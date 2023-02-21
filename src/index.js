@@ -5,16 +5,23 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import { AirtableProvider } from './context/AirtableContext';
-import { UserProvider } from './context/UserContext';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <UserProvider>
+  <Auth0Provider
+    domain='dev-yhy2r863cr3afldj.us.auth0.com'
+    clientId='AU1Uq8D0NgE2clFjuO4WlFTU1jycCEiw'
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+    }}
+    cacheLocation='localstorage'
+  >
     <BrowserRouter>
       <AirtableProvider>
         <App />
       </AirtableProvider>
     </BrowserRouter>
-  </UserProvider>
+  </Auth0Provider>
 );

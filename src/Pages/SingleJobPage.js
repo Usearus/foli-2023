@@ -1,19 +1,17 @@
 import React from 'react';
 import SideBar from '../Components/SideBar';
 import SheetList from '../Components/SheetList';
-import TopBar from '../Components/TopBar';
+import TopBarJob from '../Components/TopBarJob';
 import styled from 'styled-components';
 import { AirtableContext } from '../context/AirtableContext';
 
 export const SingleJobPage = () => {
-  const { sheets, jobs } = React.useContext(AirtableContext);
+  const { sheets, selectedJob } = React.useContext(AirtableContext);
   const thisUsersSheets = sheets;
-  const selectedJob = jobs[0];
-  console.log('selected job', selectedJob);
 
   return (
     <Wrapper>
-      <TopBar className='top' job={selectedJob} />
+      <TopBarJob className='top' job={selectedJob} />
       <SideBar className='sidebar' sheets={thisUsersSheets} />
       <SheetList className='right' sheets={thisUsersSheets} />
     </Wrapper>
@@ -28,7 +26,7 @@ const Wrapper = styled.div`
     'top top'
     'sidebar right';
   grid-template-columns: 250px 1fr;
-  grid-template-rows: 75px auto;
+  grid-template-rows: 71px auto;
   height: calc(100vh - 78px);
   overflow: hidden;
 

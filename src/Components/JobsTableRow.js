@@ -10,13 +10,15 @@ const JobsTableRow = (jobs) => {
       <td>{jobs.fields.company}</td>
       <td>{jobs.fields.role}</td>
       <td>
-        ${jobs.fields.salary_min.toLocaleString()} - $
-        {jobs.fields.salary_max.toLocaleString()}
+        {jobs.fields.salary_min && jobs.fields.salary_max
+          ? `$${jobs.fields.salary_min.toLocaleString()} - 
+        ${jobs.fields.salary_max.toLocaleString()}`
+          : '-'}
       </td>
       <td>{jobs.fields.location}</td>
       <td>
         <Badge pill bg='secondary'>
-          Bookmarked
+          {jobs.fields.status}
         </Badge>
       </td>
       <td>08/15/2022</td>

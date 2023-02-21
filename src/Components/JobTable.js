@@ -28,27 +28,4 @@ function JobsTable({ jobs }) {
   );
 }
 
-// function JobsTable() {
-//   return (
-//     <Table striped bordered hover>
-//       <thead>
-//         <tr>
-//           <th>0</th>
-//           <th>Company</th>
-//           <th>Position</th>
-//           <th>Salary</th>
-//           <th>Location</th>
-//           <th>Status</th>
-//           <th>Edited</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//         <JobsTableRow {...jobsData[0]} />
-//         <JobsTableRow {...jobsData[0]} />
-//         <JobsTableRow {...jobsData[0]} />
-//       </tbody>
-//     </Table>
-//   );
-// }
-
 export default JobsTable;

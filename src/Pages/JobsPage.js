@@ -1,6 +1,7 @@
 import React from 'react';
 import JobsTable from '../Components/JobTable';
 import { AirtableContext } from '../context/AirtableContext';
+import TopBarTable from '../Components/TopBarTable';
 
 export const JobsPage = () => {
   const { jobs } = React.useContext(AirtableContext);
@@ -9,6 +10,7 @@ export const JobsPage = () => {
 
   return (
     <>
+      <TopBarTable />
       <JobsTable jobs={thisUsersJobs} />
     </>
   );

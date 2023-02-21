@@ -1,7 +1,7 @@
-import Airtable from "airtable";
+import Airtable from 'airtable';
 
-const airtableBase = new Airtable({ apiKey: "keylQ4H6gLVHxTKxu" }).base(
-  "appH7fYPUV6jNFbKK"
-);
+const airtableBase = new Airtable({
+  apiKey: process.env.REACT_APP_AIRTABLE_API_KEY,
+}).base(process.env.REACT_APP_AIRTABLE_BASE);
 
 export default airtableBase;

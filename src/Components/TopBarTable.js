@@ -1,20 +1,16 @@
 // import { BiCaretDown } from 'react-icons/bi';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
-import PlusButton from './PlusButton';
+import AddJobModal from './AddJobModal';
 
-export const TopBar = ({ className, job }) => {
+export const TopBarTable = ({ className }) => {
   return (
     <Wrapper className={className}>
       <Container fluid>
         <Stack direction='horizontal' gap={3} className='top-bar-container'>
-          <h4>
-            {job.fields.company} - {job.fields.role}
-          </h4>
-          {/* <span className="img-center">
-            <BiCaretDown />
-          </span> */}
-          <PlusButton />
+          <div className=' ms-auto'>
+            <AddJobModal />
+          </div>
         </Stack>
       </Container>
     </Wrapper>
@@ -31,4 +27,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default TopBar;
+export default TopBarTable;
