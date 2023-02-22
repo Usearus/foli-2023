@@ -4,14 +4,19 @@ import { AirtableContext } from '../context/AirtableContext';
 import TopBarTable from '../Components/TopBarTable';
 
 export const JobsPage = () => {
-  const { jobs } = React.useContext(AirtableContext);
-  const thisUsersJobs = jobs;
-  console.log('thisUsersJobs', thisUsersJobs);
-
+  const { userJobs } = React.useContext(AirtableContext);
+  if (userJobs) {
+    return (
+      <>
+        <TopBarTable />
+        <JobsTable jobs={userJobs || 'no jobs yet'} />
+      </>
+    );
+  }
   return (
     <>
       <TopBarTable />
-      <JobsTable jobs={thisUsersJobs} />
+      <h1>No Jobs Added Yet</h1>
     </>
   );
 };

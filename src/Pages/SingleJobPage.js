@@ -6,14 +6,13 @@ import styled from 'styled-components';
 import { AirtableContext } from '../context/AirtableContext';
 
 export const SingleJobPage = () => {
-  const { sheets, selectedJob } = React.useContext(AirtableContext);
-  const thisUsersSheets = sheets;
+  const { currentJob, currentSheets } = React.useContext(AirtableContext);
 
   return (
     <Wrapper>
-      <TopBarJob className='top' job={selectedJob} />
-      <SideBar className='sidebar' sheets={thisUsersSheets} />
-      <SheetList className='right' sheets={thisUsersSheets} />
+      <TopBarJob className='top' job={currentJob} />
+      <SideBar className='sidebar' sheets={currentSheets} />
+      <SheetList className='right' sheets={currentSheets} />
     </Wrapper>
   );
 };
