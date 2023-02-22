@@ -7,13 +7,14 @@ Context
 React Router
 Auto0
 
-## Things to note
-
-userContext isn't being applied anywhere yet.
-
 ## Things to add
 
+---DIFFICULT---
 When a profile is created on foli, add a record to Airtable profile base that has the members email address
 
+--MODERATE---
 Filter my jobs by what is in my account.
 Filter my sheets by what job is being shown.
+
+---EASY---
+Edit Preferences Modal content
