@@ -1,5 +1,6 @@
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import MarkdownView from 'react-showdown';
 
 const Sheet = (sheets) => {
   return (
@@ -8,7 +9,10 @@ const Sheet = (sheets) => {
         <h4>{sheets.fields.title}</h4>
       </header>
       <section className='sheet-content'>
-        <div className='sheet-scroll'>{sheets.fields.content}</div>
+        <MarkdownView
+          className='sheet-scroll'
+          markdown={sheets.fields.content}
+        />
         <Button variant='secondary'>Edit</Button>
       </section>
     </Wrapper>

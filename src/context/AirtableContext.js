@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import airtableBase from '../API/base';
+import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
-// import axios from "axios";
 
 const AirtableContext = React.createContext();
 
@@ -9,7 +8,6 @@ const AirtableProvider = ({ children }) => {
   // ..
   // ..
   // AIRTABLE ONLY
-  const base = airtableBase;
   const [allSheets, setAllSheets] = useState([]);
   const [allJobs, setAllJobs] = useState([]);
   const [allProfiles, setAllProfiles] = useState([]);
@@ -22,7 +20,7 @@ const AirtableProvider = ({ children }) => {
         console.log('all sheets', records);
         fetchNextPage();
       });
-  }, [base]);
+  }, []);
 
   useEffect(() => {
     base('jobs')
@@ -32,7 +30,7 @@ const AirtableProvider = ({ children }) => {
         console.log('all jobs', records);
         fetchNextPage();
       });
-  }, [base]);
+  }, []);
 
   useEffect(() => {
     base('profiles')
@@ -42,7 +40,7 @@ const AirtableProvider = ({ children }) => {
         console.log('all profiles', records);
         fetchNextPage();
       });
-  }, [base]);
+  }, []);
 
   // ..
   // ..
@@ -131,6 +129,7 @@ const AirtableProvider = ({ children }) => {
         userSheets,
         currentJob,
         currentSheets,
+        setAllJobs,
       }}
     >
       {children}

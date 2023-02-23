@@ -5,7 +5,7 @@ import TopBarJob from '../Components/TopBarJob';
 import styled from 'styled-components';
 import { AirtableContext } from '../context/AirtableContext';
 
-export const SingleJobPage = () => {
+const SingleJobPage = () => {
   const { currentJob, currentSheets } = React.useContext(AirtableContext);
 
   return (

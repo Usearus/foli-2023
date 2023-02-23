@@ -9,7 +9,7 @@ export const TopBarJob = ({ className, job }) => {
       <Container fluid>
         <Stack direction='horizontal' gap={3} className='top-bar-container'>
           <h4>
-            {job.fields.company} - {job.fields.role}
+            {job.fields.company} - {job.fields.position}
           </h4>
           {/* <span className="img-center">
             <BiCaretDown />

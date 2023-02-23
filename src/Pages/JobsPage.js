@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import JobsTable from '../Components/JobTable';
 import { AirtableContext } from '../context/AirtableContext';
 import TopBarTable from '../Components/TopBarTable';
 
 export const JobsPage = () => {
-  const { userJobs } = React.useContext(AirtableContext);
+  const { userJobs } = useContext(AirtableContext);
+
   if (userJobs) {
     return (
       <>
@@ -20,5 +21,4 @@ export const JobsPage = () => {
     </>
   );
 };
-
 export default JobsPage;

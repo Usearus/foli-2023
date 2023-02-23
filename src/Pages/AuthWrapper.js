@@ -1,13 +1,14 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
+import Spinner from 'react-bootstrap/Spinner';
 
 function AuthWrapper({ children }) {
   const { isLoading, error } = useAuth0();
   if (isLoading) {
     return (
       <Wrapper>
-        <h1>loading</h1>
+        <Spinner animation='grow' />
       </Wrapper>
     );
   }

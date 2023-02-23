@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import { Nav, Navbar, Button } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import { CiSearch } from 'react-icons/ci';
+// import Form from 'react-bootstrap/Form';
+// import { CiSearch } from 'react-icons/ci';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -44,28 +44,31 @@ function NavBar() {
             </LinkContainer>
           </Nav>
 
-          <Form className='d-flex' style={{ marginRight: '8px' }}>
-            {/* hiding search bar until I can add it */}
-            {/* <Form.Control
+          {/* hiding search bar until I can add it */}
+          {/*<Form className='d-flex' style={{ marginRight: '8px' }}>
+            <Form.Control
               type='search'
               placeholder='Search'
               className='me-2'
               aria-label='Search'
-            /> */}
+            /> 
             <Button variant='light'>
               <CiSearch />
             </Button>
-          </Form>
+          </Form>*/}
+          <LinkContainer
+            to='/profile'
+            style={{ marginRight: '8px', border: 0 }}
+          >
+            <button>
+              <img
+                src={user.picture}
+                alt={user.name}
+                style={{ width: '40px', borderRadius: '100px' }}
+              />
+            </button>
+          </LinkContainer>
           <Nav>
-            <LinkContainer to='/profile' style={{ marginRight: '8px' }}>
-              <Button variant='light'>
-                <img
-                  src={user.picture}
-                  alt={user.name}
-                  style={{ width: '30px', borderRadius: '100px' }}
-                />
-              </Button>
-            </LinkContainer>
             <Button
               variant='light'
               onClick={() =>

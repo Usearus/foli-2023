@@ -2,19 +2,32 @@
 
 This file has:
 Styled Components
-Airtable data
-Context
+Airtable for Database
 React Router
-Auto0
+Auth0
 
 ## Things to add
 
----DIFFICULT---
-When a profile is created on foli, add a record to Airtable profile base that has the members email address
+---CRITICAL---
+Fetch airtable after updating the base in all instances (Airtable is currently not reloading)
+Add 'Position Details' sheet for each position
+Click a job to bring user into a single job page
+When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 
---MODERATE---
-Filter my jobs by what is in my account.
-Filter my sheets by what job is being shown.
+---LOW PRIORITY---
+Move Profile & Logout into nav image
+Get "remote" checkbox value to push to new Job records.
+Edit Preferences Modal content to match content pre-filled. (Should I use something other than placeholder?)
 
----EASY---
-Edit Preferences Modal content
+## Post-MVP Features
+
+Search feature
+Move Delete & Rename
+
+## Done
+
+Ability to Add and Delete a job
+Markup conversion in sheets using react-showdown package
+Filter user jobs in table by what is in my account
+Filter user sheets in single job page by what job is being shown
+Addecd React-showdown for sheet markup
