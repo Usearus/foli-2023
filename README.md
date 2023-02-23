@@ -10,8 +10,6 @@
 
 ---CRITICAL---
 
-- Look into Axios to do async (see what we did for Github User project)
-- Fetch airtable after updating the base in all instances (Airtable is currently not reloading)
 - Add 'Position Details' sheet for each position
 - Click a job to bring user into a single job page (see what we did for Github User project)
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
