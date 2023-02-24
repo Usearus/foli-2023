@@ -26,7 +26,7 @@ function App() {
           }
         />
         <Route
-          path='/singlejob'
+          path='/job/:id'
           element={
             <PrivateRoute>
               <NavBar />

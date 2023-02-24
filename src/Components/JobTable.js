@@ -20,8 +20,8 @@ function JobsTable({ jobs }) {
       </thead>
 
       <tbody>
-        {jobs.map((job) => {
-          return <JobsTableRow key={job.id} {...job} />;
+        {jobs.map((singleJob) => {
+          return <JobsTableRow key={singleJob.id} {...singleJob} />;
         })}
       </tbody>
     </Table>

@@ -10,12 +10,14 @@
 
 ---CRITICAL---
 
+- Make trash button work while rest of row is clickable
 - Add 'Position Details' sheet for each position
-- Click a job to bring user into a single job page (see what we did for Github User project)
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 
 ---LOW PRIORITY---
 
+- When I click on profile remove active state on nav item
+- When I hover over a table row make it clickable
 - Move Profile & Logout into nav image
 - Get "remote" checkbox value to push to new Job records.
 - Edit Preferences Modal content to match content pre-filled. (Should I use something other than placeholder?)
@@ -27,6 +29,7 @@
 
 ## Done
 
+- Click a job to bring user into a single job page (see what we did for Github User project)
 - Ability to Add and Delete a job
 - Markup conversion in sheets using react-showdown package
 - Filter user jobs in table by what is in my account

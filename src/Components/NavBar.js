@@ -36,9 +36,6 @@ function NavBar() {
             <LinkContainer to='/'>
               <Nav.Link>Jobs</Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/singlejob'>
-              <Nav.Link>Single Job</Nav.Link>
-            </LinkContainer>
             <LinkContainer to='/testing'>
               <Nav.Link>Testing</Nav.Link>
             </LinkContainer>

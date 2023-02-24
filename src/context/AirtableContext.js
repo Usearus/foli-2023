@@ -10,23 +10,29 @@ const AirtableProvider = ({ children }) => {
   const [auth0Email, setAuth0Email] = useState(null);
 
   // USEEFFECT TO SET USER EMAIL
-  useEffect(function effectSetAuth0Email() {
-    if (user) {
-      setAuth0Email(user.email);
-    }
-  }, [user]);
+  useEffect(
+    function effectSetAuth0Email() {
+      if (user) {
+        setAuth0Email(user.email);
+      }
+    },
+    [user]
+  );
 
   // ALL AIRTABLE DATA
   const [allSheets, setAllSheets] = useState([]);
   const [allJobs, setAllJobs] = useState([]);
   const [allProfiles, setAllProfiles] = useState([]);
-  // SET USER AIRTABLE DATA 
+  // SET USER AIRTABLE DATA
   const [userProfile, setUserProfile] = useState(null);
   const [userJobs, setUserJobs] = useState(null);
   const [userSheets, setUserSheets] = useState(null);
+  // SET CURRENTLY VIEWED JOB DATA
+  const [currentSheets, setCurrentSheets] = useState([]);
+  const [currentJob, setCurrentJob] = useState([]);
 
   // USEEFFECTS TO SET & UPDATE ALL AIRTABLE DATA
-  useEffect(() => {
+  const fetchAllSheets = () => {
     base('sheets')
       .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
@@ -34,9 +40,9 @@ const AirtableProvider = ({ children }) => {
         console.log('all sheets', records);
         fetchNextPage();
       });
-  }, []);
+  };
 
-  useEffect(() => {
+  const fetchAllJobs = () => {
     base('jobs')
       .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
@@ -44,9 +50,9 @@ const AirtableProvider = ({ children }) => {
         console.log('all jobs', records);
         fetchNextPage();
       });
-  }, []);
+  };
 
-  useEffect(() => {
+  const fetchAllProfiles = () => {
     base('profiles')
       .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
@@ -54,68 +60,63 @@ const AirtableProvider = ({ children }) => {
         console.log('all profiles', records);
         fetchNextPage();
       });
+  };
+
+  useEffect(() => {
+    fetchAllSheets();
+  }, []);
+
+  useEffect(() => {
+    fetchAllJobs();
+  }, []);
+
+  useEffect(() => {
+    fetchAllProfiles();
   }, []);
 
   // USEEFFECT TO FILTER AIRTABLE INFO BASED ON USER
-  useEffect(function effectFindUserProfile() {
-    const findUserProfile = (auth0Email, allProfiles) => {
-      return allProfiles.find(
-        (profile) => profile.fields.account === auth0Email
-      );
-    };
-
-    if (auth0Email && allProfiles.length > 0) {
-      const matchingProfile = findUserProfile(auth0Email, allProfiles);
-      setUserProfile(matchingProfile);
-    }
-  }, [auth0Email, allProfiles]);
-
-  useEffect(function effectFindUserJobs() {
-    const findUserJobs = (auth0Email, allJobs) => {
-      return allJobs.filter((job) => job.fields.account === auth0Email);
-    };
-    if (auth0Email && allJobs.length > 0) {
-      const matchingJobs = findUserJobs(auth0Email, allJobs);
-      setUserJobs(matchingJobs);
-    }
-  }, [auth0Email,  allJobs]);
-
-  useEffect(function effectFindUserSheets() {
-
-    const findUserSheets = (auth0Email, allSheets) => {
-      return allSheets.filter((sheet) => sheet.fields.account === auth0Email);
-    };
-
-    if (auth0Email && allSheets.length > 0) {
-      const matchingSheets = findUserSheets(auth0Email, allSheets);
-      setUserSheets(matchingSheets);
-    }
-  }, [auth0Email, allSheets]);
-
-  // **********************
-  // THIS INCLUDES TEMP CURRENT JOB UNTIL WE CODE IN THE CONNECTOR
-  // **********************
-  const [currentSheets, setCurrentSheets] = useState([]);
-  // const [currentJob, setCurrentJob] = useState([]);
-  const currentJob = userJobs && userJobs.length > 0 ? userJobs[1] : null;
-
-  // USEEFFECT TO SET CURRENT SHEETS BASED ON CURRENT JOB
-  useEffect(function effectFindCurrentSheets() {
-    const findCurrentSheets = (currentJob, userSheets) => {
-      const sheetIds = currentJob.fields.sheets;
-      if (userSheets) {
-        return userSheets.filter((sheet) =>
-          sheetIds.some((id) => id === sheet.id)
+  useEffect(
+    function effectFindUserProfile() {
+      const findUserProfile = (auth0Email, allProfiles) => {
+        return allProfiles.find(
+          (profile) => profile.fields.account === auth0Email
         );
-      } else {
-        return [];
+      };
+
+      if (auth0Email && allProfiles.length > 0) {
+        const matchingProfile = findUserProfile(auth0Email, allProfiles);
+        setUserProfile(matchingProfile);
       }
-    };
-    if (currentJob) {
-      const matchingSheets = findCurrentSheets(currentJob, userSheets);
-      setCurrentSheets(matchingSheets);
-    }
-  }, [currentJob, userSheets]);
+    },
+    [auth0Email, allProfiles]
+  );
+
+  useEffect(
+    function effectFindUserJobs() {
+      const findUserJobs = (auth0Email, allJobs) => {
+        return allJobs.filter((job) => job.fields.account === auth0Email);
+      };
+      if (auth0Email && allJobs.length > 0) {
+        const matchingJobs = findUserJobs(auth0Email, allJobs);
+        setUserJobs(matchingJobs);
+      }
+    },
+    [auth0Email, allJobs]
+  );
+
+  useEffect(
+    function effectFindUserSheets() {
+      const findUserSheets = (auth0Email, allSheets) => {
+        return allSheets.filter((sheet) => sheet.fields.account === auth0Email);
+      };
+
+      if (auth0Email && allSheets.length > 0) {
+        const matchingSheets = findUserSheets(auth0Email, allSheets);
+        setUserSheets(matchingSheets);
+      }
+    },
+    [auth0Email, allSheets]
+  );
 
   return (
     <AirtableContext.Provider
@@ -126,9 +127,11 @@ const AirtableProvider = ({ children }) => {
         userJobs,
         userSheets,
         currentJob,
-        // setCurrentJob,
+        setCurrentJob,
         currentSheets,
+        setCurrentSheets,
         setAllJobs,
+        fetchAllJobs,
       }}
     >
       {children}

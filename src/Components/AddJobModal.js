@@ -1,15 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
+import { AirtableContext } from '../context/AirtableContext';
 
 function AddJobModal() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const { user } = useAuth0();
+  const { fetchAllJobs } = useContext(AirtableContext);
 
   const companyRef = useRef();
   const positionRef = useRef();
@@ -18,8 +21,6 @@ function AddJobModal() {
   const locationRef = useRef();
   // const remoteRef = useRef();
   const linkRef = useRef();
-
-  // const { userJobs, setUserJobs } = useContext(AirtableContext);
 
   const handleAddJobClick = (e) => {
     e.preventDefault();
@@ -47,6 +48,7 @@ function AddJobModal() {
         }
         records.forEach(function (record) {
           console.log(record.getId());
+          fetchAllJobs();
         });
       }
     );
