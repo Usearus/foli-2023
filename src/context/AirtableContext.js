@@ -5,13 +5,27 @@ import { useAuth0 } from '@auth0/auth0-react';
 const AirtableContext = React.createContext();
 
 const AirtableProvider = ({ children }) => {
-  // ..
-  // ..
-  // AIRTABLE ONLY
+  // USER AUTH0 EMAIL
+  const { user } = useAuth0();
+  const [auth0Email, setAuth0Email] = useState(null);
+
+  // USEEFFECT TO SET USER EMAIL
+  useEffect(function effectSetAuth0Email() {
+    if (user) {
+      setAuth0Email(user.email);
+    }
+  }, [user]);
+
+  // ALL AIRTABLE DATA
   const [allSheets, setAllSheets] = useState([]);
   const [allJobs, setAllJobs] = useState([]);
   const [allProfiles, setAllProfiles] = useState([]);
+  // SET USER AIRTABLE DATA 
+  const [userProfile, setUserProfile] = useState(null);
+  const [userJobs, setUserJobs] = useState(null);
+  const [userSheets, setUserSheets] = useState(null);
 
+  // USEEFFECTS TO SET & UPDATE ALL AIRTABLE DATA
   useEffect(() => {
     base('sheets')
       .select({ view: 'Grid view' })
@@ -42,57 +56,41 @@ const AirtableProvider = ({ children }) => {
       });
   }, []);
 
-  // ..
-  // ..
-  // ..
-  // SET AUTH0 EMAIL
-  const { user } = useAuth0();
-  const [auth0Email, setAuth0Email] = useState(null);
-
-  // USEEFFECT TO SET USER
-  useEffect(() => {
-    if (user) {
-      setAuth0Email(user.email);
-    }
-  }, [user]);
-
-  // ..
-  // ..
-  // ..
-  // FIND USER AIRTABLE INFO BASED ON EMAIL
-  const [userProfile, setUserProfile] = useState(null);
-  const [userJobs, setUserJobs] = useState(null);
-  const [userSheets, setUserSheets] = useState(null);
-
   // USEEFFECT TO FILTER AIRTABLE INFO BASED ON USER
-  useEffect(() => {
+  useEffect(function effectFindUserProfile() {
     const findUserProfile = (auth0Email, allProfiles) => {
       return allProfiles.find(
         (profile) => profile.fields.account === auth0Email
       );
     };
 
+    if (auth0Email && allProfiles.length > 0) {
+      const matchingProfile = findUserProfile(auth0Email, allProfiles);
+      setUserProfile(matchingProfile);
+    }
+  }, [auth0Email, allProfiles]);
+
+  useEffect(function effectFindUserJobs() {
     const findUserJobs = (auth0Email, allJobs) => {
       return allJobs.filter((job) => job.fields.account === auth0Email);
     };
+    if (auth0Email && allJobs.length > 0) {
+      const matchingJobs = findUserJobs(auth0Email, allJobs);
+      setUserJobs(matchingJobs);
+    }
+  }, [auth0Email,  allJobs]);
+
+  useEffect(function effectFindUserSheets() {
 
     const findUserSheets = (auth0Email, allSheets) => {
       return allSheets.filter((sheet) => sheet.fields.account === auth0Email);
     };
 
-    if (auth0Email && allProfiles.length > 0) {
-      const matchingProfile = findUserProfile(auth0Email, allProfiles);
-      setUserProfile(matchingProfile);
-    }
-    if (auth0Email && allJobs.length > 0) {
-      const matchingJobs = findUserJobs(auth0Email, allJobs);
-      setUserJobs(matchingJobs);
-    }
     if (auth0Email && allSheets.length > 0) {
       const matchingSheets = findUserSheets(auth0Email, allSheets);
       setUserSheets(matchingSheets);
     }
-  }, [auth0Email, allProfiles, allJobs, allSheets]);
+  }, [auth0Email, allSheets]);
 
   // **********************
   // THIS INCLUDES TEMP CURRENT JOB UNTIL WE CODE IN THE CONNECTOR
@@ -102,7 +100,7 @@ const AirtableProvider = ({ children }) => {
   const currentJob = userJobs && userJobs.length > 0 ? userJobs[1] : null;
 
   // USEEFFECT TO SET CURRENT SHEETS BASED ON CURRENT JOB
-  useEffect(() => {
+  useEffect(function effectFindCurrentSheets() {
     const findCurrentSheets = (currentJob, userSheets) => {
       const sheetIds = currentJob.fields.sheets;
       if (userSheets) {
@@ -128,6 +126,7 @@ const AirtableProvider = ({ children }) => {
         userJobs,
         userSheets,
         currentJob,
+        // setCurrentJob,
         currentSheets,
         setAllJobs,
       }}
