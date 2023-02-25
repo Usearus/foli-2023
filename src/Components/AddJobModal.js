@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
+// import LocationAutocompleteBtn from './LocationAutocompleteBtn';
 
 function AddJobModal() {
   const [show, setShow] = useState(false);
@@ -97,11 +98,12 @@ function AddJobModal() {
                 ref={salary_maxRef}
               />
             </Form.Group>
+            {/* <LocationAutocompleteBtn /> */}
             <Form.Group className='mb-3' controlId='location'>
               <Form.Label>Location</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Start typing a location...'
+                placeholder='Start typing a city...'
                 ref={locationRef}
               />
             </Form.Group>
@@ -118,7 +120,6 @@ function AddJobModal() {
             </Form.Group>
           </Form>
         </Modal.Body>
-
         <Modal.Footer>
           <Button type='submit' variant='secondary' onClick={handleClose}>
             Close

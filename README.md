@@ -1,10 +1,11 @@
-# Information
+# Packages
 
 - This file has:
 - Styled Components
-- Airtable for Database
+- Airtable (database)
 - React Router
 - Auth0
+- react-cool-onclickoutside (trigger callback when user clicks outside of target component. Used for my location dropdown. May remove)
 
 ## Things to add
 
