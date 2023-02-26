@@ -1,16 +1,27 @@
 import { Stack, Button } from 'react-bootstrap';
-import { BiShow } from 'react-icons/bi';
+import { BiShow, BiHide } from 'react-icons/bi';
+import { useState } from 'react';
 
-const SideBarItem = (sheets) => {
+const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
+  const [showIcon, setShowIcon] = useState(true);
+  const [isRemoved, setIsRemoved] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowIcon(!showIcon);
+    toggleSheet();
+    setIsRemoved(!isRemoved);
+  };
+
   return (
     <Stack direction='horizontal'>
-      <span>{sheets.fields.title}</span>
+      <span>{sheet.fields.title}</span>
       <Button
         className='ms-auto'
         variant='link'
         style={{ color: 'var(--grey-600)' }}
+        onClick={handleButtonClick}
       >
-        <BiShow />
+        {hidden ? <BiHide /> : <BiShow />}
       </Button>
     </Stack>
   );

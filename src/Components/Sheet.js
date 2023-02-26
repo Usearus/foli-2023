@@ -20,9 +20,6 @@ const Sheet = (sheets) => {
 };
 
 const Wrapper = styled.div`
-  .sheet-container {
-  }
-
   .sheet-title {
     margin-bottom: 1rem;
     color: var(--grey-600);

@@ -1,13 +1,28 @@
 import SideBarItem from './SideBarItem';
 import styled from 'styled-components';
+import { useContext } from 'react';
+import { AirtableContext } from '../context/AirtableContext';
 
 export const SideBar = ({ sheets, className }) => {
+  const { currentSheets, setCurrentSheets } = useContext(AirtableContext);
+
+  const toggleSheet = (id) => {
+    const index = currentSheets.findIndex((sheet) => sheet.id === id); // Find the index of the sheet with the given id
+    currentSheets[index].hidden = !currentSheets[index].hidden; // If the sheet is already hidden, show it, and vice versa
+    setCurrentSheets([...currentSheets]);
+  };
+
   return (
     <Wrapper className={className}>
       <section className='sidebar-container'>
         <span className='sidebar-title'>Sheets</span>
         {sheets.map((sheet) => (
-          <SideBarItem key={sheet.id} {...sheet} />
+          <SideBarItem
+            key={sheet.id}
+            sheet={sheet}
+            hidden={currentSheets.find((s) => s.id === sheet.id).hidden}
+            toggleSheet={() => toggleSheet(sheet.id)}
+          />
         ))}
       </section>
     </Wrapper>

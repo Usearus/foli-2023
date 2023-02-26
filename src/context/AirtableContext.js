@@ -132,6 +132,7 @@ const AirtableProvider = ({ children }) => {
         setCurrentSheets,
         setAllJobs,
         fetchAllJobs,
+        fetchAllSheets,
       }}
     >
       {children}
