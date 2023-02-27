@@ -8,13 +8,13 @@ import { AirtableContext } from '../context/AirtableContext';
 import { useNavigate } from 'react-router-dom';
 
 const JobsTableRow = (singleJob) => {
-  const { fetchAllJobs, setCurrentJob, setCurrentSheets, userSheets } =
+  const { fetchAllJobs, setCurrentJob, findCurrentSheets } =
     useContext(AirtableContext);
 
   const navigate = useNavigate();
 
   const handleDeleteJobClick = (event) => {
-    event.stopPropagation(); // stop event propagation
+    event.stopPropagation();
     base('jobs').destroy(singleJob.id, function (err, deletedRecord) {
       if (err) {
         console.error(err);
@@ -25,22 +25,10 @@ const JobsTableRow = (singleJob) => {
     });
   };
 
-  const findCurrentSheets = () => {
-    const jobSheetIds = singleJob.fields.sheets;
-    if (jobSheetIds) {
-      const matchingSheets = userSheets.filter((sheet) =>
-        jobSheetIds.some((id) => id === sheet.id)
-      );
-      setCurrentSheets(matchingSheets);
-    } else {
-      return setCurrentSheets([]);
-    }
-  };
-
   const openJob = (singleJob) => {
     setCurrentJob(singleJob);
+    findCurrentSheets(singleJob);
     navigate(`/job/${singleJob.id}`);
-    findCurrentSheets();
   };
 
   const handleTableRowClick = () => {
