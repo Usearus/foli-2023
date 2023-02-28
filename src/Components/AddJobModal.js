@@ -5,7 +5,6 @@ import Modal from 'react-bootstrap/Modal';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
-// import LocationAutocompleteBtn from './LocationAutocompleteBtn';
 
 function AddJobModal() {
   const [show, setShow] = useState(false);
@@ -13,7 +12,7 @@ function AddJobModal() {
   const handleShow = () => setShow(true);
 
   const { user } = useAuth0();
-  const { fetchAllJobs } = useContext(AirtableContext);
+  const { fetchUserJobs } = useContext(AirtableContext);
 
   const companyRef = useRef();
   const positionRef = useRef();
@@ -23,8 +22,7 @@ function AddJobModal() {
   // const remoteRef = useRef();
   const linkRef = useRef();
 
-  const handleAddJobClick = (e) => {
-    e.preventDefault();
+  const handleAddJobClick = () => {
     base('jobs').create(
       [
         {
@@ -49,7 +47,7 @@ function AddJobModal() {
         }
         records.forEach(function (record) {
           console.log(record.getId());
-          fetchAllJobs();
+          fetchUserJobs();
         });
       }
     );
@@ -134,109 +132,3 @@ function AddJobModal() {
 }
 
 export default AddJobModal;
-
-// import React, { useState } from 'react';
-// import Button from 'react-bootstrap/Button';
-// import Form from 'react-bootstrap/Form';
-// import Modal from 'react-bootstrap/Modal';
-// import airtableBase from '../API/base';
-
-// function AddJobModal({ onJobAdded }) {
-//   const [show, setShow] = useState(false);
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-
-//   const base = airtableBase;
-
-//   const handleAddJobClick = () => {
-//     addNewUserJob();
-//     handleClose();
-//   };
-
-//   const addNewUserJob = () => {
-//     base('jobs').create(
-//       [
-//         {
-//           fields: {
-//             account: 'adamdenais@gmail.com',
-//             company: 'TEST COMPANY',
-//             role: 'TEST ROLE',
-//             salary_min: 0,
-//             salary_max: 0,
-//             location: 'TEST LOCATION',
-//             link: 'TEST LINK',
-//             status: 'Bookmarked',
-//           },
-//         },
-//       ],
-//       function (err, records) {
-//         if (err) {
-//           console.error(err);
-//           return;
-//         }
-//         records.forEach(function (record) {
-//           console.log(record.getId());
-//           onJobAdded(record);
-//         });
-//       }
-//     );
-//   };
-
-//   return (
-//     <>
-//       <Button variant='primary' onClick={handleShow}>
-//         Add Job
-//       </Button>
-
-//       <Modal show={show} onHide={handleClose}>
-//         <Modal.Header closeButton>
-//           <Modal.Title>Add job to track</Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <Form>
-//             <Form.Group className='mb-3' controlId='company'>
-//               <Form.Label>Company</Form.Label>
-//               <Form.Control
-//                 type='text'
-//                 placeholder='Google, Apple, etc.'
-//                 autoFocus
-//               />
-//             </Form.Group>
-//             <Form.Group className='mb-3' controlId='position'>
-//               <Form.Label>Position</Form.Label>
-//               <Form.Control type='text' />
-//             </Form.Group>
-//             <Form.Group className='mb-3' controlId='salary-min'>
-//               <Form.Label>Salary Minimum ($)</Form.Label>
-//               <Form.Control type='number' placeholder='40,000' />
-//             </Form.Group>
-//             <Form.Group className='mb-3' controlId='salary-max'>
-//               <Form.Label>Salary Maximum ($)</Form.Label>
-//               <Form.Control type='number' placeholder='60,000' />
-//             </Form.Group>
-//             <Form.Group className='mb-3' controlId='location'>
-//               <Form.Label>Location</Form.Label>
-//               <Form.Control
-//                 type='text'
-//                 placeholder='Start typing a location...'
-//               />
-//             </Form.Group>
-//             <Form.Group className='mb-3' controlId='remote'>
-//               <Form.Check label='Remote' />
-//             </Form.Group>
-//           </Form>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <Button variant='secondary' onClick={handleClose}>
-//             Close
-//           </Button>
-//           <Button variant='primary' onClick={handleAddJobClick}>
-//             Add Job
-//           </Button>
-//         </Modal.Footer>
-//       </Modal>
-//     </>
-//   );
-// }
-
-// export default AddJobModal;

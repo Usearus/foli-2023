@@ -12,61 +12,43 @@ function AddSheetModal() {
   const handleShow = () => setShow(true);
 
   const { user } = useAuth0();
-  const {
-    currentJob,
-    allJobs,
-    currentSheets,
-    allSheets,
-    userSheets,
-    setCurrentSheets,
-    setCurrentJob,
-    fetchAllSheets,
-    fetchAllJobs,
-    findCurrentSheets,
-  } = useContext(AirtableContext);
+  const { currentJob, allJobs, setCurrentJob, fetchCurrentSheets } =
+    useContext(AirtableContext);
 
   const titleRef = useRef();
   const contentRef = useRef();
 
-  const addSheet = async () => {
-    try {
-      const records = await new Promise((resolve, reject) => {
-        base('sheets').create(
-          [
-            {
-              fields: {
-                account: user.email,
-                title: titleRef.current.value,
-                content: contentRef.current.value,
-                jobid: [currentJob.id],
-              },
-            },
-          ],
-          function (err, records) {
-            if (err) {
-              reject(err);
-              return;
-            }
-            records.forEach(function (record) {
-              console.log('added sheet', record.getId());
-            });
-            resolve(records);
-            fetchAllJobs();
-            fetchAllSheets();
-          }
-        );
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  const addSheet = () => {
+    base('sheets').create(
+      [
+        {
+          fields: {
+            account: user.email,
+            title: titleRef.current.value,
+            content: contentRef.current.value,
+            jobid: [currentJob.id],
+          },
+        },
+      ],
+      function (err, records) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        records.forEach(function (record) {
+          // console.log('added sheet', record.getId());
+          fetchCurrentSheets(currentJob);
+          handleClose();
+        });
+      }
+    );
   };
 
   const handleAddSheetClick = async () => {
     await addSheet();
-    handleClose();
+
     const updatedJob = allJobs.find((job) => job.id === currentJob.id);
     setCurrentJob(updatedJob);
-    findCurrentSheets(currentJob);
   };
 
   // useEffect(() => {

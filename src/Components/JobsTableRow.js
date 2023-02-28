@@ -8,7 +8,7 @@ import { AirtableContext } from '../context/AirtableContext';
 import { useNavigate } from 'react-router-dom';
 
 const JobsTableRow = (singleJob) => {
-  const { fetchAllJobs, setCurrentJob, findCurrentSheets } =
+  const { fetchAllJobs, setCurrentJob, fetchCurrentSheets } =
     useContext(AirtableContext);
 
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const JobsTableRow = (singleJob) => {
 
   const openJob = (singleJob) => {
     setCurrentJob(singleJob);
-    findCurrentSheets(singleJob);
+    fetchCurrentSheets(singleJob);
     navigate(`/job/${singleJob.id}`);
   };
 
