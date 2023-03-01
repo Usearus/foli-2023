@@ -5,7 +5,6 @@ import LoginPage from './LoginPage';
 import PrivateRoute from './PrivateRoute';
 import SingleJobPage from './SingleJobPage';
 import TestingPage from './TestingPage';
-import ProfilePage from './ProfilePage';
 
 export {
   LoginPage,
@@ -15,5 +14,4 @@ export {
   TestingPage,
   PrivateRoute,
   AuthWrapper,
-  ProfilePage,
 };

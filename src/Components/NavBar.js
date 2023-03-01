@@ -4,9 +4,10 @@ import { Nav, Navbar, Button } from 'react-bootstrap';
 // import { CiSearch } from 'react-icons/ci';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
+import EditProfileModal from './EditProfileModal';
 
 function NavBar() {
-  const { logout, user } = useAuth0();
+  const { logout } = useAuth0();
 
   return (
     <Navbar
@@ -53,18 +54,9 @@ function NavBar() {
               <CiSearch />
             </Button>
           </Form>*/}
-          <LinkContainer
-            to='/profile'
-            style={{ marginRight: '8px', border: 0 }}
-          >
-            <button>
-              <img
-                src={user.picture}
-                alt={user.name}
-                style={{ width: '40px', borderRadius: '100px' }}
-              />
-            </button>
-          </LinkContainer>
+
+          <EditProfileModal />
+
           <Nav>
             <Button
               variant='light'

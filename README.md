@@ -17,6 +17,9 @@
 
 ---LOW PRIORITY---
 
+- Add badges under locations!
+- Add multi-fields for location
+- Make Profile like the Figma profile page.
 - When I click on profile remove active state on nav item
 - When I hover over a table row make it clickable
 - Move Profile & Logout into nav image

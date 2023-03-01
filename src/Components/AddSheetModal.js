@@ -51,41 +51,6 @@ function AddSheetModal() {
     setCurrentJob(updatedJob);
   };
 
-  // useEffect(() => {
-  //   findCurrentSheets(currentJob);
-  // }, [userSheets, currentJob]);
-
-  // const handleAddSheetClick = (e) => {
-  //   // console.log('101 before currentSheets', currentSheets);
-
-  //   e.preventDefault();
-  //   base('sheets').create(
-  //     [
-  //       {
-  //         fields: {
-  //           account: user.email,
-  //           title: titleRef.current.value,
-  //           content: contentRef.current.value,
-  //           jobid: [currentJob.id],
-  //         },
-  //       },
-  //     ],
-  //     function (err, records) {
-  //       if (err) {
-  //         console.error(err);
-  //         return;
-  //       }
-  //       records.forEach(function (record) {
-  //         // console.log('added sheet', record.getId());
-  //       });
-  //       fetchAllSheets(() => {
-  //         findCurrentSheets(currentJob);
-  //       });
-  //       handleClose();
-  //     }
-  //   );
-  // };
-
   return (
     <>
       <Button variant='primary' onClick={handleShow}>
@@ -98,9 +63,9 @@ function AddSheetModal() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className='mb-3' controlId='title' autoFocus>
+            <Form.Group className='mb-3' controlId='title'>
               <Form.Label>Sheet Title</Form.Label>
-              <Form.Control type='text' ref={titleRef} />
+              <Form.Control type='text' autoFocus ref={titleRef} />
             </Form.Group>
             <Form.Group className='mb-3' controlId='content'>
               <Form.Label>Content</Form.Label>

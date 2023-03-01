@@ -7,7 +7,6 @@ import {
   TestingPage,
   PrivateRoute,
   AuthWrapper,
-  ProfilePage,
 } from './Pages';
 import NavBar from './Components/NavBar';
 
@@ -34,15 +33,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path='/profile'
-          element={
-            <PrivateRoute>
-              <NavBar />
-              <ProfilePage />
-            </PrivateRoute>
-          }
-        />
+
         <Route
           path='/testing'
           element={

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -30,7 +30,7 @@ const AirtableProvider = ({ children }) => {
       .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
         setAllSheets(records);
-        console.log('all sheets', records);
+        // console.log('all sheets', records);
         fetchNextPage();
       });
   };
@@ -40,7 +40,7 @@ const AirtableProvider = ({ children }) => {
       .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
         setAllJobs(records);
-        console.log('all jobs', records);
+        // console.log('all jobs', records);
         fetchNextPage();
       });
   };
@@ -79,16 +79,14 @@ const AirtableProvider = ({ children }) => {
   // FIND ALL USER AIRTABLE DATA
   const fetchUserProfile = async () => {
     if (auth0Email) {
-      await base('profiles')
+      const record = await base('profiles')
         .select({
-          view: 'Grid view',
+          maxRecords: 1,
           filterByFormula: `{account} = '${auth0Email}'`,
         })
-        .eachPage(function page(records, fetchNextPage) {
-          setUserProfile(records);
-          console.log('userProfile is', records);
-          fetchNextPage();
-        });
+        .firstPage();
+      setUserProfile(record[0]);
+      console.log('userProfile is', record);
     }
   };
 
@@ -101,7 +99,7 @@ const AirtableProvider = ({ children }) => {
         })
         .eachPage(function page(records, fetchNextPage) {
           setUserJobs(records);
-          console.log('userJobs are', records);
+          // console.log('userJobs are', records);
           fetchNextPage();
         });
     }
@@ -116,7 +114,7 @@ const AirtableProvider = ({ children }) => {
         })
         .eachPage(function page(records, fetchNextPage) {
           setUserSheets(records);
-          console.log('userSheets are', records);
+          // console.log('userSheets are', records);
           fetchNextPage();
         });
     }
@@ -151,7 +149,7 @@ const AirtableProvider = ({ children }) => {
         })
         .eachPage(function page(records, fetchNextPage) {
           setCurrentSheets(records);
-          console.log('currentSheets are', records);
+          // console.log('currentSheets are', records);
           fetchNextPage();
         });
     }
@@ -166,8 +164,8 @@ const AirtableProvider = ({ children }) => {
         userJobs,
         userSheets,
         currentJob,
-        setCurrentJob,
         currentSheets,
+        setCurrentJob,
         setCurrentSheets,
         setAllJobs,
         fetchAllJobs,
