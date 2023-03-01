@@ -11,12 +11,12 @@
 
 ---CRITICAL---
 
-- Make trash button work while rest of row is clickable
 - Add 'Position Details' sheet for each position
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 
 ---LOW PRIORITY---
 
+- Convert to next.js
 - Add badges under locations!
 - Add multi-fields for location
 - Make Profile like the Figma profile page.
@@ -33,6 +33,7 @@
 
 ## Done
 
+- Make trash button work while rest of row is clickable
 - Click a job to bring user into a single job page (see what we did for Github User project)
 - Ability to Add and Delete a job
 - Markup conversion in sheets using react-showdown package

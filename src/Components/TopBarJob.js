@@ -1,16 +1,36 @@
 // import { BiCaretDown } from 'react-icons/bi';
+import Badge from 'react-bootstrap/Badge';
+import React from 'react';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 import AddSheetModal from './AddSheetModal';
+import { AirtableContext } from '../context/AirtableContext';
 
-export const TopBarJob = ({ className, job }) => {
+export const TopBarJob = ({ className }) => {
+  const { setCurrentJob, currentJob } = React.useContext(AirtableContext);
+
+  React.useEffect(() => {
+    const jobFromStorage = localStorage.getItem('currentJob');
+    setCurrentJob(JSON.parse(jobFromStorage));
+  }, [setCurrentJob]);
+
   return (
     <Wrapper className={className}>
       <Container fluid>
         <Stack direction='horizontal' gap={3} className='top-bar-container'>
-          <h4>
-            {job.fields.company} - {job.fields.position}
-          </h4>
+          <div className='left-content'>
+            <h4>
+              {currentJob && currentJob.fields
+                ? `${currentJob.fields.company} - ${currentJob.fields.position}`
+                : ''}
+            </h4>
+
+            <Badge pill bg='secondary'>
+              {currentJob && currentJob.fields
+                ? `${currentJob.fields.status}`
+                : ''}
+            </Badge>
+          </div>
           {/* <span className="img-center">
             <BiCaretDown />
           </span> */}
@@ -21,7 +41,16 @@ export const TopBarJob = ({ className, job }) => {
   );
 };
 
+export default TopBarJob;
+
 const Wrapper = styled.div`
+  .left-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: center;
+    gap: 1rem;
+  }
   .top-bar-container {
     background: var(--grey-100);
     justify-content: space-between;
@@ -30,5 +59,3 @@ const Wrapper = styled.div`
     padding: 1rem;
   }
 `;
-
-export default TopBarJob;

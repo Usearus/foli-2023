@@ -3,16 +3,13 @@ import SideBar from '../Components/SideBar';
 import SheetList from '../Components/SheetList';
 import TopBarJob from '../Components/TopBarJob';
 import styled from 'styled-components';
-import { AirtableContext } from '../context/AirtableContext';
 
 const SingleJobPage = () => {
-  const { currentJob, currentSheets } = React.useContext(AirtableContext);
-
   return (
     <Wrapper>
-      <TopBarJob className='top' job={currentJob} />
-      <SideBar className='sidebar' sheets={currentSheets} />
-      <SheetList className='right' sheets={currentSheets} />
+      <TopBarJob className='top' />
+      <SideBar className='sidebar' />
+      <SheetList className='right' />
     </Wrapper>
   );
 };

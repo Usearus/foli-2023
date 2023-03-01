@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -79,13 +79,14 @@ const AirtableProvider = ({ children }) => {
   // FIND ALL USER AIRTABLE DATA
   const fetchUserProfile = async () => {
     if (auth0Email) {
-      const record = await base('profiles')
+      // This is array destructuring and I can assign first item of array to the variable
+      const [record] = await base('profiles')
         .select({
           maxRecords: 1,
           filterByFormula: `{account} = '${auth0Email}'`,
         })
         .firstPage();
-      setUserProfile(record[0]);
+      setUserProfile(record);
       console.log('userProfile is', record);
     }
   };
@@ -138,6 +139,23 @@ const AirtableProvider = ({ children }) => {
   const [currentSheets, setCurrentSheets] = useState([]);
   const [currentJob, setCurrentJob] = useState([]);
 
+  const fetchCurrentJob = async (job) => {
+    console.log('job received for fetch:', job);
+    const jobId = job.fields.jobid;
+    if (jobId) {
+      // This is array destructuring and I can assign first item of array to the variable
+      const [record] = await base('jobs')
+        .select({
+          maxRecords: 1,
+          filterByFormula: `{jobid} = '${jobId}'`,
+        })
+        .firstPage();
+      setCurrentJob(record);
+      console.log('currentJob is', record);
+      localStorage.setItem('currentJob', JSON.stringify(record));
+    }
+  };
+
   const fetchCurrentSheets = async (job) => {
     console.log('job received:', job);
     const jobJobId = job.fields.jobid;
@@ -149,8 +167,9 @@ const AirtableProvider = ({ children }) => {
         })
         .eachPage(function page(records, fetchNextPage) {
           setCurrentSheets(records);
-          // console.log('currentSheets are', records);
           fetchNextPage();
+          console.log('currentSheets are', records);
+          localStorage.setItem('currentSheets', JSON.stringify(records));
         });
     }
   };
@@ -165,12 +184,13 @@ const AirtableProvider = ({ children }) => {
         userSheets,
         currentJob,
         currentSheets,
-        setCurrentJob,
+        setCurrentJob, // Use the memoized setCurrentJob
         setCurrentSheets,
         setAllJobs,
         fetchAllJobs,
         fetchAllSheets,
         fetchCurrentSheets,
+        fetchCurrentJob,
         fetchUserJobs,
       }}
     >
