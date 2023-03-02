@@ -16,6 +16,9 @@
 
 ---LOW PRIORITY---
 
+- When I open preferences, temp close profile.
+- Make badges remove locations, but dont save until you hit save button.
+- Make numbers required to be 1000 and increment by 1000
 - Convert to next.js
 - Add badges under locations!
 - Add multi-fields for location

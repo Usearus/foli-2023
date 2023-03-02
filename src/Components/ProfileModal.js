@@ -3,9 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
-import EditPrefModal from '../Components/EditPrefModal';
+import EditPrefModal from './EditPrefModal';
+import { Badge } from 'react-bootstrap';
 
-function EditProfileModal() {
+function ProfileModal() {
   const { user } = useAuth0();
   const { userProfile } = useContext(AirtableContext);
   const [show, setShow] = useState(false);
@@ -64,9 +65,24 @@ function EditProfileModal() {
 
                     <div className='field'>
                       <h6>Location(s) </h6>
-                      <span className='text-secondary'>
-                        {userProfile.fields.location_preference}
-                      </span>
+                      {userProfile.fields.location_preference &&
+                        userProfile.fields.location_preference.map(
+                          (location) => (
+                            <Badge
+                              key={location}
+                              pill
+                              bg='secondary'
+                              className='me-2'
+                              style={{
+                                alignItems: 'center',
+                                justifyContent: 'flex-start',
+                                width: 'auto',
+                              }}
+                            >
+                              {location}
+                            </Badge>
+                          )
+                        )}
                     </div>
 
                     <div className='field'>
@@ -97,7 +113,7 @@ function EditProfileModal() {
   );
 }
 
-export default EditProfileModal;
+export default ProfileModal;
 
 const Wrapper = styled.div`
   display: flex;

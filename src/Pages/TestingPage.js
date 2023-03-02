@@ -1,5 +1,3 @@
-// import useOnclickOutside from 'react-cool-onclickoutside';
-
 const TestingPage = () => {
   return (
     <>

@@ -192,6 +192,7 @@ const AirtableProvider = ({ children }) => {
         fetchCurrentSheets,
         fetchCurrentJob,
         fetchUserJobs,
+        fetchUserProfile,
       }}
     >
       {children}
