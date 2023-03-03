@@ -24,6 +24,8 @@ https://foli2023.netlify.app
 
 ---LOW PRIORITY---
 
+- Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
+- Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/
 - When I hover over a table row make it show that it is clickable
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 - Make numbers required to be 1000 and increment by 1000
