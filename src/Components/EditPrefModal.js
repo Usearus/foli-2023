@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -14,11 +14,11 @@ function EditPrefModal() {
   const handleShow = () => setShow(true);
   const { user } = useAuth0();
   const { userProfile, fetchUserProfile } = useContext(AirtableContext);
-  console.log('profile is', userProfile.id);
   const positionRef = useRef();
   const locationRef = useRef();
   const salary_minRef = useRef();
   const salary_maxRef = useRef();
+
   // const remoteRef = useRef();
 
   console.log('user', user);
@@ -31,7 +31,7 @@ function EditPrefModal() {
         position: positionRef.current.value,
         salary_min: salary_minRef.current.value * 1,
         salary_max: salary_maxRef.current.value * 1,
-        location_preference: locationRef.current.value,
+        location_preference: tempLocations,
         // location_remote: remoteRef.current.value,
       },
       function (err, record) {
@@ -44,6 +44,17 @@ function EditPrefModal() {
       }
     );
     handleClose();
+  };
+
+  const [tempLocations, setTempLocations] = useState([
+    ...userProfile.fields.location_preference,
+  ]);
+  console.log('tempLocations is', tempLocations);
+
+  const handleRemoveLocation = (location) => {
+    const updatedLocations = tempLocations.filter((loc) => loc !== location);
+    setTempLocations(updatedLocations);
+    console.log('tempLocations updated to', tempLocations);
   };
 
   return (
@@ -80,7 +91,7 @@ function EditPrefModal() {
                 ref={locationRef}
               />
               {userProfile.fields.location_preference &&
-                userProfile.fields.location_preference.map((location) => (
+                tempLocations.map((location) => (
                   <Badge
                     key={location}
                     pill
@@ -96,6 +107,7 @@ function EditPrefModal() {
                     {location}
                     <span style={{ paddingLeft: '8px' }}>
                       <MdOutlineClose
+                        onClick={() => handleRemoveLocation(location)}
                         style={{
                           color: '#ffffff',
                           width: '16px',

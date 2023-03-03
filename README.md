@@ -11,23 +11,23 @@
 
 ---CRITICAL---
 
+- Make badges remove locations, but dont save until you hit save button.
+- Add delete Sheet
+- Stop sheets reappearing after edit
 - Add 'Position Details' sheet for each position
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 
 ---LOW PRIORITY---
 
 - When I open preferences, temp close profile.
-- Make badges remove locations, but dont save until you hit save button.
 - Make numbers required to be 1000 and increment by 1000
 - Convert to next.js
 - Add badges under locations!
 - Add multi-fields for location
-- Make Profile like the Figma profile page.
 - When I click on profile remove active state on nav item
-- When I hover over a table row make it clickable
-- Move Profile & Logout into nav image
+- When I hover over a table row make it show that it is clickable
 - Get "remote" checkbox value to push to new Job records.
-- Edit Preferences Modal content to match content pre-filled. (Should I use something other than placeholder?)
+- Edit Preferences Modal content to match content pre-filled.
 
 ## Post-MVP Features
 
@@ -36,6 +36,8 @@
 
 ## Done
 
+- Move Profile into nav image
+- Make Profile like the Figma profile page.
 - Make trash button work while rest of row is clickable
 - Click a job to bring user into a single job page (see what we did for Github User project)
 - Ability to Add and Delete a job

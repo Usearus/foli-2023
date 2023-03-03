@@ -29,13 +29,13 @@ function ProfileModal() {
         </Modal.Header>
         <Modal.Body>
           <Wrapper>
-            <div>
+            {/* <div>
               <img
                 src={user.picture}
                 alt={user.name}
                 style={{ borderRadius: '100px' }}
               />
-            </div>
+            </div> */}
             <div>
               <div>
                 <div className='container'>
@@ -54,7 +54,7 @@ function ProfileModal() {
 
                 {userProfile && (
                   <div className='container'>
-                    <h4>Preferences</h4>
+                    <h4>Job Preferences</h4>
 
                     <div className='field'>
                       <h6>Position </h6>
@@ -118,7 +118,7 @@ export default ProfileModal;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  /* justify-content: center; */
   /* padding: 20px; */
   gap: 2rem;
   img {

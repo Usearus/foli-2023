@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -87,7 +87,7 @@ const AirtableProvider = ({ children }) => {
         })
         .firstPage();
       setUserProfile(record);
-      console.log('userProfile is', record);
+      // console.log('userProfile is', record);
     }
   };
 
@@ -115,7 +115,7 @@ const AirtableProvider = ({ children }) => {
         })
         .eachPage(function page(records, fetchNextPage) {
           setUserSheets(records);
-          // console.log('userSheets are', records);
+          console.log('userSheets are', records);
           fetchNextPage();
         });
     }
@@ -157,7 +157,7 @@ const AirtableProvider = ({ children }) => {
   };
 
   const fetchCurrentSheets = async (job) => {
-    console.log('job received:', job);
+    // console.log('job received:', job);
     const jobJobId = job.fields.jobid;
     if (jobJobId) {
       await base('sheets')
@@ -193,6 +193,8 @@ const AirtableProvider = ({ children }) => {
         fetchCurrentJob,
         fetchUserJobs,
         fetchUserProfile,
+        // tempLocations,
+        // setTempLocations,
       }}
     >
       {children}
