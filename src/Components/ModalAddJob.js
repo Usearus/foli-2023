@@ -6,7 +6,7 @@ import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
 
-function AddJobModal() {
+function ModalAddJob() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -19,7 +19,7 @@ function AddJobModal() {
   const salary_minRef = useRef();
   const salary_maxRef = useRef();
   const locationRef = useRef();
-  // const remoteRef = useRef();
+  const remoteRef = useRef();
   const linkRef = useRef();
 
   const handleAddJobClick = () => {
@@ -33,7 +33,7 @@ function AddJobModal() {
             salary_min: salary_minRef.current.value * 1,
             salary_max: salary_maxRef.current.value * 1,
             location: locationRef.current.value,
-            // remote: remoteRef.current.value,
+            remote: remoteRef.current.checked,
             link: linkRef.current.value,
             status: 'Bookmarked',
             edited: new Date().toLocaleDateString('en-US'),
@@ -105,14 +105,18 @@ function AddJobModal() {
                 ref={locationRef}
               />
             </Form.Group>
-            {/* <Form.Group className='mb-3' controlId='remote'>
-              <Form.Check wlabel='Remote' ref={remoteRef} />
-            </Form.Group> */}
+            <Form.Group className='mb-4' controlId='remote'>
+              <Form.Check
+                label='Remote preferred'
+                ref={remoteRef}
+                defaultChecked={false}
+              />
+            </Form.Group>
             <Form.Group className='mb-3' controlId='link'>
               <Form.Label>Listing Link</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Start typing a location...'
+                placeholder='Add website location of job listing'
                 ref={linkRef}
               />
             </Form.Group>
@@ -131,4 +135,4 @@ function AddJobModal() {
   );
 }
 
-export default AddJobModal;
+export default ModalAddJob;

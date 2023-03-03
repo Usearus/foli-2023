@@ -1,9 +1,8 @@
 import React from 'react';
-
-import SideBarItem from './SideBarItem';
-import styled from 'styled-components';
 import { useContext } from 'react';
 import { AirtableContext } from '../context/AirtableContext';
+import styled from 'styled-components';
+import SideBarItem from './SideBarItem';
 
 export const SideBar = ({ className }) => {
   const { currentSheets, setCurrentSheets } = useContext(AirtableContext);

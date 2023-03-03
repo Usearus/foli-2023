@@ -4,7 +4,7 @@ import { Nav, Navbar, Button } from 'react-bootstrap';
 // import { CiSearch } from 'react-icons/ci';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
-import ProfileModal from './ProfileModal';
+import ModalProfile from './ModalProfile';
 
 function NavBar() {
   const { logout } = useAuth0();
@@ -55,7 +55,7 @@ function NavBar() {
             </Button>
           </Form>*/}
 
-          <ProfileModal />
+          <ModalProfile />
 
           <Nav>
             <Button

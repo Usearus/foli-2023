@@ -6,7 +6,7 @@ import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
 
-function AddSheetModal() {
+function ModalAddSheet() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -88,4 +88,4 @@ function AddSheetModal() {
 
 // render(<Example />);
 
-export default AddSheetModal;
+export default ModalAddSheet;

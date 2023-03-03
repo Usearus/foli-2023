@@ -3,7 +3,7 @@ import Badge from 'react-bootstrap/Badge';
 import React from 'react';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
-import AddSheetModal from './AddSheetModal';
+import ModalAddSheet from './ModalAddSheet';
 import { AirtableContext } from '../context/AirtableContext';
 
 export const TopBarJob = ({ className }) => {
@@ -34,7 +34,7 @@ export const TopBarJob = ({ className }) => {
           {/* <span className="img-center">
             <BiCaretDown />
           </span> */}
-          <AddSheetModal />
+          <ModalAddSheet />
         </Stack>
       </Container>
     </Wrapper>

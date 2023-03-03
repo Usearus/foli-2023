@@ -1,3 +1,7 @@
+# Deployed at
+
+https://foli2023.netlify.app
+
 # Packages
 
 - This file has:
@@ -11,7 +15,7 @@
 
 ---CRITICAL---
 
-- Make badges remove locations, but dont save until you hit save button.
+- Add general error banner with 3 second timeout and statement arguement
 - Add delete Sheet
 - Stop sheets reappearing after edit
 - Add 'Position Details' sheet for each position
@@ -19,15 +23,12 @@
 
 ---LOW PRIORITY---
 
-- When I open preferences, temp close profile.
+- When I hover over a table row make it show that it is clickable
+- Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 - Make numbers required to be 1000 and increment by 1000
 - Convert to next.js
-- Add badges under locations!
-- Add multi-fields for location
+- When I open preferences, temp close profile.
 - When I click on profile remove active state on nav item
-- When I hover over a table row make it show that it is clickable
-- Get "remote" checkbox value to push to new Job records.
-- Edit Preferences Modal content to match content pre-filled.
 
 ## Post-MVP Features
 
@@ -36,6 +37,11 @@
 
 ## Done
 
+- Edit Preferences Modal content to match content pre-filled.
+- Get "remote" checkbox value to push to new Job records.
+- Add 'remote' choice to job preferences
+- Make badges remove locations, but dont save until you hit save button.
+- Disable add button if value on locationRef is blank
 - Move Profile into nav image
 - Make Profile like the Figma profile page.
 - Make trash button work while rest of row is clickable

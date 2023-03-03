@@ -1,7 +1,7 @@
 // import { BiCaretDown } from 'react-icons/bi';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
-import AddJobModal from './AddJobModal';
+import ModalAddJob from './ModalAddJob';
 
 export const TopBarTable = ({ className }) => {
   return (
@@ -9,7 +9,7 @@ export const TopBarTable = ({ className }) => {
       <Container fluid>
         <Stack direction='horizontal' gap={3} className='top-bar-container'>
           <div className=' ms-auto'>
-            <AddJobModal />
+            <ModalAddJob />
           </div>
         </Stack>
       </Container>

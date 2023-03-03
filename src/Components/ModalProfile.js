@@ -3,19 +3,19 @@ import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
-import EditPrefModal from './EditPrefModal';
+import ModalEditPref from './ModalEditPref';
 import { Badge } from 'react-bootstrap';
 
-function ProfileModal() {
+function ModalProfile() {
   const { user } = useAuth0();
   const { userProfile } = useContext(AirtableContext);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showProfile, setShowProfile] = useState(false);
+  const handleHideProfile = () => setShowProfile(false);
+  const handleShowProfile = () => setShowProfile(true);
 
   return (
     <>
-      <button style={{ border: 'none' }} onClick={handleShow}>
+      <button style={{ border: 'none' }} onClick={handleShowProfile}>
         <img
           src={user.picture}
           alt={user.name}
@@ -23,7 +23,7 @@ function ProfileModal() {
         />
       </button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={showProfile} onHide={handleHideProfile}>
         <Modal.Header closeButton>
           <Modal.Title>Profile</Modal.Title>
         </Modal.Header>
@@ -64,7 +64,7 @@ function ProfileModal() {
                     </div>
 
                     <div className='field'>
-                      <h6>Location(s) </h6>
+                      <h6>Locations</h6>
                       {userProfile.fields.location_preference &&
                         userProfile.fields.location_preference.map(
                           (location) => (
@@ -106,35 +106,30 @@ function ProfileModal() {
           </Wrapper>
         </Modal.Body>
         <Modal.Footer>
-          <EditPrefModal />
+          <ModalEditPref />
         </Modal.Footer>
       </Modal>
     </>
   );
 }
 
-export default ProfileModal;
+export default ModalProfile;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
-  /* padding: 20px; */
-  gap: 2rem;
-  img {
+  */ img {
     width: 100px;
   }
   h4 {
     padding-bottom: 0.5rem;
   }
   h6 {
-    margin-bottom: 0;
+    margin-bottom: 0.25rem;
   }
   .container {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
   }
   .field {
     padding-bottom: 0.5rem;
