@@ -9,12 +9,13 @@ https://foli2023.netlify.app
 - Airtable (database)
 - React Router
 - Auth0
-- react-cool-onclickoutside (trigger callback when user clicks outside of target component. Used for my location dropdown. May remove)
 
 ## Things to add
 
 ---CRITICAL---
 
+- add templates
+- add warning before deleting a job
 - Add general error banner with 3 second timeout and statement arguement
 - Add delete Sheet
 - Stop sheets reappearing after edit
