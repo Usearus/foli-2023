@@ -1,13 +1,13 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AirtableContext } from '../context/AirtableContext';
-import styled from 'styled-components';
 import SideBarItem from './SideBarItem';
+import SideBarPositionItem from './SideBarPositionItem';
+import styled from 'styled-components';
 
 export const SideBar = ({ className }) => {
   const { currentSheets, setCurrentSheets } = useContext(AirtableContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const sheetsFromStorage = localStorage.getItem('currentSheets');
     setCurrentSheets(JSON.parse(sheetsFromStorage));
   }, [setCurrentSheets]);
@@ -22,6 +22,7 @@ export const SideBar = ({ className }) => {
     <Wrapper className={className}>
       <section className='sidebar-container'>
         <span className='sidebar-title'>Sheets</span>
+        <SideBarPositionItem />
         {currentSheets.map((sheet) => (
           <SideBarItem
             key={sheet.id}
@@ -35,9 +36,11 @@ export const SideBar = ({ className }) => {
   );
 };
 
+export default SideBar;
+
 const Wrapper = styled.div`
   .sidebar-container {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
     height: 100%;
     background: var(--grey-100);
     color: var(--grey-800);
@@ -47,7 +50,7 @@ const Wrapper = styled.div`
   .sidebar-title {
     display: flex;
     padding: 0rem 0rem 1rem 0rem;
-    font-weight: 600;
+
     font-size: 1.5rem;
   }
 
@@ -62,5 +65,3 @@ const Wrapper = styled.div`
     border-radius: 0.5rem;
   }
 `;
-
-export default SideBar;

@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import MarkdownView from 'react-showdown';
 import base from '../API/base';
+import { FiTrash } from 'react-icons/fi';
 
 const Sheet = (sheets) => {
   const [editing, setEditing] = useState(false);
@@ -30,6 +31,18 @@ const Sheet = (sheets) => {
     );
   };
 
+  const handleDeleteSheetClick = (e) => {
+    e.stopPropagation();
+    base('sheets').destroy(sheets.id, function (err, deletedRecord) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      // console.log('Deleted sheet', deletedRecord.id);
+      fetchCurrentSheets(currentJob);
+    });
+  };
+
   const handleEditClick = () => {
     setEditing(true);
   };
@@ -47,6 +60,13 @@ const Sheet = (sheets) => {
     <Wrapper className='sheet-container'>
       <header className='sheet-title'>
         <h4>{sheets.fields.title}</h4>
+        <Button
+          variant='light'
+          onClick={handleDeleteSheetClick}
+          className='delete-button'
+        >
+          <FiTrash />
+        </Button>
       </header>
       <section className='sheet-content'>
         {editing ? (
@@ -63,7 +83,7 @@ const Sheet = (sheets) => {
             <div className='sheet-footer'>
               <Button variant='primary' onClick={handleUpdateContentClick}>
                 Save
-              </Button>{' '}
+              </Button>
               <Button variant='secondary' onClick={handleCancelClick}>
                 Cancel
               </Button>
@@ -90,23 +110,29 @@ const Sheet = (sheets) => {
 
 const Wrapper = styled.div`
   .sheet-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1rem;
-    color: var(--grey-600);
+    color: var(--grey-800);
+    height: 2rem;
+  }
+  .sheet-content:hover > .delete-button {
+    display: block;
   }
 
+  .delete-button {
+    display: block;
+  }
   .sheet-content {
     display: flex;
-    /* justify-content: flex-end; */
     flex-direction: column;
     width: 30rem;
     max-height: 75vh;
-    background: var(--grey-50);
+    background: var(--white);
     box-shadow: var(--shadow-1);
-    gap: 1rem;
     transition: var(--transition);
-    color: var(--grey-900);
     position: relative;
-    /* overflow-y: hidden; */
   }
 
   .sheet-content .ql-toolbar {
@@ -143,6 +169,10 @@ const Wrapper = styled.div`
     font-style: italic;
     font-size: 0.8rem;
     color: var(--grey-400);
+  }
+
+  .ql-container {
+    border: none;
   }
 `;
 

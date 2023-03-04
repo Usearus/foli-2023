@@ -5,11 +5,13 @@ import Modal from 'react-bootstrap/Modal';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
+import ReactQuill from 'react-quill';
 
 function ModalAddSheet() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // const [content, setContent] = useState('');
 
   const { user } = useAuth0();
   const { currentJob, allJobs, setCurrentJob, fetchCurrentSheets } =
@@ -51,6 +53,10 @@ function ModalAddSheet() {
     setCurrentJob(updatedJob);
   };
 
+  // const handleEditorChange = (value) => {
+  //   setContent(value);
+  // };
+
   return (
     <>
       <Button variant='primary' onClick={handleShow}>
@@ -67,10 +73,16 @@ function ModalAddSheet() {
               <Form.Label>Sheet Title</Form.Label>
               <Form.Control type='text' autoFocus ref={titleRef} />
             </Form.Group>
-            <Form.Group className='mb-3' controlId='content'>
+            <Form className='sheet-scroll'>
               <Form.Label>Content</Form.Label>
-              <Form.Control as='textarea' rows={3} ref={contentRef} />
-            </Form.Group>
+              <Form.Group className='mb-3' controlId='content'>
+                <ReactQuill
+                  theme='snow'
+                  // onChange={handleEditorChange}
+                  ref={contentRef}
+                />
+              </Form.Group>
+            </Form>
           </Form>
         </Modal.Body>
         <Modal.Footer>

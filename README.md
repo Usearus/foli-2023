@@ -7,31 +7,34 @@ https://foli2023.netlify.app
 - This file has:
 - Styled Components
 - Airtable (database)
-- React Router
 - Auth0
 
 ## Things to add
 
 ---CRITICAL---
 
+- Add border radius & focus state to React-Quill in Add Sheet modal.
+- Add focus state to all sheets using React-Quill
 - add templates
+- add rich text editor to new sheet modal
 - add warning before deleting a job
 - Add general error banner with 3 second timeout and statement arguement
-- Add delete Sheet
-- Stop sheets reappearing after edit
-- Add 'Position Details' sheet for each position
+- Make delete Sheet appear only on hover
+- Add rename Sheet
+- Stop sheets reappearing after edit (May need to add a state in Airtable for this)
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 
 ---LOW PRIORITY---
 
+- Add 'Position Details' sheet for each position
 - Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/
 - When I hover over a table row make it show that it is clickable
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 - Make numbers required to be 1000 and increment by 1000
-- Convert to next.js
 - When I open preferences, temp close profile.
 - When I click on profile remove active state on nav item
+- Convert to next.js
 
 ## Post-MVP Features
 
@@ -40,6 +43,7 @@ https://foli2023.netlify.app
 
 ## Done
 
+- Get 'Position Details' sheet to hide from sidebar
 - Edit Preferences Modal content to match content pre-filled.
 - Get "remote" checkbox value to push to new Job records.
 - Add 'remote' choice to job preferences

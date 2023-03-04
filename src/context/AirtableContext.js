@@ -50,7 +50,7 @@ const AirtableProvider = ({ children }) => {
       .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
         setAllProfiles(records);
-        console.log('all profiles', records);
+        // console.log('all profiles', records);
         fetchNextPage();
       });
   };
@@ -115,7 +115,7 @@ const AirtableProvider = ({ children }) => {
         })
         .eachPage(function page(records, fetchNextPage) {
           setUserSheets(records);
-          console.log('userSheets are', records);
+          // console.log('userSheets are', records);
           fetchNextPage();
         });
     }
@@ -138,6 +138,7 @@ const AirtableProvider = ({ children }) => {
   // SET CURRENTLY VIEWED JOB DATA
   const [currentSheets, setCurrentSheets] = useState([]);
   const [currentJob, setCurrentJob] = useState([]);
+  const [positionSheet, setPositionSheet] = useState(true);
 
   const fetchCurrentJob = async (job) => {
     console.log('job received for fetch:', job);
@@ -184,7 +185,8 @@ const AirtableProvider = ({ children }) => {
         userSheets,
         currentJob,
         currentSheets,
-        setCurrentJob, // Use the memoized setCurrentJob
+        positionSheet,
+        setCurrentJob,
         setCurrentSheets,
         setAllJobs,
         fetchAllJobs,
@@ -193,8 +195,7 @@ const AirtableProvider = ({ children }) => {
         fetchCurrentJob,
         fetchUserJobs,
         fetchUserProfile,
-        // tempLocations,
-        // setTempLocations,
+        setPositionSheet,
       }}
     >
       {children}
