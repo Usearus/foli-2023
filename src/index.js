@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import { AirtableProvider } from './context/AirtableContext';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { AlertProvider } from './context/AlertContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -20,7 +21,9 @@ root.render(
   >
     <BrowserRouter>
       <AirtableProvider>
-        <App />
+        <AlertProvider>
+          <App />
+        </AlertProvider>
       </AirtableProvider>
     </BrowserRouter>
   </Auth0Provider>
