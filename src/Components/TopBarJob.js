@@ -5,6 +5,8 @@ import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 import ModalAddSheet from './ModalAddSheet';
 import { AirtableContext } from '../context/AirtableContext';
+import ModalTemplates from './ModalTemplates';
+// import { Form } from 'react-bootstrap';
 
 export const TopBarJob = ({ className }) => {
   const { setCurrentJob, currentJob } = React.useContext(AirtableContext);
@@ -24,6 +26,11 @@ export const TopBarJob = ({ className }) => {
                 ? `${currentJob.fields.company} - ${currentJob.fields.position}`
                 : ''}
             </h4>
+            {/* <Form.Select aria-label='Default select example'>
+              <option value='1'>Bookmarked</option>
+              <option value='2'>Applied</option>
+              <option value='3'>Interviewing</option>
+            </Form.Select> */}
 
             <Badge pill bg='secondary'>
               {currentJob && currentJob.fields
@@ -34,7 +41,10 @@ export const TopBarJob = ({ className }) => {
           {/* <span className="img-center">
             <BiCaretDown />
           </span> */}
-          <ModalAddSheet />
+          <div className='btns'>
+            <ModalTemplates />
+            <ModalAddSheet />
+          </div>
         </Stack>
       </Container>
     </Wrapper>
@@ -44,11 +54,17 @@ export const TopBarJob = ({ className }) => {
 export default TopBarJob;
 
 const Wrapper = styled.div`
+  .btns {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
   .left-content {
     display: flex;
     flex-direction: row;
     justify-content: stretch;
-    align-items: center;
+    align-items: baseline;
     gap: 1rem;
   }
   .top-bar-container {

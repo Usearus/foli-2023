@@ -13,10 +13,11 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
+- Fix unique key prop issue with TemplateCard
+- Add template preview when clicked in template panel
 - Add border radius & focus state to React-Quill in Add Sheet modal.
 - Add focus state to all sheets using React-Quill
-- add templates
-- add rich text editor to new sheet modal
+- add default content hight rich text editor to add sheet modal
 - add warning before deleting a job
 - Add general error banner with 3 second timeout and statement arguement
 - Make delete Sheet appear only on hover
@@ -26,10 +27,9 @@ https://foli2023.netlify.app
 
 ---LOW PRIORITY---
 
-- Add 'Position Details' sheet for each position
+- When I hover over a table row make it show that it is clickable
 - Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/
-- When I hover over a table row make it show that it is clickable
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 - Make numbers required to be 1000 and increment by 1000
 - When I open preferences, temp close profile.
@@ -43,6 +43,8 @@ https://foli2023.netlify.app
 
 ## Done
 
+- Add 'Position Details' sheet for each position
+- add templates
 - Get 'Position Details' sheet to hide from sidebar
 - Edit Preferences Modal content to match content pre-filled.
 - Get "remote" checkbox value to push to new Job records.

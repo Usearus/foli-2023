@@ -63,7 +63,7 @@ function ModalAddSheet() {
         Add Sheet
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal fullscreen='md-down' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add sheet to job</Modal.Title>
         </Modal.Header>

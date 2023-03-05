@@ -61,6 +61,12 @@ const SheetPosition = () => {
   };
 
   const handleCancelClick = () => {
+    positionRef.current.value = initialValues.position;
+    salary_minRef.current.value = initialValues.salary_min;
+    salary_maxRef.current.value = initialValues.salary_max;
+    remoteRef.current.value = initialValues.remote;
+    locationRef.current.value = initialValues.location;
+    linkRef.current.value = initialValues.link;
     setEditing(false);
   };
 
@@ -158,7 +164,7 @@ const SheetPosition = () => {
                       autoFocus
                       ref={companyRef}
                       defaultValue={initialValues.company}
-                      disabled
+                      readOnly
                     />
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='position'>
@@ -167,7 +173,7 @@ const SheetPosition = () => {
                       type='text'
                       ref={positionRef}
                       defaultValue={initialValues.position}
-                      disabled
+                      readOnly
                     />
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='salary-min'>
@@ -177,7 +183,7 @@ const SheetPosition = () => {
                       placeholder='40,000'
                       ref={salary_minRef}
                       defaultValue={initialValues.salary_min}
-                      disabled
+                      readOnly
                     />
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='salary-max'>
@@ -187,7 +193,7 @@ const SheetPosition = () => {
                       placeholder='60,000'
                       ref={salary_maxRef}
                       defaultValue={initialValues.salary_max}
-                      disabled
+                      readOnly
                     />
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='location'>
@@ -197,7 +203,7 @@ const SheetPosition = () => {
                       placeholder='Start typing a city...'
                       ref={locationRef}
                       defaultValue={initialValues.location}
-                      disabled
+                      readOnly
                     />
                   </Form.Group>
                   <Form.Group className='mb-4' controlId='remote'>
@@ -215,10 +221,11 @@ const SheetPosition = () => {
                       placeholder='Add website location of job listing'
                       ref={linkRef}
                       defaultValue={initialValues.link}
-                      disabled
+                      readOnly
                     />
                   </Form.Group>
                 </Form>
+
                 <div className='sheet-footer'>
                   <Button variant='secondary' onClick={handleEditClick}>
                     Edit

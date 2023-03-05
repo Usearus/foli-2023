@@ -91,7 +91,7 @@ function ModalEditPref() {
       <Button variant='primary' onClick={handleShowPref}>
         Edit Preferences
       </Button>
-      <Modal show={showPref} onHide={handleClosePref}>
+      <Modal fullscreen='md-down' show={showPref} onHide={handleClosePref}>
         <Modal.Header closeButton>
           <Modal.Title>Edit job preferences</Modal.Title>
         </Modal.Header>

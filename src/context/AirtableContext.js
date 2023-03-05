@@ -23,6 +23,7 @@ const AirtableProvider = ({ children }) => {
   const [allSheets, setAllSheets] = useState([]);
   const [allJobs, setAllJobs] = useState([]);
   const [allProfiles, setAllProfiles] = useState([]);
+  const [allTemplates, setAllTemplates] = useState([]);
 
   // FETCH ALL AIRTABLE DATA
   const fetchAllSheets = async () => {
@@ -55,6 +56,17 @@ const AirtableProvider = ({ children }) => {
       });
   };
 
+  const fetchAllTemplates = async () => {
+    await base('templates')
+      .select({ view: 'Grid view' })
+      .eachPage(function page(records, fetchNextPage) {
+        setAllTemplates(records);
+        setCurrentTemplates(records);
+        // console.log('all templates', records);
+        fetchNextPage();
+      });
+  };
+
   useEffect(() => {
     fetchAllSheets();
   }, []);
@@ -65,6 +77,10 @@ const AirtableProvider = ({ children }) => {
 
   useEffect(() => {
     fetchAllProfiles();
+  }, []);
+
+  useEffect(() => {
+    fetchAllTemplates();
   }, []);
 
   // *
@@ -175,27 +191,57 @@ const AirtableProvider = ({ children }) => {
     }
   };
 
+  // *
+  // *
+  // SET CURRENTLY VIEWED TEMPLATE DATA
+  const [currentTemplates, setCurrentTemplates] = useState(allTemplates);
+
+  const fetchTemplatesByCategory = async (category) => {
+    // console.log('category received:', category);
+    await base('templates')
+      .select({
+        view: 'Grid view',
+        filterByFormula: `{category} = '${category}'`,
+      })
+      .eachPage(function page(records, fetchNextPage) {
+        setCurrentTemplates(records);
+        fetchNextPage();
+        console.log('currentTemplates are', records);
+      });
+  };
+
   return (
     <AirtableContext.Provider
       value={{
+        //Sheets
         allSheets,
-        allJobs,
-        userProfile,
-        userJobs,
         userSheets,
-        currentJob,
         currentSheets,
         positionSheet,
-        setCurrentJob,
+        fetchAllSheets,
         setCurrentSheets,
+        fetchCurrentSheets,
+        setPositionSheet,
+        //Jobs
+        allJobs,
+        userJobs,
+        currentJob,
         setAllJobs,
         fetchAllJobs,
-        fetchAllSheets,
-        fetchCurrentSheets,
-        fetchCurrentJob,
         fetchUserJobs,
+        setCurrentJob,
+        fetchCurrentJob,
+        //Profiles
+        allProfiles,
+        userProfile,
         fetchUserProfile,
-        setPositionSheet,
+        //Templates
+        currentTemplates,
+        allTemplates,
+        setAllTemplates,
+        fetchTemplatesByCategory,
+        setCurrentTemplates,
+        fetchAllTemplates,
       }}
     >
       {children}

@@ -60,7 +60,7 @@ function ModalAddJob() {
         Add Job
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal fullscreen='md-down' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add job to track</Modal.Title>
         </Modal.Header>

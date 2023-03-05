@@ -23,7 +23,7 @@ function ModalProfile() {
         />
       </button>
 
-      <Modal show={showProfile} onHide={handleHideProfile}>
+      <Modal fullscreen='md-down' show={showProfile} onHide={handleHideProfile}>
         <Modal.Header closeButton>
           <Modal.Title>Profile</Modal.Title>
         </Modal.Header>
