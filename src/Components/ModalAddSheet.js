@@ -6,12 +6,14 @@ import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
 import ReactQuill from 'react-quill';
+import useAlert from '../Custom Hooks/useAlert';
 
 function ModalAddSheet() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // const [content, setContent] = useState('');
+
+  const { setAlert } = useAlert();
 
   const { user } = useAuth0();
   const { currentJob, allJobs, setCurrentJob, fetchCurrentSheets } =
@@ -41,6 +43,7 @@ function ModalAddSheet() {
           // console.log('added sheet', record.getId());
           fetchCurrentSheets(currentJob);
           handleClose();
+          setAlert('Sheet successfully added!', 'success');
         });
       }
     );

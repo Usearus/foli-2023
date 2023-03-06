@@ -9,6 +9,7 @@ import {
   AuthWrapper,
 } from './Pages';
 import NavBar from './Components/NavBar';
+import AlertPopup from './Components/AlertPopup';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           path='/'
           element={
             <PrivateRoute>
+              <AlertPopup />
               <NavBar />
               <JobsPage />
             </PrivateRoute>
@@ -28,6 +30,7 @@ function App() {
           path='/job/:id'
           element={
             <PrivateRoute>
+              <AlertPopup />
               <NavBar />
               <SingleJobPage />
             </PrivateRoute>
@@ -38,6 +41,7 @@ function App() {
           path='/testing'
           element={
             <PrivateRoute>
+              <AlertPopup />
               <NavBar />
               <TestingPage />
             </PrivateRoute>
