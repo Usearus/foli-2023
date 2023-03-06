@@ -135,18 +135,6 @@ const Wrapper = styled.div`
     position: relative;
   }
 
-  .sheet-content .ql-toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background: var(--grey-50);
-  }
-
-  .sheet-content .ql-container {
-    overflow-y: auto;
-    /* height: calc(75vh - 41px); subtract toolbar height from max-height */
-  }
-
   .sheet-content:hover {
     box-shadow: var(--shadow-4);
   }
@@ -154,6 +142,7 @@ const Wrapper = styled.div`
   .markdown-content {
     padding: 1rem;
   }
+
   .sheet-scroll {
     overflow-y: scroll;
   }
@@ -171,8 +160,53 @@ const Wrapper = styled.div`
     color: var(--grey-400);
   }
 
+  .sheet-content .ql-container {
+    overflow-y: auto;
+    /* height: calc(75vh - 41px); subtract toolbar height from max-height */
+  }
+
+  .sheet-content .ql-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--grey-50);
+  }
+
   .ql-container {
     border: none;
+  }
+
+  .ql-editor {
+    font-size: 16px; /* change this value to the desired font size */
+  }
+
+  .ql-editor ul {
+    padding-bottom: 16px; /* change this value to the desired font size */
+    list-style-type: circle;
+  }
+
+  .ql-editor h1 {
+    padding-bottom: 0px; /* change this value to the desired font size */
+  }
+
+  .ql-editor h1 {
+    font-size: 3.052rem;
+  }
+
+  .ql-editor h2 {
+    font-size: 2.441rem;
+  }
+
+  .ql-editor h3 {
+    font-size: 1.953rem;
+  }
+
+  .ql-editor h4 {
+    font-size: 1.563rem;
+  }
+
+  .ql-editor h5 {
+    font-size: 1.25rem;
   }
 `;
 
