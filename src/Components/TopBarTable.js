@@ -1,9 +1,17 @@
-// import { BiCaretDown } from 'react-icons/bi';
+import { useContext } from 'react';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 import ModalAddJob from './ModalAddJob';
+import { AirtableContext } from '../context/AirtableContext';
 
 export const TopBarTable = ({ className }) => {
+  const {
+    checkedCount,
+    setCheckedCount,
+    batchActionsVisible,
+    setBatchActionsVisible,
+  } = useContext(AirtableContext);
+
   return (
     <Wrapper className={className}>
       <Container fluid>

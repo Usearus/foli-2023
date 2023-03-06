@@ -19,7 +19,6 @@ https://foli2023.netlify.app
 - Add focus state to all sheets using React-Quill
 - add default content hight rich text editor to add sheet modal
 - add warning before deleting a job
-- Add general error banner with 3 second timeout and statement arguement
 - Make delete Sheet appear only on hover
 - Add rename Sheet
 - Stop sheets reappearing after edit (May need to add a state in Airtable for this)
@@ -27,6 +26,7 @@ https://foli2023.netlify.app
 
 ---LOW PRIORITY---
 
+- Add global alerts
 - When I hover over a table row make it show that it is clickable
 - Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/

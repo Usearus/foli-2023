@@ -210,6 +210,10 @@ const AirtableProvider = ({ children }) => {
       });
   };
 
+  // SET CURRENTLY VIEWED TEMPLATE DATA
+  const [checkedCount, setCheckedCount] = useState(0);
+  const [batchActionsVisible, setBatchActionsVisible] = useState(false);
+
   return (
     <AirtableContext.Provider
       value={{
@@ -242,6 +246,11 @@ const AirtableProvider = ({ children }) => {
         fetchTemplatesByCategory,
         setCurrentTemplates,
         fetchAllTemplates,
+        // Job Table
+        checkedCount,
+        setCheckedCount,
+        batchActionsVisible,
+        setBatchActionsVisible,
       }}
     >
       {children}
