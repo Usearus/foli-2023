@@ -13,6 +13,7 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
+- Add rename Sheet
 - Fix unique key prop issue with TemplateCard
 - Add template preview when clicked in template panel
 - Add border radius & focus state to React-Quill in Add Sheet modal.
@@ -20,14 +21,12 @@ https://foli2023.netlify.app
 - add default content hight rich text editor to add sheet modal
 - add warning before deleting a job
 - Make delete Sheet appear only on hover
-- Add rename Sheet
 - Stop sheets reappearing after edit (May need to add a state in Airtable for this)
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 
 ---LOW PRIORITY---
 
-- Add global alerts
-- When I hover over a table row make it show that it is clickable
+- CSS for setting sheet height (affects React-Quill too)
 - Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
@@ -43,6 +42,8 @@ https://foli2023.netlify.app
 
 ## Done
 
+- Add global alerts
+- When I hover over a table row make it show that it is clickable
 - Add 'Position Details' sheet for each position
 - add templates
 - Get 'Position Details' sheet to hide from sidebar

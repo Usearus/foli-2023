@@ -9,10 +9,12 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600;1,800&display=swap');
+// @import "custom";
+@import "quill-edits.scss";
 
 html {
   font-size: 100%;
-} /*16px*/
+} 
 
 :root {
   /* dark shades of primary color*/
@@ -69,8 +71,9 @@ html {
   --extra-small-text: 0.7em;
 
   /* rest of the vars */
-  --backgroundColor: var(--grey-700);
-  --textColor: var(--grey-900);
+  --backgroundColor: var(white);
+  --primaryTextColor: var(--grey-900);
+  --secondaryTextColor: var(--grey-200);
   --borderRadius: 0.25rem;
   --letterSpacing: 1px;
   --transition: 0.3s ease-in-out all;
@@ -79,17 +82,19 @@ html {
 }
 
 body {
-  background: var(--backgroundColor);
+  background: var(--white);
   font-family: var(--bodyFont);
   font-weight: 400;
   line-height: 1.75;
-  color: var(--textColor);
+  // color: var(--primaryTextColor);
 }
 
 p {
   font-family: var(--bodyFont);
   line-height: 1.5;
   font-size: 1rem;
+  margin-bottom: 0;
+  // color: var(--secondaryTextColor);
 }
 
 li,
@@ -134,29 +139,29 @@ small,
   font-size: var(--small-text);
 }
 
-@media screen and (min-width: 800px) {
-  h1 {
-    font-size: 4rem;
-  }
-  h2 {
-    font-size: 2.5rem;
-  }
-  h3 {
-    font-size: 1.5rem;
-  }
-  h4 {
-    font-size: 1rem;
-  }
-  body {
-    font-size: 1rem;
-  }
-  h1,
-  h2,
-  h3,
-  h4 {
-    line-height: 1;
-  }
-}
+// @media screen and (min-width: 800px) {
+//   h1 {
+//     font-size: 4rem;
+//   }
+//   h2 {
+//     font-size: 2.5rem;
+//   }
+//   h3 {
+//     font-size: 1.5rem;
+//   }
+//   h4 {
+//     font-size: 1rem;
+//   }
+//   body {
+//     font-size: 1rem;
+//   }
+//   h1,
+//   h2,
+//   h3,
+//   h4 {
+//     line-height: 1;
+//   }
+// }
 
 a {
   text-decoration: none;
@@ -226,5 +231,3 @@ div .container-fluid {
 .navbar-nav .nav-link.active {
   --bs-navbar-active-color: var(--white);
 }
-
-// React Quill Customization
