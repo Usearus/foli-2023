@@ -6,6 +6,7 @@ import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
 import useAlert from '../Custom Hooks/useAlert';
+import styled from "styled-components";
 
 function ModalAddJob() {
   const [show, setShow] = useState(false);
@@ -59,7 +60,7 @@ function ModalAddJob() {
   };
 
   return (
-    <>
+    <Wrapper>
       <Button variant='primary' onClick={handleShow}>
         Add Job
       </Button>
@@ -80,12 +81,12 @@ function ModalAddJob() {
                 ref={companyRef}
               />
             </Form.Group>
-            <Form.Group className='mb-3' controlId='position'>
+            <Form.Group className='mb-3 ' controlId='position'>
               <Form.Label>Position</Form.Label>
               <Form.Control type='text' ref={positionRef} />
             </Form.Group>
             <Form.Group className='mb-3' controlId='salary-min'>
-              <Form.Label>Salary Minimum ($)</Form.Label>
+              <Form.Label className='test'>Salary Minimum ($)</Form.Label>
               <Form.Control
                 type='number'
                 placeholder='40,000'
@@ -135,8 +136,18 @@ function ModalAddJob() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </Wrapper>
   );
 }
 
 export default ModalAddJob;
+
+const Wrapper = styled.div`
+
+  .editor {
+    height: 250px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+`;

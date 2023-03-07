@@ -1,18 +1,8 @@
-import { useContext } from 'react';
-import Table from 'react-bootstrap/Table';
-import JobsTableRow from './JobsTableRow';
-import Form from 'react-bootstrap/Form';
-import styled from 'styled-components';
-import { AirtableContext } from '../context/AirtableContext';
+import Table from "react-bootstrap/Table";
+import JobsTableRow from "./JobsTableRow";
+import styled from "styled-components";
 
 function JobsTable({ jobs }) {
-  // const {
-  //   checkedCount,
-  //   setCheckedCount,
-  //   batchActionsVisible,
-  //   setBatchActionsVisible,
-  // } = useContext(AirtableContext);
-
   return (
     <Wrapper>
       <Table responsive hover>

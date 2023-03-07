@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import Badge from 'react-bootstrap/Badge';
-import base from '../API/base';
-import { AirtableContext } from '../context/AirtableContext';
-import { useNavigate } from 'react-router-dom';
-import ModalDeleteConfirmation from './ModalDeleteConfirmation';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import Badge from "react-bootstrap/Badge";
+import base from "../API/base";
+import { AirtableContext } from "../context/AirtableContext";
+import { useNavigate } from "react-router-dom";
+import ModalDeleteConfirmation from "./ModalDeleteConfirmation";
+import styled from "styled-components";
 
 const JobsTableRow = (singleJob, handleCheckboxChange) => {
   const { fetchUserJobs, fetchCurrentJob, fetchCurrentSheets } =
@@ -13,7 +13,7 @@ const JobsTableRow = (singleJob, handleCheckboxChange) => {
 
   const handleDeleteJobClick = (e) => {
     e.stopPropagation();
-    base('jobs').destroy(singleJob.id, function (err, deletedRecord) {
+    base("jobs").destroy(singleJob.id, function (err, deletedRecord) {
       if (err) {
         console.error(err);
         return;
@@ -38,19 +38,19 @@ const JobsTableRow = (singleJob, handleCheckboxChange) => {
           {singleJob.fields.salary_min && singleJob.fields.salary_max
             ? `$${singleJob.fields.salary_min.toLocaleString()} -
         ${singleJob.fields.salary_max.toLocaleString()}`
-            : '-'}
+            : "-"}
         </td>
         <td onClick={handleTableRowClick}>{singleJob.fields.location}</td>
         <td>
-          <Badge pill bg='secondary'>
+          <Badge pill bg="secondary">
             {singleJob.fields.status}
           </Badge>
         </td>
         <td onClick={handleTableRowClick}>{singleJob.fields.edited}</td>
         <td>
           <ModalDeleteConfirmation
-            job={singleJob}
-            handleDeleteJobClick={handleDeleteJobClick}
+            deleteFunction={handleDeleteJobClick}
+            type={"job"}
           />
         </td>
       </tr>

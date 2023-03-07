@@ -82,10 +82,12 @@ function ModalEditPref() {
     handleClosePref();
   };
 
+  // CANNOT GET THIS TO WORK!
   // const handleEditClick = () => {
   //   handleShowPref();
   //   // handleHideProfile();
   // };
+
   return (
     <Wrapper>
       <Button variant='primary' onClick={handleShowPref}>
@@ -204,10 +206,6 @@ function ModalEditPref() {
 export default ModalEditPref;
 
 const Wrapper = styled.div`
-  /* .salary-inputs {
-    display: flex;
-    justify-content: space-between;
-  } */
   .MdOutlineClose:hover {
     cursor: pointer;
   }

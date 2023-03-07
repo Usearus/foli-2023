@@ -5,12 +5,6 @@ import ModalAddJob from './ModalAddJob';
 import { AirtableContext } from '../context/AirtableContext';
 
 export const TopBarTable = ({ className }) => {
-  const {
-    checkedCount,
-    setCheckedCount,
-    batchActionsVisible,
-    setBatchActionsVisible,
-  } = useContext(AirtableContext);
 
   return (
     <Wrapper className={className}>

@@ -1,12 +1,12 @@
-import React, { useState, useRef, useContext } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import base from '../API/base';
-import { useAuth0 } from '@auth0/auth0-react';
-import { AirtableContext } from '../context/AirtableContext';
-import ReactQuill from 'react-quill';
-import useAlert from '../Custom Hooks/useAlert';
+import React, { useState, useRef, useContext } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import base from "../API/base";
+import { useAuth0 } from "@auth0/auth0-react";
+import { AirtableContext } from "../context/AirtableContext";
+import ReactQuill from "react-quill";
+import useAlert from "../Custom Hooks/useAlert";
 
 function ModalAddSheet() {
   const [show, setShow] = useState(false);
@@ -23,7 +23,7 @@ function ModalAddSheet() {
   const contentRef = useRef();
 
   const addSheet = () => {
-    base('sheets').create(
+    base("sheets").create(
       [
         {
           fields: {
@@ -43,7 +43,7 @@ function ModalAddSheet() {
           // console.log('added sheet', record.getId());
           fetchCurrentSheets(currentJob);
           handleClose();
-          setAlert('Sheet successfully added!', 'success');
+          setAlert("Sheet successfully added!", "success");
         });
       }
     );
@@ -55,52 +55,44 @@ function ModalAddSheet() {
     const updatedJob = allJobs.find((job) => job.id === currentJob.id);
     setCurrentJob(updatedJob);
   };
-
-  // const handleEditorChange = (value) => {
-  //   setContent(value);
-  // };
-
+  
+  
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow}>
         Add Sheet
       </Button>
 
-      <Modal fullscreen='md-down' show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add sheet to job</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className='mb-3' controlId='title'>
-              <Form.Label>Sheet Title</Form.Label>
-              <Form.Control type='text' autoFocus ref={titleRef} />
-            </Form.Group>
-            <Form className='sheet-scroll'>
+      
+        <Modal fullscreen="md-down" show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add a new sheet</Modal.Title>
+          </Modal.Header>
+          <Modal.Body >
+            <Form>
+              <Form.Group className="mb-3 " controlId="title">
+                <Form.Label>Sheet Title</Form.Label>
+                <Form.Control type="text" autoFocus ref={titleRef} />
+              </Form.Group>
+
               <Form.Label>Content</Form.Label>
-              <Form.Group className='mb-3' controlId='content'>
-                <ReactQuill
-                  theme='snow'
-                  // onChange={handleEditorChange}
-                  ref={contentRef}
-                />
+              <Form.Group className="mb-3" controlId="content">
+                <ReactQuill theme="snow" ref={contentRef}/>
               </Form.Group>
             </Form>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant='primary' onClick={handleAddSheetClick}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleAddSheetClick}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
     </>
   );
 }
-
-// render(<Example />);
 
 export default ModalAddSheet;
