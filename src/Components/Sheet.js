@@ -1,22 +1,28 @@
-import { useState, useContext } from "react";
-import { Button, Form } from "react-bootstrap";
-import { AirtableContext } from "../context/AirtableContext";
-import styled from "styled-components";
-import ReactQuill from "react-quill";
-import MarkdownView from "react-showdown";
-import base from "../API/base";
-import { FiTrash } from "react-icons/fi";
+import { useState, useContext, useRef } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { AirtableContext } from '../context/AirtableContext';
+import styled from 'styled-components';
+import MarkdownView from 'react-showdown';
+import base from '../API/base';
+import useAlert from '../Custom Hooks/useAlert';
+import ReactQuillEditor from '../Components/ReactQuillEditor';
+import ModalDeleteConfirmation from '../Components/ModalDeleteConfirmation';
 
-const Sheet = (sheets) => {
+const Sheet = (sheet) => {
   const [editing, setEditing] = useState(false);
-  const [content, setContent] = useState(sheets.fields.content);
+  const [content, setContent] = useState(sheet.fields.content);
   const { fetchCurrentSheets, currentJob } = useContext(AirtableContext);
+  const { setAlert } = useAlert();
+
+  const titleRef = useRef();
+  const initialTitleValue = sheet.fields?.title ?? '';
 
   const handleUpdateContentClick = () => {
-    base("sheets").update(
-      sheets.id,
+    base('sheets').update(
+      sheet.id,
       {
         content: content,
+        title: titleRef.current.value,
       },
       function (err, record) {
         if (err) {
@@ -24,6 +30,7 @@ const Sheet = (sheets) => {
           return;
         }
         // console.log('sheet updated', record.getId());
+        setAlert('Sheet successfully updated!', 'success');
         fetchCurrentSheets(currentJob);
         setEditing(false);
       }
@@ -32,12 +39,13 @@ const Sheet = (sheets) => {
 
   const handleDeleteSheetClick = (e) => {
     e.stopPropagation();
-    base("sheets").destroy(sheets.id, function (err, deletedRecord) {
+    base('sheets').destroy(sheet.id, function (err, deletedRecord) {
       if (err) {
         console.error(err);
         return;
       }
       // console.log('Deleted sheet', deletedRecord.id);
+      setAlert('Sheet successfully deleted!', 'success');
       fetchCurrentSheets(currentJob);
     });
   };
@@ -47,7 +55,7 @@ const Sheet = (sheets) => {
   };
 
   const handleCancelClick = () => {
-    setContent(sheets.fields.content);
+    setContent(sheet.fields.content);
     setEditing(false);
   };
 
@@ -56,48 +64,63 @@ const Sheet = (sheets) => {
   };
 
   return (
-    <Wrapper className="sheet-container">
-      <header className="sheet-title">
-        <h4>{sheets.fields.title}</h4>
-        <Button
-          variant="light"
-          onClick={handleDeleteSheetClick}
-          className="delete-button"
-        >
-          <FiTrash />
-        </Button>
+    <Wrapper className='sheet-container'>
+      <header
+        className='sheet-title'
+        style={{ marginBottom: editing ? '.75rem' : '.75rem' }}
+      >
+        {!editing ? (
+          <h4>{sheet.fields.title}</h4>
+        ) : (
+          <Form>
+            <Form.Group className='mb-3 ' controlId='title'>
+              <Form.Control
+                type='text'
+                required
+                ref={titleRef}
+                defaultValue={initialTitleValue}
+                placeholder='Sheet title'
+                size='md'
+              />
+            </Form.Group>
+          </Form>
+        )}
+        <ModalDeleteConfirmation
+          className='delete-button'
+          type='sheet'
+          deleteFunction={handleDeleteSheetClick}
+        />
       </header>
-      <section className="sheet-content">
-        {editing ? (
+      <section className='sheet-content'>
+        {!editing ? (
           <>
-            <Form className="sheet-scroll">
-              <Form.Group controlId="content">
-                <ReactQuill
-                  theme="snow"
-                  value={content}
-                  onChange={handleEditorChange}
-                />
-              </Form.Group>
-            </Form>
-            <div className="sheet-footer">
-              <Button variant="primary" onClick={handleUpdateContentClick}>
-                Save
-              </Button>
-              <Button variant="secondary" onClick={handleCancelClick}>
-                Cancel
+            <MarkdownView
+              className='sheet-scroll markdown-content'
+              markdown={sheet.fields.content}
+              style={{ display: editing ? 'none' : 'block' }}
+            />
+            <div className='sheet-footer'>
+              <Button variant='outline-secondary' onClick={handleEditClick}>
+                Edit
               </Button>
             </div>
           </>
         ) : (
           <>
-            <MarkdownView
-              className="sheet-scroll markdown-content"
-              markdown={sheets.fields.content}
-              style={{ display: editing ? "none" : "block" }}
-            />
-            <div className="sheet-footer">
-              <Button variant="secondary" onClick={handleEditClick}>
-                Edit
+            <Form className='sheet-scroll'>
+              <Form.Group controlId='content'>
+                <ReactQuillEditor
+                  value={content}
+                  onChange={handleEditorChange}
+                />
+              </Form.Group>
+            </Form>
+            <div className='sheet-footer'>
+              <Button variant='outline-secondary' onClick={handleCancelClick}>
+                Cancel
+              </Button>
+              <Button variant='primary' onClick={handleUpdateContentClick}>
+                Save
               </Button>
             </div>
           </>
@@ -111,8 +134,7 @@ const Wrapper = styled.div`
   .sheet-title {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+    align-items: flex-start;
     color: var(--grey-800);
     height: 2rem;
   }

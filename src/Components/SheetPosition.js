@@ -1,8 +1,8 @@
-import { useState, useContext, useRef } from "react";
-import { Button, Form } from "react-bootstrap";
-import { AirtableContext } from "../context/AirtableContext";
-import styled from "styled-components";
-import base from "../API/base";
+import { useState, useContext, useRef } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { AirtableContext } from '../context/AirtableContext';
+import styled from 'styled-components';
+import base from '../API/base';
 
 const SheetPosition = () => {
   const [editing, setEditing] = useState(false);
@@ -19,17 +19,17 @@ const SheetPosition = () => {
   const linkRef = useRef();
 
   const initialValues = {
-    company: currentJob?.fields?.company ?? "",
-    position: currentJob?.fields?.position ?? "",
-    salary_min: currentJob?.fields?.salary_min ?? "",
-    salary_max: currentJob?.fields?.salary_max ?? "",
-    location: currentJob?.fields?.location ?? "",
+    company: currentJob?.fields?.company ?? '',
+    position: currentJob?.fields?.position ?? '',
+    salary_min: currentJob?.fields?.salary_min ?? '',
+    salary_max: currentJob?.fields?.salary_max ?? '',
+    location: currentJob?.fields?.location ?? '',
     remote: currentJob?.fields?.remote ?? false,
-    link: currentJob?.fields?.link ?? "",
+    link: currentJob?.fields?.link ?? '',
   };
 
   const handleUpdateJobClick = () => {
-    base("jobs").update(
+    base('jobs').update(
       currentJob.id,
       {
         company: companyRef.current.value,
@@ -39,15 +39,15 @@ const SheetPosition = () => {
         location: locationRef.current.value,
         remote: remoteRef.current.checked,
         link: linkRef.current.value,
-        status: "Bookmarked",
-        edited: new Date().toLocaleDateString("en-US"),
+        status: 'Bookmarked',
+        edited: new Date().toLocaleDateString('en-US'),
       },
       function (err, record) {
         if (err) {
           console.error(err);
           return;
         }
-        console.log("sheet updated", record.getId());
+        console.log('sheet updated', record.getId());
         fetchCurrentSheets(currentJob);
         fetchCurrentJob(currentJob);
         fetchUserJobs(currentJob);
@@ -73,150 +73,153 @@ const SheetPosition = () => {
   if (positionSheet) {
     return (
       <>
-        <Wrapper className="sheet-container">
-          <header className="sheet-title">
+        <Wrapper className='sheet-container'>
+          <header className='sheet-title'>
             <h4>Position Details</h4>
           </header>
-          <section className="sheet-content">
+          <section className='sheet-content'>
             {editing ? (
               <>
                 <Form>
-                  <Form.Group className="mb-3" controlId="company">
+                  <Form.Group className='mb-3' controlId='company'>
                     <Form.Label>Company</Form.Label>
                     <Form.Control
-                      type="text"
-                      placeholder="Google, Apple, etc."
+                      type='text'
+                      placeholder='Google, Apple, etc.'
                       ref={companyRef}
                       defaultValue={initialValues.company}
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="position">
+                  <Form.Group className='mb-3' controlId='position'>
                     <Form.Label>Position</Form.Label>
                     <Form.Control
-                      type="text"
+                      type='text'
                       ref={positionRef}
                       defaultValue={initialValues.position}
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="salary-min">
+                  <Form.Group className='mb-3' controlId='salary-min'>
                     <Form.Label>Salary Minimum ($)</Form.Label>
                     <Form.Control
-                      type="number"
-                      placeholder="40,000"
+                      type='number'
+                      placeholder='40,000'
                       ref={salary_minRef}
                       defaultValue={initialValues.salary_min}
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="salary-max">
+                  <Form.Group className='mb-3' controlId='salary-max'>
                     <Form.Label>Salary Maximum ($)</Form.Label>
                     <Form.Control
-                      type="number"
-                      placeholder="60,000"
+                      type='number'
+                      placeholder='60,000'
                       ref={salary_maxRef}
                       defaultValue={initialValues.salary_max}
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="location">
+                  <Form.Group className='mb-3' controlId='location'>
                     <Form.Label>Location</Form.Label>
                     <Form.Control
-                      type="text"
-                      placeholder="Start typing a city..."
+                      type='text'
+                      placeholder='Start typing a city...'
                       ref={locationRef}
                       defaultValue={initialValues.location}
                     />
                   </Form.Group>
-                  <Form.Group className="mb-4" controlId="remote">
+                  <Form.Group className='mb-4' controlId='remote'>
                     <Form.Check
-                      label="Remote preferred"
+                      label='Remote preferred'
                       ref={remoteRef}
                       defaultChecked={initialValues.remote}
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="link">
+                  <Form.Group className='mb-3' controlId='link'>
                     <Form.Label>Listing Link</Form.Label>
                     <Form.Control
-                      type="text"
-                      placeholder="Add website location of job listing"
+                      type='text'
+                      placeholder='Add website location of job listing'
                       ref={linkRef}
                       defaultValue={initialValues.link}
                     />
                   </Form.Group>
                 </Form>
 
-                <div className="sheet-footer">
-                  <Button variant="primary" onClick={handleUpdateJobClick}>
-                    Save
-                  </Button>
-                  <Button variant="secondary" onClick={handleCancelClick}>
+                <div className='sheet-footer'>
+                  <Button
+                    variant='outline-secondary'
+                    onClick={handleCancelClick}
+                  >
                     Cancel
+                  </Button>
+                  <Button variant='primary' onClick={handleUpdateJobClick}>
+                    Save
                   </Button>
                 </div>
               </>
             ) : (
               <>
                 <Form>
-                  <Form.Group className="mb-3" controlId="company">
+                  <Form.Group className='mb-3' controlId='company'>
                     <Form.Label>Company</Form.Label>
                     <Form.Control
-                      type="text"
-                      placeholder="Google, Apple, etc."
+                      type='text'
+                      placeholder='Google, Apple, etc.'
                       ref={companyRef}
                       defaultValue={initialValues.company}
                       readOnly
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="position">
+                  <Form.Group className='mb-3' controlId='position'>
                     <Form.Label>Position</Form.Label>
                     <Form.Control
-                      type="text"
+                      type='text'
                       ref={positionRef}
                       defaultValue={initialValues.position}
                       readOnly
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="salary-min">
+                  <Form.Group className='mb-3' controlId='salary-min'>
                     <Form.Label>Salary Minimum ($)</Form.Label>
                     <Form.Control
-                      type="number"
-                      placeholder="40,000"
+                      type='number'
+                      placeholder='40,000'
                       ref={salary_minRef}
                       defaultValue={initialValues.salary_min}
                       readOnly
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="salary-max">
+                  <Form.Group className='mb-3' controlId='salary-max'>
                     <Form.Label>Salary Maximum ($)</Form.Label>
                     <Form.Control
-                      type="number"
-                      placeholder="60,000"
+                      type='number'
+                      placeholder='60,000'
                       ref={salary_maxRef}
                       defaultValue={initialValues.salary_max}
                       readOnly
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="location">
+                  <Form.Group className='mb-3' controlId='location'>
                     <Form.Label>Location</Form.Label>
                     <Form.Control
-                      type="text"
-                      placeholder="Start typing a city..."
+                      type='text'
+                      placeholder='Start typing a city...'
                       ref={locationRef}
                       defaultValue={initialValues.location}
                       readOnly
                     />
                   </Form.Group>
-                  <Form.Group className="mb-4" controlId="remote">
+                  <Form.Group className='mb-4' controlId='remote'>
                     <Form.Check
-                      label="Remote preferred"
+                      label='Remote preferred'
                       ref={remoteRef}
                       defaultChecked={initialValues.remote}
                       disabled
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="link">
+                  <Form.Group className='mb-3' controlId='link'>
                     <Form.Label>Listing Link</Form.Label>
                     <Form.Control
-                      type="text"
-                      placeholder="Add website location of job listing"
+                      type='text'
+                      placeholder='Add website location of job listing'
                       ref={linkRef}
                       defaultValue={initialValues.link}
                       readOnly
@@ -224,8 +227,8 @@ const SheetPosition = () => {
                   </Form.Group>
                 </Form>
 
-                <div className="sheet-footer">
-                  <Button variant="secondary" onClick={handleEditClick}>
+                <div className='sheet-footer'>
+                  <Button variant='outline-secondary' onClick={handleEditClick}>
                     Edit
                   </Button>
                 </div>
@@ -242,6 +245,10 @@ export default SheetPosition;
 const Wrapper = styled.div`
   Form {
     padding: 1rem;
+  }
+
+  .sheet-title {
+    margin-bottom: 1rem;
   }
 
   .sheet-content {

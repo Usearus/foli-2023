@@ -6,7 +6,7 @@ import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
 import useAlert from '../Custom Hooks/useAlert';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 function ModalAddJob() {
   const [show, setShow] = useState(false);
@@ -112,7 +112,7 @@ function ModalAddJob() {
             </Form.Group>
             <Form.Group className='mb-4' controlId='remote'>
               <Form.Check
-                label='Remote preferred'
+                label='Remote position'
                 ref={remoteRef}
                 defaultChecked={false}
               />
@@ -143,11 +143,9 @@ function ModalAddJob() {
 export default ModalAddJob;
 
 const Wrapper = styled.div`
-
   .editor {
     height: 250px;
     max-height: 500px;
     overflow-y: auto;
   }
-
 `;

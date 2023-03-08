@@ -1,11 +1,8 @@
-import { useContext } from 'react';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 import ModalAddJob from './ModalAddJob';
-import { AirtableContext } from '../context/AirtableContext';
 
 export const TopBarTable = ({ className }) => {
-
   return (
     <Wrapper className={className}>
       <Container fluid>

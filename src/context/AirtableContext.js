@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import base from "../API/base";
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { useState, useEffect } from 'react';
+import base from '../API/base';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const AirtableContext = React.createContext();
 
@@ -27,8 +27,8 @@ const AirtableProvider = ({ children }) => {
 
   // FETCH ALL AIRTABLE DATA
   const fetchAllSheets = async () => {
-    await base("sheets")
-      .select({ view: "Grid view" })
+    await base('sheets')
+      .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
         setAllSheets(records);
         // console.log('all sheets', records);
@@ -37,8 +37,8 @@ const AirtableProvider = ({ children }) => {
   };
 
   const fetchAllJobs = async () => {
-    await base("jobs")
-      .select({ view: "Grid view" })
+    await base('jobs')
+      .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
         setAllJobs(records);
         // console.log('all jobs', records);
@@ -47,8 +47,8 @@ const AirtableProvider = ({ children }) => {
   };
 
   const fetchAllProfiles = async () => {
-    await base("profiles")
-      .select({ view: "Grid view" })
+    await base('profiles')
+      .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
         setAllProfiles(records);
         // console.log('all profiles', records);
@@ -57,8 +57,8 @@ const AirtableProvider = ({ children }) => {
   };
 
   const fetchAllTemplates = async () => {
-    await base("templates")
-      .select({ view: "Grid view" })
+    await base('templates')
+      .select({ view: 'Grid view' })
       .eachPage(function page(records, fetchNextPage) {
         setAllTemplates(records);
         setCurrentTemplates(records);
@@ -69,22 +69,11 @@ const AirtableProvider = ({ children }) => {
 
   useEffect(() => {
     fetchAllSheets();
-  }, []);
-
-  useEffect(() => {
     fetchAllJobs();
-  }, []);
-
-  useEffect(() => {
     fetchAllProfiles();
-  }, []);
-
-  useEffect(() => {
     fetchAllTemplates();
   }, []);
 
-  // *
-  // *
   // *
   // *
   // SET USER AIRTABLE DATA
@@ -96,7 +85,7 @@ const AirtableProvider = ({ children }) => {
   const fetchUserProfile = async () => {
     if (auth0Email) {
       // This is array destructuring and I can assign first item of array to the variable
-      const [record] = await base("profiles")
+      const [record] = await base('profiles')
         .select({
           maxRecords: 1,
           filterByFormula: `{account} = '${auth0Email}'`,
@@ -109,9 +98,9 @@ const AirtableProvider = ({ children }) => {
 
   const fetchUserJobs = async () => {
     if (auth0Email) {
-      await base("jobs")
+      await base('jobs')
         .select({
-          view: "Grid view",
+          view: 'Grid view',
           filterByFormula: `{account} = '${auth0Email}'`,
         })
         .eachPage(function page(records, fetchNextPage) {
@@ -124,9 +113,9 @@ const AirtableProvider = ({ children }) => {
 
   const fetchUserSheets = async () => {
     if (auth0Email) {
-      await base("sheets")
+      await base('sheets')
         .select({
-          view: "Grid view",
+          view: 'Grid view',
           filterByFormula: `{account} = '${auth0Email}'`,
         })
         .eachPage(function page(records, fetchNextPage) {
@@ -139,14 +128,12 @@ const AirtableProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUserProfile();
-  }, [auth0Email]);
-
-  useEffect(() => {
     fetchUserJobs();
-  }, [auth0Email]);
-
-  useEffect(() => {
     fetchUserSheets();
+
+    return () => {
+      // Cleanup // TODO figure out how to fix this useEffect issue
+    };
   }, [auth0Email]);
 
   // *
@@ -157,19 +144,19 @@ const AirtableProvider = ({ children }) => {
   const [positionSheet, setPositionSheet] = useState(true);
 
   const fetchCurrentJob = async (job) => {
-    console.log("job received for fetch:", job);
+    console.log('job received for fetch:', job);
     const jobId = job.fields.jobid;
     if (jobId) {
       // This is array destructuring and I can assign first item of array to the variable
-      const [record] = await base("jobs")
+      const [record] = await base('jobs')
         .select({
           maxRecords: 1,
           filterByFormula: `{jobid} = '${jobId}'`,
         })
         .firstPage();
       setCurrentJob(record);
-      console.log("currentJob is", record);
-      localStorage.setItem("currentJob", JSON.stringify(record));
+      console.log('currentJob is', record);
+      localStorage.setItem('currentJob', JSON.stringify(record));
     }
   };
 
@@ -177,16 +164,16 @@ const AirtableProvider = ({ children }) => {
     // console.log('job received:', job);
     const jobJobId = job.fields.jobid;
     if (jobJobId) {
-      await base("sheets")
+      await base('sheets')
         .select({
-          view: "Grid view",
+          view: 'Grid view',
           filterByFormula: `{jobid} = '${jobJobId}'`,
         })
         .eachPage(function page(records, fetchNextPage) {
           setCurrentSheets(records);
           fetchNextPage();
-          console.log("currentSheets are", records);
-          localStorage.setItem("currentSheets", JSON.stringify(records));
+          console.log('currentSheets are', records);
+          localStorage.setItem('currentSheets', JSON.stringify(records));
         });
     }
   };
@@ -198,15 +185,15 @@ const AirtableProvider = ({ children }) => {
 
   const fetchTemplatesByCategory = async (category) => {
     // console.log('category received:', category);
-    await base("templates")
+    await base('templates')
       .select({
-        view: "Grid view",
+        view: 'Grid view',
         filterByFormula: `{category} = '${category}'`,
       })
       .eachPage(function page(records, fetchNextPage) {
         setCurrentTemplates(records);
         fetchNextPage();
-        console.log("currentTemplates are", records);
+        console.log('currentTemplates are', records);
       });
   };
 

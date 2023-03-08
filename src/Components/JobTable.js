@@ -1,6 +1,6 @@
-import Table from "react-bootstrap/Table";
-import JobsTableRow from "./JobsTableRow";
-import styled from "styled-components";
+import Table from 'react-bootstrap/Table';
+import JobsTableRow from './JobsTableRow';
+import styled from 'styled-components';
 
 function JobsTable({ jobs }) {
   return (

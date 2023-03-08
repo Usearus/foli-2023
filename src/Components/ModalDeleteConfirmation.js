@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import styled from "styled-components";
-import { Button } from "react-bootstrap";
-import { FiTrash } from "react-icons/fi";
+import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import styled from 'styled-components';
+import { Button } from 'react-bootstrap';
+import { FiTrash } from 'react-icons/fi';
 
 function ModalDeleteConfirmation({ type, deleteFunction }) {
   const [show, setShow] = useState(false);
@@ -11,13 +11,13 @@ function ModalDeleteConfirmation({ type, deleteFunction }) {
 
   return (
     <>
-      <Button variant="light" onClick={handleShow}>
+      <Button variant='light' onClick={handleShow}>
         <FiTrash />
       </Button>
 
-      <Modal fullscreen="md-down" show={show} onHide={handleClose}>
+      <Modal fullscreen='md-down' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm delete {type}</Modal.Title>
+          <Modal.Title>Confirm</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Wrapper>
@@ -25,11 +25,11 @@ function ModalDeleteConfirmation({ type, deleteFunction }) {
           </Wrapper>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={deleteFunction}>
-            Delete job
-          </Button>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant='outline-secondary' onClick={handleClose}>
             Cancel
+          </Button>
+          <Button variant='danger' onClick={deleteFunction}>
+            Delete
           </Button>
         </Modal.Footer>
       </Modal>
