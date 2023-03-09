@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AirtableContext } from '../context/AirtableContext';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
@@ -17,10 +17,6 @@ export const TemplateSidebar = () => {
 
   const [activeCategory, setActiveCategory] = useState(null);
 
-  useEffect(() => {
-    fetchAllTemplates();
-  }, []);
-
   const templateCategoryList = uniqueCategories.map((category) => {
     const count = categoryCounts[category];
     const isActive = category === activeCategory;
@@ -36,14 +32,14 @@ export const TemplateSidebar = () => {
           setActiveCategory(category);
         }}
       >
-        {category} ({count})
+        {category} <span className='category-count'>({count})</span>
       </Button>
     );
   });
 
   return (
     <Wrapper>
-      <h6 className='sidebar-title'>Categories</h6>
+      <label>Categories</label>
       <div className='category-list'>
         <Button
           style={{ textAlign: 'left' }}
@@ -54,7 +50,7 @@ export const TemplateSidebar = () => {
             setActiveCategory(null);
           }}
         >
-          All ({allTemplates.length})
+          All <span className='category-count'>({allTemplates.length})</span>
         </Button>
         {templateCategoryList}
       </div>
@@ -74,6 +70,23 @@ const Wrapper = styled.div`
     flex-direction: column;
     gap: 0.25rem;
     align-self: flex-start;
+  }
+
+  .category-count {
+    color: var(--grey-600);
+    font-size: 0.85rem;
+  }
+
+  button:active {
+    .category-count {
+      color: var(--grey-900);
+    }
+  }
+
+  button:focus {
+    .category-count {
+      color: var(--grey-200);
+    }
   }
 
   .sidebar-title {

@@ -230,3 +230,25 @@ div .container-fluid {
 .navbar-nav .nav-link.active {
   --bs-navbar-active-color: var(--white);
 }
+
+.form-label {
+  margin-bottom: 0;
+  color: var(--grey-700);
+  font-size: 12px;
+}
+
+label {
+  margin-bottom: 1rem;
+  color: var(--grey-700);
+  font-size: 14px;
+}
+
+.badge {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+}
+
+input {
+  text-overflow: ellipsis;
+}

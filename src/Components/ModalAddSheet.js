@@ -5,7 +5,6 @@ import Modal from 'react-bootstrap/Modal';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
-// import ReactQuill from 'react-quill';
 import useAlert from '../Custom Hooks/useAlert';
 import ReactQuillEditor from './ReactQuillEditor';
 

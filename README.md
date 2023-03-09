@@ -6,34 +6,35 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
-- Fix unique key prop issue with TemplateCard
 - Add template preview when clicked in template panel
+- When I open preferences, temp close profile.
+- Fix unique key prop issue with TemplateCard
 - Stop sheets reappearing after edit (May need to add a state in Airtable or local storage for this)
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 
 ---LOW PRIORITY---
 
 - Add focus state to all sheets using React-Quill
-- CSS for setting sheet height (affects React-Quill too)
-- Make delete Sheet appear only on hover
 - Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/
+- When I click on profile remove active state on nav item
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 - Make numbers required to be 1000 and increment by 1000
-- When I open preferences, temp close profile.
-- When I click on profile remove active state on nav item
-- Convert to next.js
 
 ## Post-MVP Features
+
+- Search feature
+- Convert to next.js
+
+## Done
 
 - add default content hight rich text editor to add sheet modal
 - add warning before deleting a job
 - Add rename Sheet
-- Search feature
 - Move Delete & Rename
-
-## Done
-
+- Make delete Sheet appear only on hover
+- CSS for setting sheet height (affects React-Quill too)
+- Added copy to clipboard button to link in position details
 - Add global alerts
 - When I hover over a table row make it show that it is clickable
 - Add 'Position Details' sheet for each position

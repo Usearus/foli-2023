@@ -16,6 +16,7 @@ const Sheet = (sheet) => {
 
   const titleRef = useRef();
   const initialTitleValue = sheet.fields?.title ?? '';
+  const [characterCount, setCharacterCount] = useState(content.length);
 
   const handleUpdateContentClick = () => {
     base('sheets').update(
@@ -37,8 +38,7 @@ const Sheet = (sheet) => {
     );
   };
 
-  const handleDeleteSheetClick = (e) => {
-    e.stopPropagation();
+  const handleDeleteSheetClick = () => {
     base('sheets').destroy(sheet.id, function (err, deletedRecord) {
       if (err) {
         console.error(err);
@@ -63,6 +63,13 @@ const Sheet = (sheet) => {
     setContent(value);
   };
 
+  const handleTitleChange = (event) => {
+    const newValue = event.target.value;
+    setCharacterCount(newValue.length);
+  };
+
+  const titleMaxChar = 32;
+
   return (
     <Wrapper className='sheet-container'>
       <header
@@ -72,24 +79,31 @@ const Sheet = (sheet) => {
         {!editing ? (
           <h4>{sheet.fields.title}</h4>
         ) : (
-          <Form>
-            <Form.Group className='mb-3 ' controlId='title'>
-              <Form.Control
-                type='text'
-                required
-                ref={titleRef}
-                defaultValue={initialTitleValue}
-                placeholder='Sheet title'
-                size='md'
-              />
-            </Form.Group>
-          </Form>
+          <div>
+            <div>
+              <Form>
+                <Form.Group className='mb-3 title-field' controlId='title'>
+                  <Form.Control
+                    type='text'
+                    required
+                    ref={titleRef}
+                    defaultValue={initialTitleValue}
+                    placeholder='Sheet title'
+                    size='md'
+                    maxLength={titleMaxChar}
+                    onChange={handleTitleChange}
+                  />
+                </Form.Group>
+              </Form>
+              {characterCount}/{titleMaxChar}
+            </div>
+            <ModalDeleteConfirmation
+              className='delete-button'
+              type='sheet'
+              deleteFunction={handleDeleteSheetClick}
+            />
+          </div>
         )}
-        <ModalDeleteConfirmation
-          className='delete-button'
-          type='sheet'
-          deleteFunction={handleDeleteSheetClick}
-        />
       </header>
       <section className='sheet-content'>
         {!editing ? (
@@ -116,11 +130,11 @@ const Sheet = (sheet) => {
               </Form.Group>
             </Form>
             <div className='sheet-footer'>
-              <Button variant='outline-secondary' onClick={handleCancelClick}>
-                Cancel
-              </Button>
               <Button variant='primary' onClick={handleUpdateContentClick}>
                 Save
+              </Button>
+              <Button variant='outline-secondary' onClick={handleCancelClick}>
+                Cancel
               </Button>
             </div>
           </>
@@ -132,18 +146,19 @@ const Sheet = (sheet) => {
 
 const Wrapper = styled.div`
   .sheet-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    color: var(--grey-800);
     height: 2rem;
   }
-  .sheet-content:hover > .delete-button {
-    display: block;
-  }
 
-  .delete-button {
-    display: block;
+  .sheet-title div {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: baseline;
+    color: var(--grey-600);
+    font-size: 0.85rem;
+  }
+  .title-field {
+    width: 350px;
   }
   .sheet-content {
     display: flex;
@@ -166,6 +181,7 @@ const Wrapper = styled.div`
 
   .sheet-scroll {
     overflow-y: scroll;
+    min-height: 250px;
   }
 
   .sheet-footer {

@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Badge } from 'react-bootstrap';
 import styled from 'styled-components';
 import { BiFileBlank } from 'react-icons/bi';
 
-function TemplateCard({ template }) {
+function TemplateCard({ template, handlePreview }) {
   const content = template.fields.content.slice(0, 100) + '...';
+
   return (
-    <Wrapper>
+    <Wrapper onClick={handlePreview}>
       <Card>
         <Card.Header className='text-muted header'>
           <BiFileBlank />
@@ -34,6 +35,7 @@ function TemplateCard({ template }) {
 export default TemplateCard;
 
 const Wrapper = styled.div`
+  cursor: pointer;
   .card {
     transition: var(--transition);
     width: 22rem;

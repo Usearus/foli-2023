@@ -1,21 +1,50 @@
 // import { BiCaretDown } from 'react-icons/bi';
 import Badge from 'react-bootstrap/Badge';
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+
+import base from '../API/base';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 import ModalAddSheet from './ModalAddSheet';
 import { AirtableContext } from '../context/AirtableContext';
 import ModalTemplates from './ModalTemplates';
-// import { Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import useAlert from '../Custom Hooks/useAlert';
 
 export const TopBarJob = ({ className }) => {
-  const { setCurrentJob, currentJob } = React.useContext(AirtableContext);
+  const { setCurrentJob, fetchUserJobs, currentJob } =
+    useContext(AirtableContext);
+  const { setAlert } = useAlert();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const jobFromStorage = localStorage.getItem('currentJob');
     setCurrentJob(JSON.parse(jobFromStorage));
   }, [setCurrentJob]);
 
+  const [selectedStatus, setSelectedStatus] = useState(
+    currentJob && currentJob.fields ? currentJob.fields.status : ''
+  );
+
+  const handleUpdateJobClick = (e) => {
+    setSelectedStatus(e.target.value);
+    base('jobs').update(
+      currentJob.id,
+      {
+        status: e.target.value,
+        // edited: new Date().toLocaleDateString('en-US'),
+      },
+      function (err, record) {
+        if (err) {
+          console.error(err);
+          setAlert('Something went wrong. Job not updated.', 'Danger');
+          return;
+        }
+        // console.log('Job updated', record.getId());
+        setAlert('Job successfully updated!', 'success');
+        fetchUserJobs();
+      }
+    );
+  };
   return (
     <Wrapper className={className}>
       <Container fluid>
@@ -26,17 +55,30 @@ export const TopBarJob = ({ className }) => {
                 ? `${currentJob.fields.company} - ${currentJob.fields.position}`
                 : ''}
             </h4>
-            {/* <Form.Select aria-label='Default select example'>
-              <option value='1'>Bookmarked</option>
-              <option value='2'>Applied</option>
-              <option value='3'>Interviewing</option>
-            </Form.Select> */}
+            <Form>
+              <Form.Select
+                size='sm'
+                aria-label='Select job status'
+                onChange={handleUpdateJobClick}
+                value={currentJob && currentJob.fields ? selectedStatus : ''}
+                className='select'
+              >
+                <option value='Bookmarked'>Bookmarked</option>
+                <option value='Applied'>Applied</option>
+                <option value='Interviewing'>Interviewing</option>
+                <option value='Accepted'>Accepted</option>
+                <option value='Negotiating'>Negotiating</option>
+                <option value='Declined'>Declined</option>
+                <option value='Rejected'>Rejected</option>
+                <option value='Archived'>Archived</option>
+              </Form.Select>
+            </Form>
 
-            <Badge pill bg='secondary'>
+            {/* <Badge pill bg='secondary'>
               {currentJob && currentJob.fields
                 ? `${currentJob.fields.status}`
                 : ''}
-            </Badge>
+            </Badge> */}
           </div>
           {/* <span className="img-center">
             <BiCaretDown />
@@ -73,5 +115,11 @@ const Wrapper = styled.div`
     border-bottom: 1px solid var(--grey-300);
     color: var(--grey-700);
     padding: 1rem;
+  }
+
+  .select {
+    min-width: 130px;
+    border: 0;
+    background-color: #f8f9fa;
   }
 `;

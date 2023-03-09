@@ -7,13 +7,14 @@ import base from '../API/base';
 import { AirtableContext } from '../context/AirtableContext';
 import { Badge } from 'react-bootstrap';
 import { MdOutlineClose } from 'react-icons/md';
-import styled from 'styled-components';
+import useAlert from '../Custom Hooks/useAlert';
 
 function ModalEditPref() {
   const { userProfile, fetchUserProfile } = useContext(AirtableContext);
   const [showPref, setShowPref] = useState(false);
   const handleClosePref = () => setShowPref(false);
   const handleShowPref = () => setShowPref(true);
+  const { setAlert } = useAlert();
 
   const positionRef = useRef();
   const locationRef = useRef();
@@ -49,10 +50,12 @@ function ModalEditPref() {
       function (err, record) {
         if (err) {
           console.error(err);
+          setAlert('Something went wrong. Preferences not updated.', 'danger');
           return;
         }
         console.log(record.getId());
         fetchUserProfile();
+        setAlert('Preferences successfully updated!', 'success');
       }
     );
     handleClosePref();
@@ -82,14 +85,14 @@ function ModalEditPref() {
     handleClosePref();
   };
 
-  // CANNOT GET THIS TO WORK!
+  // TODO Cannot get preferences modal to close profile modal.
   // const handleEditClick = () => {
   //   handleShowPref();
   //   // handleHideProfile();
   // };
 
   return (
-    <Wrapper>
+    <>
       <Button variant='primary' onClick={handleShowPref}>
         Edit Preferences
       </Button>
@@ -157,15 +160,7 @@ function ModalEditPref() {
               </InputGroup>
               {userProfile.fields.location_preference &&
                 tempLocations.map((location) => (
-                  <Badge
-                    key={location}
-                    pill
-                    bg='secondary'
-                    className='me-1'
-                    style={{
-                      width: 'auto',
-                    }}
-                  >
+                  <Badge key={location} pill bg='secondary' className='me-1'>
                     {location}
                     <span style={{ paddingLeft: '8px' }}>
                       <MdOutlineClose
@@ -174,6 +169,7 @@ function ModalEditPref() {
                           color: '#ffffff',
                           width: '16px',
                           height: '16px',
+                          cursor: 'pointer',
                         }}
                       />
                     </span>
@@ -199,14 +195,8 @@ function ModalEditPref() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </Wrapper>
+    </>
   );
 }
 
 export default ModalEditPref;
-
-const Wrapper = styled.div`
-  .MdOutlineClose:hover {
-    cursor: pointer;
-  }
-`;
