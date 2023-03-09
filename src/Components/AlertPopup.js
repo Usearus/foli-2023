@@ -11,11 +11,10 @@ const AlertPopup = () => {
         style={{
           position: 'absolute',
           left: '50%',
-          transform: 'translate(-50%, 10%)',
-          width: '95%',
+          transform: 'translate(-50%, 40%)',
+          maxWidth: '600px',
           zIndex: 10,
         }}
-        dismissible
       >
         {text}
       </Alert>
