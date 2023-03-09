@@ -118,10 +118,10 @@ function ModalAddJob() {
               />
             </Form.Group>
             <Form.Group className='mb-3' controlId='link'>
-              <Form.Label>Listing Link</Form.Label>
+              <Form.Label>Listing URL</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Add website location of job listing'
+                placeholder='Add URL of job listing'
                 ref={linkRef}
               />
             </Form.Group>

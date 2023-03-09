@@ -247,8 +247,36 @@ label {
   font-weight: 500;
   letter-spacing: 0.5px;
   padding: 4px 12px;
+  color: var(--grey-500);
+  border: 1px solid var(--grey-400);
+}
+// Should be for only badges
+.bg-secondary {
+  background-color: var(--grey-100) !important;
 }
 
+// Truncates overflow text everywhere on inputs
 input {
   text-overflow: ellipsis;
+}
+
+// BS Card component edits
+.fSIGcG {
+  .card {
+    border-radius: 0;
+    box-shadow: var(--shadow-2);
+    background: var(--grey-50);
+    border: 0;
+  }
+  .footer {
+    border-radius: 0;
+    background-color: var(--grey-50) !important;
+    border-color: var(--grey-200);
+  }
+
+  .header {
+    border-radius: 0;
+    background-color: var(--grey-50) !important;
+    border-color: var(--grey-200);
+  }
 }

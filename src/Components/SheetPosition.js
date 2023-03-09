@@ -90,7 +90,7 @@ const SheetPosition = () => {
       <>
         <Wrapper className='sheet-container'>
           <header className='sheet-title'>
-            <h4>Position Details</h4>
+            <h5>Position Details</h5>
           </header>
           <section className='sheet-content'>
             {!editing ? (
@@ -162,11 +162,11 @@ const SheetPosition = () => {
                     />
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='link'>
-                    <Form.Label>Listing Link</Form.Label>
+                    <Form.Label>Listing URL</Form.Label>
                     <Stack direction='horizontal' gap='2'>
                       <Form.Control
                         type='text'
-                        placeholder='Add website location of job listing'
+                        placeholder='Add URL of job listing'
                         ref={linkRef}
                         defaultValue={initialValues.link}
                         readOnly

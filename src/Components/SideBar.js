@@ -21,7 +21,8 @@ export const SideBar = ({ className }) => {
   return (
     <Wrapper className={className}>
       <section className='sidebar-container'>
-        <span className='sidebar-title'>Sheets</span>
+        {/* <span className='sidebar-title'>Sheets</span> */}
+        <label>Sheets</label>
         <SideBarPositionItem />
         {currentSheets.map((sheet) => (
           <SideBarItem

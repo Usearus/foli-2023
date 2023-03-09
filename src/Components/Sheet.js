@@ -77,7 +77,7 @@ const Sheet = (sheet) => {
         style={{ marginBottom: editing ? '.75rem' : '.75rem' }}
       >
         {!editing ? (
-          <h4>{sheet.fields.title}</h4>
+          <h5>{sheet.fields.title}</h5>
         ) : (
           <div>
             <div>

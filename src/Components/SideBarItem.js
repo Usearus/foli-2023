@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Stack, Button } from 'react-bootstrap';
 import { BiShow, BiHide } from 'react-icons/bi';
+import styled from 'styled-components';
 
 const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
   const [showIcon, setShowIcon] = useState(true);
@@ -13,18 +14,28 @@ const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
   };
 
   return (
-    <Stack direction='horizontal'>
-      <span>{sheet.fields.title}</span>
-      <Button
-        className='ms-auto'
-        variant='link'
-        style={{ color: 'var(--grey-600)' }}
-        onClick={handleButtonClick}
-      >
-        {hidden ? <BiHide /> : <BiShow />}
+    <Wrapper>
+      <Button size='sm' variant='light' className='parent-btn'>
+        <span>{sheet.fields.title}</span>
+        <Button
+          className='ms-auto'
+          variant='link'
+          style={{ color: 'var(--grey-600)' }}
+          onClick={handleButtonClick}
+        >
+          {hidden ? <BiHide /> : <BiShow />}
+        </Button>
       </Button>
-    </Stack>
+    </Wrapper>
   );
 };
 
 export default SideBarItem;
+
+const Wrapper = styled.div`
+  .parent-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+`;

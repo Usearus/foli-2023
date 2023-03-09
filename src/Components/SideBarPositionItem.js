@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Stack, Button } from 'react-bootstrap';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { AirtableContext } from '../context/AirtableContext';
+import styled from 'styled-components';
 
 const SideBarPositionItem = () => {
   const { setPositionSheet, positionSheet } = useContext(AirtableContext);
@@ -13,18 +14,29 @@ const SideBarPositionItem = () => {
   };
 
   return (
-    <Stack direction='horizontal'>
-      <span>Position Details</span>
-      <Button
-        className='ms-auto'
-        variant='link'
-        style={{ color: 'var(--grey-600)' }}
-        onClick={handleButtonClick}
-      >
-        {showIcon ? <BiHide /> : <BiShow />}
+    <Wrapper>
+      <Button size='sm' variant='light' className='parent-btn'>
+        <span>Position Details</span>
+        <Button
+          className='ms-auto'
+          variant='link'
+          style={{ color: 'var(--grey-600)' }}
+          onClick={handleButtonClick}
+        >
+          {showIcon ? <BiHide /> : <BiShow />}
+        </Button>
       </Button>
-    </Stack>
+    </Wrapper>
   );
 };
 
 export default SideBarPositionItem;
+
+const Wrapper = styled.div`
+  .parent-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+`;

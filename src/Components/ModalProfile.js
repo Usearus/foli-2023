@@ -29,13 +29,6 @@ function ModalProfile() {
         </Modal.Header>
         <Modal.Body>
           <Wrapper>
-            {/* <div>
-              <img
-                src={user.picture}
-                alt={user.name}
-                style={{ borderRadius: '100px' }}
-              />
-            </div> */}
             <div>
               <div>
                 <div className='container'>

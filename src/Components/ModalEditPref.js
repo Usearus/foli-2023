@@ -166,7 +166,7 @@ function ModalEditPref() {
                       <MdOutlineClose
                         onClick={() => handleRemoveLocation(location)}
                         style={{
-                          color: '#ffffff',
+                          color: 'var(--grey-500)',
                           width: '16px',
                           height: '16px',
                           cursor: 'pointer',
