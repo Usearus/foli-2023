@@ -11,7 +11,7 @@ function ModalDeleteConfirmation({ type, deleteFunction }) {
 
   return (
     <>
-      <Button variant='light' onClick={handleShow}>
+      <Button variant='outline-secondary' onClick={handleShow}>
         <FiTrash />
       </Button>
 

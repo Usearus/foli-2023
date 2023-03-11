@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Badge } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -18,7 +17,7 @@ function TemplateCard({ template, handlePreview }) {
           <Card.Title className='title'>{template.fields.title}</Card.Title>
           <Card.Text className='text'>{content}</Card.Text>
         </Card.Body>
-        <Card.Footer className='text-muted footer'>
+        <Card.Footer className='text-muted'>
           <div className='tag-list'>
             {template.fields.tags.map((tag) => (
               <Badge pill bg='light'>
@@ -46,10 +45,6 @@ const Wrapper = styled.div`
     box-shadow: var(--shadow-3);
   }
 
-  .card:hover .body .title {
-    color: var(--bs-btn-bg);
-  }
-
   .header {
     display: flex;
     align-items: center;
@@ -57,11 +52,6 @@ const Wrapper = styled.div`
     font-size: small;
   }
 
-  .footer {
-    background-color: white;
-    border-color: var(--grey-200);
-    /* border-top: 0; */
-  }
   .body {
     display: flex;
     flex-direction: column;

@@ -17,6 +17,9 @@ export const TopBarTable = ({ className }) => {
 };
 
 const Wrapper = styled.div`
+  position: sticky;
+  top: 63px;
+  z-index: 1;
   .top-bar-container {
     background: var(--grey-100);
     justify-content: space-between;

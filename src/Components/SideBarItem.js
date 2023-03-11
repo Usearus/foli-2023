@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Stack, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { BiShow, BiHide } from 'react-icons/bi';
 import styled from 'styled-components';
 

@@ -1,5 +1,5 @@
 import Container from 'react-bootstrap/Container';
-import { Nav, Navbar, Button } from 'react-bootstrap';
+import { Nav, Navbar, Button, Badge } from 'react-bootstrap';
 // import Form from 'react-bootstrap/Form';
 // import { CiSearch } from 'react-icons/ci';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -17,6 +17,9 @@ function NavBar() {
         padding: '8px 16px',
         background: 'var(--grey-100)',
         borderBottom: '1px solid var(--grey-300)',
+        position: 'sticky',
+        top: '0',
+        zIndex: '1',
       }}
     >
       <Container fluid>
@@ -25,9 +28,20 @@ function NavBar() {
             style={{
               fontWeight: 700,
               fontSize: '1.5rem',
+              cursor: 'default',
+              paddingRight: '.25rem',
             }}
           >
             fol<i>i</i>
+          </span>
+          <span>
+            <Badge
+              pill
+              bg='dark'
+              style={{ fontSize: '.6rem', marginRight: '1rem' }}
+            >
+              beta
+            </Badge>
           </span>
         </Navbar.Brand>
 

@@ -7,7 +7,9 @@ const ReactQuillEditor = ({ value, onChange }) => {
     toolbar: [
       [{ header: [1, 2, false] }],
       ['bold', 'italic', 'underline'],
-      ['image', 'code-block'],
+      [{ align: [] }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      // ['code-block'],
     ],
   };
 
@@ -39,13 +41,6 @@ const Wrapper = styled.div`
     border-radius: 0 0 8px 8px !important;
   }
 
-  .ql-editor {
-    min-height: 200px;
-    border-radius: 8px 8px 8px 8px !important;
-    // TODO HOW CAN I FIX REACT QUILL HEIGHT TO BE A %?
-    // max-height: 700px;
-  }
-
   .ql-toolbar {
     position: sticky;
     top: 0;
@@ -55,31 +50,45 @@ const Wrapper = styled.div`
   }
 
   .ql-editor {
+    min-height: 200px;
+    border-radius: 8px 8px 8px 8px !important;
+    // TODO HOW CAN I FIX REACT QUILL HEIGHT TO BE A %?
+    // max-height: 700px;
+
     font-size: 1rem !important;
 
     ul {
       padding-bottom: 1rem !important;
+      padding-left: 0;
       list-style-type: circle !important;
     }
-
+    /* 
     h1 {
       font-size: 3.052rem !important;
     }
 
     h2 {
       font-size: 2.441rem !important;
+    } */
+
+    h1 {
+      font-size: 1.8rem !important;
+    }
+
+    h2 {
+      font-size: 1.25rem !important;
     }
 
     h3 {
-      font-size: 1.953rem !important;
+      font-size: 1rem !important;
     }
 
     h4 {
-      font-size: 1.563rem !important;
+      font-size: 1rem !important;
     }
 
     h5 {
-      font-size: 1.25rem !important;
+      font-size: 1rem !important;
     }
   }
 `;

@@ -101,7 +101,7 @@ function ModalAddJob() {
                 ref={salary_maxRef}
               />
             </Form.Group>
-            {/* <LocationAutocompleteBtn /> */}
+            {/* TODO  <LocationAutocompleteBtn /> */}
             <Form.Group className='mb-3' controlId='location'>
               <Form.Label>Location</Form.Label>
               <Form.Control

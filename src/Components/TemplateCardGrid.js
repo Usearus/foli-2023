@@ -6,16 +6,22 @@ import TemplateCard from './TemplateCard';
 
 export const TemplateCardGrid = () => {
   const { currentTemplates } = useContext(AirtableContext);
-  const [previewSheet, setPreviewSheet] = useState(false);
+  const [previewTemplate, setPreviewTemplate] = useState(false);
+  const [activeTemplate, setActiveTemplate] = useState(null);
 
   const handlePreview = () => {
-    setPreviewSheet(true);
+    setPreviewTemplate(true);
+  };
+  const handleClick = (template) => {
+    console.log('template received ', template);
+    setActiveTemplate(template);
+    setPreviewTemplate(false);
   };
 
   return (
     <Wrapper>
       <section>
-        {!previewSheet ? (
+        {!previewTemplate ? (
           currentTemplates
             .sort((a, b) => a.fields.category.localeCompare(b.fields.category))
             .map((template) => (
@@ -23,10 +29,20 @@ export const TemplateCardGrid = () => {
                 key={template.id}
                 template={template}
                 handlePreview={handlePreview}
+                onClick={() => handleClick(template)}
               />
             ))
         ) : (
-          <></>
+          <>
+            {activeTemplate && (
+              <>
+                <section className='title'>
+                  {activeTemplate.fields.title}
+                </section>
+                <div className='content'>{activeTemplate.fields.content}</div>
+              </>
+            )}
+          </>
         )}
       </section>
     </Wrapper>
@@ -43,5 +59,6 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     gap: 1rem;
     align-content: flex-start;
+    padding: 0 20px;
   }
 `;

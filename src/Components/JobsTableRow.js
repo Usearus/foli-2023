@@ -111,7 +111,8 @@ export default JobsTableRow;
 const Wrapper = styled.div`
   .select {
     min-width: 130px;
-    border: 0;
-    background-color: #f8f9fa;
+    border: 1px solid var(--grey-600);
+    color: var(--grey-600);
+    background-color: var(--white);
   }
 `;

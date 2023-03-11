@@ -61,7 +61,7 @@ export const TemplateSidebar = () => {
 export default TemplateSidebar;
 
 const Wrapper = styled.div`
-  min-width: 220px;
+  min-width: 230px;
   .category {
     /* font-size: small; */
   }

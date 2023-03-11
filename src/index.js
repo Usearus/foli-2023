@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.scss';
+import './bs-custom.scss';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { AirtableProvider } from './context/AirtableContext';

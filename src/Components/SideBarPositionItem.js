@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Stack, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { AirtableContext } from '../context/AirtableContext';
 import styled from 'styled-components';
@@ -37,6 +37,5 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 8px;
   }
 `;

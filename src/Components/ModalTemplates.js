@@ -19,7 +19,6 @@ function ModalTemplates() {
         fullscreen='lg-down'
         show={show}
         onHide={() => setShow(false)}
-        // dialogClassName='modal-90w'
       >
         <Modal.Header closeButton>
           <Modal.Title>Templates</Modal.Title>

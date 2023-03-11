@@ -1,5 +1,4 @@
 // import { BiCaretDown } from 'react-icons/bi';
-import Badge from 'react-bootstrap/Badge';
 import React, { useContext, useState, useEffect } from 'react';
 
 import base from '../API/base';
@@ -50,14 +49,14 @@ export const TopBarJob = ({ className }) => {
       <Container fluid>
         <Stack direction='horizontal' gap={3} className='top-bar-container'>
           <div className='left-content'>
-            <h4>
+            <h5 className='truncate'>
               {currentJob && currentJob.fields
                 ? `${currentJob.fields.company} - ${currentJob.fields.position}`
                 : ''}
-            </h4>
+            </h5>
             <Form>
               <Form.Select
-                size='sm'
+                size='md'
                 aria-label='Select job status'
                 onChange={handleUpdateJobClick}
                 value={currentJob && currentJob.fields ? selectedStatus : ''}
@@ -96,10 +95,18 @@ export const TopBarJob = ({ className }) => {
 export default TopBarJob;
 
 const Wrapper = styled.div`
+  position: sticky;
+  z-index: 1;
   .btns {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+  }
+  .truncate {
+    max-width: 400px;
+    white-space: nowrap; /* prevent the text from wrapping to a new line */
+    overflow: hidden; /* hide any text that overflows the element */
+    text-overflow: ellipsis;
   }
 
   .left-content {
@@ -119,7 +126,8 @@ const Wrapper = styled.div`
 
   .select {
     min-width: 130px;
-    border: 0;
-    background-color: #f8f9fa;
+    border: 1px solid var(--grey-600);
+    color: var(--grey-600);
+    background-color: var(--grey-100);
   }
 `;

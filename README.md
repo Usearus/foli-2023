@@ -6,28 +6,54 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
-- Add template preview when clicked in template panel
-- When I open preferences, temp close profile.
-- Fix unique key prop issue with TemplateCard
-- Stop sheets reappearing after edit (May need to add a state in Airtable or local storage for this)
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
+- Add template preview when clicked in template panel
+- Stop sheets reappearing after edit (try local storage for this)
 
 ---LOW PRIORITY---
 
+- Add template to prep for initial interview screening (questions to ask and info to get)
+  - Other templates can be for different types of interviews (portfolio, group, negotiation, etc.)
+  - Add template for interview notes during / after interview.
+- Make add sheet a dropdown button to add a sheeet or a template (and put in comments one for contacts)
+- Add simple privacy policy page (who can I reference?).
+- Fix unique key prop issue with TemplateCard
+- Make job description persistant and automatic on job creation (will make future GPT links easier).
+- Set nav and top bar to fixed (view on mobile after)
+- Add copy to clipboard to any content field on a sheet on hover.
+- When I open preferences, temp close profile (Or merge the two).
 - Add focus state to all sheets using React-Quill
-- Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
-- Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/
 - When I click on profile remove active state on nav item
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
-- Make numbers required to be 1000 and increment by 1000
 
 ## Post-MVP Features
 
+- Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Search feature
 - Convert to next.js
+- Highlight Skills (Skills API)
+- Ability to add contacts (May go over sheets)
+  - Name, Role, Notes
+- Open/Close Sheets bar
+- Letter style button to change format of sheet to printer friendly version
+- ChatGPT API Right Sidebar
+  - Prompts dropdown to start off with
+  - Settings button that shows what info is prefilled from preferences
+  - Add sheet from GPT button
+- Sticky survey at bottom
+  - What do you like, what's missing, what to chat about it?
+- Budgeting preferences page to set all budgeting info ahead of time.
+  - Simple vs advanced. What is minimal and what can be added?
+- Interview flash cards (mobile)
+- Build mobile interface
 
 ## Done
 
+- Add max-width to alerts
+- Add 'beta' badge next to foli icon. Make icon default to a normal cursor and not text.
+- Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/
+- Change job listing link to URL
+- Change default ReactQuill headings
 - add default content hight rich text editor to add sheet modal
 - add warning before deleting a job
 - Add rename Sheet
@@ -53,4 +79,4 @@ https://foli2023.netlify.app
 - Markup conversion in sheets using react-showdown package
 - Filter user jobs in table by what is in my account
 - Filter user sheets in single job page by what job is being shown
-- Addecd React-showdown for sheet markup
+- Added React-showdown for sheet markup

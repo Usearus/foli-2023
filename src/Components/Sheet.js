@@ -177,6 +177,34 @@ const Wrapper = styled.div`
 
   .markdown-content {
     padding: 1rem;
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+    }
+
+    h4 {
+      font-size: 1rem;
+    }
+
+    h5 {
+      font-size: 1rem;
+    }
+    p {
+      margin-bottom: 0;
+    }
+
+    ul {
+      padding-bottom: 1rem !important;
+      padding-left: 2rem;
+      list-style-type: circle !important;
+    }
   }
 
   .sheet-scroll {
