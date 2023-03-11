@@ -2,7 +2,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
-function ErrorPage() {
+const ErrorPage = () => {
   return (
     <Wrapper>
       <h1>404</h1>
@@ -12,7 +12,7 @@ function ErrorPage() {
       </LinkContainer>
     </Wrapper>
   );
-}
+};
 
 export default ErrorPage;
 

@@ -1,6 +1,4 @@
-// import { BiCaretDown } from 'react-icons/bi';
-import React, { useContext, useState, useEffect } from 'react';
-
+import { useContext, useState, useEffect } from 'react';
 import base from '../API/base';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -10,7 +8,7 @@ import ModalTemplates from './ModalTemplates';
 import { Form } from 'react-bootstrap';
 import useAlert from '../Custom Hooks/useAlert';
 
-export const TopBarJob = ({ className }) => {
+const TopBarJob = ({ className }) => {
   const { setCurrentJob, fetchUserJobs, currentJob } =
     useContext(AirtableContext);
   const { setAlert } = useAlert();

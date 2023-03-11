@@ -85,187 +85,192 @@ const SheetPosition = () => {
       });
   };
 
-  return (
-    <>
-      <Wrapper className='sheet-container'>
-        <header className='sheet-title'>
-          <h5>Position Details</h5>
-        </header>
-        <section className='sheet-content'>
-          {!editing ? (
-            <>
-              <Form>
-                <Form.Group className='mb-3' controlId='company'>
-                  <Form.Label>Company</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='Google, Apple, etc.'
-                    ref={companyRef}
-                    defaultValue={initialValues.company}
-                    readOnly
-                    plaintext
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='position'>
-                  <Form.Label>Position</Form.Label>
-                  <Form.Control
-                    type='text'
-                    ref={positionRef}
-                    defaultValue={initialValues.position}
-                    readOnly
-                    plaintext
-                  />
-                </Form.Group>
-                <Stack direction='horizontal' gap={4}>
-                  <Form.Group className='mb-3' controlId='salary-min'>
-                    <Form.Label>Salary Min ($)</Form.Label>
-                    <Form.Control
-                      type='number'
-                      placeholder='40,000'
-                      ref={salary_minRef}
-                      defaultValue={initialValues.salary_min}
-                      readOnly
-                      plaintext
-                    />
-                  </Form.Group>
-                  <span style={{ paddingTop: '1rem' }}>-</span>
-                  <Form.Group className='mb-3' controlId='salary-max'>
-                    <Form.Label>Salary Max ($)</Form.Label>
-                    <Form.Control
-                      type='number'
-                      placeholder='60,000'
-                      ref={salary_maxRef}
-                      defaultValue={initialValues.salary_max}
-                      readOnly
-                      plaintext
-                    />
-                  </Form.Group>
-                </Stack>
-                <Form.Group className='mb-1' controlId='location'>
-                  <Form.Label>Location</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='No location added'
-                    ref={locationRef}
-                    defaultValue={initialValues.location}
-                    readOnly
-                    plaintext
-                  />
-                </Form.Group>
-                <Form.Group className='mb-1' controlId='remote'>
-                  <Form.Check
-                    label='Remote preferred'
-                    ref={remoteRef}
-                    defaultChecked={initialValues.remote}
-                    disabled
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='link'>
-                  <Form.Label>Listing URL</Form.Label>
-                  <Stack direction='horizontal' gap='2'>
+  if (positionSheet) {
+    return (
+      <>
+        <Wrapper className='sheet-container'>
+          <header className='sheet-title'>
+            <h5 style={{ paddingBottom: '4px' }}>Position Details</h5>
+          </header>
+          <section className='sheet-content'>
+            {!editing ? (
+              <>
+                <Form>
+                  <Form.Group className='mb-3' controlId='company'>
+                    <Form.Label>Company</Form.Label>
                     <Form.Control
                       type='text'
-                      placeholder='Add URL of job listing'
-                      ref={linkRef}
-                      defaultValue={initialValues.link}
+                      placeholder='Google, Apple, etc.'
+                      ref={companyRef}
+                      defaultValue={initialValues.company}
                       readOnly
                       plaintext
                     />
-                    <Button variant='outline-secondary'>
-                      <BiCopy onClick={handleCopyLinkClick} />
-                    </Button>
+                  </Form.Group>
+                  <Form.Group className='mb-3' controlId='position'>
+                    <Form.Label>Position</Form.Label>
+                    <Form.Control
+                      type='text'
+                      ref={positionRef}
+                      defaultValue={initialValues.position}
+                      readOnly
+                      plaintext
+                    />
+                  </Form.Group>
+                  <Stack direction='horizontal' gap={4}>
+                    <Form.Group className='mb-3' controlId='salary-min'>
+                      <Form.Label>Salary Min ($)</Form.Label>
+                      <Form.Control
+                        type='number'
+                        placeholder='40,000'
+                        ref={salary_minRef}
+                        defaultValue={initialValues.salary_min}
+                        readOnly
+                        plaintext
+                      />
+                    </Form.Group>
+                    <span style={{ paddingTop: '1rem' }}>-</span>
+                    <Form.Group className='mb-3' controlId='salary-max'>
+                      <Form.Label>Salary Max ($)</Form.Label>
+                      <Form.Control
+                        type='number'
+                        placeholder='60,000'
+                        ref={salary_maxRef}
+                        defaultValue={initialValues.salary_max}
+                        readOnly
+                        plaintext
+                      />
+                    </Form.Group>
                   </Stack>
-                </Form.Group>
-              </Form>
-
-              <div className='sheet-footer'>
-                <Button variant='outline-secondary' onClick={handleEditClick}>
-                  Edit
-                </Button>
-              </div>
-            </>
-          ) : (
-            <>
-              <Form>
-                <Form.Group className='mb-3' controlId='company'>
-                  <Form.Label>Company</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='Google, Apple, etc.'
-                    ref={companyRef}
-                    defaultValue={initialValues.company}
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='position'>
-                  <Form.Label>Position</Form.Label>
-                  <Form.Control
-                    type='text'
-                    ref={positionRef}
-                    defaultValue={initialValues.position}
-                  />
-                </Form.Group>
-                <Stack direction='horizontal' gap={4}>
-                  <Form.Group className='mb-3' controlId='salary-min'>
-                    <Form.Label>Salary Min ($)</Form.Label>
+                  <Form.Group className='mb-1' controlId='location'>
+                    <Form.Label>Location</Form.Label>
                     <Form.Control
-                      type='number'
-                      placeholder='40,000'
-                      ref={salary_minRef}
-                      defaultValue={initialValues.salary_min}
+                      type='text'
+                      placeholder='No location added'
+                      ref={locationRef}
+                      defaultValue={initialValues.location}
+                      readOnly
+                      plaintext
                     />
                   </Form.Group>
-                  <span style={{ paddingTop: '1rem' }}>-</span>
-                  <Form.Group className='mb-3' controlId='salary-max'>
-                    <Form.Label>Salary Max ($)</Form.Label>
-                    <Form.Control
-                      type='number'
-                      placeholder='60,000'
-                      ref={salary_maxRef}
-                      defaultValue={initialValues.salary_max}
+                  <Form.Group className='mb-1' controlId='remote'>
+                    <Form.Check
+                      label='Remote preferred'
+                      ref={remoteRef}
+                      defaultChecked={initialValues.remote}
+                      disabled
                     />
                   </Form.Group>
-                </Stack>
-                <Form.Group className='mb-1' controlId='location'>
-                  <Form.Label>Location</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='Start typing a city...'
-                    ref={locationRef}
-                    defaultValue={initialValues.location}
-                  />
-                </Form.Group>
-                <Form.Group className='mb-1' controlId='remote'>
-                  <Form.Check
-                    label='Remote preferred'
-                    ref={remoteRef}
-                    defaultChecked={initialValues.remote}
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='link'>
-                  <Form.Label>Listing Link</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='Add website location of job listing'
-                    ref={linkRef}
-                    defaultValue={initialValues.link}
-                  />
-                </Form.Group>
-              </Form>
+                  <Form.Group className='mb-3' controlId='link'>
+                    <Form.Label>Listing URL</Form.Label>
+                    <Stack direction='horizontal' gap='2'>
+                      <Form.Control
+                        type='text'
+                        placeholder='Add URL of job listing'
+                        ref={linkRef}
+                        defaultValue={initialValues.link}
+                        readOnly
+                        plaintext
+                      />
+                      <Button variant='outline-secondary'>
+                        <BiCopy onClick={handleCopyLinkClick} />
+                      </Button>
+                    </Stack>
+                  </Form.Group>
+                </Form>
 
-              <div className='sheet-footer'>
-                <Button variant='primary' onClick={handleUpdateJobClick}>
-                  Save
-                </Button>
-                <Button variant='outline-secondary' onClick={handleCancelClick}>
-                  Cancel
-                </Button>
-              </div>
-            </>
-          )}
-        </section>
-      </Wrapper>
-    </>
-  );
+                <div className='sheet-footer'>
+                  <Button variant='outline-secondary' onClick={handleEditClick}>
+                    Edit
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <Form>
+                  <Form.Group className='mb-3' controlId='company'>
+                    <Form.Label>Company</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Google, Apple, etc.'
+                      ref={companyRef}
+                      defaultValue={initialValues.company}
+                    />
+                  </Form.Group>
+                  <Form.Group className='mb-3' controlId='position'>
+                    <Form.Label>Position</Form.Label>
+                    <Form.Control
+                      type='text'
+                      ref={positionRef}
+                      defaultValue={initialValues.position}
+                    />
+                  </Form.Group>
+                  <Stack direction='horizontal' gap={4}>
+                    <Form.Group className='mb-3' controlId='salary-min'>
+                      <Form.Label>Salary Min ($)</Form.Label>
+                      <Form.Control
+                        type='number'
+                        placeholder='40,000'
+                        ref={salary_minRef}
+                        defaultValue={initialValues.salary_min}
+                      />
+                    </Form.Group>
+                    <span style={{ paddingTop: '1rem' }}>-</span>
+                    <Form.Group className='mb-3' controlId='salary-max'>
+                      <Form.Label>Salary Max ($)</Form.Label>
+                      <Form.Control
+                        type='number'
+                        placeholder='60,000'
+                        ref={salary_maxRef}
+                        defaultValue={initialValues.salary_max}
+                      />
+                    </Form.Group>
+                  </Stack>
+                  <Form.Group className='mb-1' controlId='location'>
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Start typing a city...'
+                      ref={locationRef}
+                      defaultValue={initialValues.location}
+                    />
+                  </Form.Group>
+                  <Form.Group className='mb-1' controlId='remote'>
+                    <Form.Check
+                      label='Remote preferred'
+                      ref={remoteRef}
+                      defaultChecked={initialValues.remote}
+                    />
+                  </Form.Group>
+                  <Form.Group className='mb-3' controlId='link'>
+                    <Form.Label>Listing Link</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Add website location of job listing'
+                      ref={linkRef}
+                      defaultValue={initialValues.link}
+                    />
+                  </Form.Group>
+                </Form>
+
+                <div className='sheet-footer'>
+                  <Button variant='primary' onClick={handleUpdateJobClick}>
+                    Save
+                  </Button>
+                  <Button
+                    variant='outline-secondary'
+                    onClick={handleCancelClick}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </>
+            )}
+          </section>
+        </Wrapper>
+      </>
+    );
+  }
 };
 export default SheetPosition;
 

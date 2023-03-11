@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { AirtableContext } from '../context/AirtableContext';
 import SideBarItem from './SideBarItem';
 import SideBarPositionItem from './SideBarPositionItem';
 import styled from 'styled-components';
 
-export const SideBar = ({ className }) => {
+const SideBar = ({ className }) => {
   const { currentSheets, setCurrentSheets } = useContext(AirtableContext);
 
   useEffect(() => {
@@ -21,7 +21,6 @@ export const SideBar = ({ className }) => {
   return (
     <Wrapper className={className}>
       <section className='sidebar-container'>
-        {/* <span className='sidebar-title'>Sheets</span> */}
         <label>Sheets</label>
         <SideBarPositionItem />
         {currentSheets.map((sheet) => (

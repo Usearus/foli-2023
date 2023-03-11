@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { FiTrash } from 'react-icons/fi';
 
-function ModalDeleteConfirmation({ type, deleteFunction }) {
+const ModalDeleteConfirmation = ({ type, deleteFunction }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -35,7 +34,7 @@ function ModalDeleteConfirmation({ type, deleteFunction }) {
       </Modal>
     </>
   );
-}
+};
 
 export default ModalDeleteConfirmation;
 

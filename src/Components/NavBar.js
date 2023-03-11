@@ -1,12 +1,10 @@
 import Container from 'react-bootstrap/Container';
 import { Nav, Navbar, Button, Badge } from 'react-bootstrap';
-// import Form from 'react-bootstrap/Form';
-// import { CiSearch } from 'react-icons/ci';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 import ModalProfile from './ModalProfile';
 
-function NavBar() {
+const NavBar = () => {
   const { logout } = useAuth0();
 
   return (
@@ -85,6 +83,6 @@ function NavBar() {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default NavBar;

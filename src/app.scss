@@ -250,10 +250,6 @@ label {
   color: var(--grey-500);
   border: 1px solid var(--grey-400);
 }
-// Should be for only badges
-.bg-secondary {
-  background-color: var(--grey-100) !important;
-}
 
 // Truncates overflow text everywhere on inputs
 input {
@@ -280,3 +276,16 @@ input {
     border-color: var(--grey-200);
   }
 }
+
+// Should be for only badges
+// .bg-secondary {
+//   background-color: var(--grey-100) !important;
+// }
+
+// .bg-light {
+//   background-color: var(--grey-800) !important;
+// }
+// .badge {
+//   color: var(--grey-500);
+//   border: 1px solid var(--grey-400);
+// }

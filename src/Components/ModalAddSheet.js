@@ -1,14 +1,12 @@
-import React, { useState, useRef, useContext } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
+import { useState, useRef, useContext } from 'react';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
 import useAlert from '../Custom Hooks/useAlert';
 import ReactQuillEditor from './ReactQuillEditor';
+import { Button, Modal, Form } from 'react-bootstrap';
 
-function ModalAddSheet() {
+const ModalAddSheet = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -97,6 +95,6 @@ function ModalAddSheet() {
       </Modal>
     </>
   );
-}
+};
 
 export default ModalAddSheet;

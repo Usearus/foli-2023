@@ -2,7 +2,7 @@ import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 import ModalAddJob from './ModalAddJob';
 
-export const TopBarTable = ({ className }) => {
+const TopBarTable = ({ className }) => {
   return (
     <Wrapper className={className}>
       <Container fluid>

@@ -1,5 +1,7 @@
 // Bootstrap React Custom
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600;1,800&display=swap');
+
 // $theme-colors: (
 //   'primary': $primary,
 //   'secondary': $secondary,
@@ -7,9 +9,11 @@
 //   'info': $info,
 //   'warning': $warning,
 //   'danger': $danger,
-//   'light': $light,
+//   'light': $gray-500,
 //   'dark': $dark,
 // ) !default;
+
+// color: var(--grey-500);
 
 $gray-100: #f1f1f1 !default;
 $gray-200: #eaecee !default;
@@ -34,6 +38,13 @@ $cyan: #0dcaf0 !default;
 
 $secondary: $gray-600 !default;
 $primary: $indigo !default;
+
+$font-family-sans-serif: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto,
+  'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+  'Liberation Mono', 'Courier New', monospace !default;
 
 @import '../node_modules/bootstrap/scss/bootstrap';
 // @import '../node_modules/bootstrap/scss/_variables';

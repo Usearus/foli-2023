@@ -1,10 +1,9 @@
 import { Navigate } from 'react-router-dom';
-import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
-function LoginPage() {
+const LoginPage = () => {
   const { loginWithRedirect } = useAuth0();
   const { isAuthenticated } = useAuth0();
 
@@ -19,7 +18,7 @@ function LoginPage() {
     );
   }
   return <Navigate to='/' />;
-}
+};
 
 export default LoginPage;
 

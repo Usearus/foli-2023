@@ -6,7 +6,6 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
-- When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 - Add template preview when clicked in template panel
 - Stop sheets reappearing after edit (try local storage for this)
 
@@ -20,7 +19,6 @@ https://foli2023.netlify.app
 - Fix unique key prop issue with TemplateCard
 - Make job description persistant and automatic on job creation (will make future GPT links easier).
 - Set nav and top bar to fixed (view on mobile after)
-- Add copy to clipboard to any content field on a sheet on hover.
 - When I open preferences, temp close profile (Or merge the two).
 - Add focus state to all sheets using React-Quill
 - When I click on profile remove active state on nav item
@@ -28,9 +26,10 @@ https://foli2023.netlify.app
 
 ## Post-MVP Features
 
+- When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
 - Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Search feature
-- Convert to next.js
+- Add copy to clipboard to any content field on a sheet on hover.
 - Highlight Skills (Skills API)
 - Ability to add contacts (May go over sheets)
   - Name, Role, Notes
@@ -46,6 +45,7 @@ https://foli2023.netlify.app
   - Simple vs advanced. What is minimal and what can be added?
 - Interview flash cards (mobile)
 - Build mobile interface
+- Convert to next.js
 
 ## Done
 

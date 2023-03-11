@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import base from '../API/base';
 import { AirtableContext } from '../context/AirtableContext';
 import { useNavigate } from 'react-router-dom';

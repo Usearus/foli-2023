@@ -11,7 +11,7 @@ import {
 import NavBar from './Components/NavBar';
 import AlertPopup from './Components/AlertPopup';
 
-function App() {
+const App = () => {
   return (
     <AuthWrapper>
       <Routes>
@@ -59,6 +59,6 @@ function App() {
       </Routes>
     </AuthWrapper>
   );
-}
+};
 
 export default App;

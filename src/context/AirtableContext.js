@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const AirtableContext = React.createContext();
+const AirtableContext = createContext();
 
 const AirtableProvider = ({ children }) => {
   // USER AUTH0 EMAIL
@@ -82,6 +82,18 @@ const AirtableProvider = ({ children }) => {
   const [userSheets, setUserSheets] = useState(null);
 
   // FIND ALL USER AIRTABLE DATA
+  // const fetchUserProfile = async () => {
+  //   if (auth0Email) {
+  //     const [record] = await base('profiles')
+  //     .select({
+  //       maxRecords: 1,
+  //         filterByFormula: `{account} = '${auth0Email}'`,
+  //       })
+  //       .firstPage();
+  //       setUserProfile(record);
+  //     }
+  //   };
+
   const fetchUserProfile = async () => {
     if (auth0Email) {
       // This is array destructuring and I can assign first item of array to the variable
@@ -91,8 +103,14 @@ const AirtableProvider = ({ children }) => {
           filterByFormula: `{account} = '${auth0Email}'`,
         })
         .firstPage();
-      setUserProfile(record);
-      // console.log('userProfile is', record);
+      if (record) {
+        setUserProfile(record);
+      } else {
+        const newRecord = { account: auth0Email };
+        await base('profiles').create(newRecord);
+        fetchUserProfile(); // Call the function again to fetch the newly created record
+        // console.log('userProfile is', record);
+      }
     }
   };
 

@@ -1,4 +1,6 @@
-import React, { useState, useRef, useContext } from 'react';
+// Trying to phase this out of the project
+
+import { useState, useRef, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -32,7 +34,7 @@ function ModalEditPref() {
     position: userProfile?.fields?.position ?? '',
     salary_min: userProfile?.fields?.salary_min ?? '',
     salary_max: userProfile?.fields?.salary_max ?? '',
-    location_preference: [...userProfile.fields.location_preference],
+    location_preference: [...userProfile.fields.location_preference] ?? [],
     location_remote: userProfile?.fields?.location_remote ?? false,
   };
 
@@ -85,11 +87,11 @@ function ModalEditPref() {
     handleClosePref();
   };
 
-  // TODO Cannot get preferences modal to close profile modal.
-  // const handleEditClick = () => {
-  //   handleShowPref();
-  //   // handleHideProfile();
-  // };
+  //   // TODO Cannot get preferences modal to close profile modal.
+  //   // const handleEditClick = () => {
+  //   //   handleShowPref();
+  //   //   // handleHideProfile();
+  //   // };
 
   return (
     <>
@@ -166,7 +168,7 @@ function ModalEditPref() {
                       <MdOutlineClose
                         onClick={() => handleRemoveLocation(location)}
                         style={{
-                          color: 'var(--grey-500)',
+                          color: 'var(--grey-600)',
                           width: '16px',
                           height: '16px',
                           cursor: 'pointer',
