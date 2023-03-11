@@ -1,23 +1,21 @@
 import Card from 'react-bootstrap/Card';
-import { Badge } from 'react-bootstrap';
+// import { Badge } from 'react-bootstrap';
 import styled from 'styled-components';
 import { BiFileBlank } from 'react-icons/bi';
 
-function TemplateCard({ template, handlePreview }) {
-  const content = template.fields.content.slice(0, 100) + '...';
-
+const TemplateCard = ({ template, handleClick }) => {
   return (
-    <Wrapper onClick={handlePreview}>
-      <Card>
+    <Wrapper>
+      <Card onClick={() => handleClick(template)}>
         <Card.Header className='text-muted header'>
           <BiFileBlank />
           {template.fields.category}
         </Card.Header>
         <Card.Body className='body'>
           <Card.Title className='title'>{template.fields.title}</Card.Title>
-          <Card.Text className='text'>{content}</Card.Text>
+          <Card.Text className='text'>{template.fields.description}</Card.Text>
         </Card.Body>
-        <Card.Footer className='text-muted'>
+        {/* <Card.Footer className='text-muted footer'>
           <div className='tag-list'>
             {template.fields.tags.map((tag) => (
               <Badge pill bg='light'>
@@ -25,11 +23,11 @@ function TemplateCard({ template, handlePreview }) {
               </Badge>
             ))}
           </div>
-        </Card.Footer>
+        </Card.Footer> */}
       </Card>
     </Wrapper>
   );
-}
+};
 
 export default TemplateCard;
 
@@ -38,7 +36,8 @@ const Wrapper = styled.div`
   .card {
     transition: var(--transition);
     width: 22rem;
-    height: 13rem;
+    height: 11rem;
+    border-radius: 0;
   }
 
   .card:hover {
@@ -50,12 +49,18 @@ const Wrapper = styled.div`
     align-items: center;
     gap: 0.5rem;
     font-size: small;
+    background-color: var(--grey-100);
   }
 
   .body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .footer {
+    background-color: var(--white);
+    border: 0;
   }
 
   .title {
@@ -71,8 +76,10 @@ const Wrapper = styled.div`
   }
 
   .tag-list .badge {
-    color: var(--grey-500);
-    border: 1px solid var(--grey-400);
+    color: var(--grey-600);
+    border: 1px solid var(--grey-300);
+    font-weight: 600;
+    padding: 6px 8px;
   }
 
   .text {

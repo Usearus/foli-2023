@@ -1,11 +1,15 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AirtableContext } from '../context/AirtableContext';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 
-export const TemplateSidebar = () => {
-  const { allTemplates, fetchAllTemplates, fetchTemplatesByCategory } =
-    useContext(AirtableContext);
+const TemplateSidebar = () => {
+  const {
+    allTemplates,
+    fetchAllTemplates,
+    fetchTemplatesByCategory,
+    setPreviewTemplate,
+  } = useContext(AirtableContext);
 
   const categoryCounts = allTemplates.reduce((counts, template) => {
     const category = template.fields.category;
@@ -30,6 +34,7 @@ export const TemplateSidebar = () => {
         onClick={() => {
           fetchTemplatesByCategory(category);
           setActiveCategory(category);
+          setPreviewTemplate(false);
         }}
       >
         {category} <span className='category-count'>({count})</span>
@@ -48,6 +53,7 @@ export const TemplateSidebar = () => {
           onClick={() => {
             fetchAllTemplates();
             setActiveCategory(null);
+            setPreviewTemplate(false);
           }}
         >
           All <span className='category-count'>({allTemplates.length})</span>
@@ -63,8 +69,9 @@ export default TemplateSidebar;
 const Wrapper = styled.div`
   min-width: 230px;
   .category {
-    /* font-size: small; */
+    font-size: small;
   }
+
   .category-list {
     display: flex;
     flex-direction: column;
@@ -73,8 +80,8 @@ const Wrapper = styled.div`
   }
 
   .category-count {
-    color: var(--grey-600);
-    font-size: 0.85rem;
+    /* color: var(--grey-600); */
+    font-size: 0.75rem;
   }
 
   button:active {
@@ -87,20 +94,5 @@ const Wrapper = styled.div`
     .category-count {
       color: var(--grey-200);
     }
-  }
-
-  .sidebar-title {
-    display: flex;
-  }
-
-  .sidebar-item {
-    background: var(--grey-200);
-    color: var(--grey-600);
-    transition: var(--transition);
-  }
-
-  .sidebar-item:hover {
-    background: var(--grey-300);
-    border-radius: 0.5rem;
   }
 `;

@@ -5,13 +5,18 @@ import styled from 'styled-components';
 import ModalAddSheet from './ModalAddSheet';
 import { AirtableContext } from '../context/AirtableContext';
 import ModalTemplates from './ModalTemplates';
-import { Form } from 'react-bootstrap';
+import { Form, Dropdown, DropdownButton } from 'react-bootstrap';
 import useAlert from '../Custom Hooks/useAlert';
+import { BiFileBlank } from 'react-icons/bi';
+import { GrTemplate } from 'react-icons/gr';
 
 const TopBarJob = ({ className }) => {
   const { setCurrentJob, fetchUserJobs, currentJob } =
     useContext(AirtableContext);
   const { setAlert } = useAlert();
+  const [selectedEventKey, setSelectedEventKey] = useState(null);
+  const [showAddSheetModal, setShowAddSheetModal] = useState(false);
+  const [showTemplateModal, setShowTemplateModal] = useState(false);
 
   useEffect(() => {
     const jobFromStorage = localStorage.getItem('currentJob');
@@ -42,6 +47,22 @@ const TopBarJob = ({ className }) => {
       }
     );
   };
+
+  const handleSelect = (eventKey) => {
+    setSelectedEventKey(eventKey);
+    if (eventKey === '1') {
+      setShowAddSheetModal(true);
+    }
+    if (eventKey === '2') {
+      setShowTemplateModal(true);
+    }
+  };
+
+  const handleCloseReset = () => {
+    setShowAddSheetModal(false);
+    setShowTemplateModal(false);
+  };
+
   return (
     <Wrapper className={className}>
       <Container fluid>
@@ -54,7 +75,7 @@ const TopBarJob = ({ className }) => {
             </h5>
             <Form>
               <Form.Select
-                size='md'
+                size='sm'
                 aria-label='Select job status'
                 onChange={handleUpdateJobClick}
                 value={currentJob && currentJob.fields ? selectedStatus : ''}
@@ -70,19 +91,49 @@ const TopBarJob = ({ className }) => {
                 <option value='Archived'>Archived</option>
               </Form.Select>
             </Form>
-
-            {/* <Badge pill bg='secondary'>
-              {currentJob && currentJob.fields
-                ? `${currentJob.fields.status}`
-                : ''}
-            </Badge> */}
           </div>
-          {/* <span className="img-center">
-            <BiCaretDown />
-          </span> */}
           <div className='btns'>
-            <ModalTemplates />
-            <ModalAddSheet />
+            {/* <ModalTemplates />
+            <ModalAddSheet /> */}
+            <DropdownButton
+              title='Add Sheet'
+              id='add-sheet-dropdown'
+              onSelect={handleSelect}
+            >
+              <Dropdown.Item
+                eventKey='1'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '.5rem 1rem',
+                }}
+              >
+                <BiFileBlank style={{ marginRight: '.5rem' }} />
+                Blank Sheet
+              </Dropdown.Item>
+              <Dropdown.Item
+                eventKey='2'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '.5rem 1rem',
+                }}
+              >
+                <GrTemplate style={{ marginRight: '.5rem' }} /> From Template
+              </Dropdown.Item>
+            </DropdownButton>
+            {showAddSheetModal && (
+              <ModalAddSheet
+                show={showAddSheetModal}
+                handleClose={handleCloseReset}
+              />
+            )}
+            {showTemplateModal && (
+              <ModalTemplates
+                show={showTemplateModal}
+                closeTemplateModal={handleCloseReset}
+              />
+            )}
           </div>
         </Stack>
       </Container>

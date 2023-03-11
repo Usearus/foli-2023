@@ -17,14 +17,34 @@ const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
     <Wrapper>
       <Button size='sm' variant='light' className='parent-btn'>
         <span>{sheet.fields.title}</span>
-        <Button
+        <div
           className='ms-auto'
-          variant='link'
-          style={{ color: 'var(--grey-600)' }}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'var(--grey-600)',
+            minWidth: '24px',
+            minHeight: '24px',
+          }}
           onClick={handleButtonClick}
         >
-          {hidden ? <BiHide /> : <BiShow />}
-        </Button>
+          {hidden ? (
+            <BiHide
+              style={{
+                minWidth: '16px',
+                minHeight: '16px',
+              }}
+            />
+          ) : (
+            <BiShow
+              style={{
+                minWidth: '16px',
+                minHeight: '16px',
+              }}
+            />
+          )}
+        </div>
       </Button>
     </Wrapper>
   );

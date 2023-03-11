@@ -39,10 +39,10 @@ const ModalProfile = () => {
     return <></>;
   }
 
-  console.log('userProfile', userProfile);
-  console.log('location_preferences', userProfile.fields.location_preference);
-  console.log('initialValues', initialValues);
-  console.log('tempLocations', tempLocations);
+  // console.log('userProfile', userProfile);
+  // console.log('location_preferences', userProfile.fields.location_preference);
+  // console.log('initialValues', initialValues);
+  // console.log('tempLocations', tempLocations);
 
   const handleEditClick = () => {
     setEditing(true);
@@ -53,8 +53,6 @@ const ModalProfile = () => {
     if (newLocation !== '' && !tempLocations.includes(newLocation)) {
       setTempLocations([...tempLocations, newLocation]);
       setLocationInput('');
-      // Is this really needed?
-      fetchUserProfile();
     }
   };
 
@@ -168,31 +166,15 @@ const ModalProfile = () => {
                           plaintext
                         />
                       </Form.Group>
-                      <Stack direction='horizontal' gap={4}>
-                        <Form.Group className='mb-4' controlId='salary-min'>
-                          <Form.Label>Salary Minimum ($)</Form.Label>
-                          <Form.Control
-                            type='number'
-                            placeholder='Enter a number...'
-                            ref={salary_minRef}
-                            defaultValue={initialValues.salary_min}
-                            readOnly
-                            plaintext
-                          />
-                        </Form.Group>
-                        <span style={{ paddingTop: '1rem' }}>-</span>
-                        <Form.Group className='mb-4' controlId='salary-max'>
-                          <Form.Label>Salary Maximum ($)</Form.Label>
-                          <Form.Control
-                            type='number'
-                            placeholder='Enter a number...'
-                            ref={salary_maxRef}
-                            defaultValue={initialValues.salary_max}
-                            readOnly
-                            plaintext
-                          />
-                        </Form.Group>
-                      </Stack>
+
+                      <Form.Group className='mb-4' controlId='salary-range'>
+                        <Form.Label>Salary Range</Form.Label>
+                        <div style={{ padding: '7px 0' }}>
+                          ${initialValues.salary_min} -{' '}
+                          {initialValues.salary_max}
+                        </div>
+                      </Form.Group>
+
                       <Form.Group className='mb-1' controlId='location'>
                         <Form.Label>Locations</Form.Label>
                         <div
@@ -249,7 +231,7 @@ const ModalProfile = () => {
                       </Form.Group>
                       <Stack direction='horizontal' gap={4}>
                         <Form.Group className='mb-4' controlId='salary-min'>
-                          <Form.Label>Salary Minimum ($)</Form.Label>
+                          <Form.Label>Salary Min ($)</Form.Label>
                           <Form.Control
                             type='number'
                             placeholder='Enter a number...'
@@ -258,9 +240,9 @@ const ModalProfile = () => {
                             // style={{ maxWidth: '120px' }}
                           />
                         </Form.Group>
-                        <span style={{ paddingTop: '1rem' }}>-</span>
+                        <span style={{ paddingTop: '.5rem' }}>-</span>
                         <Form.Group className='mb-4' controlId='salary-max'>
-                          <Form.Label>Salary Maximum ($)</Form.Label>
+                          <Form.Label>Salary Max ($)</Form.Label>
                           <Form.Control
                             type='number'
                             placeholder='Enter a number...'
@@ -381,248 +363,3 @@ const Wrapper = styled.div`
     width: 100px;
   }
 `;
-
-//  TRY 2
-
-//   // if (userProfile) {
-//   return (
-//     <Wrapper>
-
-//               {!editing ? (
-//                 <>
-
-//                 </>
-//               ) : (
-//                 <>
-//                   <Form>
-
-//                     <Form.Group className='mb-4' controlId='location'>
-//                       <Form.Label>Locations</Form.Label>
-//                       <InputGroup className='mb-2'>
-//                         <Form.Control
-//                           type='text'
-//                           placeholder='Add a location...'
-//                           ref={locationRef}
-//                           value={locationInput}
-//                           onChange={(e) => setLocationInput(e.target.value)}
-//                         />
-//                         <Button
-//                           variant='outline-secondary'
-//                           id='button-addon2'
-//                           onClick={handleAddLocation}
-//                           disabled={!locationInput}
-//                         >
-//                           Add
-//                         </Button>
-//                       </InputGroup>
-//                       {userProfile.fields.location_preference &&
-//                         tempLocations.map((location) => (
-//                           <Badge
-//                             key={location}
-//                             pill
-//                             bg='secondary'
-//                             className='me-1'
-//                           >
-//                             {location}
-//                             <span style={{ paddingLeft: '8px' }}>
-//                               <MdOutlineClose
-//                                 onClick={() => handleRemoveLocation(location)}
-//                                 style={{
-//                                   color: 'var(--grey-600)',
-//                                   width: '16px',
-//                                   height: '16px',
-//                                   cursor: 'pointer',
-//                                 }}
-//                               />
-//                             </span>
-//                           </Badge>
-//                         ))}
-//                     </Form.Group>
-
-//                     <Form.Group className='mb-4' controlId='remote'>
-//                       <Form.Check
-//                         label='Remote preferred'
-//                         ref={remoteRef}
-//                         defaultChecked={initialValues.location_remote}
-//                       />
-//                     </Form.Group>
-//                   </Form>
-//                   <div className='sheet-footer'>
-// <Button variant='secondary' onClick={handleCancelClick}>
-//   Cancel
-// </Button>
-// <Button variant='primary' onClick={handleSavePrefClick}>
-//   Save Preferences
-// </Button>
-//                   </div>
-//               )}
-//                 </>
-//             </div>
-//           </>
-//         </Modal.Body>
-//         {/* <Modal.Footer></Modal.Footer> */}
-//       </Modal>
-//     </Wrapper>
-//   );
-// }
-// export default ModalProfile;
-
-// const Wrapper = styled.div`
-//   */ img {
-//     width: 100px;
-//   }
-//   h4 {
-//     padding-bottom: 0.5rem;
-//   }
-//   h6 {
-//     margin-bottom: 0.25rem;
-//   }
-//   .container {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 0.25rem;
-//     padding-bottom: 40px;
-//   }
-//   .field {
-//     padding-bottom: 0.5rem;
-//   }
-// `;
-
-// TRY 1
-
-// import React, { useState, useContext } from 'react';
-// import Modal from 'react-bootstrap/Modal';
-// import styled from 'styled-components';
-// import { useAuth0 } from '@auth0/auth0-react';
-// import { AirtableContext } from '../context/AirtableContext';
-// import ModalEditPref from './ModalEditPref';
-// import { Badge } from 'react-bootstrap';
-
-// function ModalProfile() {
-//   const { user } = useAuth0();
-//   const { userProfile } = useContext(AirtableContext);
-//   const [showProfile, setShowProfile] = useState(false);
-//   const handleHideProfile = () => setShowProfile(false);
-//   const handleShowProfile = () => setShowProfile(true);
-
-//   console.log('userProfile', userProfile);
-
-//   return (
-//     <>
-//       <button style={{ border: 'none' }} onClick={handleShowProfile}>
-//         <img
-//           src={user.picture}
-//           alt={user.name}
-//           style={{ width: '40px', borderRadius: '100px' }}
-//         />
-//       </button>
-
-//       <Modal fullscreen='md-down' show={showProfile} onHide={handleHideProfile}>
-//         <Modal.Header closeButton>
-//           <Modal.Title>Profile</Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <Wrapper>
-//             <div>
-//               <div>
-//                 <div className='container'>
-//                   <h4>Account</h4>
-
-//                   <div className='field'>
-//                     <h6>Name </h6>
-//                     <span className='text-secondary'>{user.name}</span>
-//                   </div>
-
-//                   <div className='field'>
-//                     <h6>Email </h6>
-//                     <span className='text-secondary'>{user.email}</span>
-//                   </div>
-//                 </div>
-
-//                 {userProfile && (
-//                   <div className='container'>
-//                     <h4>Job Preferences</h4>
-
-//                     <div className='field'>
-//                       <h6>Desired position </h6>
-//                       <span className='text-secondary'>
-//                         {userProfile.fields.position || 'No position added yet'}
-//                       </span>
-//                     </div>
-
-//                     <div className='field'>
-//                       <h6>Locations</h6>
-//                       {userProfile.fields.location_preference &&
-//                       userProfile.fields.location_preference.length > 0 ? (
-//                         userProfile.fields.location_preference.map(
-//                           (location) => (
-//                             <Badge
-//                               key={location}
-//                               pill
-//                               bg='secondary'
-//                               className='me-2'
-//                               style={{
-//                                 alignItems: 'center',
-//                                 justifyContent: 'flex-start',
-//                                 width: 'auto',
-//                               }}
-//                             >
-//                               {location}
-//                             </Badge>
-//                           )
-//                         )
-//                       ) : (
-//                         <span>No location added yet</span>
-//                       )}
-//                     </div>
-
-//                     <div className='field'>
-//                       <h6>Remote</h6>
-//                       <span className='text-secondary'>
-//                         {userProfile.fields.location_remote ? 'Yes' : 'No'}
-//                       </span>
-//                     </div>
-
-//                     <div className='field'>
-//                       <h6>Salary</h6>
-//                       <span className='text-secondary'>
-//                         ${userProfile.fields.salary_min.toLocaleString()}-
-//                         {userProfile.fields.salary_max.toLocaleString()}
-//                       </span>
-//                     </div>
-//                   </div>
-//                 )}
-//               </div>
-//             </div>
-//           </Wrapper>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <ModalEditPref />
-//         </Modal.Footer>
-//       </Modal>
-//     </>
-//   );
-// }
-
-// export default ModalProfile;
-
-// const Wrapper = styled.div`
-//   */ img {
-//     width: 100px;
-//   }
-//   h4 {
-//     padding-bottom: 0.5rem;
-//   }
-//   h6 {
-//     margin-bottom: 0.25rem;
-//   }
-//   .container {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 0.25rem;
-//     padding-bottom: 40px;
-//   }
-//   .field {
-//     padding-bottom: 0.5rem;
-//   }
-// `;

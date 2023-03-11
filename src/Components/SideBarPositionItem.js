@@ -17,14 +17,34 @@ const SideBarPositionItem = () => {
     <Wrapper>
       <Button size='sm' variant='light' className='parent-btn'>
         <span>Position Details</span>
-        <Button
+        <div
           className='ms-auto'
-          variant='link'
-          style={{ color: 'var(--grey-600)' }}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'var(--grey-600)',
+            minWidth: '24px',
+            minHeight: '24px',
+          }}
           onClick={handleButtonClick}
         >
-          {showIcon ? <BiHide /> : <BiShow />}
-        </Button>
+          {showIcon ? (
+            <BiHide
+              style={{
+                minWidth: '16px',
+                minHeight: '16px',
+              }}
+            />
+          ) : (
+            <BiShow
+              style={{
+                minWidth: '16px',
+                minHeight: '16px',
+              }}
+            />
+          )}
+        </div>
       </Button>
     </Wrapper>
   );

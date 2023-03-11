@@ -117,31 +117,12 @@ const SheetPosition = () => {
                       plaintext
                     />
                   </Form.Group>
-                  <Stack direction='horizontal' gap={4}>
-                    <Form.Group className='mb-3' controlId='salary-min'>
-                      <Form.Label>Salary Min ($)</Form.Label>
-                      <Form.Control
-                        type='number'
-                        placeholder='40,000'
-                        ref={salary_minRef}
-                        defaultValue={initialValues.salary_min}
-                        readOnly
-                        plaintext
-                      />
-                    </Form.Group>
-                    <span style={{ paddingTop: '1rem' }}>-</span>
-                    <Form.Group className='mb-3' controlId='salary-max'>
-                      <Form.Label>Salary Max ($)</Form.Label>
-                      <Form.Control
-                        type='number'
-                        placeholder='60,000'
-                        ref={salary_maxRef}
-                        defaultValue={initialValues.salary_max}
-                        readOnly
-                        plaintext
-                      />
-                    </Form.Group>
-                  </Stack>
+                  <Form.Group className='mb-3' controlId='salary-range'>
+                    <Form.Label>Salary Range</Form.Label>
+                    <div style={{ padding: '7px 0' }}>
+                      ${initialValues.salary_min} - {initialValues.salary_max}
+                    </div>
+                  </Form.Group>
                   <Form.Group className='mb-1' controlId='location'>
                     <Form.Label>Location</Form.Label>
                     <Form.Control
@@ -243,7 +224,7 @@ const SheetPosition = () => {
                     />
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='link'>
-                    <Form.Label>Listing Link</Form.Label>
+                    <Form.Label>Listing URL</Form.Label>
                     <Form.Control
                       type='text'
                       placeholder='Add website location of job listing'

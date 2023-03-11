@@ -1,39 +1,31 @@
-import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import TemplateSidebar from './TemplateSidebar';
 import TemplateCardGrid from './TemplateCardGrid';
 
-function ModalTemplates() {
-  const [show, setShow] = useState(false);
-
+const ModalTemplates = ({ show, closeTemplateModal }) => {
   return (
     <>
-      <Button variant='outline-secondary' onClick={() => setShow(true)}>
-        Templates
-      </Button>
-
       <Modal
         size='xl'
         fullscreen='lg-down'
         show={show}
-        onHide={() => setShow(false)}
+        onHide={closeTemplateModal}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton style={{ background: 'var(--grey-100)' }}>
           <Modal.Title>Templates</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{ background: 'var(--grey-100)' }}>
           <Wrapper>
             <TemplateSidebar />
-            <TemplateCardGrid />
+            <TemplateCardGrid closeTemplateModal={closeTemplateModal} />
           </Wrapper>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Footer style={{ background: 'var(--grey-100)' }}></Modal.Footer>
       </Modal>
     </>
   );
-}
+};
 
 export default ModalTemplates;
 

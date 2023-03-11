@@ -6,13 +6,8 @@ import useAlert from '../Custom Hooks/useAlert';
 import ReactQuillEditor from './ReactQuillEditor';
 import { Button, Modal, Form } from 'react-bootstrap';
 
-const ModalAddSheet = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+const ModalAddSheet = ({ show, handleClose }) => {
   const { setAlert } = useAlert();
-
   const { user } = useAuth0();
   const { currentJob, allJobs, setCurrentJob, fetchCurrentSheets } =
     useContext(AirtableContext);
@@ -20,11 +15,6 @@ const ModalAddSheet = () => {
   const [content, setContent] = useState('');
   const handleEditorChange = (value) => {
     setContent(value);
-  };
-
-  const handleCloseReset = () => {
-    setContent('');
-    handleClose();
   };
 
   const titleRef = useRef();
@@ -49,51 +39,45 @@ const ModalAddSheet = () => {
         records.forEach(function (record) {
           // console.log('added sheet', record.getId());
           fetchCurrentSheets(currentJob);
-          handleCloseReset();
+          handleClose();
           setAlert('Sheet successfully added!', 'success');
         });
       }
     );
   };
 
-  const handleAddSheetClick = async () => {
-    await addSheet();
+  const handleAddSheetClick = () => {
+    addSheet();
     const updatedJob = allJobs.find((job) => job.id === currentJob.id);
     setCurrentJob(updatedJob);
   };
 
   return (
-    <>
-      <Button variant='primary' onClick={handleShow}>
-        Add Sheet
-      </Button>
-
-      <Modal fullscreen='md-down' show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add a new sheet</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className='mb-3 ' controlId='title'>
-              <Form.Label>Sheet Title</Form.Label>
-              <Form.Control type='text' autoFocus required ref={titleRef} />
-            </Form.Group>
-            <Form.Label>Content</Form.Label>
-            <Form.Group className='mb-3' controlId='content'>
-              <ReactQuillEditor value={content} onChange={handleEditorChange} />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant='outline-secondary' onClick={handleCloseReset}>
-            Close
-          </Button>
-          <Button variant='primary' onClick={handleAddSheetClick}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+    <Modal fullscreen='md-down' show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Add a new sheet</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          <Form.Group className='mb-3 ' controlId='title'>
+            <Form.Label>Sheet Title</Form.Label>
+            <Form.Control type='text' autoFocus required ref={titleRef} />
+          </Form.Group>
+          <Form.Label>Content</Form.Label>
+          <Form.Group className='mb-3' controlId='content'>
+            <ReactQuillEditor value={content} onChange={handleEditorChange} />
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant='outline-secondary' onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant='primary' onClick={handleAddSheetClick}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
