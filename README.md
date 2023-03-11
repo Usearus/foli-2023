@@ -6,31 +6,29 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
-- Add template preview when clicked in template panel
+- Add template to sheets
 - Stop sheets reappearing after edit (try local storage for this)
 
 ---LOW PRIORITY---
 
+- Add a built out a sample job whenever a new user account is created.
 - Add template to prep for initial interview screening (questions to ask and info to get)
+- Prompt preferences questions on account creation.
   - Other templates can be for different types of interviews (portfolio, group, negotiation, etc.)
   - Add template for interview notes during / after interview.
-- Make add sheet a dropdown button to add a sheeet or a template (and put in comments one for contacts)
 - Add simple privacy policy page (who can I reference?).
 - Fix unique key prop issue with TemplateCard
 - Make job description persistant and automatic on job creation (will make future GPT links easier).
-- Set nav and top bar to fixed (view on mobile after)
-- When I open preferences, temp close profile (Or merge the two).
 - Add focus state to all sheets using React-Quill
 - When I click on profile remove active state on nav item
-- Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 
 ## Post-MVP Features
 
-- When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
+- Duplicate Job Function
 - Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
-- Search feature
 - Add copy to clipboard to any content field on a sheet on hover.
 - Highlight Skills (Skills API)
+- Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 - Ability to add contacts (May go over sheets)
   - Name, Role, Notes
 - Open/Close Sheets bar
@@ -45,10 +43,17 @@ https://foli2023.netlify.app
   - Simple vs advanced. What is minimal and what can be added?
 - Interview flash cards (mobile)
 - Build mobile interface
+- Add Contacts for a job
+- Search feature
 - Convert to next.js
 
 ## Done
 
+- Add template preview when clicked in template panel
+- Make add sheet a dropdown button to add a sheeet or a template
+- When an account using Auth0 is created, add a record to Airtable profile base that has the members email address
+- When I open preferences, temp close profile (Or merge the two).
+- Set nav and top bar to fixed (view on mobile after)
 - Add max-width to alerts
 - Add 'beta' badge next to foli icon. Make icon default to a normal cursor and not text.
 - Modify toolbar module to simplify: https://quilljs.com/docs/modules/toolbar/

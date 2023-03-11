@@ -82,17 +82,6 @@ const AirtableProvider = ({ children }) => {
   const [userSheets, setUserSheets] = useState(null);
 
   // FIND ALL USER AIRTABLE DATA
-  // const fetchUserProfile = async () => {
-  //   if (auth0Email) {
-  //     const [record] = await base('profiles')
-  //     .select({
-  //       maxRecords: 1,
-  //         filterByFormula: `{account} = '${auth0Email}'`,
-  //       })
-  //       .firstPage();
-  //       setUserProfile(record);
-  //     }
-  //   };
 
   const fetchUserProfile = async () => {
     if (auth0Email) {
@@ -200,6 +189,8 @@ const AirtableProvider = ({ children }) => {
   // *
   // SET CURRENTLY VIEWED TEMPLATE DATA
   const [currentTemplates, setCurrentTemplates] = useState(allTemplates);
+  const [previewTemplate, setPreviewTemplate] = useState(false);
+  const [activeTemplate, setActiveTemplate] = useState(null);
 
   const fetchTemplatesByCategory = async (category) => {
     // console.log('category received:', category);
@@ -247,6 +238,10 @@ const AirtableProvider = ({ children }) => {
         fetchTemplatesByCategory,
         setCurrentTemplates,
         fetchAllTemplates,
+        activeTemplate,
+        previewTemplate,
+        setPreviewTemplate,
+        setActiveTemplate,
       }}
     >
       {children}
