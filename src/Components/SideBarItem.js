@@ -53,6 +53,13 @@ const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
 export default SideBarItem;
 
 const Wrapper = styled.div`
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 85%;
+    text-align: left;
+  }
   .parent-btn {
     display: flex;
     align-items: center;

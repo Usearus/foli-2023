@@ -109,6 +109,7 @@ export default TemplateCardGrid;
 const Wrapper = styled.div`
   display: flex;
   .grid-container {
+    margin: 0 1rem;
     overflow-x: scroll;
     height: 800px;
     display: flex;
@@ -118,6 +119,7 @@ const Wrapper = styled.div`
   }
   .sheet-container {
     height: 800px;
+    margin: 0 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;

@@ -72,10 +72,7 @@ const Sheet = (sheet) => {
 
   return (
     <Wrapper className='sheet-container'>
-      <header
-        className='sheet-title'
-        style={{ marginBottom: editing ? '.75rem' : '.75rem' }}
-      >
+      <header className='sheet-title'>
         {!editing ? (
           <h5>{sheet.fields.title}</h5>
         ) : (
@@ -147,6 +144,7 @@ const Sheet = (sheet) => {
 const Wrapper = styled.div`
   .sheet-title {
     height: 2rem;
+    margin-bottom: 0.75rem;
   }
 
   .sheet-title div {
@@ -225,6 +223,10 @@ const Wrapper = styled.div`
     color: var(--grey-400);
   }
 
+  .slide-in {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+  }
   // React Quill Customization for SHEET Component only!
 
   .ql-container {

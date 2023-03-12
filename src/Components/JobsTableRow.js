@@ -26,7 +26,7 @@ const JobsTableRow = (singleJob) => {
       singleJob.id,
       {
         status: e.target.value,
-        // edited: new Date().toLocaleDateString('en-US'),
+        edited: new Date().toLocaleDateString('en-US'),
       },
       function (err, record) {
         if (err) {
@@ -110,9 +110,14 @@ export default JobsTableRow;
 
 const Wrapper = styled.div`
   .select {
+    cursor: pointer;
     min-width: 130px;
     border: 1px solid var(--grey-600);
     color: var(--grey-600);
     background-color: var(--white);
+    border-radius: 90px;
+  }
+  .select:hover {
+    background-color: var(--grey-100);
   }
 `;

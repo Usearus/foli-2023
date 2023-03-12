@@ -15,6 +15,7 @@ const TemplateCard = ({ template, handleClick }) => {
           <Card.Title className='title'>{template.fields.title}</Card.Title>
           <Card.Text className='text'>{template.fields.description}</Card.Text>
         </Card.Body>
+        {/* IDK If I want a footer anymore */}
         {/* <Card.Footer className='text-muted footer'>
           <div className='tag-list'>
             {template.fields.tags.map((tag) => (
@@ -33,15 +34,18 @@ export default TemplateCard;
 
 const Wrapper = styled.div`
   cursor: pointer;
+
   .card {
     transition: var(--transition);
     width: 22rem;
     height: 11rem;
     border-radius: 0;
+    border: 0;
+    box-shadow: var(--shadow-1);
   }
 
   .card:hover {
-    box-shadow: var(--shadow-3);
+    box-shadow: var(--shadow-4);
   }
 
   .header {
@@ -49,7 +53,7 @@ const Wrapper = styled.div`
     align-items: center;
     gap: 0.5rem;
     font-size: small;
-    background-color: var(--grey-100);
+    background-color: var(--white);
   }
 
   .body {
@@ -66,6 +70,7 @@ const Wrapper = styled.div`
   .title {
     font-size: medium;
     text-align: left;
+    font-weight: 600;
   }
 
   .tag-list {

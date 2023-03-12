@@ -48,6 +48,11 @@ const ModalProfile = () => {
     setEditing(true);
   };
 
+  const handleOnHide = () => {
+    setEditing(false);
+    handleHideProfile();
+  };
+
   const handleAddLocation = () => {
     const newLocation = locationInput.trim();
     if (newLocation !== '' && !tempLocations.includes(newLocation)) {
@@ -115,11 +120,7 @@ const ModalProfile = () => {
           />
         </button>
 
-        <Modal
-          fullscreen='md-down'
-          show={showProfile}
-          onHide={handleHideProfile}
-        >
+        <Modal fullscreen='md-down' show={showProfile} onHide={handleOnHide}>
           <Modal.Header closeButton>
             <Modal.Title>Profile</Modal.Title>
           </Modal.Header>

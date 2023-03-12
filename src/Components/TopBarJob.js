@@ -33,7 +33,7 @@ const TopBarJob = ({ className }) => {
       currentJob.id,
       {
         status: e.target.value,
-        // edited: new Date().toLocaleDateString('en-US'),
+        edited: new Date().toLocaleDateString('en-US'),
       },
       function (err, record) {
         if (err) {
@@ -152,6 +152,7 @@ const Wrapper = styled.div`
     gap: 1rem;
   }
   .truncate {
+    font-weight: 600;
     max-width: 400px;
     white-space: nowrap; /* prevent the text from wrapping to a new line */
     overflow: hidden; /* hide any text that overflows the element */
@@ -174,9 +175,14 @@ const Wrapper = styled.div`
   }
 
   .select {
+    cursor: pointer;
     min-width: 130px;
     border: 1px solid var(--grey-600);
     color: var(--grey-600);
     background-color: var(--grey-100);
+    border-radius: 90px;
+  }
+  .select:hover {
+    background-color: var(--grey-200);
   }
 `;
