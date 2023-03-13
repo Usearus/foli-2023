@@ -39,10 +39,10 @@ const ModalProfile = () => {
     return <></>;
   }
 
-  // console.log('userProfile', userProfile);
-  // console.log('location_preferences', userProfile.fields.location_preference);
-  // console.log('initialValues', initialValues);
-  // console.log('tempLocations', tempLocations);
+  console.log('userProfile', userProfile);
+  console.log('location_preferences', userProfile.fields.location_preference);
+  console.log('initialValues', initialValues);
+  console.log('tempLocations', tempLocations);
 
   const handleEditClick = () => {
     setEditing(true);

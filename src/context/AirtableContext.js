@@ -81,11 +81,12 @@ const AirtableProvider = ({ children }) => {
   const [userJobs, setUserJobs] = useState(null);
   const [userSheets, setUserSheets] = useState(null);
 
-  // FIND ALL USER AIRTABLE DATA
+  // WHEN A NEW PROFILE IN fetchUserProfile IS CREATED WE SET THIS TO TRUE
+  // const [newUser, setNewUser] = useState(false);
 
+  // FIND ALL USER AIRTABLE DATA
   const fetchUserProfile = async () => {
     if (auth0Email) {
-      // This is array destructuring and I can assign first item of array to the variable
       const [record] = await base('profiles')
         .select({
           maxRecords: 1,
@@ -95,14 +96,24 @@ const AirtableProvider = ({ children }) => {
       if (record) {
         setUserProfile(record);
       } else {
-        const newRecord = { account: auth0Email };
-        await base('profiles').create(newRecord);
-        fetchUserProfile(); // Call the function again to fetch the newly created record
-        // console.log('userProfile is', record);
+        createUserProfile();
       }
     }
   };
 
+  const createUserProfile = async () => {
+    if (auth0Email) {
+      const newRecord = { account: auth0Email };
+      const createdRecord = await base('profiles').create(newRecord);
+      if (createdRecord) {
+        setUserProfile(createdRecord);
+        // setNewUser(true);
+        fetchUserProfile();
+      }
+      // console.log('new userProfile created', createdRecord.id);
+    }
+  };
+  // console.log('(1) newUser is', newUser);
   const fetchUserJobs = async () => {
     if (auth0Email) {
       await base('jobs')
@@ -209,6 +220,9 @@ const AirtableProvider = ({ children }) => {
   return (
     <AirtableContext.Provider
       value={{
+        // New User
+        // newUser,
+        // setNewUser,
         //Sheets
         allSheets,
         userSheets,
