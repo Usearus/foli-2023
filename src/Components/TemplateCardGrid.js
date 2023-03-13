@@ -86,7 +86,7 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
           <h4>{activeTemplate.fields.title}</h4>
           <div className='sheet-body'>
             <MarkdownView
-              className='sheet-scroll sheet-content'
+              className='sheet-content markdown-content'
               markdown={activeTemplate.fields.content}
             />
             <div className='sheet-footer'>
@@ -133,6 +133,38 @@ const Wrapper = styled.div`
     max-width: 500px;
     padding: 1rem 1rem 0 1rem;
     max-height: 650px;
+  }
+
+  .markdown-content {
+    padding: 1rem;
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+    }
+
+    h4 {
+      font-size: 1rem;
+    }
+
+    h5 {
+      font-size: 1rem;
+    }
+    p {
+      margin-bottom: 0;
+    }
+
+    ul {
+      padding-bottom: 1rem !important;
+      padding-left: 2rem;
+      list-style-type: circle !important;
+    }
   }
   .sheet-footer {
     display: flex;

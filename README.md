@@ -6,19 +6,19 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
+- Make job description persistant and automatic on job creation (will make future GPT links easier).
+- Add a built out a sample job whenever a new user account is created.
 - Add template to sheets
-- Stop sheets reappearing after edit (try local storage for this)
+- Add template to prep for initial interview screening (questions to ask and info to get)
+  - Add template for interview notes during / after interview.
 
 ---LOW PRIORITY---
 
-- Add a built out a sample job whenever a new user account is created.
-- Add template to prep for initial interview screening (questions to ask and info to get)
+- Stop sheets reappearing after edit (try local storage for this)
 - Prompt preferences questions on account creation.
   - Other templates can be for different types of interviews (portfolio, group, negotiation, etc.)
-  - Add template for interview notes during / after interview.
 - Add simple privacy policy page (who can I reference?).
 - Fix unique key prop issue with TemplateCard
-- Make job description persistant and automatic on job creation (will make future GPT links easier).
 - Add focus state to all sheets using React-Quill
 - When I click on profile remove active state on nav item
 
@@ -33,7 +33,8 @@ https://foli2023.netlify.app
   - Name, Role, Notes
 - Open/Close Sheets bar
 - Letter style button to change format of sheet to printer friendly version
-- ChatGPT API Right Sidebar
+- ChatGPT API
+  - Sidebar
   - Prompts dropdown to start off with
   - Settings button that shows what info is prefilled from preferences
   - Add sheet from GPT button

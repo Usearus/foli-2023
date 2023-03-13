@@ -126,7 +126,11 @@ const ModalAddJob = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button type='submit' variant='secondary' onClick={handleClose}>
+          <Button
+            type='submit'
+            variant='outline-secondary'
+            onClick={handleClose}
+          >
             Close
           </Button>
           <Button variant='primary' onClick={handleAddJobClick}>

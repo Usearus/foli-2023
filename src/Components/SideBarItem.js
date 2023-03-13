@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { BiShow, BiHide } from 'react-icons/bi';
 import styled from 'styled-components';
 
@@ -16,7 +16,16 @@ const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
   return (
     <Wrapper>
       <Button size='sm' variant='light' className='parent-btn'>
-        <span>{sheet.fields.title}</span>
+        <OverlayTrigger
+          key='title'
+          placement='top'
+          delay={{ show: 1000, hide: 0 }}
+          overlay={
+            <Tooltip id={`tooltip-${sheet.id}`}>{sheet.fields.title}</Tooltip>
+          }
+        >
+          <span>{sheet.fields.title}</span>
+        </OverlayTrigger>
         <div
           className='ms-auto'
           style={{
