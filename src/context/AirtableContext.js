@@ -97,6 +97,8 @@ const AirtableProvider = ({ children }) => {
         setUserProfile(record);
       } else {
         createUserProfile();
+        const onboardingJob = await createOnboardingJob();
+        const onboardingSheets = await createOnboardingSheets(onboardingJob.id);
       }
     }
   };
@@ -113,7 +115,61 @@ const AirtableProvider = ({ children }) => {
       // console.log('new userProfile created', createdRecord.id);
     }
   };
-  // console.log('(1) newUser is', newUser);
+
+  const createOnboardingJob = async () => {
+    try {
+      const onboardingJob = await base('jobs').create([
+        {
+          fields: {
+            account: user.email,
+            company: 'Sample Company',
+            position: 'Sample Position',
+            salary_min: 45000,
+            salary_max: 55000,
+            location: 'Dallas, TX',
+            status: 'Interviewing',
+            edited: new Date().toLocaleDateString('en-US'),
+          },
+        },
+      ]);
+      console.log('onboardingJob.id', onboardingJob.id);
+      return onboardingJob[0]; // return the created job object
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const createOnboardingSheets = async (onboardingJobId) => {
+    try {
+      const onboardingSheets = await base('sheets').create([
+        {
+          fields: {
+            title: 'Sheet 1',
+            content: '<h2>Sheet 1 Content</h2>',
+            account: user.email,
+            jobid: [onboardingJobId],
+          },
+        },
+        {
+          fields: {
+            title: 'Sheet 2',
+            content: '<h2>Sheet 2 Content</h2>',
+            account: user.email,
+            jobid: [onboardingJobId],
+          },
+        },
+      ]);
+
+      for (const sheet of onboardingSheets) {
+        console.log(sheet.getId());
+      }
+
+      fetchUserJobs(); // call fetchUserJobs() after creating the sheets
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const fetchUserJobs = async () => {
     if (auth0Email) {
       await base('jobs')
@@ -220,9 +276,6 @@ const AirtableProvider = ({ children }) => {
   return (
     <AirtableContext.Provider
       value={{
-        // New User
-        // newUser,
-        // setNewUser,
         //Sheets
         allSheets,
         userSheets,

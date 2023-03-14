@@ -24,7 +24,7 @@ const ModalAddJob = () => {
   const remoteRef = useRef();
   const linkRef = useRef();
 
-  const handleAddJobClick = () => {
+  const handleAddJobClick = async () => {
     base('jobs').create(
       [
         {
@@ -42,19 +42,44 @@ const ModalAddJob = () => {
           },
         },
       ],
-      function (err, records) {
+      async function (err, records) {
         if (err) {
           console.error(err);
           return;
         }
-        records.forEach(function (record) {
-          console.log(record.getId());
-          fetchUserJobs();
-          setAlert('Job successfully added!', 'success');
-        });
+        const record = records[0];
+        console.log(record.getId());
+        fetchUserJobs();
+        setAlert('Job successfully added!', 'success');
+        const jobDescriptionSheet = await createJobDescriptionSheet(
+          record.getId()
+        );
       }
     );
     handleClose();
+  };
+
+  const createJobDescriptionSheet = async (recordId) => {
+    try {
+      const jobDescriptionSheet = await base('sheets').create([
+        {
+          fields: {
+            title: 'Job Description',
+            content: '<p>Start by pasting in the job description.</p>',
+            account: user.email,
+            jobid: [recordId],
+          },
+        },
+      ]);
+
+      for (const sheet of jobDescriptionSheet) {
+        console.log(sheet.getId());
+      }
+
+      // fetchUserJobs();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
