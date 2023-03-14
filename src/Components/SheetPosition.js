@@ -120,7 +120,8 @@ const SheetPosition = () => {
                   <Form.Group className='mb-3' controlId='salary-range'>
                     <Form.Label>Salary Range</Form.Label>
                     <div style={{ padding: '7px 0' }}>
-                      ${initialValues.salary_min} - {initialValues.salary_max}
+                      ${initialValues.salary_min.toLocaleString()} -{' '}
+                      {initialValues.salary_max.toLocaleString()}
                     </div>
                   </Form.Group>
                   <Form.Group className='mb-1' controlId='location'>
@@ -147,7 +148,7 @@ const SheetPosition = () => {
                     <Stack direction='horizontal' gap='2'>
                       <Form.Control
                         type='text'
-                        placeholder='Add URL of job listing'
+                        placeholder='Paste in URL'
                         ref={linkRef}
                         defaultValue={initialValues.link}
                         readOnly

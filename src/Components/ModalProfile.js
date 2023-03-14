@@ -171,8 +171,8 @@ const ModalProfile = () => {
                       <Form.Group className='mb-4' controlId='salary-range'>
                         <Form.Label>Salary Range</Form.Label>
                         <div style={{ padding: '7px 0' }}>
-                          ${initialValues.salary_min} -{' '}
-                          {initialValues.salary_max}
+                          ${initialValues.salary_min.toLocaleString()} -{' '}
+                          {initialValues.salary_max.toLocaleString()}
                         </div>
                       </Form.Group>
 
