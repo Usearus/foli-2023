@@ -81,9 +81,6 @@ const AirtableProvider = ({ children }) => {
   const [userJobs, setUserJobs] = useState(null);
   const [userSheets, setUserSheets] = useState(null);
 
-  // WHEN A NEW PROFILE IN fetchUserProfile IS CREATED WE SET THIS TO TRUE
-  // const [newUser, setNewUser] = useState(false);
-
   // FIND ALL USER AIRTABLE DATA
   const fetchUserProfile = async () => {
     if (auth0Email) {
@@ -122,8 +119,8 @@ const AirtableProvider = ({ children }) => {
         {
           fields: {
             account: user.email,
-            company: 'Sample Company',
-            position: 'Sample Position',
+            company: 'Foli',
+            position: 'Tutorial',
             salary_min: 45000,
             salary_max: 55000,
             location: 'Dallas, TX',
@@ -144,20 +141,20 @@ const AirtableProvider = ({ children }) => {
       const onboardingSheets = await base('sheets').create([
         {
           fields: {
-            title: 'Sheet 1',
-            content: '<h2>Sheet 1 Content</h2>',
+            title: 'Foli Tutorial',
+            content: '<h3>Learn Foli</h3>',
             account: user.email,
             jobid: [onboardingJobId],
           },
         },
-        {
-          fields: {
-            title: 'Sheet 2',
-            content: '<h2>Sheet 2 Content</h2>',
-            account: user.email,
-            jobid: [onboardingJobId],
-          },
-        },
+        // {
+        //   fields: {
+        //     title: 'Sheet 2',
+        //     content: '<h2>Sheet 2 Content</h2>',
+        //     account: user.email,
+        //     jobid: [onboardingJobId],
+        //   },
+        // },
       ]);
 
       for (const sheet of onboardingSheets) {
