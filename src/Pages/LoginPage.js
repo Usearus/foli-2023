@@ -198,7 +198,7 @@ const Wrapper = styled.div`
   }
 
   .right-container {
-    background: #b3b3fd;
+    background: var(--primary-100);
     height: 100vh;
     width: 100%;
     padding-left: 5rem;
@@ -224,7 +224,7 @@ const Wrapper = styled.div`
 
   span {
     font-weight: 700;
-    color: #4f12b2;
+    color: var(--primary-500);
   }
 
   p {
