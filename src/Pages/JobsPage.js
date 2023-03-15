@@ -246,7 +246,7 @@ const JobsPage = () => {
   }
 
   // if (isOnboarded) {
-  if (isOnboarded === true && userJobs.length === 0) {
+  if (userJobs && isOnboarded === true && userJobs.length === 0) {
     return (
       <>
         <TopBarTable />{' '}
@@ -257,7 +257,7 @@ const JobsPage = () => {
     );
   }
 
-  if (isOnboarded === true && userJobs.length > 0) {
+  if (userJobs && isOnboarded === true && userJobs.length > 0) {
     return (
       <>
         <TopBarTable />
