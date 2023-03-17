@@ -36,10 +36,10 @@ const Wrapper = styled.div`
   .right {
     grid-area: right;
     display: flex;
-    gap: 3rem;
+    gap: 1rem;
     align-items: flex-start;
     /* height: 100%; */
-    padding: 2rem 2rem;
+    padding: 2rem 1rem;
     overflow-x: scroll;
     background: var(--grey-200);
   }
