@@ -160,11 +160,11 @@ const Sheet = (sheet) => {
               </Form.Group>
             </Form>
             <div className='sheet-footer'>
-              <Button variant='primary' onClick={handleUpdateContentClick}>
-                Save
-              </Button>
               <Button variant='outline-secondary' onClick={handleCancelClick}>
                 Cancel
+              </Button>
+              <Button variant='primary' onClick={handleUpdateContentClick}>
+                Save
               </Button>
             </div>
           </>
