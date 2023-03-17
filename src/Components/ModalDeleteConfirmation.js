@@ -5,21 +5,35 @@ import { AirtableContext } from '../context/AirtableContext';
 import useAlert from '../Custom Hooks/useAlert';
 import base from '../API/base';
 
-const ModalDeleteConfirmation = ({ show, close, type, job }) => {
+const ModalDeleteConfirmation = ({ show, close, type, object }) => {
   const { setAlert } = useAlert();
-  const { fetchUserJobs } = useContext(AirtableContext);
+  const { fetchUserJobs, fetchCurrentSheets, currentJob } =
+    useContext(AirtableContext);
 
-  const handleDeleteJobClick = (e) => {
-    base('jobs').destroy(job.id, function (err, deletedRecord) {
-      if (err) {
-        console.error(err);
-        setAlert('Something went wrong. Job not deleted.', 'Danger');
-        return;
-      }
-      // console.log('Deleted record', deletedRecord.id);
-      setAlert('Job successfully deleted!', 'success');
-      fetchUserJobs();
-    });
+  const handleDelete = (e) => {
+    if (type === 'job') {
+      base('jobs').destroy(object.id, function (err, deletedRecord) {
+        if (err) {
+          console.error(err);
+          setAlert('Something went wrong. Job not deleted.', 'Danger');
+          return;
+        }
+        // console.log('Deleted record', deletedRecord.id);
+        setAlert('Job successfully deleted!', 'success');
+        fetchUserJobs();
+      });
+    }
+    if (type === 'sheet') {
+      base('sheets').destroy(object.id, function (err, deletedRecord) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        // console.log('Deleted sheet', deletedRecord.id);
+        setAlert('Sheet successfully deleted!', 'success');
+        fetchCurrentSheets(currentJob);
+      });
+    }
   };
 
   return (
@@ -37,7 +51,7 @@ const ModalDeleteConfirmation = ({ show, close, type, job }) => {
           <Button variant='outline-secondary' onClick={close}>
             Cancel
           </Button>
-          <Button variant='danger' onClick={handleDeleteJobClick}>
+          <Button variant='danger' onClick={handleDelete}>
             Delete
           </Button>
         </Modal.Footer>

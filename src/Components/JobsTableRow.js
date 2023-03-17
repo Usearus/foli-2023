@@ -104,14 +104,14 @@ const JobsTableRow = (job) => {
               <FiMoreVertical />
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item eventKey='1'>Delete</Dropdown.Item>
+              <Dropdown.Item eventKey='1'>Delete Job</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           {showDeleteModal && (
             <ModalDeleteConfirmation
               show={showDeleteModal}
               close={handleCloseReset}
-              job={job}
+              object={job}
               type='job'
             />
           )}

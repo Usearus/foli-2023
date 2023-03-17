@@ -90,7 +90,7 @@ const SheetPosition = () => {
       <>
         <Wrapper className='sheet-container'>
           <header className='sheet-title'>
-            <h5 style={{ paddingBottom: '4px' }}>Position Details</h5>
+            <h5>Position Details</h5>
           </header>
           <section className='sheet-content'>
             {!editing ? (
@@ -160,9 +160,11 @@ const SheetPosition = () => {
                     </Stack>
                   </Form.Group>
                 </Form>
-
                 <div className='sheet-footer'>
-                  <Button variant='outline-secondary' onClick={handleEditClick}>
+                  <Button
+                    variant='outline-secondary button-transition'
+                    onClick={handleEditClick}
+                  >
                     Edit
                   </Button>
                 </div>
@@ -234,7 +236,6 @@ const SheetPosition = () => {
                     />
                   </Form.Group>
                 </Form>
-
                 <div className='sheet-footer'>
                   <Button variant='primary' onClick={handleUpdateJobClick}>
                     Save
@@ -261,8 +262,21 @@ const Wrapper = styled.div`
     padding: 1rem;
   }
 
+  :hover .button-transition {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .button-transition {
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+  }
+
   .sheet-title {
-    margin-bottom: 1rem;
+    height: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
   .sheet-content {

@@ -1,5 +1,5 @@
 import { useState, useContext, useRef } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Dropdown, Stack } from 'react-bootstrap';
 import { AirtableContext } from '../context/AirtableContext';
 import styled from 'styled-components';
 import MarkdownView from 'react-showdown';
@@ -7,12 +7,15 @@ import base from '../API/base';
 import useAlert from '../Custom Hooks/useAlert';
 import ReactQuillEditor from '../Components/ReactQuillEditor';
 import ModalDeleteConfirmation from '../Components/ModalDeleteConfirmation';
+import { FiMoreVertical } from 'react-icons/fi';
 
 const Sheet = (sheet) => {
   const [editing, setEditing] = useState(false);
   const [content, setContent] = useState(sheet.fields.content);
   const { fetchCurrentSheets, currentJob } = useContext(AirtableContext);
   const { setAlert } = useAlert();
+  const [selectedEventKey, setSelectedEventKey] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const titleRef = useRef();
   const initialTitleValue = sheet.fields?.title ?? '';
@@ -38,18 +41,6 @@ const Sheet = (sheet) => {
     );
   };
 
-  const handleDeleteSheetClick = () => {
-    base('sheets').destroy(sheet.id, function (err, deletedRecord) {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      // console.log('Deleted sheet', deletedRecord.id);
-      setAlert('Sheet successfully deleted!', 'success');
-      fetchCurrentSheets(currentJob);
-    });
-  };
-
   const handleEditClick = () => {
     setEditing(true);
   };
@@ -68,18 +59,59 @@ const Sheet = (sheet) => {
     setCharacterCount(newValue.length);
   };
 
+  // Will handle any modal option selected
+  const handleSelect = (eventKey) => {
+    setSelectedEventKey(eventKey);
+    if (eventKey === '1') {
+      setShowDeleteModal(true);
+      console.log('handleSelect called');
+    }
+  };
+
+  // Will close any modal opened by the dropdown
+  const handleCloseReset = () => {
+    console.log('handleCloseReset called');
+    setShowDeleteModal(false);
+  };
+
   const titleMaxChar = 32;
 
   return (
-    <Wrapper className='sheet-container'>
+    <Wrapper>
       <header className='sheet-title'>
         {!editing ? (
-          <h5>{sheet.fields.title}</h5>
+          <Stack direction='horizontal' style={{ height: '38px' }}>
+            <h5>{sheet.fields.title}</h5>
+            <Dropdown
+              className='ms-auto dropdown-transition'
+              onSelect={handleSelect}
+            >
+              <Dropdown.Toggle
+                id='dropdown'
+                variant='link'
+                style={{ color: 'var(--grey-800)' }}
+              >
+                <FiMoreVertical />
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item eventKey='1'>Delete Sheet</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+
+            {showDeleteModal && (
+              <ModalDeleteConfirmation
+                show={showDeleteModal}
+                close={handleCloseReset}
+                object={sheet}
+                type='sheet'
+              />
+            )}
+          </Stack>
         ) : (
           <div>
-            <div>
+            <Stack direction='horizontal' gap='2'>
               <Form>
-                <Form.Group className='mb-3 title-field' controlId='title'>
+                <Form.Group className='title-field' controlId='title'>
                   <Form.Control
                     type='text'
                     required
@@ -92,13 +124,10 @@ const Sheet = (sheet) => {
                   />
                 </Form.Group>
               </Form>
-              {characterCount}/{titleMaxChar}
-            </div>
-            <ModalDeleteConfirmation
-              className='delete-button'
-              type='sheet'
-              deleteFunction={handleDeleteSheetClick}
-            />
+              <span className='character-count'>
+                {characterCount}/{titleMaxChar}
+              </span>
+            </Stack>
           </div>
         )}
       </header>
@@ -111,7 +140,11 @@ const Sheet = (sheet) => {
               style={{ display: editing ? 'none' : 'block' }}
             />
             <div className='sheet-footer'>
-              <Button variant='outline-secondary' onClick={handleEditClick}>
+              <Button
+                variant='outline-secondary'
+                className='button-transition'
+                onClick={handleEditClick}
+              >
                 Edit
               </Button>
             </div>
@@ -142,22 +175,35 @@ const Sheet = (sheet) => {
 };
 
 const Wrapper = styled.div`
+  :hover .dropdown-transition {
+    opacity: 1;
+  }
+
+  :hover .button-transition {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .button-transition {
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+  }
+
+  .dropdown-transition {
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
   .sheet-title {
     height: 2rem;
     margin-bottom: 0.75rem;
   }
 
-  .sheet-title div {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-    align-items: baseline;
-    color: var(--grey-600);
-    font-size: 0.85rem;
-  }
   .title-field {
     width: 350px;
   }
+
   .sheet-content {
     display: flex;
     flex-direction: column;
@@ -171,6 +217,11 @@ const Wrapper = styled.div`
 
   .sheet-content:hover {
     box-shadow: var(--shadow-4);
+  }
+
+  .character-count {
+    font-style: italic;
+    font-size: small;
   }
 
   .markdown-content {
