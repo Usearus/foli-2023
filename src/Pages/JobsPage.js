@@ -245,11 +245,10 @@ const JobsPage = () => {
     return <></>;
   }
 
-  // if (isOnboarded) {
   if (userJobs && isOnboarded === true && userJobs.length === 0) {
     return (
       <>
-        <TopBarTable />{' '}
+        <TopBarTable />
         <Wrapper>
           <h5>No jobs are being tracked. Add your first job to get started.</h5>
         </Wrapper>

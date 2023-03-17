@@ -6,50 +6,65 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
-- Make job description persistant and automatic on job creation (will make future GPT links easier).
-- Add a built out a sample job whenever a new user account is created.
-- Add template to sheets
+- Sm, Md, Lg, Letter style format of sheet (printer friendly version?)
 - Add template to prep for initial interview screening (questions to ask and info to get)
-  - Add template for interview notes during / after interview.
+- Add template for interview notes during / after interview.
+- Add templates for different types of interviews (portfolio, group, negotiation, etc.)
 
----LOW PRIORITY---
+  ---LOW PRIORITY---
 
+- Open/Close Sheets bar
+- Reduce spacing to 4-8px
+- Animations
+  - Table row
+- Try to stack overlapping sheets.
 - Stop sheets reappearing after edit (try local storage for this)
-- Prompt preferences questions on account creation.
-  - Other templates can be for different types of interviews (portfolio, group, negotiation, etc.)
-- Add simple privacy policy page (who can I reference?).
-- Fix unique key prop issue with TemplateCard
+- Fix unique key prop issue with TemplateCard & Job Table Row
 - Add focus state to all sheets using React-Quill
 - When I click on profile remove active state on nav item
 
 ## Post-MVP Features
 
-- Duplicate Job Function
-- Look into crunchbase for Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
+- Build mobile interface
+
+- Sticky survey at bottom
+
+  - What do you like, what's missing, what to chat about it?
+
+- Spaces
+
+  - Document Space (MVP)
+  - Negotiation Space
+  - Interview Space
+
+- Bugdgeting Tool
+
+  - Set all budgeting info for account
+  - Simple vs advanced. What is minimal and what can be added?
+
+- Add contacts (May go over sheets sidebar)
+
+  - Name, Role, Notes
+
+- Duplicate Job
+- Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Add copy to clipboard to any content field on a sheet on hover.
 - Highlight Skills (Skills API)
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
-- Ability to add contacts (May go over sheets)
-  - Name, Role, Notes
-- Open/Close Sheets bar
-- Letter style button to change format of sheet to printer friendly version
+
 - ChatGPT API
+  - Make job description persistant and automatic on job creation (will make future GPT links easier).
   - Sidebar
   - Prompts dropdown to start off with
   - Settings button that shows what info is prefilled from preferences
   - Add sheet from GPT button
-- Sticky survey at bottom
-  - What do you like, what's missing, what to chat about it?
-- Budgeting preferences page to set all budgeting info ahead of time.
-  - Simple vs advanced. What is minimal and what can be added?
-- Interview flash cards (mobile)
-- Build mobile interface
-- Add Contacts for a job
-- Search feature
-- Convert to next.js
 
 ## Done
 
+- Add simple privacy policy page (who can I reference?).
+- Prompt preferences questions on account creation.
+- Add a built out a sample job whenever a new user account is created.
+- Add template to sheets
 - Add template preview when clicked in template panel
 - Make add sheet a dropdown button to add a sheeet or a template
 - When an account using Auth0 is created, add a record to Airtable profile base that has the members email address

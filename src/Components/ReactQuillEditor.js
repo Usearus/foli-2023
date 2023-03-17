@@ -62,6 +62,7 @@ const Wrapper = styled.div`
       padding-left: 0;
       list-style-type: circle !important;
     }
+
     /* 
     h1 {
       font-size: 3.052rem !important;
@@ -71,6 +72,9 @@ const Wrapper = styled.div`
       font-size: 2.441rem !important;
     } */
 
+    p {
+      color: var(--black) !important;
+    }
     h1 {
       font-size: 1.8rem !important;
     }
