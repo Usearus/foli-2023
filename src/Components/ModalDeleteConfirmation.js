@@ -1,20 +1,30 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { Button, Modal } from 'react-bootstrap';
-import { FiTrash } from 'react-icons/fi';
+import { AirtableContext } from '../context/AirtableContext';
+import useAlert from '../Custom Hooks/useAlert';
+import base from '../API/base';
 
-const ModalDeleteConfirmation = ({ type, deleteFunction }) => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+const ModalDeleteConfirmation = ({ show, close, type, job }) => {
+  const { setAlert } = useAlert();
+  const { fetchUserJobs } = useContext(AirtableContext);
+
+  const handleDeleteJobClick = (e) => {
+    base('jobs').destroy(job.id, function (err, deletedRecord) {
+      if (err) {
+        console.error(err);
+        setAlert('Something went wrong. Job not deleted.', 'Danger');
+        return;
+      }
+      // console.log('Deleted record', deletedRecord.id);
+      setAlert('Job successfully deleted!', 'success');
+      fetchUserJobs();
+    });
+  };
 
   return (
     <>
-      <Button variant='outline-secondary' onClick={handleShow}>
-        <FiTrash />
-      </Button>
-
-      <Modal fullscreen='md-down' show={show} onHide={handleClose}>
+      <Modal fullscreen='md-down' show={show} onHide={close}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm</Modal.Title>
         </Modal.Header>
@@ -24,10 +34,10 @@ const ModalDeleteConfirmation = ({ type, deleteFunction }) => {
           </Wrapper>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='outline-secondary' onClick={handleClose}>
+          <Button variant='outline-secondary' onClick={close}>
             Cancel
           </Button>
-          <Button variant='danger' onClick={deleteFunction}>
+          <Button variant='danger' onClick={handleDeleteJobClick}>
             Delete
           </Button>
         </Modal.Footer>
