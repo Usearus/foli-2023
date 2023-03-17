@@ -73,19 +73,21 @@ const TopBarJob = ({ className }) => {
                 ? `${currentJob.fields.company} - ${currentJob.fields.position}`
                 : ''}
             </h5>
+
             <Form>
               <Form.Select
                 size='sm'
                 aria-label='Select job status'
                 onChange={handleUpdateJobClick}
-                value={currentJob && currentJob.fields ? selectedStatus : ''}
-                className='select'
+                value={selectedStatus}
+                // value={currentJob && currentJob.fields ? selectedStatus : ''}
+                className={`select ${selectedStatus}`}
               >
                 <option value='Bookmarked'>Bookmarked</option>
                 <option value='Applied'>Applied</option>
                 <option value='Interviewing'>Interviewing</option>
-                <option value='Accepted'>Accepted</option>
                 <option value='Negotiating'>Negotiating</option>
+                <option value='Accepted'>Accepted</option>
                 <option value='Declined'>Declined</option>
                 <option value='Rejected'>Rejected</option>
                 <option value='Archived'>Archived</option>
@@ -93,8 +95,6 @@ const TopBarJob = ({ className }) => {
             </Form>
           </div>
           <div className='btns'>
-            {/* <ModalTemplates />
-            <ModalAddSheet /> */}
             <DropdownButton
               title='Add Sheet'
               id='add-sheet-dropdown'
@@ -182,7 +182,36 @@ const Wrapper = styled.div`
     background-color: var(--grey-100);
     border-radius: 90px;
   }
-  .select:hover {
-    background-color: var(--grey-200);
+
+  option {
+    background-color: var(--white);
+    color: var(--grey-900);
+  }
+
+  .Applied {
+    background-color: var(--primary-50);
+    color: var(--grey-800);
+  }
+
+  .Interviewing {
+    background-color: var(--primary-100);
+    color: var(--grey-800);
+  }
+
+  .Negotiating {
+    background-color: var(--primary-200);
+    color: var(--black);
+  }
+
+  .Accepted {
+    background-color: var(--primary-300);
+    color: var(--white);
+  }
+
+  .Rejected,
+  .Declined,
+  .Archived {
+    background-color: var(--primary-800);
+    color: var(--white);
   }
 `;

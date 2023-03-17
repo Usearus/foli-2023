@@ -162,8 +162,4 @@ const Wrapper = styled.div`
     background-color: var(--primary-800);
     color: var(--white);
   }
-
-  .select:hover {
-    /* border: 1px solid var(--primary-500); */
-  }
 `;
