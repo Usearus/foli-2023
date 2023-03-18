@@ -145,7 +145,11 @@ const SheetPosition = () => {
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='link'>
                     <Form.Label>Listing URL</Form.Label>
-                    <Stack direction='horizontal' gap='2'>
+                    <Stack
+                      direction='horizontal'
+                      gap='2'
+                      className='link-element'
+                    >
                       <Form.Control
                         type='text'
                         placeholder='Paste in URL'
@@ -154,7 +158,7 @@ const SheetPosition = () => {
                         readOnly
                         plaintext
                       />
-                      <Button variant='outline-secondary'>
+                      <Button variant='outline-secondary fade-in'>
                         <BiCopy onClick={handleCopyLinkClick} />
                       </Button>
                     </Stack>
@@ -162,7 +166,7 @@ const SheetPosition = () => {
                 </Form>
                 <div className='sheet-footer'>
                   <Button
-                    variant='outline-secondary button-transition'
+                    variant='outline-secondary fade-up'
                     onClick={handleEditClick}
                   >
                     Edit
@@ -262,15 +266,24 @@ const Wrapper = styled.div`
     padding: 1rem;
   }
 
-  :hover .button-transition {
-    opacity: 1;
-    transform: translateY(0);
+  .fade-in {
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
-  .button-transition {
+  .link-element:hover .fade-in {
+    opacity: 1;
+  }
+
+  .fade-up {
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateY(10px);
+  }
+
+  :hover .fade-up {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .sheet-title {

@@ -283,6 +283,31 @@ input {
   }
 }
 
+// Removes dropdowns from all dropdown buttons
 .dropdown-toggle::after {
   display: none !important;
 }
+
+// My transitions::
+
+// Must copy into component
+.fade-up {
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+}
+
+// :hover .fade-up {
+//   opacity: 1;
+//   transform: translateY(0);
+// }
+
+// Works in all components already
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+// :hover .fade-in {
+//   opacity: 1;
+// }

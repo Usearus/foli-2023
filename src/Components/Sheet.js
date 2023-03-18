@@ -76,16 +76,23 @@ const Sheet = (sheet) => {
 
   const titleMaxChar = 32;
 
+  // const [unmounting, setUnmounting] = useState(false);
+
+  // useEffect(() => {
+  //   setUnmounting(true);
+  //   return () => {
+  //     setUnmounting(false);
+  //   };
+  // }, []);
+
   return (
     <Wrapper>
+      {/* <Wrapper className={`my-component ${unmounting ? 'unmounting' : ''}`}></Wrapper> */}
       <header className='sheet-title'>
         {!editing ? (
           <Stack direction='horizontal' style={{ height: '38px' }}>
             <h5>{sheet.fields.title}</h5>
-            <Dropdown
-              className='ms-auto dropdown-transition'
-              onSelect={handleSelect}
-            >
+            <Dropdown className='ms-auto fade-in' onSelect={handleSelect}>
               <Dropdown.Toggle
                 id='dropdown'
                 variant='link'
@@ -142,7 +149,7 @@ const Sheet = (sheet) => {
             <div className='sheet-footer'>
               <Button
                 variant='outline-secondary'
-                className='button-transition'
+                className='fade-up'
                 onClick={handleEditClick}
               >
                 Edit
@@ -175,24 +182,28 @@ const Sheet = (sheet) => {
 };
 
 const Wrapper = styled.div`
-  :hover .dropdown-transition {
+  /* .my-component {
     opacity: 1;
+    transition: opacity 0.5s ease-out;
   }
 
-  :hover .button-transition {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .my-component.unmounting {
+    opacity: 0;
+  } */
 
-  .button-transition {
+  .fade-up {
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateY(10px);
   }
 
-  .dropdown-transition {
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  :hover .fade-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  :hover .fade-in {
+    opacity: 1;
   }
 
   .sheet-title {
