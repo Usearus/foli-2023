@@ -6,6 +6,9 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
+- "target" role, salary, etc...
+- Sticky survey at bottom
+  - What do you like, what's missing, what to chat about it?
 - Sm, Md, Lg, Letter style format of sheet (printer friendly version?)
 - Add template to prep for initial interview screening (questions to ask and info to get)
 - Add template for interview notes during / after interview.
@@ -27,25 +30,15 @@ https://foli2023.netlify.app
 
 - Build mobile interface
 
-- Sticky survey at bottom
-
-  - What do you like, what's missing, what to chat about it?
-
 - Spaces
-
   - Document Space (MVP)
   - Negotiation Space
   - Interview Space
-
 - Bugdgeting Tool
-
   - Set all budgeting info for account
   - Simple vs advanced. What is minimal and what can be added?
-
 - Add contacts (May go over sheets sidebar)
-
   - Name, Role, Notes
-
 - Duplicate Job
 - Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Add copy to clipboard to any content field on a sheet on hover.
