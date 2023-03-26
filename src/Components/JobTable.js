@@ -20,7 +20,7 @@ const JobsTable = ({ jobs }) => {
 
         <tbody>
           {jobs.map((job) => {
-            return <JobsTableRow key={job.fields.jobid} {...job} />;
+            return <JobsTableRow key={job.id} {...job} />;
           })}
         </tbody>
       </Table>

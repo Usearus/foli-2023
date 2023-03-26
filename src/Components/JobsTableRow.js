@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import base from '../API/base';
 import { AirtableContext } from '../context/AirtableContext';
 import { useNavigate } from 'react-router-dom';
 import ModalDeleteConfirmation from './ModalDeleteConfirmation';
@@ -7,6 +6,7 @@ import { Form, Dropdown } from 'react-bootstrap';
 import useAlert from '../Custom Hooks/useAlert';
 import styled from 'styled-components';
 import { FiMoreVertical } from 'react-icons/fi';
+import { supabase } from '../API/supabase';
 
 const JobsTableRow = (job) => {
   const { fetchUserJobs, fetchCurrentJob, fetchCurrentSheets } =
@@ -16,34 +16,32 @@ const JobsTableRow = (job) => {
   const navigate = useNavigate();
 
   const [selectedEventKey, setSelectedEventKey] = useState(null);
-  const [selectedStatus, setSelectedStatus] = useState(job.fields.status);
+  const [selectedStatus, setSelectedStatus] = useState(job.status);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const handleUpdateJobClick = (e) => {
+  const handleUpdateJobClick = async (e) => {
     setSelectedStatus(e.target.value);
-    base('jobs').update(
-      job.id,
-      {
+    const { error } = await supabase
+      .from('jobs')
+      .update({
         status: e.target.value,
         edited: new Date().toLocaleDateString('en-US'),
-      },
-      function (err, record) {
-        if (err) {
-          console.error(err);
-          setAlert('Something went wrong. Job not updated.', 'Danger');
-          return;
-        }
-        // console.log('Job updated', record.getId());
-        setAlert('Job successfully updated!', 'success');
-        fetchUserJobs();
-      }
-    );
+      })
+      .eq('id', job.id);
+    setAlert('Job successfully updated!', 'success');
+    fetchUserJobs();
+
+    if (error) {
+      setAlert('Something went wrong. Job not updated.', 'danger');
+      console.log('error is', error);
+      return;
+    }
   };
 
   const handleTableRowClick = async () => {
     await fetchCurrentJob(job);
     await fetchCurrentSheets(job);
-    navigate(`/job/id:${job.fields.jobid}`);
+    navigate(`/job/id:${job.id}`);
   };
 
   // Will handle any modal option selected
@@ -62,15 +60,15 @@ const JobsTableRow = (job) => {
   return (
     <>
       <tr>
-        <td onClick={handleTableRowClick}>{job.fields.company}</td>
-        <td onClick={handleTableRowClick}>{job.fields.position}</td>
+        <td onClick={handleTableRowClick}>{job.company}</td>
+        <td onClick={handleTableRowClick}>{job.position}</td>
         <td onClick={handleTableRowClick}>
-          {job.fields.salary_min && job.fields.salary_max
-            ? `$${job.fields.salary_min.toLocaleString()} -
-        ${job.fields.salary_max.toLocaleString()}`
+          {job.salary_min && job.salary_max
+            ? `$${job.salary_min.toLocaleString()} -
+        ${job.salary_max.toLocaleString()}`
             : '-'}
         </td>
-        <td onClick={handleTableRowClick}>{job.fields.location}</td>
+        <td onClick={handleTableRowClick}>{job.location}</td>
         <td>
           <Wrapper>
             <Form>
@@ -93,7 +91,9 @@ const JobsTableRow = (job) => {
             </Form>
           </Wrapper>
         </td>
-        <td onClick={handleTableRowClick}>{job.fields.edited}</td>
+        <td onClick={handleTableRowClick}>
+          {new Date(job.edited).toLocaleDateString()}
+        </td>
         <td>
           <Dropdown onSelect={handleSelect}>
             <Dropdown.Toggle

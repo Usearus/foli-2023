@@ -4,13 +4,17 @@ import { AirtableContext } from '../context/AirtableContext';
 import { BiCopy } from 'react-icons/bi';
 import useAlert from '../Custom Hooks/useAlert';
 import styled from 'styled-components';
-import base from '../API/base';
+import { supabase } from '../API/supabase';
 
 const SheetPosition = () => {
   const [editing, setEditing] = useState(false);
-  const { currentJob } = useContext(AirtableContext);
-  const { fetchCurrentSheets, fetchCurrentJob, fetchUserJobs, positionSheet } =
-    useContext(AirtableContext);
+  const {
+    currentJob,
+    fetchCurrentSheets,
+    fetchCurrentJob,
+    fetchUserJobs,
+    positionSheet,
+  } = useContext(AirtableContext);
   const { setAlert } = useAlert();
 
   const companyRef = useRef();
@@ -22,19 +26,19 @@ const SheetPosition = () => {
   const linkRef = useRef();
 
   const initialValues = {
-    company: currentJob?.fields?.company ?? '',
-    position: currentJob?.fields?.position ?? '',
-    salary_min: currentJob?.fields?.salary_min ?? '',
-    salary_max: currentJob?.fields?.salary_max ?? '',
-    location: currentJob?.fields?.location ?? '',
-    remote: currentJob?.fields?.remote ?? false,
-    link: currentJob?.fields?.link ?? '',
+    company: currentJob?.company ?? '',
+    position: currentJob?.position ?? '',
+    salary_min: currentJob?.salary_min ?? '',
+    salary_max: currentJob?.salary_max ?? '',
+    location: currentJob?.location ?? '',
+    remote: currentJob?.remote ?? false,
+    link: currentJob?.link ?? '',
   };
 
-  const handleUpdateJobClick = () => {
-    base('jobs').update(
-      currentJob.id,
-      {
+  const handleUpdateJobClick = async () => {
+    const { error } = await supabase
+      .from('jobs')
+      .update({
         company: companyRef.current.value,
         position: positionRef.current.value,
         salary_min: salary_minRef.current.value * 1,
@@ -44,20 +48,19 @@ const SheetPosition = () => {
         link: linkRef.current.value,
         status: 'Bookmarked',
         edited: new Date().toLocaleDateString('en-US'),
-      },
-      function (err, record) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        console.log('Job updated', record.getId());
-        setAlert('Job successfully updated!', 'success');
-        fetchCurrentSheets(currentJob);
-        fetchCurrentJob(currentJob);
-        fetchUserJobs(currentJob);
-        setEditing(false);
-      }
-    );
+      })
+      .eq('id', currentJob.id);
+    setAlert('Job successfully updated!', 'success');
+    fetchCurrentSheets(currentJob);
+    fetchCurrentJob(currentJob);
+    fetchUserJobs(currentJob);
+    setEditing(false);
+
+    if (error) {
+      setAlert('Something went wrong. Sheet not updated.', 'danger');
+      console.log('error is', error);
+      return;
+    }
   };
 
   const handleEditClick = () => {

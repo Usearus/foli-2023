@@ -3,42 +3,41 @@ import { Button, Form, Dropdown, Stack } from 'react-bootstrap';
 import { AirtableContext } from '../context/AirtableContext';
 import styled from 'styled-components';
 import MarkdownView from 'react-showdown';
-import base from '../API/base';
 import useAlert from '../Custom Hooks/useAlert';
 import ReactQuillEditor from '../Components/ReactQuillEditor';
 import ModalDeleteConfirmation from '../Components/ModalDeleteConfirmation';
 import { FiMoreVertical } from 'react-icons/fi';
+import { supabase } from '../API/supabase';
 
 const Sheet = (sheet) => {
   const [editing, setEditing] = useState(false);
-  const [content, setContent] = useState(sheet.fields.content);
+  const [content, setContent] = useState(sheet.content);
   const { fetchCurrentSheets, currentJob } = useContext(AirtableContext);
   const { setAlert } = useAlert();
   const [selectedEventKey, setSelectedEventKey] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const titleRef = useRef();
-  const initialTitleValue = sheet.fields?.title ?? '';
+  const initialTitleValue = sheet.title ?? '';
   const [characterCount, setCharacterCount] = useState(content.length);
 
-  const handleUpdateContentClick = () => {
-    base('sheets').update(
-      sheet.id,
-      {
+  const handleUpdateContentClick = async () => {
+    const { error } = await supabase
+      .from('sheets')
+      .update({
         content: content,
         title: titleRef.current.value,
-      },
-      function (err, record) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        // console.log('sheet updated', record.getId());
-        setAlert('Sheet successfully updated!', 'success');
-        fetchCurrentSheets(currentJob);
-        setEditing(false);
-      }
-    );
+      })
+      .eq('id', sheet.id);
+    setAlert('Sheet successfully updated!', 'success');
+    fetchCurrentSheets(currentJob);
+    setEditing(false);
+
+    if (error) {
+      setAlert('Something went wrong. Sheet not updated.', 'danger');
+      console.log('error is', error);
+      return;
+    }
   };
 
   const handleEditClick = () => {
@@ -46,7 +45,7 @@ const Sheet = (sheet) => {
   };
 
   const handleCancelClick = () => {
-    setContent(sheet.fields.content);
+    setContent(sheet.content);
     setEditing(false);
   };
 
@@ -91,7 +90,7 @@ const Sheet = (sheet) => {
       <header className='sheet-title'>
         {!editing ? (
           <Stack direction='horizontal' style={{ height: '38px' }}>
-            <h5>{sheet.fields.title}</h5>
+            <h5>{sheet.title}</h5>
             <Dropdown className='ms-auto fade-in' onSelect={handleSelect}>
               <Dropdown.Toggle
                 id='dropdown'
@@ -143,7 +142,7 @@ const Sheet = (sheet) => {
           <>
             <MarkdownView
               className='sheet-scroll markdown-content'
-              markdown={sheet.fields.content}
+              markdown={sheet.content}
               style={{ display: editing ? 'none' : 'block' }}
             />
             <div className='sheet-footer'>

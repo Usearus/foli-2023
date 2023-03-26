@@ -1,10 +1,10 @@
 import { useState, useRef, useContext } from 'react';
-import base from '../API/base';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AirtableContext } from '../context/AirtableContext';
 import useAlert from '../Custom Hooks/useAlert';
 import styled from 'styled-components';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { supabase } from '../API/supabase';
 
 const ModalAddJob = () => {
   const [show, setShow] = useState(false);
@@ -25,61 +25,38 @@ const ModalAddJob = () => {
   const linkRef = useRef();
 
   const handleAddJobClick = async () => {
-    base('jobs').create(
-      [
-        {
-          fields: {
-            account: user.email,
-            company: companyRef.current.value,
-            position: positionRef.current.value,
-            salary_min: salary_minRef.current.value * 1,
-            salary_max: salary_maxRef.current.value * 1,
-            location: locationRef.current.value,
-            remote: remoteRef.current.checked,
-            link: linkRef.current.value,
-            status: 'Bookmarked',
-            edited: new Date().toLocaleDateString('en-US'),
-          },
-        },
-      ],
-      async function (err, records) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        const record = records[0];
-        console.log(record.getId());
-        fetchUserJobs();
-        setAlert('Job successfully added!', 'success');
-        const jobDescriptionSheet = await createJobDescriptionSheet(
-          record.getId()
-        );
-      }
-    );
-    handleClose();
-  };
+    const { data, error } = await supabase
+      .from('jobs')
+      .insert({
+        account: user.email,
+        company: companyRef.current.value,
+        position: positionRef.current.value,
+        salary_min: salary_minRef.current.value * 1,
+        salary_max: salary_maxRef.current.value * 1,
+        location: locationRef.current.value,
+        remote: remoteRef.current.checked,
+        link: linkRef.current.value,
+        status: 'Bookmarked',
+        edited: new Date().toLocaleDateString('en-US'),
+      })
+      .select();
 
-  const createJobDescriptionSheet = async (recordId) => {
-    try {
-      const jobDescriptionSheet = await base('sheets').create([
-        {
-          fields: {
-            title: 'Job Description',
-            content: '<p>Start by pasting in the job description.</p>',
-            account: user.email,
-            jobid: [recordId],
-          },
-        },
-      ]);
-
-      for (const sheet of jobDescriptionSheet) {
-        console.log(sheet.getId());
-      }
-
-      // fetchUserJobs();
-    } catch (err) {
-      console.error(err);
+    if (error) {
+      setAlert('There was an error adding the job.', 'error');
+      return;
     }
+
+    fetchUserJobs();
+    setAlert('Job successfully added!', 'success');
+    const newJobId = data[0].id;
+    // console.log('newJobId', newJobId);
+    await supabase.from('sheets').insert({
+      title: 'Job Description',
+      content: '<p>Start by pasting in the job description.</p>',
+      account: user.email,
+      jobid: newJobId,
+    });
+    handleClose();
   };
 
   return (

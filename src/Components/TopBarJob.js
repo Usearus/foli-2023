@@ -1,5 +1,4 @@
 import { useContext, useState, useEffect } from 'react';
-import base from '../API/base';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 import ModalAddSheet from './ModalAddSheet';
@@ -9,6 +8,7 @@ import { Form, Dropdown, DropdownButton } from 'react-bootstrap';
 import useAlert from '../Custom Hooks/useAlert';
 import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
+import { supabase } from '../API/supabase';
 
 const TopBarJob = ({ className }) => {
   const { setCurrentJob, fetchUserJobs, currentJob } =
@@ -23,29 +23,25 @@ const TopBarJob = ({ className }) => {
     setCurrentJob(JSON.parse(jobFromStorage));
   }, [setCurrentJob]);
 
-  const [selectedStatus, setSelectedStatus] = useState(
-    currentJob && currentJob.fields ? currentJob.fields.status : ''
-  );
+  const [selectedStatus, setSelectedStatus] = useState(currentJob.status);
 
-  const handleUpdateJobClick = (e) => {
+  const handleUpdateJobClick = async (e) => {
     setSelectedStatus(e.target.value);
-    base('jobs').update(
-      currentJob.id,
-      {
+    const { error } = await supabase
+      .from('jobs')
+      .update({
         status: e.target.value,
         edited: new Date().toLocaleDateString('en-US'),
-      },
-      function (err, record) {
-        if (err) {
-          console.error(err);
-          setAlert('Something went wrong. Job not updated.', 'Danger');
-          return;
-        }
-        // console.log('Job updated', record.getId());
-        setAlert('Job successfully updated!', 'success');
-        fetchUserJobs();
-      }
-    );
+      })
+      .eq('id', currentJob.id);
+    setAlert('Job successfully updated!', 'success');
+    fetchUserJobs();
+
+    if (error) {
+      setAlert('Something went wrong. Job not updated.', 'danger');
+      console.log('error is', error);
+      return;
+    }
   };
 
   const handleSelect = (eventKey) => {
@@ -69,8 +65,8 @@ const TopBarJob = ({ className }) => {
         <Stack direction='horizontal' gap={3} className='top-bar-container'>
           <div className='left-content'>
             <h5 className='truncate'>
-              {currentJob && currentJob.fields
-                ? `${currentJob.fields.company} - ${currentJob.fields.position}`
+              {currentJob
+                ? `${currentJob.company} - ${currentJob.position}`
                 : ''}
             </h5>
 
@@ -80,7 +76,6 @@ const TopBarJob = ({ className }) => {
                 aria-label='Select job status'
                 onChange={handleUpdateJobClick}
                 value={selectedStatus}
-                // value={currentJob && currentJob.fields ? selectedStatus : ''}
                 className={`select ${selectedStatus}`}
               >
                 <option value='Bookmarked'>Bookmarked</option>

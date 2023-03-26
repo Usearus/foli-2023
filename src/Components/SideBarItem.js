@@ -20,11 +20,9 @@ const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
           key='title'
           placement='top'
           delay={{ show: 1000, hide: 0 }}
-          overlay={
-            <Tooltip id={`tooltip-${sheet.id}`}>{sheet.fields.title}</Tooltip>
-          }
+          overlay={<Tooltip id={`tooltip-${sheet.id}`}>{sheet.title}</Tooltip>}
         >
-          <span>{sheet.fields.title}</span>
+          <span>{sheet.title}</span>
         </OverlayTrigger>
         <div
           className='ms-auto'

@@ -5,7 +5,7 @@ import useAlert from '../Custom Hooks/useAlert';
 import { MdOutlineClose } from 'react-icons/md';
 import { Badge, Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
 import styled from 'styled-components';
-import base from '../API/base';
+import { supabase } from '../API/supabase';
 
 const ModalProfile = () => {
   const { user } = useAuth0();
@@ -26,12 +26,12 @@ const ModalProfile = () => {
   const remoteRef = useRef();
 
   const initialValues = {
-    position: userProfile?.fields?.position ?? '',
-    salary_min: userProfile?.fields?.salary_min ?? '',
-    salary_max: userProfile?.fields?.salary_max ?? '',
-    location_remote: userProfile?.fields?.location_remote ?? false,
-    location_preference: userProfile?.fields?.location_preference
-      ? [...userProfile.fields.location_preference]
+    position: userProfile?.position ?? '',
+    salary_min: userProfile?.salary_min ?? '',
+    salary_max: userProfile?.salary_max ?? '',
+    location_remote: userProfile?.location_remote ?? false,
+    location_preference: userProfile?.location_preference
+      ? [...userProfile.location_preference]
       : [],
   };
 
@@ -40,7 +40,7 @@ const ModalProfile = () => {
   }
 
   // console.log('userProfile', userProfile);
-  // console.log('location_preferences', userProfile.fields.location_preference);
+  // console.log('location_preferences', userProfile.location_preference);
   // console.log('initialValues', initialValues);
   // console.log('tempLocations', tempLocations);
 
@@ -84,29 +84,51 @@ const ModalProfile = () => {
     setEditing(false);
   };
 
-  const handleSavePrefClick = () => {
-    base('profiles').update(
-      userProfile.id,
-      {
+  // const handleSavePrefClick = () => {
+  //   base('profiles').update(
+  //     userProfile.id,
+  //     {
+  //       position: positionRef.current.value,
+  //       salary_min: salary_minRef.current.value * 1,
+  //       salary_max: salary_maxRef.current.value * 1,
+  //       location_preference: tempLocations,
+  //       location_remote: remoteRef.current.checked,
+  //     },
+  //     { typecast: true },
+  //     function (err, record) {
+  //       if (err) {
+  //         console.error(err);
+  //         setAlert('Something went wrong. Preferences not updated.', 'danger');
+  //         return;
+  //       }
+  //       console.log(record.getId());
+  //       fetchUserProfile();
+  //       setAlert('Preferences successfully updated!', 'success');
+  //       setEditing(false);
+  //     }
+  //   );
+  // };
+
+  const handleSavePrefClick = async () => {
+    const { error } = await supabase
+      .from('profiles')
+      .update({
         position: positionRef.current.value,
         salary_min: salary_minRef.current.value * 1,
         salary_max: salary_maxRef.current.value * 1,
         location_preference: tempLocations,
         location_remote: remoteRef.current.checked,
-      },
-      { typecast: true },
-      function (err, record) {
-        if (err) {
-          console.error(err);
-          setAlert('Something went wrong. Preferences not updated.', 'danger');
-          return;
-        }
-        console.log(record.getId());
-        fetchUserProfile();
-        setAlert('Preferences successfully updated!', 'success');
-        setEditing(false);
-      }
-    );
+      })
+      .eq('id', userProfile.id);
+    fetchUserProfile();
+    setAlert('Preferences successfully updated!', 'success');
+    setEditing(false);
+
+    if (error) {
+      setAlert('Something went wrong. Preferences not updated.', 'danger');
+      console.log('error is', error);
+      return;
+    }
   };
 
   if (userProfile) {
@@ -186,7 +208,7 @@ const ModalProfile = () => {
                             color: 'black',
                           }}
                         >
-                          {userProfile.fields.location_preference &&
+                          {userProfile.location_preference &&
                             tempLocations.map((location) => (
                               <Badge
                                 key={location}
@@ -277,7 +299,7 @@ const ModalProfile = () => {
                             display: 'flex',
                           }}
                         >
-                          {userProfile.fields.location_preference &&
+                          {userProfile.location_preference &&
                             tempLocations.map((location) => (
                               <Badge
                                 key={location}
