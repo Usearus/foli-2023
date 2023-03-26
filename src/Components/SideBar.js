@@ -12,24 +12,13 @@ const SideBar = ({ className }) => {
     setCurrentSheets(JSON.parse(sheetsFromStorage));
   }, [setCurrentSheets]);
 
-  const toggleSheet = (id) => {
-    const index = currentSheets.findIndex((sheet) => sheet.id === id); // Find the index of the sheet with the given id
-    currentSheets[index].hidden = !currentSheets[index].hidden; // If the sheet is already hidden, show it, and vice versa
-    setCurrentSheets([...currentSheets]);
-  };
-
   return (
     <Wrapper className={className}>
       <section className='sidebar-container'>
         <label>Sheets</label>
         <SideBarPositionItem />
         {currentSheets.map((sheet) => (
-          <SideBarItem
-            key={sheet.id}
-            sheet={sheet}
-            hidden={currentSheets.find((s) => s.id === sheet.id).hidden}
-            toggleSheet={() => toggleSheet(sheet.id)}
-          />
+          <SideBarItem key={sheet.id} sheet={sheet} />
         ))}
       </section>
     </Wrapper>

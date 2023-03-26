@@ -9,7 +9,8 @@ import { Button, Modal, Form } from 'react-bootstrap';
 const ModalAddSheet = ({ show, handleClose }) => {
   const { setAlert } = useAlert();
   const { user } = useAuth0();
-  const { currentJob, fetchCurrentSheets } = useContext(AirtableContext);
+  const { currentJob, currentSheets, fetchCurrentSheets } =
+    useContext(AirtableContext);
 
   const [content, setContent] = useState('');
   const handleEditorChange = (value) => {
@@ -29,6 +30,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
         title: titleRef.current.value,
         content: content,
         jobid: currentJob.id,
+        position: currentSheets.length,
       });
       // console.log(data, 'sheet added');
       fetchCurrentSheets(currentJob);

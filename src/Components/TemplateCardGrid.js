@@ -17,6 +17,7 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
     setPreviewTemplate,
     currentJob,
     fetchCurrentSheets,
+    currentSheets,
   } = useContext(AirtableContext);
 
   const { user } = useAuth0();
@@ -32,6 +33,7 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
       title: activeTemplate.title,
       content: activeTemplate.content,
       jobid: currentJob.id,
+      position: currentSheets.length,
     });
     // console.log(data, 'template added');
     fetchCurrentSheets(currentJob);

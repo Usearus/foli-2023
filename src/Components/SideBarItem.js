@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { BiShow, BiHide } from 'react-icons/bi';
 import styled from 'styled-components';
+import { supabase } from '../API/supabase';
+import { AirtableContext } from '../context/AirtableContext';
 
-const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
-  const [showIcon, setShowIcon] = useState(true);
-  const [isRemoved, setIsRemoved] = useState(false);
+const SideBarItem = ({ sheet }) => {
+  const { fetchCurrentSheets, currentJob } = useContext(AirtableContext);
 
-  const handleButtonClick = () => {
-    setShowIcon(!showIcon);
-    toggleSheet();
-    setIsRemoved(!isRemoved);
+  const handleButtonClick = async () => {
+    const visible = sheet.visible;
+    await supabase
+      .from('sheets')
+      .update({
+        visible: !visible,
+      })
+      .eq('id', sheet.id);
+    fetchCurrentSheets(currentJob);
   };
 
   return (
@@ -36,15 +42,15 @@ const SideBarItem = ({ sheet, hidden, toggleSheet }) => {
           }}
           onClick={handleButtonClick}
         >
-          {hidden ? (
-            <BiHide
+          {sheet.visible ? (
+            <BiShow
               style={{
                 minWidth: '16px',
                 minHeight: '16px',
               }}
             />
           ) : (
-            <BiShow
+            <BiHide
               style={{
                 minWidth: '16px',
                 minHeight: '16px',

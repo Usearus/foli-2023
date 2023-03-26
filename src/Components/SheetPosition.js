@@ -265,6 +265,7 @@ const SheetPosition = () => {
 export default SheetPosition;
 
 const Wrapper = styled.div`
+  margin-right: 1rem;
   Form {
     padding: 1rem;
   }

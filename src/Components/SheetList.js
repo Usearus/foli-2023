@@ -6,14 +6,14 @@ import SheetPosition from './SheetPosition';
 const SheetList = ({ className }) => {
   const { currentSheets } = useContext(AirtableContext);
 
+  const visibleSheets = currentSheets.filter((sheet) => sheet.visible);
+
   return (
     <div className={className}>
       <SheetPosition />
-      {currentSheets
-        .filter((sheet) => !currentSheets.find((s) => s.id === sheet.id).hidden)
-        .map((sheet) => {
-          return <Sheet key={sheet.id} {...sheet} id={sheet.id} />;
-        })}
+      {visibleSheets.map((sheet) => {
+        return <Sheet key={sheet.id} {...sheet} id={sheet.id} />;
+      })}
     </div>
   );
 };

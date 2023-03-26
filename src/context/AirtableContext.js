@@ -271,9 +271,10 @@ const AirtableProvider = ({ children }) => {
       .select('*')
       .filter('jobid', 'eq', job.id);
     if (data) {
-      setCurrentSheets(data);
-      // console.log('currentSheets are', data);
+      console.log('currentSheets are', data);
       localStorage.setItem('currentSheets', JSON.stringify(data));
+      const sortedSheets = [...data].sort((a, b) => a.position - b.position);
+      setCurrentSheets(sortedSheets);
     }
   }
 
