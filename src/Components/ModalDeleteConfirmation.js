@@ -10,32 +10,6 @@ const ModalDeleteConfirmation = ({ show, close, type, object }) => {
   const { fetchUserJobs, fetchCurrentSheets, currentJob } =
     useContext(AirtableContext);
 
-  // const handleDelete = (e) => {
-  //   if (type === 'job') {
-  //     base('jobs').destroy(object.id, function (err, deletedRecord) {
-  //       if (err) {
-  //         console.error(err);
-  //         setAlert('Something went wrong. Job not deleted.', 'Danger');
-  //         return;
-  //       }
-  //       // console.log('Deleted record', deletedRecord.id);
-  //       setAlert('Job successfully deleted!', 'success');
-  //       fetchUserJobs();
-  //     });
-  //   }
-  //   if (type === 'sheet') {
-  //     base('sheets').destroy(object.id, function (err, deletedRecord) {
-  //       if (err) {
-  //         console.error(err);
-  //         return;
-  //       }
-  //       // console.log('Deleted sheet', deletedRecord.id);
-  //       setAlert('Sheet successfully deleted!', 'success');
-  //       fetchCurrentSheets(currentJob);
-  //     });
-  //   }
-  // };
-
   const handleDelete = async (e) => {
     if (type === 'job') {
       const { error } = await supabase

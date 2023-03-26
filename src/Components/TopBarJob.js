@@ -178,7 +178,7 @@ const Wrapper = styled.div`
     border-radius: 90px;
   }
 
-  option {
+  /* option {
     background-color: var(--white);
     color: var(--grey-900);
   }
@@ -208,5 +208,5 @@ const Wrapper = styled.div`
   .Archived {
     background-color: var(--primary-800);
     color: var(--white);
-  }
+  } */
 `;
