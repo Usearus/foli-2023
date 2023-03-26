@@ -1,5 +1,4 @@
 import Card from 'react-bootstrap/Card';
-// import { Badge } from 'react-bootstrap';
 import styled from 'styled-components';
 import { BiFileBlank } from 'react-icons/bi';
 
@@ -15,16 +14,6 @@ const TemplateCard = ({ template, handleClick }) => {
           <Card.Title className='title'>{template.fields.title}</Card.Title>
           <Card.Text className='text'>{template.fields.description}</Card.Text>
         </Card.Body>
-        {/* IDK If I want a footer anymore */}
-        {/* <Card.Footer className='text-muted footer'>
-          <div className='tag-list'>
-            {template.fields.tags.map((tag) => (
-              <Badge pill bg='light'>
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        </Card.Footer> */}
       </Card>
     </Wrapper>
   );

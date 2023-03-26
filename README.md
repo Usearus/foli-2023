@@ -41,10 +41,10 @@ https://foli2023.netlify.app
   - Name, Role, Notes
 - Duplicate Job
 - Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
-- Add copy to clipboard to any content field on a sheet on hover.
 - Highlight Skills (Skills API)
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
-
+  -Mobile
+  - See OurGroceries app for a good reference of what I want to do with sheets.
 - ChatGPT API
   - Make job description persistant and automatic on job creation (will make future GPT links easier).
   - Sidebar
@@ -54,7 +54,7 @@ https://foli2023.netlify.app
 
 ## Done
 
-- Add simple privacy policy page (who can I reference?).
+- Add simple privacy policy page .
 - Prompt preferences questions on account creation.
 - Add a built out a sample job whenever a new user account is created.
 - Add template to sheets
