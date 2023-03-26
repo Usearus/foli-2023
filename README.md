@@ -54,7 +54,8 @@ https://foli2023.netlify.app
 
 ## Done
 
-- Add simple privacy policy page .
+- Migration to Supabase
+- Add simple privacy policy page.
 - Prompt preferences questions on account creation.
 - Add a built out a sample job whenever a new user account is created.
 - Add template to sheets

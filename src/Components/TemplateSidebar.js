@@ -12,7 +12,7 @@ const TemplateSidebar = () => {
   } = useContext(AirtableContext);
 
   const categoryCounts = allTemplates.reduce((counts, template) => {
-    const category = template.fields.category;
+    const category = template.category;
     counts[category] = (counts[category] || 0) + 1;
     return counts;
   }, {});

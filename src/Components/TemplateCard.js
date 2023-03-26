@@ -8,11 +8,11 @@ const TemplateCard = ({ template, handleClick }) => {
       <Card onClick={() => handleClick(template)}>
         <Card.Header className='text-muted header'>
           <BiFileBlank />
-          {template.fields.category}
+          {template.category}
         </Card.Header>
         <Card.Body className='body'>
-          <Card.Title className='title'>{template.fields.title}</Card.Title>
-          <Card.Text className='text'>{template.fields.description}</Card.Text>
+          <Card.Title className='title'>{template.title}</Card.Title>
+          <Card.Text className='text'>{template.description}</Card.Text>
         </Card.Body>
       </Card>
     </Wrapper>

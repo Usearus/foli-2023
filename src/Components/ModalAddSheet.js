@@ -9,8 +9,7 @@ import { Button, Modal, Form } from 'react-bootstrap';
 const ModalAddSheet = ({ show, handleClose }) => {
   const { setAlert } = useAlert();
   const { user } = useAuth0();
-  const { currentJob, allJobs, setCurrentJob, fetchCurrentSheets } =
-    useContext(AirtableContext);
+  const { currentJob, fetchCurrentSheets } = useContext(AirtableContext);
 
   const [content, setContent] = useState('');
   const handleEditorChange = (value) => {
@@ -19,35 +18,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
 
   const titleRef = useRef();
 
-  // const addSheet = () => {
-  //   base('sheets').create(
-  //     [
-  //       {
-  //         fields: {
-  //           account: user.email,
-  //           title: titleRef.current.value,
-  //           content: content,
-  //           jobid: [currentJob.id],
-  //         },
-  //       },
-  //     ],
-  //     function (err, records) {
-  //       if (err) {
-  //         console.error(err);
-  //         return;
-  //       }
-  //       records.forEach(function (record) {
-  //         // console.log('added sheet', record.getId());
-  //         fetchCurrentSheets(currentJob);
-  //         handleClose();
-  //         setAlert('Sheet successfully added!', 'success');
-  //       });
-  //     }
-  //   );
-  // };
-  console.log('currentJob', currentJob);
-
-  const addSheet = async () => {
+  const handleAddSheetClick = async () => {
     if (currentJob) {
       const { data } = await supabase
         .from('jobs')
@@ -59,7 +30,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
         content: content,
         jobid: currentJob.id,
       });
-      console.log(data, 'data');
+      // console.log(data, 'sheet added');
       fetchCurrentSheets(currentJob);
       handleClose();
       setAlert('Sheet successfully added!', 'success');
@@ -69,12 +40,6 @@ const ModalAddSheet = ({ show, handleClose }) => {
         return;
       }
     }
-  };
-
-  const handleAddSheetClick = () => {
-    addSheet();
-    // const updatedJob = allJobs.find((job) => job.id === currentJob.id);
-    // setCurrentJob(updatedJob);
   };
 
   return (

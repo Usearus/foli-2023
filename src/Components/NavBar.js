@@ -12,7 +12,7 @@ const NavBar = () => {
   const { userProfile } = useContext(AirtableContext);
 
   useEffect(() => {
-    if (userProfile?.fields?.account === 'adamdenais@gmail.com') {
+    if (userProfile.email === 'adamdenais@gmail.com') {
       setAdmin(true);
     }
   }, [userProfile]);

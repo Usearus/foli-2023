@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import MarkdownView from 'react-showdown';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAlert from '../Custom Hooks/useAlert';
-import base from '../API/base';
+import { supabase } from '../API/supabase';
 
 const TemplateCardGrid = ({ closeTemplateModal }) => {
   const {
@@ -22,30 +22,25 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
   const { user } = useAuth0();
   const { setAlert } = useAlert();
 
-  const addSheet = () => {
-    base('sheets').create(
-      [
-        {
-          fields: {
-            account: user.email,
-            title: activeTemplate.fields.title,
-            content: activeTemplate.fields.content,
-            jobid: [currentJob.id],
-          },
-        },
-      ],
-      function (err, records) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        records.forEach(function (record) {
-          // console.log('added sheet', record.getId());
-          fetchCurrentSheets(currentJob);
-          setAlert('Sheet successfully added!', 'success');
-        });
-      }
-    );
+  const addSheet = async () => {
+    const { data } = await supabase
+      .from('sheets')
+      .select()
+      .eq('id', currentJob.id);
+    const { error } = await supabase.from('sheets').insert({
+      account: user.email,
+      title: activeTemplate.title,
+      content: activeTemplate.content,
+      jobid: currentJob.id,
+    });
+    // console.log(data, 'template added');
+    fetchCurrentSheets(currentJob);
+    setAlert('Sheet successfully added!', 'success');
+    if (error) {
+      setAlert('There was an error adding the template.', 'error');
+      console.log(error);
+      return;
+    }
   };
 
   const handleAddSheetClick = () => {
@@ -54,7 +49,7 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
   };
 
   const handleClick = (template) => {
-    console.log('template received ', typeof template);
+    // console.log('template received ', typeof template);
     setActiveTemplate(template);
     setPreviewTemplate(true);
   };
@@ -72,10 +67,10 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
       {!previewTemplate ? (
         <div className='grid-container'>
           {currentTemplates
-            .sort((a, b) => a.fields.category.localeCompare(b.fields.category))
+            .sort((a, b) => a.category.localeCompare(b.category))
             .map((template) => (
               <TemplateCard
-                key={template.fields.id}
+                key={template.id}
                 template={template}
                 handleClick={handleClick}
               />
@@ -83,11 +78,11 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
         </div>
       ) : (
         <div className='sheet-container'>
-          <h4>{activeTemplate.fields.title}</h4>
+          <h4>{activeTemplate.title}</h4>
           <div className='sheet-body'>
             <MarkdownView
               className='sheet-content markdown-content'
-              markdown={activeTemplate.fields.content}
+              markdown={activeTemplate.content}
             />
             <div className='sheet-footer'>
               <Button variant='primary' onClick={handleAddSheetClick}>
