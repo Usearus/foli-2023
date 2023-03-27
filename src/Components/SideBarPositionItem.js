@@ -57,5 +57,9 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
+    border: 0;
+  }
+  .parent-btn:hover {
+    background: var(--grey-300);
   }
 `;

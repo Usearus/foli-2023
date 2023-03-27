@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
-import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { useContext } from 'react';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { BiShow, BiHide } from 'react-icons/bi';
 import styled from 'styled-components';
 import { supabase } from '../API/supabase';
@@ -21,7 +21,8 @@ const SideBarItem = ({ sheet }) => {
 
   return (
     <Wrapper>
-      <Button size='sm' variant='light' className='parent-btn'>
+      {/* <Button size='sm' variant='light' className='parent-btn'> */}
+      <div className='parent-btn'>
         <OverlayTrigger
           key='title'
           placement='top'
@@ -47,6 +48,7 @@ const SideBarItem = ({ sheet }) => {
               style={{
                 minWidth: '16px',
                 minHeight: '16px',
+                cursor: 'pointer',
               }}
             />
           ) : (
@@ -54,11 +56,12 @@ const SideBarItem = ({ sheet }) => {
               style={{
                 minWidth: '16px',
                 minHeight: '16px',
+                cursor: 'pointer',
               }}
             />
           )}
         </div>
-      </Button>
+      </div>
     </Wrapper>
   );
 };
@@ -77,5 +80,21 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+    /* Padding is weird to offset the draggable container box */
+    padding: 4px 7px;
+    color: var(--grey-900);
+  }
+
+  .parent-btn:hover {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: var(--grey-300);
+  }
+
+  .parent-btn:active {
+    background: var(--grey-400);
   }
 `;
