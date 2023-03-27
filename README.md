@@ -6,10 +6,10 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
+- Sm, Md, Lg, Letter style format of sheet (printer friendly version?)
 - "target" role, salary, etc...
 - Sticky survey at bottom
   - What do you like, what's missing, what to chat about it?
-- Sm, Md, Lg, Letter style format of sheet (printer friendly version?)
 - Add template to prep for initial interview screening (questions to ask and info to get)
 - Add template for interview notes during / after interview.
 - Add templates for different types of interviews (portfolio, group, negotiation, etc.)
@@ -17,19 +17,18 @@ https://foli2023.netlify.app
   ---LOW PRIORITY---
 
 - Open/Close Sheets bar
-- Reduce spacing to 4-8px
 - Animations
   - Table row
-- Try to stack overlapping sheets.
-- Stop sheets reappearing after edit (try local storage for this)
-- Fix unique key prop issue with TemplateCard & Job Table Row
 - Add focus state to all sheets using React-Quill
-- When I click on profile remove active state on nav item
 
 ## Post-MVP Features
 
-- Build mobile interface
-
+- ChatGPT API
+  - Make job description persistant and automatic on job creation (will make future GPT links easier).
+  - Sidebar
+  - Prompts dropdown to start off with
+  - Settings button that shows what info is prefilled from preferences
+  - Add sheet from GPT button
 - Spaces
   - Document Space (MVP)
   - Negotiation Space
@@ -40,20 +39,18 @@ https://foli2023.netlify.app
 - Add contacts (May go over sheets sidebar)
   - Name, Role, Notes
 - Duplicate Job
-- Company Logos: https://data.crunchbase.com/docs/crunchbase-basic-getting-started
 - Highlight Skills (Skills API)
 - Add (25mi, 50mi, 100mi) miles dropdown to add to a location
   -Mobile
+  - Build mobile interface
   - See OurGroceries app for a good reference of what I want to do with sheets.
-- ChatGPT API
-  - Make job description persistant and automatic on job creation (will make future GPT links easier).
-  - Sidebar
-  - Prompts dropdown to start off with
-  - Settings button that shows what info is prefilled from preferences
-  - Add sheet from GPT button
 
 ## Done
 
+- Drag and drop sheets on sidebar
+- Fix unique key prop issue with TemplateCard & Job Table Row
+- Stop sheets reappearing after edit (added field to database)
+- Reduce sheet spacing to 4-8px
 - Migration to Supabase
 - Add simple privacy policy page.
 - Prompt preferences questions on account creation.
