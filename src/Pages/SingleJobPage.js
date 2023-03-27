@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   .right {
     grid-area: right;
     display: flex;
-    /* gap: 1rem; */
+    gap: 1rem;
     align-items: flex-start;
     /* height: 100%; */
     padding: 2rem 1rem;

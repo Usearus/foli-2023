@@ -181,7 +181,6 @@ const Sheet = (sheet) => {
 };
 
 const Wrapper = styled.div`
-  margin-right: 1rem;
   .fade-up {
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
