@@ -1,6 +1,6 @@
 import { useState, useContext, useRef } from 'react';
 import { Button, Form, Stack } from 'react-bootstrap';
-import { AirtableContext } from '../context/AirtableContext';
+import { DatabaseContext } from '../context/DatabaseContext';
 import { BiCopy } from 'react-icons/bi';
 import useAlert from '../Custom Hooks/useAlert';
 import styled from 'styled-components';
@@ -8,13 +8,8 @@ import { supabase } from '../API/supabase';
 
 const SheetPosition = () => {
     const [editing, setEditing] = useState(false);
-    const {
-        currentJob,
-        fetchCurrentSheets,
-        fetchCurrentJob,
-        fetchUserJobs,
-        positionSheet,
-    } = useContext(AirtableContext);
+    const { currentJob, fetchCurrentJob, positionSheet } =
+        useContext(DatabaseContext);
     const { setAlert } = useAlert();
 
     const companyRef = useRef();

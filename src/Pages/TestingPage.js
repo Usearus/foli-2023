@@ -1,11 +1,11 @@
 import { useState, useRef, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { AirtableContext } from '../context/AirtableContext';
+import { DatabaseContext } from '../context/DatabaseContext';
 import { openai } from '../API/gpt';
 
 const TestingPage = () => {
     const [responses, setResponses] = useState([]);
-    const { userProfile } = useContext(AirtableContext);
+    const { userProfile } = useContext(DatabaseContext);
     const promptRef = useRef();
 
     const handleResponse = async () => {

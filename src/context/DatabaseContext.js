@@ -2,9 +2,9 @@ import { createContext, useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { supabase } from '../API/supabase';
 
-const AirtableContext = createContext();
+const DatabaseContext = createContext();
 
-const AirtableProvider = ({ children }) => {
+const DatabaseProvider = ({ children }) => {
     // USER AUTH0 EMAIL
     const { user } = useAuth0();
     const [auth0Email, setAuth0Email] = useState(null);
@@ -140,9 +140,7 @@ const AirtableProvider = ({ children }) => {
             } else {
                 createUserProfile();
                 const onboardingJob = await createOnboardingJob();
-                const onboardingSheets = await createOnboardingSheets(
-                    onboardingJob
-                );
+                await createOnboardingSheets(onboardingJob);
                 fetchUserJobs();
             }
         }
@@ -167,7 +165,6 @@ const AirtableProvider = ({ children }) => {
     async function createOnboardingJob() {
         const {
             data: [onboardingJob],
-            error,
         } = await supabase
             .from('jobs')
             .insert({
@@ -181,12 +178,11 @@ const AirtableProvider = ({ children }) => {
                 edited: new Date().toLocaleDateString('en-US'),
             })
             .select();
-        // console.log('onboardingJob.id', onboardingJob.id);
         return onboardingJob;
     }
 
     async function createOnboardingSheets(onboardingJob) {
-        const { data: onboardingSheets } = await supabase
+        await supabase
             .from('sheets')
             .insert([
                 {
@@ -203,7 +199,6 @@ const AirtableProvider = ({ children }) => {
                 },
             ])
             .select();
-        // console.log('onboardingSheets are', onboardingSheets);
         fetchUserJobs();
     }
 
@@ -301,7 +296,7 @@ const AirtableProvider = ({ children }) => {
     }
 
     return (
-        <AirtableContext.Provider
+        <DatabaseContext.Provider
             value={{
                 //Sheets
                 allSheets,
@@ -339,8 +334,8 @@ const AirtableProvider = ({ children }) => {
             }}
         >
             {children}
-        </AirtableContext.Provider>
+        </DatabaseContext.Provider>
     );
 };
 
-export { AirtableProvider, AirtableContext };
+export { DatabaseProvider, DatabaseContext };

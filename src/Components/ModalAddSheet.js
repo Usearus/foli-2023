@@ -1,7 +1,7 @@
 import { useState, useRef, useContext } from 'react';
 import { supabase } from '../API/supabase';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AirtableContext } from '../context/AirtableContext';
+import { DatabaseContext } from '../context/DatabaseContext';
 import useAlert from '../Custom Hooks/useAlert';
 import ReactQuillEditor from './ReactQuillEditor';
 import { Button, Modal, Form } from 'react-bootstrap';
@@ -10,7 +10,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
     const { setAlert } = useAlert();
     const { user } = useAuth0();
     const { currentJob, currentSheets, fetchCurrentSheets } =
-        useContext(AirtableContext);
+        useContext(DatabaseContext);
 
     const [content, setContent] = useState('');
     const handleEditorChange = (value) => {
