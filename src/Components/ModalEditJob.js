@@ -1,20 +1,14 @@
-import { useState, useRef, useContext } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useRef, useContext } from 'react';
 import { DatabaseContext } from '../context/DatabaseContext';
 import useAlert from '../Custom Hooks/useAlert';
 import styled from 'styled-components';
 import { Button, Modal, Form, Stack } from 'react-bootstrap';
 import { supabase } from '../API/supabase';
 
-const ModalAddJob = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+const ModalEditJob = ({ show, close, job }) => {
+    const { fetchUserJobs } = useContext(DatabaseContext);
 
     const { setAlert } = useAlert();
-
-    const { user } = useAuth0();
-    const { fetchUserJobs } = useContext(DatabaseContext);
 
     const companyRef = useRef();
     const positionRef = useRef();
@@ -24,7 +18,17 @@ const ModalAddJob = () => {
     const remoteRef = useRef();
     const linkRef = useRef();
 
-    const handleAddJobClick = async () => {
+    const initialValues = {
+        company: job?.company ?? '',
+        position: job?.position ?? '',
+        salary_min: job?.salary_min ?? '',
+        salary_max: job?.salary_max ?? '',
+        location: job?.location ?? '',
+        remote: job?.remote ?? false,
+        link: job?.link ?? '',
+    };
+
+    const handleEditJobClick = async () => {
         let salary_min = salary_minRef.current.value.trim();
         let salary_max = salary_maxRef.current.value.trim();
 
@@ -40,10 +44,9 @@ const ModalAddJob = () => {
             salary_max = parseInt(salary_max);
         }
 
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from('jobs')
-            .insert({
-                account: user.email,
+            .update({
                 company: companyRef.current.value,
                 position: positionRef.current.value,
                 salary_min: salary_min,
@@ -51,40 +54,35 @@ const ModalAddJob = () => {
                 location: locationRef.current.value,
                 remote: remoteRef.current.checked,
                 link: linkRef.current.value,
-                status: 'Bookmarked',
                 edited: new Date().toLocaleDateString('en-US'),
             })
-            .select();
-
+            .eq('id', job.id);
+        setAlert('Job successfully updated!', 'success');
+        fetchUserJobs();
+        close();
         if (error) {
-            setAlert('There was an error adding the job.', 'error');
+            setAlert('Something went wrong. Sheet not updated.', 'danger');
+            console.log('error is', error);
             return;
         }
+    };
 
-        fetchUserJobs();
-        setAlert('Job successfully added!', 'success');
-        const newJobId = data[0].id;
-        // console.log('newJobId', newJobId);
-        await supabase.from('sheets').insert({
-            title: 'Job Description',
-            content: '<p>Start by pasting in the job description.</p>',
-            account: user.email,
-            jobid: newJobId,
-        });
-        handleClose();
+    const handleCancelClick = () => {
+        positionRef.current.value = initialValues.position;
+        salary_minRef.current.value = initialValues.salary_min;
+        salary_maxRef.current.value = initialValues.salary_max;
+        remoteRef.current.value = initialValues.remote;
+        locationRef.current.value = initialValues.location;
+        linkRef.current.value = initialValues.link;
+        close();
     };
 
     return (
         <Wrapper>
-            <Button variant='primary' onClick={handleShow}>
-                Add Job
-            </Button>
-
-            <Modal fullscreen='md-down' show={show} onHide={handleClose}>
+            <Modal fullscreen='md-down' show={show} onHide={close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add job to track</Modal.Title>
+                    <Modal.Title>Edit job</Modal.Title>
                 </Modal.Header>
-
                 <Modal.Body>
                     <Form>
                         <Form.Group className='mb-3' controlId='company'>
@@ -92,23 +90,26 @@ const ModalAddJob = () => {
                             <Form.Control
                                 type='text'
                                 placeholder='Google, Apple, etc.'
-                                autoFocus
                                 ref={companyRef}
+                                defaultValue={initialValues.company}
                             />
                         </Form.Group>
-                        <Form.Group className='mb-3 ' controlId='position'>
+                        <Form.Group className='mb-3' controlId='position'>
                             <Form.Label>Position</Form.Label>
-                            <Form.Control type='text' ref={positionRef} />
+                            <Form.Control
+                                type='text'
+                                ref={positionRef}
+                                defaultValue={initialValues.position}
+                            />
                         </Form.Group>
                         <Stack direction='horizontal' gap={4}>
                             <Form.Group className='mb-3' controlId='salary-min'>
-                                <Form.Label className='test'>
-                                    Salary Min ($)
-                                </Form.Label>
+                                <Form.Label>Salary Min ($)</Form.Label>
                                 <Form.Control
                                     type='number'
                                     placeholder='40,000'
                                     ref={salary_minRef}
+                                    defaultValue={initialValues.salary_min}
                                 />
                             </Form.Group>
                             <span style={{ paddingTop: '1rem' }}>-</span>
@@ -118,45 +119,46 @@ const ModalAddJob = () => {
                                     type='number'
                                     placeholder='60,000'
                                     ref={salary_maxRef}
+                                    defaultValue={initialValues.salary_max}
                                 />
                             </Form.Group>
                         </Stack>
-                        {/* TODO  <LocationAutocompleteBtn /> */}
                         <Form.Group className='mb-1' controlId='location'>
                             <Form.Label>Location</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Start typing a city...'
                                 ref={locationRef}
+                                defaultValue={initialValues.location}
                             />
                         </Form.Group>
                         <Form.Group className='mb-1' controlId='remote'>
                             <Form.Check
-                                label='Remote position'
+                                label='Remote preferred'
                                 ref={remoteRef}
-                                defaultChecked={false}
+                                defaultChecked={initialValues.remote}
                             />
                         </Form.Group>
                         <Form.Group className='mb-3' controlId='link'>
                             <Form.Label>Listing URL</Form.Label>
                             <Form.Control
                                 type='text'
-                                placeholder='Add URL of job listing'
+                                placeholder='Add website location of job listing'
                                 ref={linkRef}
+                                defaultValue={initialValues.link}
                             />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        type='submit'
                         variant='outline-secondary'
-                        onClick={handleClose}
+                        onClick={handleCancelClick}
                     >
-                        Close
+                        Cancel
                     </Button>
-                    <Button variant='primary' onClick={handleAddJobClick}>
-                        Add Job
+                    <Button variant='primary' onClick={handleEditJobClick}>
+                        Confirm
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -164,7 +166,7 @@ const ModalAddJob = () => {
     );
 };
 
-export default ModalAddJob;
+export default ModalEditJob;
 
 const Wrapper = styled.div`
     .editor {

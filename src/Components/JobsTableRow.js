@@ -7,6 +7,7 @@ import useAlert from '../Custom Hooks/useAlert';
 import styled from 'styled-components';
 import { FiMoreVertical } from 'react-icons/fi';
 import { supabase } from '../API/supabase';
+import ModalEditJob from './ModalEditJob';
 
 const JobsTableRow = (job) => {
     const { fetchUserJobs, fetchCurrentJob, fetchCurrentSheets } =
@@ -18,8 +19,9 @@ const JobsTableRow = (job) => {
     const [selectedEventKey, setSelectedEventKey] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState(job.status);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
 
-    const handleUpdateJobClick = async (e) => {
+    const handleEditJobClick = async (e) => {
         setSelectedStatus(e.target.value);
         const { error } = await supabase
             .from('jobs')
@@ -47,6 +49,9 @@ const JobsTableRow = (job) => {
     const handleSelect = (eventKey) => {
         setSelectedEventKey(eventKey);
         if (eventKey === '1') {
+            setShowEditModal(true);
+        }
+        if (eventKey === '2') {
             setShowDeleteModal(true);
         }
     };
@@ -54,6 +59,7 @@ const JobsTableRow = (job) => {
     // Will close any modal opened by the dropdown
     const handleCloseReset = () => {
         setShowDeleteModal(false);
+        setShowEditModal(false);
     };
 
     return (
@@ -64,7 +70,7 @@ const JobsTableRow = (job) => {
                 <td onClick={handleTableRowClick}>
                     {job.salary_min && job.salary_max
                         ? `$${job.salary_min.toLocaleString()} -
-        ${job.salary_max.toLocaleString()}`
+                            ${job.salary_max.toLocaleString()}`
                         : '-'}
                 </td>
                 <td onClick={handleTableRowClick}>{job.location}</td>
@@ -74,7 +80,7 @@ const JobsTableRow = (job) => {
                             <Form.Select
                                 size='sm'
                                 aria-label='Select job status'
-                                onChange={handleUpdateJobClick}
+                                onChange={handleEditJobClick}
                                 value={selectedStatus}
                                 className={`select ${selectedStatus}`}
                             >
@@ -105,7 +111,8 @@ const JobsTableRow = (job) => {
                             <FiMoreVertical />
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item eventKey='1'>
+                            <Dropdown.Item eventKey='1'>Edit Job</Dropdown.Item>
+                            <Dropdown.Item eventKey='2'>
                                 Delete Job
                             </Dropdown.Item>
                         </Dropdown.Menu>
@@ -116,6 +123,13 @@ const JobsTableRow = (job) => {
                             close={handleCloseReset}
                             object={job}
                             type='job'
+                        />
+                    )}
+                    {showEditModal && (
+                        <ModalEditJob
+                            show={showEditModal}
+                            close={handleCloseReset}
+                            job={job}
                         />
                     )}
                 </td>

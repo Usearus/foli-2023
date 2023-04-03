@@ -31,13 +31,28 @@ const SheetPosition = () => {
     };
 
     const handleUpdateJobClick = async () => {
+        let salary_min = salary_minRef.current.value.trim();
+        let salary_max = salary_maxRef.current.value.trim();
+
+        if (salary_min === '') {
+            salary_min = null;
+        } else {
+            salary_min = parseInt(salary_min);
+        }
+
+        if (salary_max === '') {
+            salary_max = null;
+        } else {
+            salary_max = parseInt(salary_max);
+        }
+
         const { error } = await supabase
             .from('jobs')
             .update({
                 company: companyRef.current.value,
                 position: positionRef.current.value,
-                salary_min: salary_minRef.current.value * 1,
-                salary_max: salary_maxRef.current.value * 1,
+                salary_min: salary_min,
+                salary_max: salary_max,
                 location: locationRef.current.value,
                 remote: remoteRef.current.checked,
                 link: linkRef.current.value,
@@ -126,10 +141,11 @@ const SheetPosition = () => {
                                     >
                                         <Form.Label>Salary Range</Form.Label>
                                         <div style={{ padding: '7px 0' }}>
-                                            $
-                                            {initialValues.salary_min.toLocaleString()}{' '}
-                                            -{' '}
-                                            {initialValues.salary_max.toLocaleString()}
+                                            {initialValues.salary_min &&
+                                            initialValues.salary_max
+                                                ? `$${initialValues.salary_min.toLocaleString()} -
+                            ${initialValues.salary_max.toLocaleString()}`
+                                                : '-'}
                                         </div>
                                     </Form.Group>
                                     <Form.Group
