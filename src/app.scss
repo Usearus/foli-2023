@@ -4,104 +4,104 @@
 *,
 ::after,
 ::before {
-  box-sizing: border-box;
-  /* border: 1px solid rgba(102, 51, 153, 0.062); */
+    box-sizing: border-box;
+    /* border: 1px solid rgba(102, 51, 153, 0.062); */
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600;1,800&display=swap');
 // @import "custom";
 
 html {
-  font-size: 100%;
+    font-size: 100%;
 }
 
 :root {
-  /* dark shades of primary color*/
-  --primary-50: #ede7f7;
-  --primary-100: #dcd0f0;
-  --primary-200: #b9a0e0;
-  --primary-300: #9571d1;
-  --primary-400: #7241c1;
-  /* primary/main color */
-  --primary-500: #4f12b2;
-  /* lighter shades of primary color */
-  --primary-600: #3f0e8e;
-  --primary-700: #2f0b6b;
-  --primary-800: #200747;
-  --primary-900: #100424;
+    /* dark shades of primary color*/
+    --primary-50: #ede7f7;
+    --primary-100: #dcd0f0;
+    --primary-200: #b9a0e0;
+    --primary-300: #9571d1;
+    --primary-400: #7241c1;
+    /* primary/main color */
+    --primary-500: #4f12b2;
+    /* lighter shades of primary color */
+    --primary-600: #3f0e8e;
+    --primary-700: #2f0b6b;
+    --primary-800: #200747;
+    --primary-900: #100424;
 
-  --grey-50: #fafafa;
-  --grey-100: #f1f1f1;
-  --grey-200: #eaecee;
-  --grey-300: #d6dade;
-  --grey-400: #a8b0b9;
-  --grey-500: #717d8a;
-  --grey-600: #4f5b67;
-  --grey-700: #373f47;
-  --grey-800: #242d35;
-  --grey-900: #0c1116;
+    --grey-50: #fafafa;
+    --grey-100: #f1f1f1;
+    --grey-200: #eaecee;
+    --grey-300: #d6dade;
+    --grey-400: #a8b0b9;
+    --grey-500: #717d8a;
+    --grey-600: #4f5b67;
+    --grey-700: #373f47;
+    --grey-800: #242d35;
+    --grey-900: #0c1116;
 
-  --black: #000;
-  --white: #fff;
+    --black: #000;
+    --white: #fff;
 
-  --red-light: #f8d7da;
-  --red-dark: #842029;
+    --red-light: #f8d7da;
+    --red-dark: #842029;
 
-  --green-light: #d1e7dd;
-  --green-dark: #0f5132;
+    --green-light: #d1e7dd;
+    --green-dark: #0f5132;
 
-  --green-400: #79d969;
-  --yellow-400: #ffde4b;
-  --red-400: #ff886b;
+    --green-400: #79d969;
+    --yellow-400: #ffde4b;
+    --red-400: #ff886b;
 
-  /* box shadow*/
-  --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    /* box shadow*/
+    --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
-  /* fonts  */
-  --headingFont: 'Poppins', sans-serif;
-  --bodyFont: 'Poppins', sans-serif;
-  --small-text: 0.875rem;
-  --extra-small-text: 0.7em;
+    /* fonts  */
+    --headingFont: 'Poppins', sans-serif;
+    --bodyFont: 'Poppins', sans-serif;
+    --small-text: 0.875rem;
+    --extra-small-text: 0.7em;
 
-  /* rest of the vars */
-  --backgroundColor: var(white);
-  --primaryTextColor: var(--grey-900);
-  --secondaryTextColor: var(--grey-700);
-  --borderRadius: 0.25rem;
-  --letterSpacing: 1px;
-  --transition: 0.3s ease-in-out all;
-  --max-width: 1120px;
-  --fixed-width: 600px;
+    /* rest of the vars */
+    --backgroundColor: var(white);
+    --primaryTextColor: var(--grey-900);
+    --secondaryTextColor: var(--grey-700);
+    --borderRadius: 0.25rem;
+    --letterSpacing: 1px;
+    --transition: 0.3s ease-in-out all;
+    --max-width: 1120px;
+    --fixed-width: 600px;
 }
 
 body {
-  background: var(--white);
-  font-family: var(--bodyFont);
-  font-weight: 400;
-  line-height: 1.75;
+    background: var(--white);
+    font-family: var(--bodyFont);
+    font-weight: 400;
+    line-height: 1.75;
 }
 
 p {
-  font-family: var(--bodyFont);
-  line-height: 1.5;
-  font-size: 1rem;
-  margin-bottom: 0;
-  color: var(--secondaryTextColor);
+    font-family: var(--bodyFont);
+    line-height: 1.5;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    color: var(--secondaryTextColor);
 }
 
 li,
 ul {
-  font-family: var(--bodyFont);
-  line-height: 1.5;
-  padding-bottom: 1rem;
-  font-size: 1rem;
-  color: var(--secondaryTextColor);
+    font-family: var(--bodyFont);
+    line-height: 1.5;
+    padding-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--secondaryTextColor);
 }
 
 h1,
@@ -109,35 +109,35 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: var(--headingFont);
-  margin-bottom: 0 !important;
-  color: var(--primaryTextColor);
-  font-weight: 600 !important;
+    font-family: var(--headingFont);
+    margin-bottom: 0 !important;
+    color: var(--primaryTextColor);
+    font-weight: 600 !important;
 }
 
 h1 {
-  font-size: 3.052rem;
+    font-size: 3.052rem;
 }
 
 h2 {
-  font-size: 2.441rem;
+    font-size: 2.441rem;
 }
 
 h3 {
-  font-size: 1.953rem;
+    font-size: 1.953rem;
 }
 
 h4 {
-  font-size: 1.563rem;
+    font-size: 1.563rem;
 }
 
 h5 {
-  font-size: 1.25rem;
+    font-size: 1.25rem;
 }
 
 small,
 .text-small {
-  font-size: var(--small-text);
+    font-size: var(--small-text);
 }
 
 // @media screen and (min-width: 800px) {
@@ -165,36 +165,36 @@ small,
 // }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 ul {
-  list-style-type: circle;
+    list-style-type: circle;
 }
 
 .img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
+    width: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 @keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loading {
-  width: 6rem;
-  height: 6rem;
-  border: 5px solid var(--grey-400);
-  border-radius: 50%;
-  border-top-color: var(--primary-500);
-  animation: spinner 0.6s linear infinite;
+    width: 6rem;
+    height: 6rem;
+    border: 5px solid var(--grey-400);
+    border-radius: 50%;
+    border-top-color: var(--primary-500);
+    animation: spinner 0.6s linear infinite;
 }
 
 .loading {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 /*
@@ -206,96 +206,96 @@ Custom Styles -------------------------------------------
 /* custom scrollbar */
 
 ::-webkit-scrollbar {
-  width: 18px;
+    width: 18px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+    background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--grey-300);
-  border-radius: 20px;
-  border: 6px solid transparent;
-  background-clip: content-box;
-  transition: var(--transition);
+    background-color: var(--grey-300);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+    transition: var(--transition);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--grey-400);
+    background-color: var(--grey-400);
 }
 
 /* React Bootstrap Changes */
 
 div .container-fluid {
-  /* Removes padding from fluid containers */
-  padding: 0;
+    /* Removes padding from fluid containers */
+    padding: 0;
 }
 
 .navbar-nav .nav-link.active {
-  --bs-navbar-active-color: var(--white);
+    --bs-navbar-active-color: var(--white);
 }
 
 .form-label {
-  margin-bottom: 0;
-  color: var(--grey-700);
-  font-size: 12px;
+    margin-bottom: 0;
+    color: var(--grey-700);
+    font-size: 12px;
 }
 
 label {
-  margin-bottom: 1rem;
-  color: var(--grey-700);
-  font-size: 14px;
+    margin-bottom: 1rem;
+    color: var(--grey-700);
+    font-size: 14px;
 }
 
 .badge {
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  padding: 4px 12px;
-  color: var(--grey-500);
-  border: 1px solid var(--grey-400);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    color: var(--grey-500);
+    border: 1px solid var(--grey-400);
 }
 
 // Truncates overflow text everywhere on inputs
 input {
-  text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 .start-hidden {
-  display: none;
+    display: none;
 }
 
 // BS Card component edits
 .fSIGcG {
-  .card {
-    border-radius: 0;
-    box-shadow: var(--shadow-2);
-    background: var(--grey-50);
-    border: 0;
-  }
-  .footer {
-    border-radius: 0;
-    background-color: var(--grey-50) !important;
-    border-color: var(--grey-200);
-  }
+    .card {
+        border-radius: 0;
+        box-shadow: var(--shadow-2);
+        background: var(--grey-50);
+        border: 0;
+    }
+    .footer {
+        border-radius: 0;
+        background-color: var(--grey-50) !important;
+        border-color: var(--grey-200);
+    }
 
-  .header {
-    border-radius: 0;
-    background-color: var(--grey-50) !important;
-    border-color: var(--grey-200);
-  }
+    .header {
+        border-radius: 0;
+        background-color: var(--grey-50) !important;
+        border-color: var(--grey-200);
+    }
 }
 
 // Removes dropdowns from all dropdown buttons
 .dropdown-toggle::after {
-  display: none !important;
+    display: none !important;
 }
 
 // My transitions::
 
 // Must copy into component
 .fade-up {
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: translateY(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
 }
 
 // :hover .fade-up {
@@ -305,8 +305,8 @@ input {
 
 // Works in all components already
 .fade-in {
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 // :hover .fade-in {
