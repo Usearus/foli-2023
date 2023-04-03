@@ -1,14 +1,17 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { BiShow, BiHide } from 'react-icons/bi';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import styled from 'styled-components';
 import { supabase } from '../API/supabase';
 import { DatabaseContext } from '../context/DatabaseContext';
+import ModalDeleteConfirmation from './ModalDeleteConfirmation';
 
 const SideBarItem = ({ sheet }) => {
     const { fetchCurrentSheets, currentJob } = useContext(DatabaseContext);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    const handleButtonClick = async () => {
+    const handleVisibilityClick = async () => {
         const visible = sheet.visible;
         await supabase
             .from('sheets')
@@ -19,9 +22,18 @@ const SideBarItem = ({ sheet }) => {
         fetchCurrentSheets(currentJob);
     };
 
+    // Will close any modal opened by the dropdown
+    const handleCloseModal = () => {
+        setShowDeleteModal(false);
+    };
+
+    // Will handle any modal option selected
+    const handleDeleteModal = () => {
+        setShowDeleteModal(true);
+    };
+
     return (
         <Wrapper>
-            {/* <Button size='sm' variant='light' className='parent-btn'> */}
             <div className='parent-btn'>
                 <OverlayTrigger
                     key='title'
@@ -36,16 +48,37 @@ const SideBarItem = ({ sheet }) => {
                     <span>{sheet.title}</span>
                 </OverlayTrigger>
                 <div
+                    className='ms-auto fade-in'
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        minWidth: '24px',
+                        minHeight: '24px',
+                    }}
+                    onClick={handleDeleteModal}
+                >
+                    <RiDeleteBin6Line
+                        className='show-on-hover'
+                        style={{
+                            minWidth: '16px',
+                            minHeight: '16px',
+                            cursor: 'pointer',
+                            color: 'var(--grey-600)',
+                        }}
+                    />
+                </div>
+                <div
                     className='ms-auto'
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        color: 'var(--grey-600)',
+
                         minWidth: '24px',
                         minHeight: '24px',
                     }}
-                    onClick={handleButtonClick}
+                    onClick={handleVisibilityClick}
                 >
                     {sheet.visible ? (
                         <BiShow
@@ -53,6 +86,7 @@ const SideBarItem = ({ sheet }) => {
                                 minWidth: '16px',
                                 minHeight: '16px',
                                 cursor: 'pointer',
+                                color: 'var(--grey-600)',
                             }}
                         />
                     ) : (
@@ -61,10 +95,19 @@ const SideBarItem = ({ sheet }) => {
                                 minWidth: '16px',
                                 minHeight: '16px',
                                 cursor: 'pointer',
+                                color: 'var(--grey-600)',
                             }}
                         />
                     )}
                 </div>
+                {showDeleteModal && (
+                    <ModalDeleteConfirmation
+                        show={showDeleteModal}
+                        close={handleCloseModal}
+                        object={sheet}
+                        type='sheet'
+                    />
+                )}
             </div>
         </Wrapper>
     );
@@ -100,5 +143,14 @@ const Wrapper = styled.div`
 
     .parent-btn:active {
         background: var(--grey-400);
+    }
+
+    .fade-in {
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    :hover .fade-in {
+        opacity: 1;
     }
 `;
