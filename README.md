@@ -6,8 +6,6 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
--   Add delete sheet button in the sidebar
--   Add edit to a job when on the jobs screen
 -   Add show all hide all button to sidebar sheet list
 -   Sm, Md, Lg, Letter style format of sheet (printer friendly version?)
 -   "target" role, salary, etc...
