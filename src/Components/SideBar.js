@@ -97,33 +97,17 @@ export default SideBar;
 
 const Wrapper = styled.div`
     .sidebar-container {
-        padding: 1.5rem 1rem;
+        padding: 1rem 1rem;
         height: 100%;
-        background: var(--grey-100);
-        color: var(--grey-800);
-        border-right: 1px solid var(--grey-300);
-    }
-
-    .sidebar-title {
-        display: flex;
-        padding: 0rem 0rem 1rem 0rem;
-        font-size: 1.5rem;
-    }
-
-    .sidebar-item {
         background: var(--grey-200);
-        color: var(--grey-600);
-        transition: var(--transition);
-    }
-
-    .sidebar-item:hover {
-        background: var(--grey-300);
-        border-radius: 0.5rem;
+        color: var(--grey-800);
+        /* border-right: 1px solid var(--grey-300); */
     }
 
     .draggable-area {
-        border: 1px solid var(--grey-100);
+        border: 1px solid var(--grey-200);
     }
+
     .draggable-area.dragging {
         box-sizing: border-box;
         background-color: var(--grey-200);

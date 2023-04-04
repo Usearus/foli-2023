@@ -54,6 +54,7 @@ export default SideBarPositionItem;
 
 const Wrapper = styled.div`
     .parent-btn {
+        background: var(--grey-200);
         display: flex;
         align-items: center;
         width: 100%;
