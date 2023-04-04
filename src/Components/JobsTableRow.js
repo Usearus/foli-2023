@@ -167,16 +167,16 @@ const Wrapper = styled.div`
     background-color: var(--primary-200);
     color: var(--black);
   }
+*/
+    .Accepted {
+        background-color: var(--primary-300);
+        color: var(--white);
+    }
 
-  .Accepted {
-    background-color: var(--primary-300);
-    color: var(--white);
-  }
-
-  .Rejected,
-  .Declined,
-  .Archived {
-    background-color: var(--primary-800);
-    color: var(--white);
-  } */
+    .Rejected,
+    .Declined,
+    .Archived {
+        background-color: var(--primary-800);
+        color: var(--white);
+    }
 `;
