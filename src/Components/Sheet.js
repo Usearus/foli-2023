@@ -21,6 +21,7 @@ const Sheet = (sheet) => {
     const initialTitleValue = sheet.title ?? '';
     const initialVisibleValue = sheet.visible;
     const [characterCount, setCharacterCount] = useState(content.length);
+    const titleMaxChar = 32;
 
     const handleUpdateContentClick = async () => {
         const { error } = await supabase
@@ -73,8 +74,6 @@ const Sheet = (sheet) => {
         console.log('handleCloseReset called');
         setShowDeleteModal(false);
     };
-
-    const titleMaxChar = 32;
 
     return (
         <Wrapper>
@@ -165,7 +164,7 @@ const Sheet = (sheet) => {
                             </>
                         ) : (
                             <>
-                                <Form className='sheet-scroll'>
+                                <Form>
                                     <Form.Group controlId='content'>
                                         <ReactQuillEditor
                                             value={content}
@@ -197,21 +196,6 @@ const Sheet = (sheet) => {
 };
 
 const Wrapper = styled.div`
-    .fade-up {
-        opacity: 0;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        transform: translateY(10px);
-    }
-
-    :hover .fade-up {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    :hover .fade-in {
-        opacity: 1;
-    }
-
     .sheet-title {
         height: 2rem;
         margin-bottom: 0.75rem;
@@ -224,8 +208,10 @@ const Wrapper = styled.div`
     .sheet-content {
         display: flex;
         flex-direction: column;
-        width: 30rem;
-        max-height: 75vh;
+        justify-content: space-between;
+        width: 25rem;
+        /* max-height: 75vh; */
+        height: 96%;
         background: var(--white);
         box-shadow: var(--shadow-1);
         transition: var(--transition);
@@ -275,7 +261,16 @@ const Wrapper = styled.div`
 
     .sheet-scroll {
         overflow-y: scroll;
-        min-height: 250px;
+        display: flex;
+        /* min-height: 250px; */
+        height: 100%;
+    }
+
+    .markdown-scroll {
+        overflow-y: scroll;
+        display: flex;
+        /* min-height: 250px; */
+        height: 100%;
     }
 
     .sheet-footer {
@@ -300,10 +295,35 @@ const Wrapper = styled.div`
     .ql-container {
         border: none !important;
         overflow-y: auto !important;
+        height: 100% !important;
+    }
+
+    .ql-quill {
+        display: flex;
+        justify-content: stretch !important;
+        height: 100% !important;
+        font-size: 1rem !important;
     }
 
     .ql-toolbar {
         border: none !important;
+    }
+
+    .fade-up {
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: translateY(10px);
+        /* display: none; */
+    }
+
+    :hover .fade-up {
+        opacity: 1;
+        transform: translateY(0);
+        /* display: block; */
+    }
+
+    :hover .fade-in {
+        opacity: 1;
     }
 `;
 

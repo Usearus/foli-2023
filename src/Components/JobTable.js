@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import JobsTableRow from './JobsTableRow';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { GoChevronDown, GoChevronUp } from 'react-icons/go';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const JobsTable = ({ jobs }) => {
     const [sortOrder, setSortOrder] = useState({
@@ -128,6 +129,18 @@ const JobsTable = ({ jobs }) => {
                         return <JobsTableRow key={job.id} {...job} />;
                     })}
                 </tbody>
+
+                {/* TODO <TransitionGroup component='tbody'>
+                    {sortedJobs.map((job) => (
+                        <CSSTransition
+                            key={job.id}
+                            classNames='fade'
+                            timeout={300}
+                        >
+                            <JobsTableRow {...job} />
+                        </CSSTransition>
+                    ))}
+                </TransitionGroup> */}
             </Table>
         </Wrapper>
     );
@@ -150,4 +163,22 @@ const Wrapper = styled.div`
     .table tbody:hover {
         cursor: pointer;
     }
+    /* TODO */
+    /* .fade-enter {
+        opacity: 0;
+    }
+
+    .fade-enter-active {
+        opacity: 1;
+        transition: opacity 300ms ease-in-out;
+    }
+
+    .fade-exit {
+        opacity: 1;
+    }
+
+    .fade-exit-active {
+        opacity: 0;
+        transition: opacity 300ms ease-in-out;
+    } */
 `;
