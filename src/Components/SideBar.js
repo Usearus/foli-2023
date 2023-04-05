@@ -34,7 +34,7 @@ const SideBar = ({ className }) => {
 
         await Promise.all(
             newCurrentSheets.map(async (sheet, index) => {
-                const { data, error } = await supabase
+                await supabase
                     .from('sheets')
                     .update({ position: index })
                     .eq('id', sheet.id);

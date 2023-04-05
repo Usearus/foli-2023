@@ -6,8 +6,8 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
+-   Add Google Analytics
 -   Add show all hide all button to sidebar sheet list
--   Sm, Md, Lg, Letter style format of sheet (printer friendly version?)
 -   "target" role, salary, etc...
 -   Sticky survey at bottom
     -   What do you like, what's missing, what to chat about it?

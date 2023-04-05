@@ -3,6 +3,9 @@ import Table from 'react-bootstrap/Table';
 import JobsTableRow from './JobsTableRow';
 import styled, { keyframes } from 'styled-components';
 import { GoChevronDown, GoChevronUp } from 'react-icons/go';
+import JobCards from './JobCards';
+import { useMediaQuery } from 'react-responsive';
+
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const JobsTable = ({ jobs }) => {
@@ -26,7 +29,7 @@ const JobsTable = ({ jobs }) => {
         const direction = sortOrder.direction === 'asc' ? 1 : -1;
         const columnA = a[sortOrder.column];
         const columnB = b[sortOrder.column];
-
+        // TODO salary needs to be fixed
         if (sortOrder.column === 'salary') {
             if (columnA === 0 && columnB === 0) {
                 return 0;
@@ -54,6 +57,10 @@ const JobsTable = ({ jobs }) => {
             return null;
         }
     };
+
+    const isMobileView = useMediaQuery({
+        query: '(max-width: 576px)',
+    });
 
     return (
         <Wrapper>
@@ -129,6 +136,10 @@ const JobsTable = ({ jobs }) => {
                         return <JobsTableRow key={job.id} {...job} />;
                     })}
                 </tbody>
+
+                {sortedJobs.map((job) => {
+                    return <JobCards key={job.id} {...job} />;
+                })}
 
                 {/* TODO <TransitionGroup component='tbody'>
                     {sortedJobs.map((job) => (
