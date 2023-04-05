@@ -4,7 +4,6 @@ import JobsTableRow from './JobsTableRow';
 import styled, { keyframes } from 'styled-components';
 import { GoChevronDown, GoChevronUp } from 'react-icons/go';
 import JobCards from './JobCards';
-import { useMediaQuery } from 'react-responsive';
 
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -57,10 +56,6 @@ const JobsTable = ({ jobs }) => {
             return null;
         }
     };
-
-    const isMobileView = useMediaQuery({
-        query: '(max-width: 576px)',
-    });
 
     return (
         <Wrapper>
