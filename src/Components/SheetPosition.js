@@ -99,10 +99,13 @@ const SheetPosition = () => {
         return (
             <>
                 <Wrapper className='sheet-container'>
-                    <header className='sheet-title'>
-                        <h5>Position Details</h5>
-                    </header>
                     <section className='sheet-content'>
+                        <div>
+                            <header className='sheet-title'>
+                                <h6>Position Details</h6>
+                            </header>
+                            <hr />
+                        </div>
                         {!editing ? (
                             <>
                                 <Form>
@@ -144,7 +147,7 @@ const SheetPosition = () => {
                                             {initialValues.salary_min &&
                                             initialValues.salary_max
                                                 ? `$${initialValues.salary_min.toLocaleString()} -
-                            ${initialValues.salary_max.toLocaleString()}`
+                                                    ${initialValues.salary_max.toLocaleString()}`
                                                 : '-'}
                                         </div>
                                     </Form.Group>
@@ -348,7 +351,8 @@ export default SheetPosition;
 
 const Wrapper = styled.div`
     Form {
-        padding: 1rem;
+        padding: 1rem 2rem;
+        height: 100%;
     }
 
     .fade-in {
@@ -372,16 +376,26 @@ const Wrapper = styled.div`
     }
 
     .sheet-title {
-        height: 2rem;
-        margin-top: 0.5rem;
-        margin-bottom: 0.25rem;
+        padding: 1rem 1rem 0.5rem 1rem;
+    }
+
+    .sheet-title h6 {
+        margin-bottom: 0rem;
+        font-weight: 600;
+        margin: 0 1rem;
+        padding: 0.55rem 0;
+    }
+
+    hr {
+        margin: 0 1.5rem;
     }
 
     .sheet-content {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         width: 20rem;
-        max-height: 75vh;
+        height: 100%;
         background: var(--white);
         box-shadow: var(--shadow-1);
         transition: var(--transition);

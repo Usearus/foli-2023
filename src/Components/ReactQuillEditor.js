@@ -28,19 +28,8 @@ const ReactQuillEditor = ({ value, onChange }) => {
 export default ReactQuillEditor;
 
 const Wrapper = styled.div`
-    height: 100% !important; // add this line
-    width: 100%;
-    display: flex;
-
-    .quill {
-        max-height: 100% !important;
-    }
-
     .ql-container {
-        overflow-y: auto;
         border-radius: 0 0 8px 8px !important;
-        max-height: 100% !important;
-        justify-self: stretch;
     }
 
     .ql-toolbar {
@@ -49,19 +38,19 @@ const Wrapper = styled.div`
         z-index: 1;
         background: var(--white) !important;
         border-radius: 8px 8px 0 0 !important;
-        justify-self: start;
+    }
+
+    .ql-editor ul > li::before {
+        /* This prevents an odd content that was added by React-Quill */
+        content: '';
     }
 
     .ql-editor {
         min-height: 200px;
         border-radius: 8px 8px 8px 8px !important;
-
-        // TODO HOW CAN I FIX REACT QUILL HEIGHT TO BE A %?
-        max-height: 100%;
-
         font-size: 1rem !important;
 
-        ul {
+        ul li {
             padding-bottom: 1rem !important;
             padding-left: 0;
             list-style-type: circle !important;

@@ -25,7 +25,7 @@ const TopBarJob = ({ className }) => {
 
     const [selectedStatus, setSelectedStatus] = useState(currentJob.status);
 
-    const handleUpdateJobClick = async (e) => {
+    const handleUpdateStatusClick = async (e) => {
         setSelectedStatus(e.target.value);
         const { error } = await supabase
             .from('jobs')
@@ -78,7 +78,7 @@ const TopBarJob = ({ className }) => {
                             <Form.Select
                                 size='sm'
                                 aria-label='Select job status'
-                                onChange={handleUpdateJobClick}
+                                onChange={handleUpdateStatusClick}
                                 value={selectedStatus}
                                 className={`select ${selectedStatus}`}
                             >
@@ -95,7 +95,7 @@ const TopBarJob = ({ className }) => {
                             </Form.Select>
                         </Form>
                     </div>
-                    <div className='btns'>
+                    <div className='right-content'>
                         <DropdownButton
                             title='Add Sheet'
                             id='add-sheet-dropdown'
@@ -148,17 +148,12 @@ export default TopBarJob;
 const Wrapper = styled.div`
     position: sticky;
     z-index: 1;
-    .btns {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-    }
-    .truncate {
-        font-weight: 600;
-        max-width: 400px;
-        white-space: nowrap; /* prevent the text from wrapping to a new line */
-        overflow: hidden; /* hide any text that overflows the element */
-        text-overflow: ellipsis;
+    .top-bar-container {
+        background: var(--grey-200);
+        justify-content: space-between;
+        border-bottom: 1px solid var(--grey-200);
+        color: var(--grey-700);
+        padding: 1rem;
     }
 
     .left-content {
@@ -168,12 +163,19 @@ const Wrapper = styled.div`
         align-items: baseline;
         gap: 1rem;
     }
-    .top-bar-container {
-        background: var(--grey-100);
-        justify-content: space-between;
-        border-bottom: 1px solid var(--grey-300);
-        color: var(--grey-700);
-        padding: 1rem;
+
+    .truncate {
+        font-weight: 600;
+        max-width: 400px;
+        white-space: nowrap; /* prevent the text from wrapping to a new line */
+        overflow: hidden; /* hide any text that overflows the element */
+        text-overflow: ellipsis;
+    }
+
+    .right-content {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
     }
 
     .select {

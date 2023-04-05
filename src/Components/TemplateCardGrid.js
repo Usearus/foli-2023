@@ -88,16 +88,16 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
                         />
                         <div className='sheet-footer'>
                             <Button
-                                variant='primary'
-                                onClick={handleAddSheetClick}
-                            >
-                                Add sheet
-                            </Button>
-                            <Button
                                 variant='outline-secondary'
                                 onClick={handleCloseActive}
                             >
                                 Back to templates
+                            </Button>
+                            <Button
+                                variant='primary'
+                                onClick={handleAddSheetClick}
+                            >
+                                Add sheet
                             </Button>
                         </div>
                     </div>
