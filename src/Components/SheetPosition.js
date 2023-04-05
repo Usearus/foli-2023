@@ -99,7 +99,7 @@ const SheetPosition = () => {
         return (
             <>
                 <Wrapper className='sheet-container'>
-                    <section className='sheet-content'>
+                    <section className='sheet-content shadow-on'>
                         <div>
                             <header className='sheet-title'>
                                 <h6>Position Details</h6>
@@ -375,6 +375,16 @@ const Wrapper = styled.div`
         transform: translateY(0);
     }
 
+    .shadow-on {
+        box-shadow: var(--shadow-1);
+        transition: box-shadow 1s ease;
+    }
+
+    :hover .shadow-on {
+        box-shadow: 0px 5px 10px var(--grey-400);
+        box-shadow: 5px 0px 10px var(--primary-200);
+    }
+
     .sheet-title {
         padding: 1rem 1rem 0.5rem 1rem;
     }
@@ -398,12 +408,7 @@ const Wrapper = styled.div`
         height: 100%;
         background: var(--white);
         box-shadow: var(--shadow-1);
-        transition: var(--transition);
         position: relative;
-    }
-
-    .sheet-content:hover {
-        box-shadow: var(--shadow-4);
     }
 
     .sheet-footer {

@@ -80,8 +80,11 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
                 </div>
             ) : (
                 <div className='sheet-container'>
-                    <h4>{activeTemplate.title}</h4>
                     <div className='sheet-body'>
+                        <header className='sheet-title'>
+                            <h6>{activeTemplate.title}</h6>
+                            <hr />
+                        </header>
                         <MarkdownView
                             className='sheet-content markdown-content'
                             markdown={activeTemplate.content}
@@ -138,8 +141,23 @@ const Wrapper = styled.div`
         max-height: 650px;
     }
 
+    .sheet-title {
+        padding: 1rem 1rem 0.5rem 1rem;
+    }
+
+    .sheet-container h6 {
+        margin-bottom: 0rem;
+        font-weight: 600;
+        margin: 0 1rem;
+        padding: 0.85rem 0;
+    }
+
+    hr {
+        margin: 0 0.5rem;
+    }
+
     .markdown-content {
-        padding: 1rem;
+        padding: 1rem 2rem;
         h1 {
             font-size: 1.8rem;
         }

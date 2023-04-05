@@ -1,5 +1,5 @@
 import { useState, useContext, useRef } from 'react';
-import { Button, Form, Dropdown, Stack, hr } from 'react-bootstrap';
+import { Button, Form, Dropdown, Stack } from 'react-bootstrap';
 import { DatabaseContext } from '../context/DatabaseContext';
 import styled from 'styled-components';
 import MarkdownView from 'react-showdown';
@@ -8,6 +8,7 @@ import ReactQuillEditor from '../Components/ReactQuillEditor';
 import ModalDeleteConfirmation from '../Components/ModalDeleteConfirmation';
 import { FiMoreVertical } from 'react-icons/fi';
 import { supabase } from '../API/supabase';
+import { Resizable } from 're-resizable';
 
 const Sheet = (sheet) => {
     const [editing, setEditing] = useState(false);
@@ -23,6 +24,8 @@ const Sheet = (sheet) => {
     const [characterCount, setCharacterCount] = useState(content.length);
     const titleMaxChar = 32;
 
+    const [sheetWidth, setSheetWidth] = useState(sheet.width);
+
     const handleUpdateContentClick = async () => {
         const { error } = await supabase
             .from('sheets')
@@ -37,6 +40,26 @@ const Sheet = (sheet) => {
 
         if (error) {
             setAlert('Something went wrong. Sheet not updated.', 'danger');
+            console.log('error is', error);
+            return;
+        }
+    };
+
+    const handleUpdateWidthClick = async (newSheetWidth) => {
+        // console.log('newSheetWidth', newSheetWidth);
+        setSheetWidth(newSheetWidth);
+        const { error } = await supabase
+            .from('sheets')
+            .update({
+                width: newSheetWidth,
+            })
+            .eq('id', sheet.id);
+
+        if (error) {
+            setAlert(
+                'Something went wrong. Sheet width not updated.',
+                'danger'
+            );
             console.log('error is', error);
             return;
         }
@@ -60,7 +83,6 @@ const Sheet = (sheet) => {
         setCharacterCount(newValue.length);
     };
 
-    // Will handle any modal option selected
     const handleSelect = (eventKey) => {
         setSelectedEventKey(eventKey);
         if (eventKey === '1') {
@@ -81,73 +103,92 @@ const Sheet = (sheet) => {
                 <></>
             ) : (
                 <>
-                    <section className='sheet-content'>
-                        <div>
-                            <header className='sheet-title'>
-                                {!editing ? (
-                                    <Stack direction='horizontal'>
-                                        <h6>{sheet.title}</h6>
-                                        <Dropdown
-                                            className='ms-auto fade-in'
-                                            onSelect={handleSelect}
+                    <Resizable
+                        className='sheet-content shadow-on'
+                        minWidth='300px'
+                        maxWidth='700px'
+                        size={{
+                            height: '100%',
+                            width: sheetWidth,
+                        }}
+                        onResizeStop={(e, direction, ref, d) => {
+                            const newSheetWidth = sheetWidth + d.width;
+                            handleUpdateWidthClick(newSheetWidth);
+                        }}
+                        enable={{
+                            top: false,
+                            right: true,
+                            bottom: false,
+                            left: false,
+                            topRight: false,
+                            bottomRight: false,
+                            bottomLeft: false,
+                            topLeft: false,
+                        }}
+                    >
+                        <header className='sheet-title'>
+                            {!editing ? (
+                                <Stack direction='horizontal'>
+                                    <h6>{sheet.title}</h6>
+                                    <Dropdown
+                                        className='ms-auto fade-in'
+                                        onSelect={handleSelect}
+                                    >
+                                        <Dropdown.Toggle
+                                            id='dropdown'
+                                            variant='link'
+                                            style={{
+                                                color: 'var(--grey-800)',
+                                            }}
                                         >
-                                            <Dropdown.Toggle
-                                                id='dropdown'
-                                                variant='link'
-                                                style={{
-                                                    color: 'var(--grey-800)',
-                                                }}
+                                            <FiMoreVertical />
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item eventKey='1'>
+                                                Delete Sheet
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                    {showDeleteModal && (
+                                        <ModalDeleteConfirmation
+                                            show={showDeleteModal}
+                                            close={handleCloseReset}
+                                            object={sheet}
+                                            type='sheet'
+                                        />
+                                    )}
+                                </Stack>
+                            ) : (
+                                <div>
+                                    <Stack direction='horizontal' gap='2'>
+                                        <Form>
+                                            <Form.Group
+                                                className='title-field'
+                                                controlId='title'
                                             >
-                                                <FiMoreVertical />
-                                            </Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item eventKey='1'>
-                                                    Delete Sheet
-                                                </Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                        {showDeleteModal && (
-                                            <ModalDeleteConfirmation
-                                                show={showDeleteModal}
-                                                close={handleCloseReset}
-                                                object={sheet}
-                                                type='sheet'
-                                            />
-                                        )}
+                                                <Form.Control
+                                                    type='text'
+                                                    required
+                                                    ref={titleRef}
+                                                    defaultValue={
+                                                        initialTitleValue
+                                                    }
+                                                    placeholder='Sheet title'
+                                                    size='md'
+                                                    maxLength={titleMaxChar}
+                                                    onChange={handleTitleChange}
+                                                />
+                                            </Form.Group>
+                                        </Form>
+                                        <span className='character-count'>
+                                            {characterCount}/{titleMaxChar}
+                                        </span>
                                     </Stack>
-                                ) : (
-                                    <div>
-                                        <Stack direction='horizontal' gap='2'>
-                                            <Form>
-                                                <Form.Group
-                                                    className='title-field'
-                                                    controlId='title'
-                                                >
-                                                    <Form.Control
-                                                        type='text'
-                                                        required
-                                                        ref={titleRef}
-                                                        defaultValue={
-                                                            initialTitleValue
-                                                        }
-                                                        placeholder='Sheet title'
-                                                        size='md'
-                                                        maxLength={titleMaxChar}
-                                                        onChange={
-                                                            handleTitleChange
-                                                        }
-                                                    />
-                                                </Form.Group>
-                                            </Form>
-                                            <span className='character-count'>
-                                                {characterCount}/{titleMaxChar}
-                                            </span>
-                                        </Stack>
-                                    </div>
-                                )}
-                            </header>
-                            <hr />
-                        </div>
+                                </div>
+                            )}
+                        </header>
+                        <hr />
+
                         {!editing ? (
                             <>
                                 <MarkdownView
@@ -159,7 +200,7 @@ const Sheet = (sheet) => {
                                 />
                                 <div className='sheet-footer'>
                                     <Button
-                                        variant='outline-secondary'
+                                        variant='outline-primary'
                                         className='fade-up'
                                         onClick={handleEditClick}
                                     >
@@ -193,7 +234,7 @@ const Sheet = (sheet) => {
                                 </div>
                             </>
                         )}
-                    </section>
+                    </Resizable>
                 </>
             )}
         </Wrapper>
@@ -219,16 +260,8 @@ const Wrapper = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 28rem;
         height: 100%;
         background: var(--white);
-        box-shadow: var(--shadow-1);
-        transition: var(--transition);
-        /* position: relative; */
-    }
-
-    .sheet-content:hover {
-        box-shadow: var(--shadow-4);
     }
 
     .character-count {
@@ -238,9 +271,7 @@ const Wrapper = styled.div`
 
     .sheet-scroll {
         overflow-y: scroll;
-        overflow-x: hidden;
-        min-height: 250px;
-        width: 100%;
+        width: 98%;
         height: 100%;
     }
 
@@ -257,14 +288,8 @@ const Wrapper = styled.div`
         color: var(--grey-400);
     }
 
-    .slide-in {
-        transition: transform 0.3s ease-in-out;
-        transform: translateX(100%);
-    }
-
     .markdown-content {
-        padding: 2rem;
-        height: 100%;
+        padding: 1rem 2rem;
         h1 {
             font-size: 1.8rem;
         }
@@ -321,6 +346,16 @@ const Wrapper = styled.div`
 
     :hover .fade-in {
         opacity: 1;
+    }
+
+    .shadow-on {
+        box-shadow: var(--shadow-1);
+        transition: box-shadow 1s ease;
+    }
+
+    :hover .shadow-on {
+        box-shadow: 0px 5px 10px var(--grey-400);
+        box-shadow: 5px 0px 10px var(--primary-200);
     }
 `;
 
