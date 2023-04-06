@@ -73,7 +73,9 @@ const JobsTableRow = (job) => {
                             ${job.salary_max.toLocaleString()}`
                         : '-'}
                 </td>
-                <td onClick={handleTableRowClick}>{job.location}</td>
+                <td onClick={handleTableRowClick}>
+                    {job.location ? job.location : ''}
+                </td>
                 <td>
                     <Wrapper>
                         <Form>

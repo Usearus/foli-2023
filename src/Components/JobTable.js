@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Table from 'react-bootstrap/Table';
 import JobsTableRow from './JobsTableRow';
 import styled, { keyframes } from 'styled-components';
 import { GoChevronDown, GoChevronUp } from 'react-icons/go';
 import JobCards from './JobCards';
+import { Stack, Table } from 'react-bootstrap';
 
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -59,95 +59,85 @@ const JobsTable = ({ jobs }) => {
 
     return (
         <Wrapper>
-            <Table responsive hover>
-                <thead>
-                    <tr>
-                        <th
-                            className={`custom-width ${
-                                sortOrder.column === 'company'
-                                    ? 'active-header'
-                                    : ''
-                            }`}
-                            onClick={() => handleHeaderClick('company')}
-                        >
-                            Company {renderSortIcon('company')}
-                        </th>
-                        <th
-                            className={`${
-                                sortOrder.column === 'position'
-                                    ? 'active-header'
-                                    : ''
-                            }`}
-                            onClick={() => handleHeaderClick('position')}
-                        >
-                            Position {renderSortIcon('position')}
-                        </th>
-                        <th
-                            className={`${
-                                sortOrder.column === 'salary'
-                                    ? 'active-header'
-                                    : ''
-                            }`}
-                            // TODO onClick={() => handleHeaderClick('salary')}
-                        >
-                            Salary {renderSortIcon('salary')}
-                        </th>
-                        <th
-                            className={`${
-                                sortOrder.column === 'location'
-                                    ? 'active-header'
-                                    : ''
-                            }`}
-                            onClick={() => handleHeaderClick('location')}
-                        >
-                            Location {renderSortIcon('location')}
-                        </th>
-                        <th
-                            className={`${
-                                sortOrder.column === 'status'
-                                    ? 'active-header'
-                                    : ''
-                            }`}
-                            onClick={() => handleHeaderClick('status')}
-                        >
-                            Status{renderSortIcon('status')}
-                        </th>
-                        <th
-                            className={`${
-                                sortOrder.column === 'edited'
-                                    ? 'active-header'
-                                    : ''
-                            }`}
-                            onClick={() => handleHeaderClick('edited')}
-                        >
-                            Edited {renderSortIcon('edited')}
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {sortedJobs.map((job) => {
-                        return <JobsTableRow key={job.id} {...job} />;
-                    })}
-                </tbody>
-
+            <div className='job-table'>
+                <Table responsive hover>
+                    <thead>
+                        <tr>
+                            <th
+                                className={`custom-width ${
+                                    sortOrder.column === 'company'
+                                        ? 'active-header'
+                                        : ''
+                                }`}
+                                onClick={() => handleHeaderClick('company')}
+                            >
+                                Company {renderSortIcon('company')}
+                            </th>
+                            <th
+                                className={`${
+                                    sortOrder.column === 'position'
+                                        ? 'active-header'
+                                        : ''
+                                }`}
+                                onClick={() => handleHeaderClick('position')}
+                            >
+                                Position {renderSortIcon('position')}
+                            </th>
+                            <th
+                                className={`${
+                                    sortOrder.column === 'salary'
+                                        ? 'active-header'
+                                        : ''
+                                }`}
+                                // TODO onClick={() => handleHeaderClick('salary')}
+                            >
+                                Salary {renderSortIcon('salary')}
+                            </th>
+                            <th
+                                className={`${
+                                    sortOrder.column === 'location'
+                                        ? 'active-header'
+                                        : ''
+                                }`}
+                                onClick={() => handleHeaderClick('location')}
+                            >
+                                Location {renderSortIcon('location')}
+                            </th>
+                            <th
+                                className={`${
+                                    sortOrder.column === 'status'
+                                        ? 'active-header'
+                                        : ''
+                                }`}
+                                onClick={() => handleHeaderClick('status')}
+                            >
+                                Status{renderSortIcon('status')}
+                            </th>
+                            <th
+                                className={`${
+                                    sortOrder.column === 'edited'
+                                        ? 'active-header'
+                                        : ''
+                                }`}
+                                onClick={() => handleHeaderClick('edited')}
+                            >
+                                Edited {renderSortIcon('edited')}
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {sortedJobs.map((job) => {
+                            return <JobsTableRow key={job.id} {...job} />;
+                        })}
+                    </tbody>
+                </Table>
+            </div>
+            <Stack className='job-cards'>
                 {sortedJobs.map((job) => {
                     return <JobCards key={job.id} {...job} />;
                 })}
-
-                {/* TODO <TransitionGroup component='tbody'>
-                    {sortedJobs.map((job) => (
-                        <CSSTransition
-                            key={job.id}
-                            classNames='fade'
-                            timeout={300}
-                        >
-                            <JobsTableRow {...job} />
-                        </CSSTransition>
-                    ))}
-                </TransitionGroup> */}
-            </Table>
+            </Stack>
         </Wrapper>
     );
 };
@@ -155,10 +145,16 @@ const JobsTable = ({ jobs }) => {
 export default JobsTable;
 
 const Wrapper = styled.div`
-    padding: 2rem 2rem;
+    /* TABLE */
+    .job-table {
+        display: none;
+        padding: 2rem 2rem;
+    }
+
     .custom-width {
         min-width: 120px;
     }
+
     th {
         cursor: pointer;
     }
@@ -166,25 +162,25 @@ const Wrapper = styled.div`
     th.active-header {
         background-color: var(--grey-100);
     }
+
     .table tbody:hover {
         cursor: pointer;
     }
-    /* TODO */
-    /* .fade-enter {
-        opacity: 0;
+
+    @media (min-width: 768px) {
+        .job-table {
+            display: flex;
+        }
     }
 
-    .fade-enter-active {
-        opacity: 1;
-        transition: opacity 300ms ease-in-out;
+    /* CARDS */
+    .job-cards {
+        display: none;
     }
 
-    .fade-exit {
-        opacity: 1;
+    @media (max-width: 768px) {
+        .job-cards {
+            display: flex;
+        }
     }
-
-    .fade-exit-active {
-        opacity: 0;
-        transition: opacity 300ms ease-in-out;
-    } */
 `;
