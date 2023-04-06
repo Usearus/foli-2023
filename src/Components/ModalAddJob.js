@@ -92,7 +92,6 @@ const ModalAddJob = () => {
                             <Form.Control
                                 type='text'
                                 placeholder='Google, Apple, etc.'
-                                autoFocus
                                 ref={companyRef}
                             />
                         </Form.Group>
