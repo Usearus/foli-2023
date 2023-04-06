@@ -133,6 +133,7 @@ const JobsTable = ({ jobs }) => {
                     </tbody>
                 </Table>
             </div>
+
             <Stack className='job-cards'>
                 {sortedJobs.map((job) => {
                     return <JobCards key={job.id} {...job} />;
@@ -145,10 +146,13 @@ const JobsTable = ({ jobs }) => {
 export default JobsTable;
 
 const Wrapper = styled.div`
-    /* TABLE */
+    /* Mobile */
+    .job-cards {
+        display: flex;
+    }
+
     .job-table {
         display: none;
-        padding: 2rem 2rem;
     }
 
     .custom-width {
@@ -167,20 +171,15 @@ const Wrapper = styled.div`
         cursor: pointer;
     }
 
+    /* Desktop */
+
     @media (min-width: 768px) {
+        .job-cards {
+            display: none;
+        }
         .job-table {
             display: flex;
-        }
-    }
-
-    /* CARDS */
-    .job-cards {
-        display: none;
-    }
-
-    @media (max-width: 768px) {
-        .job-cards {
-            display: flex;
+            padding: 2rem 2rem;
         }
     }
 `;

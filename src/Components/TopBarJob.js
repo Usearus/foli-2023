@@ -10,7 +10,7 @@ import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
 import { supabase } from '../API/supabase';
 
-const TopBarJob = ({ className }) => {
+const TopBarJob = () => {
     const { setCurrentJob, fetchUserJobs, currentJob } =
         useContext(DatabaseContext);
     const { setAlert } = useAlert();
@@ -60,7 +60,7 @@ const TopBarJob = ({ className }) => {
     };
 
     return (
-        <Wrapper className={className}>
+        <Wrapper>
             <Container fluid>
                 <Stack
                     direction='horizontal'
