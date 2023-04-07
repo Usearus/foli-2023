@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 import ModalProfile from './ModalProfile';
 import { DatabaseContext } from '../context/DatabaseContext';
+import { FiMenu } from 'react-icons/fi';
 
 const NavBar = () => {
     const { logout } = useAuth0();
@@ -58,7 +59,14 @@ const NavBar = () => {
                         </span>
                     </Navbar.Brand>
 
-                    <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+                    <Navbar.Toggle
+                        aria-controls='responsive-navbar-nav'
+                        style={{ border: 0 }}
+                    >
+                        <Button variant='outline-secondary'>
+                            <FiMenu />
+                        </Button>
+                    </Navbar.Toggle>
                     <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav variant='pills' className='me-auto'>
                             <LinkContainer to='/'>

@@ -5,6 +5,7 @@ import { Navbar, Nav, Container, Stack, Form, Button } from 'react-bootstrap';
 import { DatabaseContext } from '../context/DatabaseContext';
 import { supabase } from '../API/supabase';
 import useAlert from '../Custom Hooks/useAlert';
+import { GoChevronDown, GoChevronUp } from 'react-icons/go';
 
 const TopBarJobMobile = ({ className }) => {
     const { currentJob, fetchUserJobs } = useContext(DatabaseContext);
@@ -31,6 +32,8 @@ const TopBarJobMobile = ({ className }) => {
         }
     };
 
+    const [toggle, setToggle] = useState(false);
+
     return (
         <Wrapper className={className}>
             <Container fluid>
@@ -44,6 +47,7 @@ const TopBarJobMobile = ({ className }) => {
                         top: '0',
                         zIndex: '1',
                     }}
+                    onToggle={() => setToggle(!toggle)}
                 >
                     <Container fluid>
                         <h6 style={{ fontWeight: '600', margin: 0 }}>
@@ -53,7 +57,15 @@ const TopBarJobMobile = ({ className }) => {
                         </h6>
 
                         <Navbar.Toggle aria-controls='responsive-navbar-nav'>
-                            <Button variant='outline-secondary'>Details</Button>
+                            <Button
+                                variant='light'
+                                style={{
+                                    background: 'var(--grey-200)',
+                                    border: 0,
+                                }}
+                            >
+                                {toggle ? <GoChevronUp /> : <GoChevronDown />}
+                            </Button>
                         </Navbar.Toggle>
                         <Navbar.Collapse id='responsive-navbar-nav'>
                             <Form>
@@ -98,6 +110,7 @@ const Wrapper = styled.div`
     .navbar-toggler {
         border: 0;
     }
+
     .top-bar-container {
         background: var(--grey-200);
         justify-content: space-between;
