@@ -1,5 +1,5 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import JobsList from '../Components/JobsList';
+import JobsTable from '../Components/JobsTable';
 import { DatabaseContext } from '../context/DatabaseContext';
 import useAlert from '../Custom Hooks/useAlert';
 import { MdOutlineClose } from 'react-icons/md';
@@ -269,7 +269,7 @@ const JobsPage = () => {
         return (
             <Wrapper>
                 <TopBarTable className='desktop-only' />
-                <JobsList jobs={userJobs} />
+                <JobsTable jobs={userJobs} />
                 <div className='add-job-fab mobile-only'>
                     <ModalAddJob />
                 </div>
@@ -290,7 +290,8 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 100%;
+    height: calc(100vh - 63px);
+    background: var(--grey-100);
 
     .btn.btn-primary {
         border-radius: 99px;

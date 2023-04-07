@@ -25,11 +25,10 @@ const Wrapper = styled.div`
     top: 63px;
     z-index: 1;
     width: 100%;
+    background: var(--grey-100);
 
     .top-bar-container {
-        background: var(--white);
-        justify-content: space-between;
-        color: var(--grey-700);
+        /* justify-content: space-between; */
         padding: 1rem;
     }
 `;

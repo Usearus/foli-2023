@@ -64,7 +64,7 @@ const JobsTableRow = (job) => {
 
     return (
         <>
-            <tr>
+            <tr style={{ background: 'var(--white)' }}>
                 <td onClick={handleTableRowClick}>
                     <div style={{ fontWeight: '600' }}>{job.company}</div>
                     <div
@@ -158,12 +158,20 @@ const JobsTableRow = (job) => {
 export default JobsTableRow;
 
 const Wrapper = styled.div`
-    /* .truncate {
-        max-width: 100px;
+    td.div.truncate {
+        max-width: 250px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    } */
+    }
+
+    td.div.truncate {
+        color: red;
+    }
+
+    tr {
+        background: red;
+    }
 
     .select {
         cursor: pointer;

@@ -2,10 +2,9 @@ import { useState } from 'react';
 import JobsTableRow from './JobsTableRow';
 import styled from 'styled-components';
 import { GoChevronDown, GoChevronUp } from 'react-icons/go';
-import JobCards from './JobCards';
-import { Stack, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
-const JobsList = ({ jobs }) => {
+const JobsTable = ({ jobs }) => {
     const [sortOrder, setSortOrder] = useState({
         column: 'company',
         direction: 'asc',
@@ -115,7 +114,7 @@ const JobsList = ({ jobs }) => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody style={{ border: '4px' }}>
+                    <tbody>
                         {sortedJobs.map((job) => {
                             return <JobsTableRow key={job.id} {...job} />;
                         })}
@@ -126,11 +125,28 @@ const JobsList = ({ jobs }) => {
     );
 };
 
-export default JobsList;
+export default JobsTable;
 
 const Wrapper = styled.div`
-    display: flex;
-    padding: 2rem 2rem;
+    /* padding: 2rem 2rem; */
+    height: 100%;
+
+    /* Mobile */
+    @media (max-width: 576px) {
+        padding: 0;
+    }
+
+    div.job-table {
+        height: 100%;
+    }
+
+    div.table.responsive {
+        height: 100% !important;
+    }
+
+    .table {
+        height: 100%;
+    }
 
     .custom-width {
         min-width: 120px;
