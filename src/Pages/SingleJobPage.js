@@ -33,14 +33,14 @@ const SingleJobPage = () => {
     return (
         <Wrapper>
             <Stack className='top'>
-                <div className='sheets-topbar'>
+                <div className='mobile-only'>
                     <TopBarJobMobile />
                 </div>
-                <TopBarJobDesktop className='top-bar' />
+                <TopBarJobDesktop className='desktop-only' />
             </Stack>
-            <SideBar className='sidebar sheets-sidebar' />
+            <SideBar className='sidebar desktop-only' />
             <SheetList className='right' />
-            <div className='add-sheet-fab'>
+            <div className='add-sheet-fab mobile-only'>
                 <DropdownButton
                     title='Add Sheet'
                     id='add-sheet-dropdown'
@@ -101,10 +101,9 @@ const Wrapper = styled.div`
     position: relative;
 
     .add-sheet-fab {
-        display: flex;
         position: absolute;
-        bottom: 2rem;
-        right: 2rem;
+        bottom: 1rem;
+        right: 1rem;
     }
 
     .dropdown-toggle {
@@ -125,18 +124,8 @@ const Wrapper = styled.div`
         background: var(--grey-200);
     }
 
-    .sheets-sidebar {
-        display: none;
-    }
-    .sheets-topbar {
-        display: flex;
-    }
-
-    .top-bar {
-        display: none;
-    }
     /* Desktop */
-    @media (min-width: 768px) {
+    @media (min-width: 576px) {
         display: grid;
         grid-template-areas:
             'top top'
@@ -150,24 +139,8 @@ const Wrapper = styled.div`
             grid-area: sidebar;
         }
 
-        .sheets-sidebar {
-            display: flex;
-        }
-
-        .sheets-topbar {
-            display: none;
-        }
-
-        .add-sheet-fab {
-            display: none;
-        }
-
         .dropdown-toggle {
             border-radius: 0.37rem;
-        }
-
-        .top-bar {
-            display: flex;
         }
     }
 `;

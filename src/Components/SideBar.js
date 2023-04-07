@@ -123,8 +123,5 @@ const Wrapper = styled.div`
         .sidebar-container {
             padding: 1rem 1rem;
         }
-        .top-bar {
-            display: flex;
-        }
     }
 `;

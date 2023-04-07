@@ -177,14 +177,6 @@ const Wrapper = styled.div`
         .truncate {
             display: none;
         }
-
-        .sheets-sidebar {
-            display: flex;
-        }
-
-        .sheets-topbar {
-            display: none;
-        }
     }
 
     .right-content {

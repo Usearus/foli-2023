@@ -69,24 +69,15 @@ const JobsList = ({ jobs }) => {
                                 }`}
                                 onClick={() => handleHeaderClick('company')}
                             >
-                                Company {renderSortIcon('company')}
-                            </th>
-                            <th
-                                className={`${
-                                    sortOrder.column === 'position'
-                                        ? 'active-header'
-                                        : ''
-                                }`}
-                                onClick={() => handleHeaderClick('position')}
-                            >
-                                Position {renderSortIcon('position')}
+                                Job {renderSortIcon('company')}
                             </th>
                             <th
                                 className={`${
                                     sortOrder.column === 'salary'
                                         ? 'active-header'
                                         : ''
-                                }`}
+                                } , desktop-only-table-cell`}
+
                                 // TODO onClick={() => handleHeaderClick('salary')}
                             >
                                 Salary {renderSortIcon('salary')}
@@ -96,7 +87,7 @@ const JobsList = ({ jobs }) => {
                                     sortOrder.column === 'location'
                                         ? 'active-header'
                                         : ''
-                                }`}
+                                }, desktop-only-table-cell`}
                                 onClick={() => handleHeaderClick('location')}
                             >
                                 Location {renderSortIcon('location')}
@@ -116,7 +107,7 @@ const JobsList = ({ jobs }) => {
                                     sortOrder.column === 'edited'
                                         ? 'active-header'
                                         : ''
-                                }`}
+                                }, desktop-only-table-cell`}
                                 onClick={() => handleHeaderClick('edited')}
                             >
                                 Edited {renderSortIcon('edited')}
@@ -124,19 +115,13 @@ const JobsList = ({ jobs }) => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{ border: '4px' }}>
                         {sortedJobs.map((job) => {
                             return <JobsTableRow key={job.id} {...job} />;
                         })}
                     </tbody>
                 </Table>
             </div>
-
-            <Stack className='job-cards'>
-                {sortedJobs.map((job) => {
-                    return <JobCards key={job.id} {...job} />;
-                })}
-            </Stack>
         </Wrapper>
     );
 };
@@ -144,18 +129,8 @@ const JobsList = ({ jobs }) => {
 export default JobsList;
 
 const Wrapper = styled.div`
-    /* height: 100%; */
     display: flex;
-
-    /* Mobile */
-    .job-cards {
-        display: flex;
-        height: 100%;
-    }
-
-    .job-table {
-        display: none;
-    }
+    padding: 2rem 2rem;
 
     .custom-width {
         min-width: 120px;
@@ -164,7 +139,7 @@ const Wrapper = styled.div`
     th {
         cursor: pointer;
         font-weight: 600;
-        font-size: medium;
+        background: var(--grey-50);
     }
 
     tr {
@@ -177,18 +152,5 @@ const Wrapper = styled.div`
 
     .table tbody:hover {
         cursor: pointer;
-    }
-
-    /* Desktop */
-
-    @media (min-width: 576px) {
-        .job-cards {
-            display: none;
-        }
-        .job-table {
-            display: flex;
-            padding: 2rem 2rem;
-            height: 100%;
-        }
     }
 `;

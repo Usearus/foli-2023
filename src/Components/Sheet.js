@@ -104,7 +104,7 @@ const Sheet = (sheet) => {
             ) : (
                 <>
                     <Resizable
-                        className='sheet-content shadow-on sheets-desktop'
+                        className='sheet-content shadow-on sheets-desktop desktop-only'
                         minWidth='300px'
                         maxWidth='700px'
                         size={{
@@ -235,7 +235,7 @@ const Sheet = (sheet) => {
                             </>
                         )}
                     </Resizable>
-                    <div className='sheet-content sheets-mobile'>
+                    <div className='sheet-content sheets-mobile mobile-only'>
                         <header className='sheet-title'>
                             {!editing ? (
                                 <Stack direction='horizontal'>
@@ -470,10 +470,6 @@ const Wrapper = styled.div`
 
     .sheets-mobile {
         display: none;
-    }
-
-    .sheets-desktop {
-        display: flex;
     }
 
     // Mobile

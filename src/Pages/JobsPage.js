@@ -258,7 +258,7 @@ const JobsPage = () => {
                         started.
                     </h5>
                 </Wrapper>
-                <div className='add-job-fab'>
+                <div className='add-job-fab mobile-only'>
                     <ModalAddJob />
                 </div>
             </>
@@ -268,9 +268,9 @@ const JobsPage = () => {
     if (isOnboarded === true && userJobs && userJobs.length > 0) {
         return (
             <Wrapper>
-                <TopBarTable className='top-bar' />
+                <TopBarTable className='desktop-only' />
                 <JobsList jobs={userJobs} />
-                <div className='add-job-fab'>
+                <div className='add-job-fab mobile-only'>
                     <ModalAddJob />
                 </div>
             </Wrapper>
@@ -292,26 +292,13 @@ const Wrapper = styled.div`
     position: relative;
     height: 100%;
 
-    .btn .btn-primary {
-        border-radius: 99px !important;
+    .btn.btn-primary {
+        border-radius: 99px;
     }
 
     .add-job-fab {
         position: absolute;
-        right: 2rem;
-        bottom: 2rem;
-    }
-
-    .top-bar {
-        display: none;
-    }
-    // Desktop
-    @media (min-width: 576px) {
-        .add-job-fab {
-            display: none;
-        }
-        .top-bar {
-            display: flex;
-        }
+        right: 1rem;
+        bottom: 1rem;
     }
 `;

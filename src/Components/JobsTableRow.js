@@ -65,15 +65,27 @@ const JobsTableRow = (job) => {
     return (
         <>
             <tr>
-                <td onClick={handleTableRowClick}>{job.company}</td>
-                <td onClick={handleTableRowClick}>{job.position}</td>
                 <td onClick={handleTableRowClick}>
+                    <div style={{ fontWeight: '600' }}>{job.company}</div>
+                    <div
+                    // className='truncate'
+                    >
+                        {job.position}
+                    </div>
+                </td>
+                <td
+                    className='desktop-only-table-cell'
+                    onClick={handleTableRowClick}
+                >
                     {job.salary_min && job.salary_max
                         ? `$${job.salary_min.toLocaleString()} -
                             ${job.salary_max.toLocaleString()}`
                         : '-'}
                 </td>
-                <td onClick={handleTableRowClick}>
+                <td
+                    className='desktop-only-table-cell'
+                    onClick={handleTableRowClick}
+                >
                     {job.location ? job.location : ''}
                 </td>
                 <td>
@@ -100,7 +112,10 @@ const JobsTableRow = (job) => {
                         </Form>
                     </Wrapper>
                 </td>
-                <td onClick={handleTableRowClick}>
+                <td
+                    className='desktop-only-table-cell'
+                    onClick={handleTableRowClick}
+                >
                     {new Date(job.edited).toLocaleDateString()}
                 </td>
                 <td>
@@ -143,6 +158,13 @@ const JobsTableRow = (job) => {
 export default JobsTableRow;
 
 const Wrapper = styled.div`
+    /* .truncate {
+        max-width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    } */
+
     .select {
         cursor: pointer;
         min-width: 132px;
@@ -178,7 +200,7 @@ const Wrapper = styled.div`
     .Rejected,
     .Declined,
     .Archived {
-        background-color: var(--primary-800);
-        color: var(--white);
+        background-color: var(--grey-200);
+        color: var(--grey-800);
     }
 `;

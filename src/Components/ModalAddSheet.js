@@ -70,7 +70,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
                     Close
                 </Button>
                 <Button variant='primary' onClick={handleAddSheetClick}>
-                    Save Changes
+                    Confirm
                 </Button>
             </Modal.Footer>
         </Modal>

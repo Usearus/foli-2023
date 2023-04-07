@@ -155,7 +155,7 @@ const ModalAddJob = () => {
                         Close
                     </Button>
                     <Button variant='primary' onClick={handleAddJobClick}>
-                        Add Job
+                        Confirm
                     </Button>
                 </Modal.Footer>
             </Modal>
