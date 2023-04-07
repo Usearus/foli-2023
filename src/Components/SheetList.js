@@ -10,9 +10,18 @@ const SheetList = ({ className }) => {
 
     return (
         <div className={className}>
-            <SheetPosition />
+            <div style={{ scrollSnapAlign: 'center', height: '100%' }}>
+                <SheetPosition />
+            </div>
             {visibleSheets.map((sheet) => {
-                return <Sheet key={sheet.id} {...sheet} id={sheet.id} />;
+                return (
+                    <div
+                        key={sheet.id}
+                        style={{ scrollSnapAlign: 'center', height: '100%' }}
+                    >
+                        <Sheet key={sheet.id} {...sheet} id={sheet.id} />
+                    </div>
+                );
             })}
         </div>
     );

@@ -350,6 +350,10 @@ const SheetPosition = () => {
 export default SheetPosition;
 
 const Wrapper = styled.div`
+    height: 100%;
+    .sheet-container {
+    }
+
     Form {
         padding: 1rem 2rem;
         height: 100%;

@@ -349,6 +349,7 @@ const Sheet = (sheet) => {
 };
 
 const Wrapper = styled.div`
+    height: 100%;
     .sheet-title {
         padding: 1rem 1rem 0.5rem 1rem;
     }
