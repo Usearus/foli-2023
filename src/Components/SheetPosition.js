@@ -381,8 +381,7 @@ const Wrapper = styled.div`
     }
 
     :hover .shadow-on {
-        box-shadow: 0px 5px 10px var(--grey-400);
-        box-shadow: 5px 0px 10px var(--primary-200);
+        box-shadow: 0px 5px 10px var(--grey-500);
     }
 
     .sheet-title {

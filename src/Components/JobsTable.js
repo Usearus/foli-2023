@@ -57,7 +57,7 @@ const JobsTable = ({ jobs }) => {
     return (
         <Wrapper>
             <div className='job-table'>
-                <Table responsive hover>
+                <Table hover>
                     <thead>
                         <tr>
                             <th
@@ -130,22 +130,12 @@ export default JobsTable;
 const Wrapper = styled.div`
     /* padding: 2rem 2rem; */
     height: 100%;
+    width: 100%;
+    max-width: 1200px;
 
     /* Mobile */
     @media (max-width: 576px) {
         padding: 0;
-    }
-
-    div.job-table {
-        height: 100%;
-    }
-
-    div.table.responsive {
-        height: 100% !important;
-    }
-
-    .table {
-        height: 100%;
     }
 
     .custom-width {

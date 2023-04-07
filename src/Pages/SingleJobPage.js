@@ -108,6 +108,7 @@ const Wrapper = styled.div`
 
     .dropdown-toggle {
         border-radius: 99px;
+        padding: 9px 16px;
     }
     .top {
         grid-area: top;
@@ -141,6 +142,7 @@ const Wrapper = styled.div`
 
         .dropdown-toggle {
             border-radius: 0.37rem;
+            padding: 6px 12px;
         }
     }
 `;

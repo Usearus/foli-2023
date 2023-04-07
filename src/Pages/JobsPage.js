@@ -293,13 +293,17 @@ const Wrapper = styled.div`
     height: calc(100vh - 63px);
     background: var(--grey-100);
 
-    .btn.btn-primary {
-        border-radius: 99px;
-    }
-
     .add-job-fab {
         position: absolute;
         right: 1rem;
         bottom: 1rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 576px) {
+        .btn.btn-primary {
+            border-radius: 99px;
+            padding: 9px 16px;
+        }
     }
 `;

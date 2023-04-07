@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { DatabaseContext } from '../context/DatabaseContext';
 import { useNavigate } from 'react-router-dom';
 import ModalDeleteConfirmation from './ModalDeleteConfirmation';
-import { Form, Dropdown } from 'react-bootstrap';
+import { Form, Dropdown, Badge } from 'react-bootstrap';
 import useAlert from '../Custom Hooks/useAlert';
 import styled from 'styled-components';
 import { FiMoreVertical } from 'react-icons/fi';
@@ -65,10 +65,18 @@ const JobsTableRow = (job) => {
     return (
         <>
             <tr style={{ background: 'var(--white)' }}>
-                <td onClick={handleTableRowClick}>
+                <td
+                    onClick={handleTableRowClick}
+                    style={{ minWidth: '100', maxWidth: '200px' }}
+                >
                     <div style={{ fontWeight: '600' }}>{job.company}</div>
                     <div
-                    // className='truncate'
+                        // className='truncate'
+                        style={{
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                        }}
                     >
                         {job.position}
                     </div>
@@ -76,6 +84,7 @@ const JobsTableRow = (job) => {
                 <td
                     className='desktop-only-table-cell'
                     onClick={handleTableRowClick}
+                    style={{ minWidth: '88px' }}
                 >
                     {job.salary_min && job.salary_max
                         ? `$${job.salary_min.toLocaleString()} -
@@ -84,11 +93,41 @@ const JobsTableRow = (job) => {
                 </td>
                 <td
                     className='desktop-only-table-cell'
+                    style={{
+                        minWidth: '130px',
+                    }}
                     onClick={handleTableRowClick}
                 >
-                    {job.location ? job.location : ''}
+                    <span
+                        style={{
+                            fontWeight: '600',
+                        }}
+                    >
+                        {job.location ? job.location : ''}
+                    </span>
+                    <span>
+                        {job.remote ? (
+                            <Badge
+                                pill
+                                bg='light'
+                                style={{
+                                    color: 'var(--primary-500)',
+                                    border: '1px solid var(--grey-300)',
+                                    fontWeight: '600',
+                                    cursor: 'default',
+                                    padding: '6px 8px',
+                                    fontSize: '.75rem',
+                                    marginLeft: '.5rem',
+                                }}
+                            >
+                                Remote
+                            </Badge>
+                        ) : (
+                            ''
+                        )}
+                    </span>
                 </td>
-                <td>
+                <td style={{ width: '160px' }}>
                     <Wrapper>
                         <Form>
                             <Form.Select
@@ -114,11 +153,12 @@ const JobsTableRow = (job) => {
                 </td>
                 <td
                     className='desktop-only-table-cell'
+                    style={{ width: '100px' }}
                     onClick={handleTableRowClick}
                 >
                     {new Date(job.edited).toLocaleDateString()}
                 </td>
-                <td>
+                <td style={{ width: '48px' }}>
                     <Dropdown onSelect={handleSelect}>
                         <Dropdown.Toggle
                             id='dropdown'
@@ -158,24 +198,18 @@ const JobsTableRow = (job) => {
 export default JobsTableRow;
 
 const Wrapper = styled.div`
-    td.div.truncate {
-        max-width: 250px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .truncate {
     }
 
-    td.div.truncate {
-        color: red;
-    }
-
-    tr {
-        background: red;
+    .my-badge {
+        color: var(--grey-200);
+        border: 1px solid var(--grey-300);
+        font-weight: 600;
+        padding: 6px 8px;
     }
 
     .select {
         cursor: pointer;
-        min-width: 132px;
         border: 1px solid var(--grey-600);
         border-radius: 90px;
     }

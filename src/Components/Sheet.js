@@ -7,6 +7,8 @@ import useAlert from '../Custom Hooks/useAlert';
 import ReactQuillEditor from '../Components/ReactQuillEditor';
 import ModalDeleteConfirmation from '../Components/ModalDeleteConfirmation';
 import { FiMoreVertical } from 'react-icons/fi';
+import { AiFillEdit } from 'react-icons/ai';
+
 import { supabase } from '../API/supabase';
 import { Resizable } from 're-resizable';
 
@@ -46,7 +48,6 @@ const Sheet = (sheet) => {
     };
 
     const handleUpdateWidthClick = async (newSheetWidth) => {
-        // console.log('newSheetWidth', newSheetWidth);
         setSheetWidth(newSheetWidth);
         const { error } = await supabase
             .from('sheets')
@@ -134,6 +135,17 @@ const Sheet = (sheet) => {
                                         className='ms-auto fade-in'
                                         onSelect={handleSelect}
                                     >
+                                        <Button
+                                            variant='light'
+                                            style={{
+                                                background: 'var(--white)',
+                                                border: 0,
+                                            }}
+                                            onClick={handleEditClick}
+                                        >
+                                            <AiFillEdit />
+                                        </Button>
+
                                         <Dropdown.Toggle
                                             id='dropdown'
                                             variant='link'
@@ -160,7 +172,7 @@ const Sheet = (sheet) => {
                                 </Stack>
                             ) : (
                                 <div>
-                                    <Stack direction='horizontal' gap='2'>
+                                    <Stack direction='horizontal' gap='1'>
                                         <Form>
                                             <Form.Group
                                                 className='title-field'
@@ -173,16 +185,29 @@ const Sheet = (sheet) => {
                                                     defaultValue={
                                                         initialTitleValue
                                                     }
-                                                    placeholder='Sheet title'
+                                                    placeholder='Add sheet title'
                                                     size='md'
                                                     maxLength={titleMaxChar}
                                                     onChange={handleTitleChange}
                                                 />
                                             </Form.Group>
                                         </Form>
-                                        <span className='character-count'>
+                                        <div className='character-count'>
                                             {characterCount}/{titleMaxChar}
-                                        </span>
+                                        </div>
+                                        <Button
+                                            variant='outline-secondary'
+                                            className='ms-auto'
+                                            onClick={handleCancelClick}
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button
+                                            variant='primary'
+                                            onClick={handleUpdateContentClick}
+                                        >
+                                            Save
+                                        </Button>
                                     </Stack>
                                 </div>
                             )}
@@ -190,51 +215,22 @@ const Sheet = (sheet) => {
                         <hr />
 
                         {!editing ? (
-                            <>
-                                <MarkdownView
-                                    className='sheet-scroll markdown-content'
-                                    markdown={sheet.content}
-                                    style={{
-                                        display: editing ? 'none' : 'block',
-                                    }}
-                                />
-                                <div className='sheet-footer'>
-                                    <Button
-                                        variant='outline-primary'
-                                        className='fade-up'
-                                        onClick={handleEditClick}
-                                    >
-                                        Edit
-                                    </Button>
-                                </div>
-                            </>
+                            <MarkdownView
+                                className='sheet-scroll markdown-content'
+                                markdown={sheet.content}
+                            />
                         ) : (
-                            <>
-                                <Form className='sheet-scroll'>
-                                    <Form.Group controlId='content'>
-                                        <ReactQuillEditor
-                                            value={content}
-                                            onChange={handleEditorChange}
-                                        />
-                                    </Form.Group>
-                                </Form>
-                                <div className='sheet-footer'>
-                                    <Button
-                                        variant='outline-secondary'
-                                        onClick={handleCancelClick}
-                                    >
-                                        Cancel
-                                    </Button>
-                                    <Button
-                                        variant='primary'
-                                        onClick={handleUpdateContentClick}
-                                    >
-                                        Save
-                                    </Button>
-                                </div>
-                            </>
+                            <Form className='sheet-scroll'>
+                                <Form.Group controlId='content'>
+                                    <ReactQuillEditor
+                                        value={content}
+                                        onChange={handleEditorChange}
+                                    />
+                                </Form.Group>
+                            </Form>
                         )}
                     </Resizable>
+
                     <div className='sheet-content sheets-mobile mobile-only'>
                         <header className='sheet-title'>
                             {!editing ? (
@@ -244,6 +240,16 @@ const Sheet = (sheet) => {
                                         className='ms-auto fade-in'
                                         onSelect={handleSelect}
                                     >
+                                        <Button
+                                            variant='light'
+                                            style={{
+                                                background: 'var(--white)',
+                                                border: 0,
+                                            }}
+                                            onClick={handleEditClick}
+                                        >
+                                            <AiFillEdit />
+                                        </Button>
                                         <Dropdown.Toggle
                                             id='dropdown'
                                             variant='link'
@@ -270,7 +276,7 @@ const Sheet = (sheet) => {
                                 </Stack>
                             ) : (
                                 <div>
-                                    <Stack direction='horizontal' gap='2'>
+                                    <Stack direction='horizontal' gap='1'>
                                         <Form>
                                             <Form.Group
                                                 className='title-field'
@@ -283,7 +289,7 @@ const Sheet = (sheet) => {
                                                     defaultValue={
                                                         initialTitleValue
                                                     }
-                                                    placeholder='Sheet title'
+                                                    placeholder='Add sheet title'
                                                     size='md'
                                                     maxLength={titleMaxChar}
                                                     onChange={handleTitleChange}
@@ -293,6 +299,19 @@ const Sheet = (sheet) => {
                                         <span className='character-count'>
                                             {characterCount}/{titleMaxChar}
                                         </span>
+                                        <Button
+                                            variant='outline-secondary'
+                                            className='ms-auto'
+                                            onClick={handleCancelClick}
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button
+                                            variant='primary'
+                                            onClick={handleUpdateContentClick}
+                                        >
+                                            Save
+                                        </Button>
                                     </Stack>
                                 </div>
                             )}
@@ -300,49 +319,19 @@ const Sheet = (sheet) => {
                         <hr />
 
                         {!editing ? (
-                            <>
-                                <MarkdownView
-                                    className='sheet-scroll markdown-content'
-                                    markdown={sheet.content}
-                                    style={{
-                                        display: editing ? 'none' : 'block',
-                                    }}
-                                />
-                                <div className='sheet-footer'>
-                                    <Button
-                                        variant='outline-primary'
-                                        className='fade-up'
-                                        onClick={handleEditClick}
-                                    >
-                                        Edit
-                                    </Button>
-                                </div>
-                            </>
+                            <MarkdownView
+                                className='sheet-scroll markdown-content'
+                                markdown={sheet.content}
+                            />
                         ) : (
-                            <>
-                                <Form className='sheet-scroll'>
-                                    <Form.Group controlId='content'>
-                                        <ReactQuillEditor
-                                            value={content}
-                                            onChange={handleEditorChange}
-                                        />
-                                    </Form.Group>
-                                </Form>
-                                <div className='sheet-footer'>
-                                    <Button
-                                        variant='outline-secondary'
-                                        onClick={handleCancelClick}
-                                    >
-                                        Cancel
-                                    </Button>
-                                    <Button
-                                        variant='primary'
-                                        onClick={handleUpdateContentClick}
-                                    >
-                                        Save
-                                    </Button>
-                                </div>
-                            </>
+                            <Form className='sheet-scroll'>
+                                <Form.Group controlId='content'>
+                                    <ReactQuillEditor
+                                        value={content}
+                                        onChange={handleEditorChange}
+                                    />
+                                </Form.Group>
+                            </Form>
                         )}
                     </div>
                 </>
@@ -385,19 +374,6 @@ const Wrapper = styled.div`
         height: 100%;
     }
 
-    .sheet-footer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        padding: 1rem;
-    }
-
-    .edited-text {
-        font-style: italic;
-        font-size: 0.8rem;
-        color: var(--grey-400);
-    }
-
     .markdown-content {
         padding: 1rem 2rem;
         h1 {
@@ -434,7 +410,6 @@ const Wrapper = styled.div`
 
     .ql-container {
         border: none !important;
-        /* overflow-y: auto !important; */
         padding: 0rem 1rem;
     }
 
