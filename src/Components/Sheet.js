@@ -131,36 +131,41 @@ const Sheet = (sheet) => {
                             {!editing ? (
                                 <Stack direction='horizontal'>
                                     <h6>{sheet.title}</h6>
-                                    <Dropdown
-                                        className='ms-auto fade-in'
-                                        onSelect={handleSelect}
+                                    <Stack
+                                        direction='horizontal'
+                                        className='ms-auto'
                                     >
-                                        <Button
-                                            variant='light'
-                                            style={{
-                                                background: 'var(--white)',
-                                                border: 0,
-                                            }}
-                                            onClick={handleEditClick}
+                                        <Dropdown
+                                            className='fade-in'
+                                            onSelect={handleSelect}
                                         >
-                                            <AiFillEdit />
-                                        </Button>
+                                            <Button
+                                                variant='light'
+                                                style={{
+                                                    background: 'var(--white)',
+                                                    border: 0,
+                                                }}
+                                                onClick={handleEditClick}
+                                            >
+                                                <AiFillEdit />
+                                            </Button>
 
-                                        <Dropdown.Toggle
-                                            id='dropdown'
-                                            variant='link'
-                                            style={{
-                                                color: 'var(--grey-800)',
-                                            }}
-                                        >
-                                            <FiMoreVertical />
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item eventKey='1'>
-                                                Delete Sheet
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
+                                            <Dropdown.Toggle
+                                                id='dropdown'
+                                                variant='link'
+                                                style={{
+                                                    color: 'var(--grey-800)',
+                                                }}
+                                            >
+                                                <FiMoreVertical />
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item eventKey='1'>
+                                                    Delete Sheet
+                                                </Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </Stack>
                                     {showDeleteModal && (
                                         <ModalDeleteConfirmation
                                             show={showDeleteModal}
@@ -236,9 +241,9 @@ const Sheet = (sheet) => {
                             {!editing ? (
                                 <Stack direction='horizontal'>
                                     <h6>{sheet.title}</h6>
-                                    <Dropdown
-                                        className='ms-auto fade-in'
-                                        onSelect={handleSelect}
+                                    <Stack
+                                        direction='horizontal'
+                                        className='ms-auto'
                                     >
                                         <Button
                                             variant='light'
@@ -250,21 +255,24 @@ const Sheet = (sheet) => {
                                         >
                                             <AiFillEdit />
                                         </Button>
-                                        <Dropdown.Toggle
-                                            id='dropdown'
-                                            variant='link'
-                                            style={{
-                                                color: 'var(--grey-800)',
-                                            }}
-                                        >
-                                            <FiMoreVertical />
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item eventKey='1'>
-                                                Delete Sheet
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
+                                        <Dropdown onSelect={handleSelect}>
+                                            <Dropdown.Toggle
+                                                id='dropdown'
+                                                variant='link'
+                                                style={{
+                                                    color: 'var(--grey-800)',
+                                                }}
+                                            >
+                                                <FiMoreVertical />
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item eventKey='1'>
+                                                    Delete Sheet
+                                                </Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </Stack>
+
                                     {showDeleteModal && (
                                         <ModalDeleteConfirmation
                                             show={showDeleteModal}

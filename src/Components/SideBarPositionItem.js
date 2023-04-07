@@ -60,7 +60,15 @@ const Wrapper = styled.div`
         width: 100%;
         border: 0;
     }
+
     .parent-btn:hover {
         background: var(--grey-300);
+    }
+
+    // Mobile
+    @media (max-width: 576px) {
+        .parent-btn {
+            padding: 0.5rem;
+        }
     }
 `;

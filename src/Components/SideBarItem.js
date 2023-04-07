@@ -153,4 +153,14 @@ const Wrapper = styled.div`
     :hover .fade-in {
         opacity: 1;
     }
+
+    // Mobile
+    @media (max-width: 576px) {
+        .parent-btn {
+            padding: 0.5rem;
+        }
+        .fade-in {
+            opacity: 1;
+        }
+    }
 `;

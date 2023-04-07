@@ -67,5 +67,8 @@ const App = () => {
 export default App;
 
 const Wrapper = styled.div`
+    height: 100vh;
+    width: 100vw;
+    position: relative;
     height: -webkit-fill-available;
 `;
