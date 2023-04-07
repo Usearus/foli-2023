@@ -6,12 +6,10 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
--   Finish Sidebar
 -   Onboarding isnt working
 -   Error logging into new account
     "nonIterableRest.js:2 Uncaught (in promise) TypeError: Invalid attempt to destructure non-iterable instance.
     In order to be iterable, non-array objects must have a [Symbol.iterator]() method."
--   BUG Jobstable is not centering
 -   BUG Scroll on jobs table when there is one job only.
 -   Template isn't resetting on close
 -   Remove all location stuff for profile only. (But fix issue first!)

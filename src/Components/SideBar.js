@@ -97,10 +97,11 @@ export default SideBar;
 
 const Wrapper = styled.div`
     .sidebar-container {
-        padding: 1rem 1rem;
+        padding: 1rem 0;
         height: 100%;
         background: var(--grey-200);
         color: var(--grey-800);
+        width: 100%;
         /* border-right: 1px solid var(--grey-300); */
     }
 
@@ -113,5 +114,17 @@ const Wrapper = styled.div`
         background-color: var(--grey-200);
         border: 1px solid var(--grey-400);
         border-radius: 4px;
+    }
+    label {
+        font-weight: 700;
+    }
+    // Desktop
+    @media (min-width: 576px) {
+        .sidebar-container {
+            padding: 1rem 1rem;
+        }
+        .top-bar {
+            display: flex;
+        }
     }
 `;

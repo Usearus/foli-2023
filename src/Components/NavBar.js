@@ -63,7 +63,7 @@ const NavBar = () => {
                         aria-controls='responsive-navbar-nav'
                         style={{ border: 0 }}
                     >
-                        <Button variant='outline-secondary'>
+                        <Button variant='light'>
                             <FiMenu />
                         </Button>
                     </Navbar.Toggle>
