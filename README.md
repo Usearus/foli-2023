@@ -6,11 +6,36 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
+-   Finish Sidebar
+-   Onboarding isnt working
+-   Error logging into new account
+    "nonIterableRest.js:2 Uncaught (in promise) TypeError: Invalid attempt to destructure non-iterable instance.
+    In order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+-   BUG Jobstable is not centering
+-   BUG Scroll on jobs table when there is one job only.
+-   Template isn't resetting on close
+-   Remove all location stuff for profile only. (But fix issue first!)
+-   Add instruction on how to use app during onboarding
+    -   Add a new sheet
+    -   Scroll horizontally to see all sheets
+    -   Add your profile info
+    -   Grab the end of the job description sheet and make it smaller
+    -   Delete this sheet when done
+-   Filter on top of the jobs list, but only for status.
+-   Mobile
+    -   Build basic mobile interface
+    -   See OurGroceries app for a good reference of what I want to do with sheets.
 -   Add Google Analytics
 -   Add show all hide all button to sidebar sheet list
 -   "target" role, salary, etc...
 -   Sticky survey at bottom
     -   What do you like, what's missing, what to chat about it?
+-   Add company research template
+    -   How large is the company?
+    -   Who is the hiring manager?
+    -   Interesting facts?
+    -   When was the company established?
+    -   Why do you like this job?
 -   Add template to prep for initial interview screening (questions to ask and info to get)
 -   Add template for interview notes during / after interview.
 -   Add templates for different types of interviews (portfolio, group, negotiation, etc.)
@@ -19,7 +44,6 @@ https://foli2023.netlify.app
 
 -   Open/Close Sheets bar
 -   Animate table row when adding a job
--   Add focus state to all sheets using React-Quill
 
 ## Post-MVP Features
 
@@ -29,6 +53,7 @@ https://foli2023.netlify.app
     -   Prompts dropdown to start off with
     -   Settings button that shows what info is prefilled from preferences
     -   Add sheet from GPT button
+-   ADHD Tools
 -   Spaces
     -   Document Space (MVP)
     -   Negotiation Space
@@ -38,12 +63,13 @@ https://foli2023.netlify.app
     -   Simple vs advanced. What is minimal and what can be added?
 -   Add contacts (May go over sheets sidebar)
     -   Name, Role, Notes
--   Duplicate Job
 -   Highlight Skills (Skills API)
+
+## Non-priority
+
+-   Add location info
 -   Add (25mi, 50mi, 100mi) miles dropdown to add to a location
-    -Mobile
-    -   Build mobile interface
-    -   See OurGroceries app for a good reference of what I want to do with sheets.
+-   Add focus state to all sheets using React-Quill
 
 ## UX Issues
 
