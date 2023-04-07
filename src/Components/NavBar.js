@@ -34,31 +34,32 @@ const NavBar = () => {
                 }}
             >
                 <Container fluid>
-                    <Navbar.Brand>
-                        <span
-                            style={{
-                                fontWeight: 700,
-                                fontSize: '1.5rem',
-                                cursor: 'default',
-                                paddingRight: '.25rem',
-                            }}
-                        >
-                            fol<i>i</i>
-                        </span>
-                        <span>
-                            <Badge
-                                pill
-                                bg='dark'
+                    <LinkContainer to='/'>
+                        <Navbar.Brand active={false}>
+                            <span
                                 style={{
-                                    fontSize: '.6rem',
-                                    marginRight: '1rem',
+                                    fontWeight: 700,
+                                    fontSize: '1.5rem',
+                                    cursor: 'pointer',
+                                    paddingRight: '.25rem',
                                 }}
                             >
-                                beta
-                            </Badge>
-                        </span>
-                    </Navbar.Brand>
-
+                                fol<i>i</i>
+                            </span>
+                            <span>
+                                <Badge
+                                    pill
+                                    bg='dark'
+                                    style={{
+                                        fontSize: '.6rem',
+                                        marginRight: '1rem',
+                                    }}
+                                >
+                                    beta
+                                </Badge>
+                            </span>
+                        </Navbar.Brand>
+                    </LinkContainer>
                     <Navbar.Toggle
                         aria-controls='responsive-navbar-nav'
                         style={{ border: 0 }}
@@ -70,12 +71,12 @@ const NavBar = () => {
                     <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav variant='pills' className='me-auto'>
                             <LinkContainer to='/'>
-                                <Nav.Link>Jobs</Nav.Link>
+                                <Nav.Link active={false}>Jobs</Nav.Link>
                             </LinkContainer>
 
                             {admin ? (
                                 <LinkContainer to='/testing'>
-                                    <Nav.Link>Admin</Nav.Link>
+                                    <Nav.Link active={false}>Admin</Nav.Link>
                                 </LinkContainer>
                             ) : null}
                         </Nav>
