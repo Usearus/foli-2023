@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import JobsTableRow from './JobsTableRow';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { GoChevronDown, GoChevronUp } from 'react-icons/go';
 import JobCards from './JobCards';
 import { Stack, Table } from 'react-bootstrap';
 
-// import { TransitionGroup, CSSTransition } from 'react-transition-group';
-
-const JobsTable = ({ jobs }) => {
+const JobsList = ({ jobs }) => {
     const [sortOrder, setSortOrder] = useState({
         column: 'company',
         direction: 'asc',
@@ -43,7 +41,7 @@ const JobsTable = ({ jobs }) => {
             return columnA.localeCompare(columnB) * direction;
         }
     });
-    console.log(sortedJobs);
+    // console.log(sortedJobs);
 
     const renderSortIcon = (columnName) => {
         if (columnName === sortOrder.column) {
@@ -143,12 +141,16 @@ const JobsTable = ({ jobs }) => {
     );
 };
 
-export default JobsTable;
+export default JobsList;
 
 const Wrapper = styled.div`
+    /* height: 100%; */
+    display: flex;
+
     /* Mobile */
     .job-cards {
         display: flex;
+        height: 100%;
     }
 
     .job-table {
@@ -180,6 +182,7 @@ const Wrapper = styled.div`
         .job-table {
             display: flex;
             padding: 2rem 2rem;
+            height: 100%;
         }
     }
 `;

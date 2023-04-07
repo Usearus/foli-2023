@@ -44,11 +44,11 @@ const TestingPage = () => {
                 </Button>
             </Form>
 
-            <p>
+            <h6>
                 {responses.map((response, index) => (
                     <li key={index}>{response.data.choices[0].text}</li>
                 ))}
-            </p>
+            </h6>
         </>
     );
 };

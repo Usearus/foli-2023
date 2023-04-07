@@ -11,7 +11,7 @@ const TopBarTable = ({ className }) => {
                     gap={3}
                     className='top-bar-container'
                 >
-                    <div className=' ms-auto'>
+                    <div className='ms-auto'>
                         <ModalAddJob />
                     </div>
                 </Stack>
@@ -24,11 +24,11 @@ const Wrapper = styled.div`
     position: sticky;
     top: 63px;
     z-index: 1;
+    width: 100%;
 
     .top-bar-container {
         background: var(--white);
         justify-content: space-between;
-        /* border-bottom: 1px solid var(--grey-300); */
         color: var(--grey-700);
         padding: 1rem;
     }

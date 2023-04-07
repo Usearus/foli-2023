@@ -9,10 +9,8 @@ import { supabase } from '../API/supabase';
 const JobsTableRow = (job) => {
     const { fetchUserJobs, fetchCurrentJob, fetchCurrentSheets } =
         useContext(DatabaseContext);
-
     const { setAlert } = useAlert();
     const navigate = useNavigate();
-
     const [selectedStatus, setSelectedStatus] = useState(job.status);
 
     const handleEditJobClick = async (e) => {
@@ -42,23 +40,24 @@ const JobsTableRow = (job) => {
     return (
         <Wrapper>
             <Card className='card-container'>
-                <Card.Header as='h6' onClick={handleCardClick}>
-                    {job.company}
+                <Card.Header onClick={handleCardClick}>
+                    <h6>{job.company}</h6>
                 </Card.Header>
                 <Card.Body onClick={handleCardClick}>
                     <Card.Title>{job.position}</Card.Title>
                     <Card.Text>
-                        <div>
+                        <span>
                             {job.salary_min && job.salary_max
                                 ? `$${job.salary_min.toLocaleString()} -
                             ${job.salary_max.toLocaleString()}`
                                 : ''}
-                        </div>
-                        <div>{job.location ? job.location : ''}</div>
+                        </span>
+                        <br />
+                        <span>{job.location ? job.location : ''}</span>
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <Stack direction='horizontal' ms-auto>
+                    <Stack direction='horizontal ms-auto'>
                         <Form>
                             <Form.Select
                                 size='sm'

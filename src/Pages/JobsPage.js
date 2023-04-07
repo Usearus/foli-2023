@@ -1,5 +1,5 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import JobsTable from '../Components/JobTable';
+import JobsList from '../Components/JobsList';
 import { DatabaseContext } from '../context/DatabaseContext';
 import useAlert from '../Custom Hooks/useAlert';
 import { MdOutlineClose } from 'react-icons/md';
@@ -8,6 +8,7 @@ import Loader from '../Components/Loader';
 import { Badge, Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
 import styled from 'styled-components';
 import { supabase } from '../API/supabase';
+import ModalAddJob from '../Components/ModalAddJob';
 
 const JobsPage = () => {
     const { userJobs, userProfile, fetchUserProfile } =
@@ -257,16 +258,22 @@ const JobsPage = () => {
                         started.
                     </h5>
                 </Wrapper>
+                <div className='add-job-fab'>
+                    <ModalAddJob />
+                </div>
             </>
         );
     }
 
     if (isOnboarded === true && userJobs && userJobs.length > 0) {
         return (
-            <>
-                <TopBarTable />
-                <JobsTable jobs={userJobs} />
-            </>
+            <Wrapper>
+                <TopBarTable className='top-bar' />
+                <JobsList jobs={userJobs} />
+                <div className='add-job-fab'>
+                    <ModalAddJob />
+                </div>
+            </Wrapper>
         );
     }
     return (
@@ -279,8 +286,32 @@ export default JobsPage;
 
 const Wrapper = styled.div`
     display: flex;
-    padding: 4rem;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    height: 100%;
+
+    .btn .btn-primary {
+        border-radius: 99px !important;
+    }
+
+    .add-job-fab {
+        position: absolute;
+        right: 2rem;
+        bottom: 2rem;
+    }
+
+    .top-bar {
+        display: none;
+    }
+    // Desktop
+    @media (min-width: 768px) {
+        .add-job-fab {
+            display: none;
+        }
+        .top-bar {
+            display: flex;
+        }
+    }
 `;

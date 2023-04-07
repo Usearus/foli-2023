@@ -40,7 +40,7 @@ const SingleJobPage = () => {
             </Stack>
             <SideBar className='sidebar sheets-sidebar' />
             <SheetList className='right' />
-            <div className='add-sheet-btn'>
+            <div className='add-sheet-fab'>
                 <DropdownButton
                     title='Add Sheet'
                     id='add-sheet-dropdown'
@@ -100,7 +100,7 @@ const Wrapper = styled.div`
     overflow: hidden;
     position: relative;
 
-    .add-sheet-btn {
+    .add-sheet-fab {
         display: flex;
         position: absolute;
         bottom: 2rem;
@@ -158,13 +158,14 @@ const Wrapper = styled.div`
             display: none;
         }
 
-        .add-sheet-btn {
+        .add-sheet-fab {
             display: none;
         }
 
         .dropdown-toggle {
             border-radius: 0.37rem;
         }
+
         .top-bar {
             display: flex;
         }
