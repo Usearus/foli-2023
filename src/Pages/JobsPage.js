@@ -306,7 +306,7 @@ const Wrapper = styled.div`
         display: none;
     }
     // Desktop
-    @media (min-width: 768px) {
+    @media (min-width: 576px) {
         .add-job-fab {
             display: none;
         }

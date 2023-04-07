@@ -104,7 +104,7 @@ const Sheet = (sheet) => {
             ) : (
                 <>
                     <Resizable
-                        className='sheet-content shadow-on'
+                        className='sheet-content shadow-on sheets-desktop'
                         minWidth='300px'
                         maxWidth='700px'
                         size={{
@@ -235,6 +235,116 @@ const Sheet = (sheet) => {
                             </>
                         )}
                     </Resizable>
+                    <div className='sheet-content sheets-mobile'>
+                        <header className='sheet-title'>
+                            {!editing ? (
+                                <Stack direction='horizontal'>
+                                    <h6>{sheet.title}</h6>
+                                    <Dropdown
+                                        className='ms-auto fade-in'
+                                        onSelect={handleSelect}
+                                    >
+                                        <Dropdown.Toggle
+                                            id='dropdown'
+                                            variant='link'
+                                            style={{
+                                                color: 'var(--grey-800)',
+                                            }}
+                                        >
+                                            <FiMoreVertical />
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item eventKey='1'>
+                                                Delete Sheet
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                    {showDeleteModal && (
+                                        <ModalDeleteConfirmation
+                                            show={showDeleteModal}
+                                            close={handleCloseReset}
+                                            object={sheet}
+                                            type='sheet'
+                                        />
+                                    )}
+                                </Stack>
+                            ) : (
+                                <div>
+                                    <Stack direction='horizontal' gap='2'>
+                                        <Form>
+                                            <Form.Group
+                                                className='title-field'
+                                                controlId='title'
+                                            >
+                                                <Form.Control
+                                                    type='text'
+                                                    required
+                                                    ref={titleRef}
+                                                    defaultValue={
+                                                        initialTitleValue
+                                                    }
+                                                    placeholder='Sheet title'
+                                                    size='md'
+                                                    maxLength={titleMaxChar}
+                                                    onChange={handleTitleChange}
+                                                />
+                                            </Form.Group>
+                                        </Form>
+                                        <span className='character-count'>
+                                            {characterCount}/{titleMaxChar}
+                                        </span>
+                                    </Stack>
+                                </div>
+                            )}
+                        </header>
+                        <hr />
+
+                        {!editing ? (
+                            <>
+                                <MarkdownView
+                                    className='sheet-scroll markdown-content'
+                                    markdown={sheet.content}
+                                    style={{
+                                        display: editing ? 'none' : 'block',
+                                    }}
+                                />
+                                <div className='sheet-footer'>
+                                    <Button
+                                        variant='outline-primary'
+                                        className='fade-up'
+                                        onClick={handleEditClick}
+                                    >
+                                        Edit
+                                    </Button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <Form className='sheet-scroll'>
+                                    <Form.Group controlId='content'>
+                                        <ReactQuillEditor
+                                            value={content}
+                                            onChange={handleEditorChange}
+                                        />
+                                    </Form.Group>
+                                </Form>
+                                <div className='sheet-footer'>
+                                    <Button
+                                        variant='outline-secondary'
+                                        onClick={handleCancelClick}
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        variant='primary'
+                                        onClick={handleUpdateContentClick}
+                                    >
+                                        Save
+                                    </Button>
+                                </div>
+                            </>
+                        )}
+                    </div>
                 </>
             )}
         </Wrapper>
@@ -356,6 +466,26 @@ const Wrapper = styled.div`
     :hover .shadow-on {
         box-shadow: 0px 5px 10px var(--grey-400);
         box-shadow: 5px 0px 10px var(--primary-200);
+    }
+
+    .sheets-mobile {
+        display: none;
+    }
+
+    .sheets-desktop {
+        display: flex;
+    }
+
+    // Mobile
+    @media (max-width: 576px) {
+        .sheets-mobile {
+            display: flex;
+            width: 90vw;
+            scroll-snap-type: x mandatory;
+        }
+        .sheets-desktop {
+            display: none;
+        }
     }
 `;
 

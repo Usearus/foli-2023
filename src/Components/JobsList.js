@@ -175,7 +175,7 @@ const Wrapper = styled.div`
 
     /* Desktop */
 
-    @media (min-width: 768px) {
+    @media (min-width: 576px) {
         .job-cards {
             display: none;
         }

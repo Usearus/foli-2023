@@ -417,4 +417,11 @@ const Wrapper = styled.div`
         gap: 1rem;
         padding: 1rem;
     }
+
+    // Mobile
+    @media (max-width: 576px) {
+        .sheet-content {
+            width: 85vw;
+        }
+    }
 `;

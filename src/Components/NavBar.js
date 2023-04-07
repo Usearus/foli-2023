@@ -20,8 +20,9 @@ const NavBar = () => {
     if (userProfile) {
         return (
             <Navbar
+                variant='light'
                 collapseOnSelect
-                expand='lg'
+                expand='sm'
                 style={{
                     padding: '8px 16px',
                     background: 'var(--grey-100)',

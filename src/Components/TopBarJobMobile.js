@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import SideBar from './SideBar';
-import { Navbar, Nav, Container, Stack, Form } from 'react-bootstrap';
+import { Navbar, Nav, Container, Stack, Form, Button } from 'react-bootstrap';
 import { DatabaseContext } from '../context/DatabaseContext';
 import { supabase } from '../API/supabase';
 import useAlert from '../Custom Hooks/useAlert';
@@ -46,12 +46,16 @@ const TopBarJobMobile = ({ className }) => {
                     }}
                 >
                     <Container fluid>
-                        <Stack>
-                            <h5>
-                                {currentJob
-                                    ? `${currentJob.company} - ${currentJob.position}`
-                                    : ''}
-                            </h5>
+                        <h6 style={{ fontWeight: '600', margin: 0 }}>
+                            {currentJob
+                                ? `${currentJob.company} - ${currentJob.position}`
+                                : ''}
+                        </h6>
+
+                        <Navbar.Toggle aria-controls='responsive-navbar-nav'>
+                            <Button variant='outline-secondary'>Details</Button>
+                        </Navbar.Toggle>
+                        <Navbar.Collapse id='responsive-navbar-nav'>
                             <Form>
                                 <Form.Select
                                     size='sm'
@@ -76,9 +80,7 @@ const TopBarJobMobile = ({ className }) => {
                                     <option value='Archived'>Archived</option>
                                 </Form.Select>
                             </Form>
-                        </Stack>
-                        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-                        <Navbar.Collapse id='responsive-navbar-nav'>
+                            <hr />
                             <SideBar />
                             <Nav variant='pills' className='me-auto'></Nav>
                         </Navbar.Collapse>
@@ -93,6 +95,9 @@ export default TopBarJobMobile;
 
 const Wrapper = styled.div`
     width: 100%;
+    .navbar-toggler {
+        border: 0;
+    }
     .top-bar-container {
         background: var(--grey-200);
         justify-content: space-between;
@@ -108,6 +113,12 @@ const Wrapper = styled.div`
         color: var(--grey-600);
         background-color: var(--grey-100);
         border-radius: 90px;
-        margin-top: 0.5rem;
+        /* margin-top: 0.5rem; */
+        /* margin-left: 1rem; */
+    }
+
+    hr {
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
     }
 `;

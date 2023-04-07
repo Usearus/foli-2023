@@ -173,7 +173,7 @@ const Wrapper = styled.div`
     }
 
     /* Mobile */
-    @media (max-width: 768px) {
+    @media (max-width: 576px) {
         .truncate {
             display: none;
         }
