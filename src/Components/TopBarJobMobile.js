@@ -49,54 +49,60 @@ const TopBarJobMobile = ({ className }) => {
                     }}
                     onToggle={() => setToggle(!toggle)}
                 >
-                    <Container fluid>
-                        <h6 style={{ fontWeight: '600', margin: 0 }}>
+                    <div className='title-content'>
+                        <h6
+                            style={{
+                                fontWeight: '600',
+                                margin: 0,
+                            }}
+                        >
                             {currentJob
                                 ? `${currentJob.company} - ${currentJob.position}`
                                 : ''}
                         </h6>
-
-                        <Navbar.Toggle aria-controls='responsive-navbar-nav'>
-                            <Button
-                                variant='light'
-                                style={{
-                                    background: 'var(--grey-200)',
-                                    border: 0,
-                                }}
-                            >
-                                {toggle ? <GoChevronUp /> : <GoChevronDown />}
-                            </Button>
-                        </Navbar.Toggle>
-                        <Navbar.Collapse id='responsive-navbar-nav'>
-                            <Form>
-                                <Form.Select
-                                    size='sm'
-                                    aria-label='Select job status'
-                                    onChange={handleUpdateStatusClick}
-                                    value={selectedStatus}
-                                    className={`select ${selectedStatus}`}
+                        <div className='ms-auto'>
+                            <Navbar.Toggle aria-controls='responsive-navbar-nav'>
+                                <Button
+                                    variant='light'
+                                    style={{
+                                        background: 'var(--grey-200)',
+                                        border: 0,
+                                    }}
                                 >
-                                    <option value='Bookmarked'>
-                                        Bookmarked
-                                    </option>
-                                    <option value='Applied'>Applied</option>
-                                    <option value='Interviewing'>
-                                        Interviewing
-                                    </option>
-                                    <option value='Negotiating'>
-                                        Negotiating
-                                    </option>
-                                    <option value='Accepted'>Accepted</option>
-                                    <option value='Declined'>Declined</option>
-                                    <option value='Rejected'>Rejected</option>
-                                    <option value='Archived'>Archived</option>
-                                </Form.Select>
-                            </Form>
-                            <hr />
-                            <SideBar />
-                            <Nav variant='pills' className='me-auto'></Nav>
-                        </Navbar.Collapse>
-                    </Container>
+                                    {toggle ? (
+                                        <GoChevronUp />
+                                    ) : (
+                                        <GoChevronDown />
+                                    )}
+                                </Button>
+                            </Navbar.Toggle>
+                        </div>
+                    </div>
+                    <Navbar.Collapse id='responsive-navbar-nav'>
+                        <Form>
+                            <Form.Select
+                                size='sm'
+                                aria-label='Select job status'
+                                onChange={handleUpdateStatusClick}
+                                value={selectedStatus}
+                                className={`select ${selectedStatus}`}
+                            >
+                                <option value='Bookmarked'>Bookmarked</option>
+                                <option value='Applied'>Applied</option>
+                                <option value='Interviewing'>
+                                    Interviewing
+                                </option>
+                                <option value='Negotiating'>Negotiating</option>
+                                <option value='Accepted'>Accepted</option>
+                                <option value='Declined'>Declined</option>
+                                <option value='Rejected'>Rejected</option>
+                                <option value='Archived'>Archived</option>
+                            </Form.Select>
+                        </Form>
+                        <hr />
+                        <SideBar />
+                        <Nav variant='pills' className='me-auto'></Nav>
+                    </Navbar.Collapse>
                 </Navbar>
             </Container>
         </Wrapper>
@@ -126,12 +132,19 @@ const Wrapper = styled.div`
         color: var(--grey-600);
         background-color: var(--grey-100);
         border-radius: 90px;
-        /* margin-top: 0.5rem; */
+        margin-top: 0.5rem;
         /* margin-left: 1rem; */
     }
 
     hr {
         margin-top: 1.5rem;
         margin-bottom: 0.5rem;
+    }
+
+    .title-content {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
     }
 `;

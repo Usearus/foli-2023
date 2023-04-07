@@ -91,10 +91,20 @@ const JobsTableRow = (job) => {
 export default JobsTableRow;
 
 const Wrapper = styled.div`
-    padding: 1rem;
+    padding: 0.75rem;
+
+    .card {
+        border-radius: 0;
+    }
+
+    .card h6 {
+        margin: 0.5rem 0;
+        font-weight: 600;
+    }
 
     .card-header {
         background: var(--primary-50);
+        border-radius: 0;
     }
 
     .card-footer {
@@ -102,6 +112,7 @@ const Wrapper = styled.div`
         border: 0;
         padding-bottom: 1rem;
         padding-top: 0;
+        border-radius: 0;
     }
 
     .edited-text {
