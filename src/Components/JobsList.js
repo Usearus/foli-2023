@@ -163,10 +163,16 @@ const Wrapper = styled.div`
 
     th {
         cursor: pointer;
+        font-weight: 600;
+        font-size: medium;
+    }
+
+    tr {
+        font-size: small;
     }
 
     th.active-header {
-        background-color: var(--grey-100);
+        background-color: var(--primary-50);
     }
 
     .table tbody:hover {
