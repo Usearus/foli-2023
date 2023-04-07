@@ -11,11 +11,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600;1,800&display=swap');
 // @import "custom";
 
-html {
-    font-size: 100%;
-    height: 100vh;
-}
-
 :root {
     /* dark shades of primary color*/
     --primary-50: #ede7f7;
@@ -81,6 +76,10 @@ html {
     --fixed-width: 600px;
 }
 
+html {
+    font-size: 100%;
+    height: 100%;
+}
 body {
     background: var(--white);
     font-family: var(--bodyFont);
