@@ -9,7 +9,7 @@ const SheetList = ({ className }) => {
     const visibleSheets = currentSheets.filter((sheet) => sheet.visible);
 
     return (
-        <div className={className} style={{ scrollSnapType: 'x mandatory' }}>
+        <div className={className}>
             <SheetPosition />
             {visibleSheets.map((sheet) => {
                 return <Sheet key={sheet.id} {...sheet} id={sheet.id} />;

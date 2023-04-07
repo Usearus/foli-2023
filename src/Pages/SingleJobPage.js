@@ -120,8 +120,10 @@ const Wrapper = styled.div`
         gap: 0.25rem;
         align-items: stretch;
         height: 100%;
+        width: 100%;
         padding: 1rem 1rem;
         overflow-x: scroll;
+        scroll-snap-type: x mandatory;
         background: var(--grey-200);
     }
 
