@@ -10,7 +10,7 @@ import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
 import { supabase } from '../API/supabase';
 
-const TopBarJob = () => {
+const TopBarJobDesktop = ({ className }) => {
     const { setCurrentJob, fetchUserJobs, currentJob } =
         useContext(DatabaseContext);
     const { setAlert } = useAlert();
@@ -60,7 +60,7 @@ const TopBarJob = () => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper className={className}>
             <Container fluid>
                 <Stack
                     direction='horizontal'
@@ -143,7 +143,7 @@ const TopBarJob = () => {
     );
 };
 
-export default TopBarJob;
+export default TopBarJobDesktop;
 
 const Wrapper = styled.div`
     position: sticky;
@@ -172,6 +172,21 @@ const Wrapper = styled.div`
         text-overflow: ellipsis;
     }
 
+    /* Mobile */
+    @media (max-width: 768px) {
+        .truncate {
+            display: none;
+        }
+
+        .sheets-sidebar {
+            display: flex;
+        }
+
+        .sheets-topbar {
+            display: none;
+        }
+    }
+
     .right-content {
         display: flex;
         flex-direction: row;
@@ -186,36 +201,4 @@ const Wrapper = styled.div`
         background-color: var(--grey-100);
         border-radius: 90px;
     }
-
-    /* option {
-    background-color: var(--white);
-    color: var(--grey-900);
-  }
-
-  .Applied {
-    background-color: var(--primary-50);
-    color: var(--grey-800);
-  }
-
-  .Interviewing {
-    background-color: var(--primary-100);
-    color: var(--grey-800);
-  }
-
-  .Negotiating {
-    background-color: var(--primary-200);
-    color: var(--black);
-  }
-
-  .Accepted {
-    background-color: var(--primary-300);
-    color: var(--white);
-  }
-
-  .Rejected,
-  .Declined,
-  .Archived {
-    background-color: var(--primary-800);
-    color: var(--white);
-  } */
 `;
