@@ -32,7 +32,7 @@ const NavBar = () => {
                 collapseOnSelect
                 expand='sm'
                 style={{
-                    padding: '8px 16px',
+                    padding: '11px 16px',
                     background: 'var(--grey-100)',
                     borderBottom: '1px solid var(--grey-300)',
                     position: 'sticky',
