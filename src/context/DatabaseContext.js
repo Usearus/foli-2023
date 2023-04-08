@@ -78,55 +78,6 @@ const DatabaseProvider = ({ children }) => {
     const [userJobs, setUserJobs] = useState(null);
     const [userSheets, setUserSheets] = useState(null);
 
-    // FIND ALL USER DATA
-    // const fetchUserProfile = async () => {
-    //   if (auth0Email) {
-    //     const [record] = await base('profiles')
-    //       .select({
-    //         maxRecords: 1,
-    //         filterByFormula: `{account} = '${auth0Email}'`,
-    //       })
-    //       .firstPage();
-    //     if (record) {
-    //       setUserProfile(record);
-    //     } else {
-    //       createUserProfile();
-    //       const onboardingJob = await createOnboardingJob();
-    //       const onboardingSheets = await createOnboardingSheets(onboardingJob.id);
-    //     }
-    //   }
-    // };
-
-    // const fetchUserJobs = async () => {
-    //   if (auth0Email) {
-    //     await base('jobs')
-    //       .select({
-    //         view: 'Grid view',
-    //         filterByFormula: `{account} = '${auth0Email}'`,
-    //       })
-    //       .eachPage(function page(records, fetchNextPage) {
-    //         setUserJobs(records);
-    //         // console.log('userJobs are', records);
-    //         fetchNextPage();
-    //       });
-    //   }
-    // };
-
-    // const fetchUserSheets = async () => {
-    //   if (auth0Email) {
-    //     await base('sheets')
-    //       .select({
-    //         view: 'Grid view',
-    //         filterByFormula: `{account} = '${auth0Email}'`,
-    //       })
-    //       .eachPage(function page(records, fetchNextPage) {
-    //         setUserSheets(records);
-    //         // console.log('userSheets are', records);
-    //         fetchNextPage();
-    //       });
-    //   }
-    // };
-
     async function fetchUserProfile() {
         if (auth0Email) {
             const { data } = await supabase
