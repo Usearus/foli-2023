@@ -56,9 +56,6 @@ const Wrapper = styled.div`
             list-style-type: circle !important;
         }
 
-        p {
-            color: var(--black) !important;
-        }
         h1 {
             font-size: 1.8rem !important;
         }

@@ -8,7 +8,7 @@ import ReactQuillEditor from '../Components/ReactQuillEditor';
 import ModalDeleteConfirmation from '../Components/ModalDeleteConfirmation';
 import { FiMoreVertical } from 'react-icons/fi';
 import { AiFillEdit } from 'react-icons/ai';
-
+import ModalEditSheet from './ModalEditSheet';
 import { supabase } from '../API/supabase';
 import { Resizable } from 're-resizable';
 
@@ -19,6 +19,7 @@ const Sheet = (sheet) => {
     const { setAlert } = useAlert();
     const [selectedEventKey, setSelectedEventKey] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showEditSheetModal, setShowEditSheetModal] = useState(false);
 
     const titleRef = useRef();
     const initialTitleValue = sheet.title ?? '';
@@ -39,7 +40,7 @@ const Sheet = (sheet) => {
         setAlert('Sheet successfully updated!', 'success');
         fetchCurrentSheets(currentJob);
         setEditing(false);
-
+        setShowEditSheetModal(false);
         if (error) {
             setAlert('Something went wrong. Sheet not updated.', 'danger');
             console.log('error is', error);
@@ -73,6 +74,7 @@ const Sheet = (sheet) => {
     const handleCancelClick = () => {
         setContent(sheet.content);
         setEditing(false);
+        setShowEditSheetModal(false);
     };
 
     const handleEditorChange = (value) => {
@@ -90,6 +92,10 @@ const Sheet = (sheet) => {
             setShowDeleteModal(true);
             console.log('handleSelect called');
         }
+    };
+
+    const handleOpenSheetModalClick = () => {
+        setShowEditSheetModal(true);
     };
 
     // Will close any modal opened by the dropdown
@@ -251,7 +257,7 @@ const Sheet = (sheet) => {
                                                 background: 'var(--white)',
                                                 border: 0,
                                             }}
-                                            onClick={handleEditClick}
+                                            onClick={handleOpenSheetModalClick}
                                         >
                                             <AiFillEdit />
                                         </Button>
@@ -272,7 +278,34 @@ const Sheet = (sheet) => {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Stack>
-
+                                    {showEditSheetModal && (
+                                        <ModalEditSheet
+                                            showEditSheetModal={
+                                                showEditSheetModal
+                                            }
+                                            handleCancelClick={
+                                                handleCancelClick
+                                            }
+                                            sheet={sheet}
+                                            content={content}
+                                            setContent={setContent}
+                                            initialTitleValue={
+                                                initialTitleValue
+                                            }
+                                            titleRef={titleRef}
+                                            titleMaxChar={titleMaxChar}
+                                            handleTitleChange={
+                                                handleTitleChange
+                                            }
+                                            characterCount={characterCount}
+                                            handleUpdateContentClick={
+                                                handleUpdateContentClick
+                                            }
+                                            handleEditorChange={
+                                                handleEditorChange
+                                            }
+                                        />
+                                    )}
                                     {showDeleteModal && (
                                         <ModalDeleteConfirmation
                                             show={showDeleteModal}

@@ -33,7 +33,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
             handleClose();
             setAlert('Sheet successfully added!', 'success');
             if (error) {
-                setAlert('There was an error adding the job.', 'error');
+                setAlert('There was an error adding the sheet.', 'error');
                 console.log(error);
                 return;
             }

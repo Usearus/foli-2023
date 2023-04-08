@@ -12,7 +12,7 @@ https://foli2023.netlify.app
     In order to be iterable, non-array objects must have a [Symbol.iterator]() method."
 -   Template isn't resetting on close
 -   Remove all location stuff for profile only. (But fix issue first!)
-
+-   AddSheetModal missing title count & limitation. (May use context for this)
 -   Add instruction on how to use app during onboarding
 
     -   Add a new sheet
@@ -21,7 +21,6 @@ https://foli2023.netlify.app
     -   Grab the end of the job description sheet and make it smaller
     -   Delete this sheet when done
 
--   Add show all hide all button to sidebar sheet list
 -   "target" role, salary, etc...
 -   Sticky survey at bottom
     -   What do you like, what's missing, what to chat about it?
