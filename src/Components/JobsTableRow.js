@@ -101,6 +101,7 @@ const JobsTableRow = (job) => {
                     <span
                         style={{
                             fontWeight: '600',
+                            marginRight: '.5rem',
                         }}
                     >
                         {job.location ? job.location : ''}
@@ -117,7 +118,6 @@ const JobsTableRow = (job) => {
                                     cursor: 'default',
                                     padding: '6px 8px',
                                     fontSize: '.75rem',
-                                    marginLeft: '.5rem',
                                 }}
                             >
                                 Remote
