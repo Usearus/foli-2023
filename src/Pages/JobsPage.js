@@ -290,7 +290,7 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    /* height: calc(100vh - 63px); */
+    height: calc(100vh - 63px);
     height: calc(100dvh - 63px);
     background: var(--grey-100);
 

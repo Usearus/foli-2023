@@ -96,6 +96,7 @@ const Wrapper = styled.div`
         'right';
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+    height: calc(100vh - 63px);
     height: calc(100dvh - 63px);
     overflow: hidden;
     position: relative;
