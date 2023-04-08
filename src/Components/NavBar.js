@@ -55,7 +55,7 @@ const NavBar = () => {
                                         marginRight: '1rem',
                                     }}
                                 >
-                                    beta
+                                    alpha
                                 </Badge>
                             </span>
                         </Navbar.Brand>
