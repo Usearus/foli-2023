@@ -1,14 +1,21 @@
 import { useContext, useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
-import { Nav, Navbar, Button, Badge } from 'react-bootstrap';
+import {
+    Nav,
+    Navbar,
+    Button,
+    Badge,
+    Offcanvas,
+    OffcanvasHeader,
+    OffcanvasTitle,
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useAuth0 } from '@auth0/auth0-react';
 import ModalProfile from './ModalProfile';
 import { DatabaseContext } from '../context/DatabaseContext';
 import { FiMenu } from 'react-icons/fi';
 
 const NavBar = () => {
-    const { logout } = useAuth0();
+    // const { logout } = useAuth0();
     const [admin, setAdmin] = useState(false);
     const { userProfile } = useContext(DatabaseContext);
 
@@ -71,7 +78,49 @@ const NavBar = () => {
                             <FiMenu />
                         </Button>
                     </Navbar.Toggle>
-                    <Navbar.Collapse id='responsive-navbar-nav'>
+                    <Navbar.Offcanvas
+                        id='offcanvas-navbar-nav'
+                        placement='start'
+                        style={{ background: 'var(--grey-100)' }}
+                    >
+                        <OffcanvasHeader closeButton>
+                            <OffcanvasTitle id='title'>TITLE</OffcanvasTitle>
+                        </OffcanvasHeader>
+                        <Offcanvas.Body>
+                            <Nav variant='pills' className='me-auto'>
+                                <LinkContainer to='/'>
+                                    <Nav.Link active={false}>Jobs</Nav.Link>
+                                </LinkContainer>
+
+                                {admin ? (
+                                    <LinkContainer to='/testing'>
+                                        <Nav.Link active={false}>
+                                            Admin
+                                        </Nav.Link>
+                                    </LinkContainer>
+                                ) : null}
+                            </Nav>
+
+                            <ModalProfile />
+
+                            {/* <Nav>
+                                <Button
+                                    variant='secondary'
+                                    onClick={() =>
+                                        logout({
+                                            logoutParams: {
+                                                returnTo:
+                                                    window.location.origin,
+                                            },
+                                        })
+                                    }
+                                >
+                                    Log Out
+                                </Button>
+                            </Nav> */}
+                        </Offcanvas.Body>
+                    </Navbar.Offcanvas>
+                    {/* <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav variant='pills' className='me-auto'>
                             <LinkContainer to='/'>
                                 <Nav.Link active={false}>Jobs</Nav.Link>
@@ -100,7 +149,7 @@ const NavBar = () => {
                                 Log Out
                             </Button>
                         </Nav>
-                    </Navbar.Collapse>
+                    </Navbar.Collapse> */}
                 </Container>
             </Navbar>
         );

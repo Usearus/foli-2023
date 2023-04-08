@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { supabase } from '../API/supabase';
 
 const ModalProfile = () => {
+    const { logout } = useAuth0();
     const { user } = useAuth0();
     const { userProfile, fetchUserProfile } = useContext(DatabaseContext);
     const [showProfile, setShowProfile] = useState(false);
@@ -86,31 +87,6 @@ const ModalProfile = () => {
         setEditing(false);
     };
 
-    // const handleSavePrefClick = () => {
-    //   base('profiles').update(
-    //     userProfile.id,
-    //     {
-    //       position: positionRef.current.value,
-    //       salary_min: salary_minRef.current.value * 1,
-    //       salary_max: salary_maxRef.current.value * 1,
-    //       location_preference: tempLocations,
-    //       location_remote: remoteRef.current.checked,
-    //     },
-    //     { typecast: true },
-    //     function (err, record) {
-    //       if (err) {
-    //         console.error(err);
-    //         setAlert('Something went wrong. Preferences not updated.', 'danger');
-    //         return;
-    //       }
-    //       console.log(record.getId());
-    //       fetchUserProfile();
-    //       setAlert('Preferences successfully updated!', 'success');
-    //       setEditing(false);
-    //     }
-    //   );
-    // };
-
     const handleSavePrefClick = async () => {
         const { error } = await supabase
             .from('profiles')
@@ -139,13 +115,20 @@ const ModalProfile = () => {
     if (userProfile) {
         return (
             <Wrapper>
-                <button style={{ border: 'none' }} onClick={handleProfileClick}>
+                <Button
+                    variant='light'
+                    style={{
+                        border: 'none',
+                        padding: '0',
+                    }}
+                    onClick={handleProfileClick}
+                >
                     <img
                         src={user.picture}
                         alt={user.name}
                         style={{ width: '40px', borderRadius: '100px' }}
                     />
-                </button>
+                </Button>
 
                 <Modal
                     fullscreen='md-down'
@@ -189,6 +172,19 @@ const ModalProfile = () => {
                                         />
                                     </Form.Group>
                                 </Form>
+                                <Button
+                                    variant='outline-secondary'
+                                    onClick={() =>
+                                        logout({
+                                            logoutParams: {
+                                                returnTo:
+                                                    window.location.origin,
+                                            },
+                                        })
+                                    }
+                                >
+                                    Log Out
+                                </Button>
                             </section>
                             <section>
                                 <h4 style={{ paddingBottom: '1rem' }}>
@@ -482,16 +478,16 @@ const ModalProfile = () => {
                             ) : (
                                 <>
                                     <Button
-                                        variant='primary'
-                                        onClick={handleSavePrefClick}
-                                    >
-                                        Save
-                                    </Button>
-                                    <Button
                                         variant='outline-secondary'
                                         onClick={handleCancelClick}
                                     >
                                         Cancel
+                                    </Button>
+                                    <Button
+                                        variant='primary'
+                                        onClick={handleSavePrefClick}
+                                    >
+                                        Save
                                     </Button>
                                 </>
                             )}
