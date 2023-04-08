@@ -35,32 +35,35 @@ const NavBar = () => {
             >
                 <Container fluid>
                     <LinkContainer to='/'>
-                        <Navbar.Brand active={false}>
-                            <span
-                                style={{
-                                    fontWeight: 700,
-                                    fontSize: '1.5rem',
-                                    cursor: 'pointer',
-                                    paddingRight: '.25rem',
-                                }}
-                            >
-                                fol<i>i</i>
-                            </span>
-                            <span>
-                                <Badge
-                                    pill
-                                    bg='dark'
+                        <Nav.Link active={false}>
+                            <div>
+                                <span
                                     style={{
-                                        fontSize: '.6rem',
-                                        marginRight: '1rem',
+                                        fontWeight: 700,
+                                        fontSize: '1.5rem',
+                                        cursor: 'pointer',
+                                        paddingRight: '.25rem',
                                     }}
                                 >
-                                    alpha
-                                </Badge>
-                            </span>
-                        </Navbar.Brand>
+                                    fol<i>i</i>
+                                </span>
+                                <span>
+                                    <Badge
+                                        pill
+                                        bg='dark'
+                                        style={{
+                                            fontSize: '.6rem',
+                                            marginRight: '1rem',
+                                        }}
+                                    >
+                                        alpha
+                                    </Badge>
+                                </span>
+                            </div>
+                        </Nav.Link>
                     </LinkContainer>
                     <Navbar.Toggle
+                        as='div'
                         aria-controls='responsive-navbar-nav'
                         style={{ border: 0 }}
                     >

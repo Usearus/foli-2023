@@ -61,7 +61,10 @@ const TopBarJobMobile = ({ className }) => {
                                 : ''}
                         </h6>
                         <div className='ms-auto'>
-                            <Navbar.Toggle aria-controls='responsive-navbar-nav'>
+                            <Navbar.Toggle
+                                as='div'
+                                aria-controls='responsive-navbar-nav'
+                            >
                                 <Button
                                     variant='light'
                                     style={{
