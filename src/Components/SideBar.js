@@ -49,7 +49,6 @@ const SideBar = ({ className }) => {
         <Wrapper className={className}>
             <section className='sidebar-container'>
                 <label>Sheets</label>
-                <SideBarPositionItem />
                 <DragDropContext
                     onDragStart={() => setIsDragging(true)}
                     onDragEnd={(result) => {

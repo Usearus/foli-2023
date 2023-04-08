@@ -146,8 +146,5 @@ const Wrapper = styled.div`
             border-radius: 0.37rem;
             padding: 6px 12px;
         }
-        .right {
-            scroll-snap-type: none;
-        }
     }
 `;

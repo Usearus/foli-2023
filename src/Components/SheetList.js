@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { DatabaseContext } from '../context/DatabaseContext';
 import Sheet from './Sheet';
-import SheetPosition from './SheetPosition';
 
 const SheetList = ({ className }) => {
     const { currentSheets } = useContext(DatabaseContext);
@@ -10,9 +9,6 @@ const SheetList = ({ className }) => {
 
     return (
         <div className={className}>
-            <div style={{ scrollSnapAlign: 'center', height: '100%' }}>
-                <SheetPosition />
-            </div>
             {visibleSheets.map((sheet) => {
                 return (
                     <div

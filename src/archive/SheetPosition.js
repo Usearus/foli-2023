@@ -412,6 +412,7 @@ const Wrapper = styled.div`
         background: var(--white);
         box-shadow: var(--shadow-1);
         position: relative;
+        overflow-y: scroll;
     }
 
     .sheet-footer {
