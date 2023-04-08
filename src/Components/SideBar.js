@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { DatabaseContext } from '../context/DatabaseContext';
 import SideBarItem from './SideBarItem';
-import SideBarPositionItem from './SideBarPositionItem';
 import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { supabase } from '../API/supabase';

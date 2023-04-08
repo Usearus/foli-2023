@@ -157,7 +157,7 @@ const Wrapper = styled.div`
     // Mobile
     @media (max-width: 576px) {
         .parent-btn {
-            padding: 0.5rem;
+            padding: 0.75rem;
         }
         .fade-in {
             opacity: 1;
