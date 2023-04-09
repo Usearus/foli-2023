@@ -71,7 +71,6 @@ const JobsTableRow = (job) => {
                 >
                     <div style={{ fontWeight: '600' }}>{job.company}</div>
                     <div
-                        // className='truncate'
                         style={{
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
@@ -104,7 +103,24 @@ const JobsTableRow = (job) => {
                             marginRight: '.5rem',
                         }}
                     >
-                        {job.location ? job.location : ''}
+                        {job.location ? (
+                            <Badge
+                                pill
+                                bg='light'
+                                style={{
+                                    color: 'var(--primary-500)',
+                                    border: '1px solid var(--grey-300)',
+                                    fontWeight: '600',
+                                    cursor: 'default',
+                                    padding: '6px 8px',
+                                    fontSize: '.75rem',
+                                }}
+                            >
+                                {job.location}
+                            </Badge>
+                        ) : (
+                            ''
+                        )}
                     </span>
                     <span>
                         {job.remote ? (
