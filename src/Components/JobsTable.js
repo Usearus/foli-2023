@@ -99,7 +99,7 @@ const JobsTable = ({ jobs }) => {
                                 }`}
                                 onClick={() => handleHeaderClick('status')}
                             >
-                                Status{renderSortIcon('status')}
+                                Stage{renderSortIcon('status')}
                             </th>
                             <th
                                 className={`${

@@ -68,12 +68,23 @@ const TopBarJobDesktop = ({ className }) => {
                     className='top-bar-container'
                 >
                     <div className='left-content'>
-                        <h5 className='truncate'>
-                            {currentJob
-                                ? `${currentJob.company} - ${currentJob.position}`
-                                : ''}
-                        </h5>
-
+                        <div className='title-content'>
+                            {currentJob ? (
+                                <>
+                                    <h5 style={{ fontWeight: '600' }}>
+                                        {currentJob.company}
+                                    </h5>
+                                    <h6
+                                        className='truncate'
+                                        style={{ margin: '0' }}
+                                    >
+                                        {currentJob.position}
+                                    </h6>
+                                </>
+                            ) : (
+                                ''
+                            )}
+                        </div>
                         <Form>
                             <Form.Select
                                 size='sm'
@@ -160,13 +171,13 @@ const Wrapper = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: stretch;
-        align-items: baseline;
+        align-items: center;
         gap: 1rem;
     }
-
+    .title-content {
+        max-width: 300px;
+    }
     .truncate {
-        font-weight: 600;
-        max-width: 400px;
         white-space: nowrap; /* prevent the text from wrapping to a new line */
         overflow: hidden; /* hide any text that overflows the element */
         text-overflow: ellipsis;

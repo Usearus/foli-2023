@@ -84,7 +84,32 @@ const NavBar = () => {
                         style={{ background: 'var(--grey-100)' }}
                     >
                         <OffcanvasHeader closeButton>
-                            <OffcanvasTitle id='title'>TITLE</OffcanvasTitle>
+                            <OffcanvasTitle id='title'>
+                                <div>
+                                    <span
+                                        style={{
+                                            fontWeight: 700,
+                                            fontSize: '1.5rem',
+                                            cursor: 'pointer',
+                                            paddingRight: '.25rem',
+                                        }}
+                                    >
+                                        fol<i>i</i>
+                                    </span>
+                                    <span>
+                                        <Badge
+                                            pill
+                                            bg='dark'
+                                            style={{
+                                                fontSize: '.6rem',
+                                                marginRight: '1rem',
+                                            }}
+                                        >
+                                            alpha
+                                        </Badge>
+                                    </span>
+                                </div>
+                            </OffcanvasTitle>
                         </OffcanvasHeader>
                         <Offcanvas.Body>
                             <Nav variant='pills' className='me-auto'>

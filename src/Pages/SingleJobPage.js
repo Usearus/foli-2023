@@ -95,9 +95,10 @@ const Wrapper = styled.div`
         'top'
         'right';
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 60px auto;
     height: calc(100vh - 63px);
     height: calc(100dvh - 63px);
+
     overflow: hidden;
     position: relative;
 
@@ -118,11 +119,10 @@ const Wrapper = styled.div`
     .right {
         grid-area: right;
         display: flex;
-        gap: 0.25rem;
-        align-items: stretch;
+        gap: 0.5rem;
         height: 100%;
         width: 100%;
-        padding: 0rem 10rem 0.5rem 0rem;
+        padding: 0rem 0.5rem 0.5rem 0.5rem;
         overflow-x: scroll;
         scroll-snap-type: x mandatory;
         background: var(--grey-200);

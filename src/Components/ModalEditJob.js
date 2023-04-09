@@ -134,7 +134,7 @@ const ModalEditJob = ({ show, close, job }) => {
                         </Form.Group>
                         <Form.Group className='mb-1' controlId='remote'>
                             <Form.Check
-                                label='Remote preferred'
+                                label='Job is remote'
                                 ref={remoteRef}
                                 defaultChecked={initialValues.remote}
                             />

@@ -115,11 +115,13 @@ const ModalProfile = () => {
     if (userProfile) {
         return (
             <Wrapper>
+                {/* Profile Button */}
                 <Button
                     variant='light'
                     style={{
                         border: 'none',
                         padding: '0',
+                        borderRadius: '99px',
                     }}
                     onClick={handleProfileClick}
                 >
@@ -130,6 +132,7 @@ const ModalProfile = () => {
                     />
                 </Button>
 
+                {/* Modal */}
                 <Modal
                     fullscreen='md-down'
                     show={showProfile}
@@ -140,6 +143,7 @@ const ModalProfile = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <>
+                            {/* Account */}
                             <section style={{ paddingBottom: '2rem' }}>
                                 <h4 style={{ paddingBottom: '1rem' }}>
                                     Account
@@ -186,6 +190,7 @@ const ModalProfile = () => {
                                     Log Out
                                 </Button>
                             </section>
+                            {/* Preferences */}
                             <section>
                                 <h4 style={{ paddingBottom: '1rem' }}>
                                     Preferences
@@ -255,7 +260,7 @@ const ModalProfile = () => {
                                                                     bg='light'
                                                                     className='me-1'
                                                                     style={{
-                                                                        color: 'var(--grey-600)',
+                                                                        color: 'var(--primary-500)',
                                                                         border: '1px solid var(--grey-300)',
                                                                         fontWeight:
                                                                             '600',
@@ -268,22 +273,43 @@ const ModalProfile = () => {
                                                                 </Badge>
                                                             )
                                                         )}
+                                                    {initialValues.location_remote ? (
+                                                        <Badge
+                                                            pill
+                                                            bg='light'
+                                                            style={{
+                                                                color: 'var(--primary-500)',
+                                                                border: '1px solid var(--grey-300)',
+                                                                fontWeight:
+                                                                    '600',
+                                                                cursor: 'default',
+                                                                padding:
+                                                                    '6px 8px',
+                                                                fontSize:
+                                                                    '.75rem',
+                                                            }}
+                                                        >
+                                                            Remote
+                                                        </Badge>
+                                                    ) : (
+                                                        ''
+                                                    )}
                                                 </div>
                                             </Form.Group>
-
+                                            {/* 
                                             <Form.Group
                                                 className='mb-4'
                                                 controlId='remote'
                                             >
                                                 <Form.Check
-                                                    label='Remote preferred'
+                                                    label='Include remote'
                                                     ref={remoteRef}
                                                     defaultChecked={
                                                         initialValues.location_remote
                                                     }
                                                     disabled
                                                 />
-                                            </Form.Group>
+                                            </Form.Group> */}
                                             <div
                                                 style={{
                                                     marginBottom: '4.4rem',
@@ -294,6 +320,7 @@ const ModalProfile = () => {
                                 ) : (
                                     <>
                                         <Form>
+                                            {/* Position */}
                                             <Form.Group
                                                 className='mb-3'
                                                 controlId='position'
@@ -310,6 +337,7 @@ const ModalProfile = () => {
                                                     }
                                                 />
                                             </Form.Group>
+                                            {/* Salary */}
                                             <Stack
                                                 direction='horizontal'
                                                 gap={4}
@@ -355,6 +383,7 @@ const ModalProfile = () => {
                                                     />
                                                 </Form.Group>
                                             </Stack>
+                                            {/* Locations */}
                                             <Form.Group
                                                 className='mb-1'
                                                 controlId='location'
@@ -387,6 +416,25 @@ const ModalProfile = () => {
                                                         Add
                                                     </Button>
                                                 </InputGroup>
+                                                <Form.Text
+                                                    id='location text helper'
+                                                    muted
+                                                >
+                                                    Add all locations you prefer
+                                                    to work in.
+                                                </Form.Text>
+                                                <Form.Group
+                                                    className='mb-1'
+                                                    controlId='remote'
+                                                >
+                                                    <Form.Check
+                                                        label='Include remote'
+                                                        ref={remoteRef}
+                                                        defaultChecked={
+                                                            initialValues.location_remote
+                                                        }
+                                                    />
+                                                </Form.Group>
                                                 <div
                                                     style={{
                                                         marginTop: '.5rem',
@@ -408,7 +456,7 @@ const ModalProfile = () => {
                                                                             'flex',
                                                                         alignItems:
                                                                             'center',
-                                                                        color: 'var(--grey-600)',
+                                                                        color: 'var(--primary-500)',
                                                                         border: '1px solid var(--grey-300)',
                                                                         fontWeight:
                                                                             '600',
@@ -439,20 +487,28 @@ const ModalProfile = () => {
                                                                 </Badge>
                                                             )
                                                         )}
+                                                    {/* {initialValues.location_remote ? (
+                                                        <Badge
+                                                            pill
+                                                            bg='light'
+                                                            style={{
+                                                                color: 'var(--primary-500)',
+                                                                border: '1px solid var(--grey-300)',
+                                                                fontWeight:
+                                                                    '600',
+                                                                cursor: 'default',
+                                                                padding:
+                                                                    '6px 8px',
+                                                                fontSize:
+                                                                    '.75rem',
+                                                            }}
+                                                        >
+                                                            Remote
+                                                        </Badge>
+                                                    ) : (
+                                                        ''
+                                                    )} */}
                                                 </div>
-                                            </Form.Group>
-
-                                            <Form.Group
-                                                className='mb-4'
-                                                controlId='remote'
-                                            >
-                                                <Form.Check
-                                                    label='Remote preferred'
-                                                    ref={remoteRef}
-                                                    defaultChecked={
-                                                        initialValues.location_remote
-                                                    }
-                                                />
                                             </Form.Group>
                                         </Form>
                                     </>
