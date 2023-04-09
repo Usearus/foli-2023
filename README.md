@@ -7,12 +7,13 @@ https://foli2023.netlify.app
 ---CRITICAL---
 
 -   Onboarding isnt working
--   Error logging into new account
-    "nonIterableRest.js:2 Uncaught (in promise) TypeError: Invalid attempt to destructure non-iterable instance.
-    In order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+    -   Error logging into new account
+        "nonIterableRest.js:2 Uncaught (in promise) TypeError: Invalid attempt to destructure non-iterable instance.
+        In order to be iterable, non-array objects must have a [Symbol.iterator]() method."
 -   Template isn't resetting on close
 -   Remove all location stuff for profile only. (But fix issue first!)
 -   AddSheetModal missing title count & limitation. (May use context for this)
+-   Add footer back to sheet? Need to solve for mobile FAB getting in the way.
 -   Add instruction on how to use app during onboarding
 
     -   Add a new sheet
