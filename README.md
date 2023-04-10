@@ -6,17 +6,19 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
+-   Sheet only working on Mobile only sheets. ALSO SCROLL SNAP IS BEING APPLIED!
+    Not working: Desktop only sheets
 -   How do I do password reset?
 -   Template isn't resetting on close
 
--   Add footer back to sheet? Need to solve for mobile FAB getting in the way.
+-   Add footer back to sheet. Need to solve for mobile FAB getting in the way.
 -   Add instruction on how to use app during onboarding
 
     -   Add a new sheet
+    -   Stretch a sheet by dragging the right edge left or right
     -   Scroll horizontally to see all sheets
     -   Add your profile info
-    -   Grab the end of the job description sheet and make it smaller
-    -   Delete this sheet when done
+    -   Delete this sheet when you've completed this sheet
 
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
