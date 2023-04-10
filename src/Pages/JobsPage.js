@@ -1,31 +1,23 @@
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import JobsTable from '../Components/JobsTable';
 import { DatabaseContext } from '../context/DatabaseContext';
-import useAlert from '../Custom Hooks/useAlert';
-import { MdOutlineClose } from 'react-icons/md';
+import SiteIcon from '../Components/SiteIcon';
 import TopBarTable from '../Components/TopBarTable';
 import Loader from '../Components/Loader';
-import { Badge, Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
 import styled from 'styled-components';
-import { supabase } from '../API/supabase';
 import ModalAddJob from '../Components/ModalAddJob';
+import useAlert from '../Custom Hooks/useAlert';
+import { MdOutlineClose } from 'react-icons/md';
+import { Badge, Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
+import { supabase } from '../API/supabase';
+// import ModalOnboarding from '../Components/ModalOnboarding';
 
 const JobsPage = () => {
     const { userJobs, userProfile, fetchUserProfile } =
         useContext(DatabaseContext);
     const { setAlert } = useAlert();
-
-    const [locationInput, setLocationInput] = useState('');
-    const [tempLocations, setTempLocations] = useState([]);
-
     const [showModal, setShowModal] = useState(false);
     const [isOnboarded, setIsOnboarded] = useState(undefined);
-
-    const positionRef = useRef();
-    const locationRef = useRef();
-    const salary_minRef = useRef();
-    const salary_maxRef = useRef();
-    const remoteRef = useRef();
 
     // RUNS INITIAL ONBOARDING FOR USERS
     useEffect(() => {
@@ -33,14 +25,20 @@ const JobsPage = () => {
             setShowModal(true);
             setIsOnboarded(false);
         }
-        setIsOnboarded(true);
+        if (userProfile && userProfile.onboarded === true) {
+            setShowModal(false);
+            setIsOnboarded(true);
+        }
     }, [userProfile]);
 
-    const handleSubmit = () => {
-        handleAddPref();
-        setShowModal(false);
-        setIsOnboarded(true);
-    };
+    const [locationInput, setLocationInput] = useState('');
+    const [tempLocations, setTempLocations] = useState([]);
+
+    const positionRef = useRef();
+    const locationRef = useRef();
+    const salary_minRef = useRef();
+    const salary_maxRef = useRef();
+    const remoteRef = useRef();
 
     const handleAddLocation = () => {
         const newLocation = locationInput.trim();
@@ -71,7 +69,8 @@ const JobsPage = () => {
             })
             .eq('id', userProfile.id);
         fetchUserProfile();
-
+        setShowModal(false);
+        setIsOnboarded(true);
         if (error) {
             setAlert(
                 'Something went wrong. Preferences not updated.',
@@ -82,56 +81,42 @@ const JobsPage = () => {
         }
     };
 
+    if (!userProfile) {
+        return <></>;
+    }
+
     if (isOnboarded === false) {
         return (
+            // <ModalOnboarding
+            //     show={showModal}
+            //     setIsOnboarded={setIsOnboarded}
+            //     setShowModal={setShowModal}
+            // />
             <Modal
                 show={showModal}
                 backdrop='static'
                 keyboard={false}
-                animation={false}
+                animation={true}
                 centered
+                fullscreen='md-down'
                 style={{ background: '#b3b3fd' }}
-                // fullscreen='lg-down'
             >
                 <Modal.Header>
                     <Modal.Title>
-                        <span
-                            style={{
-                                fontWeight: 700,
-                                fontSize: '1.5rem',
-                                cursor: 'default',
-                                paddingRight: '.25rem',
-                            }}
-                        >
-                            fol<i>i</i>
-                        </span>
-                        <span>
-                            <Badge
-                                pill
-                                bg='dark'
-                                style={{
-                                    fontSize: '.6rem',
-                                    marginRight: '1rem',
-                                }}
-                            >
-                                beta
-                            </Badge>
-                        </span>
+                        <SiteIcon />
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h2 style={{ paddingBottom: '2rem', paddingTop: '1rem' }}>
-                        Tell us more about your job search
+                    <h2 style={{ paddingBottom: '.5rem' }}>
+                        Tell us about your job search
                     </h2>
                     <p>
-                        Your response helps tailor your experience. This can be
-                        updated in your preferences anytime.
+                        Responses personalize your experience and can be updated
+                        anytime.
                     </p>
                     <Form>
                         <Form.Group className='mb-4' controlId='position'>
-                            <Form.Label>
-                                What position are you looking for?
-                            </Form.Label>
+                            <Form.Label>Target position</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Add a position'
@@ -141,7 +126,7 @@ const JobsPage = () => {
                         </Form.Group>
                         <Stack direction='horizontal' gap={4}>
                             <Form.Group className='mb-4' controlId='salary-min'>
-                                <Form.Label>Salary Range Goal ($)</Form.Label>
+                                <Form.Label>Target salary range ($)</Form.Label>
                                 <Form.Control
                                     type='number'
                                     placeholder='Minimum'
@@ -162,13 +147,11 @@ const JobsPage = () => {
                             </Form.Group>
                         </Stack>
                         <Form.Group className='mb-2' controlId='location'>
-                            <Form.Label>
-                                What locations(s) are in your job search?
-                            </Form.Label>
+                            <Form.Label>Target locations</Form.Label>
                             <InputGroup className='mb-2'>
                                 <Form.Control
                                     type='text'
-                                    placeholder='Add a location...'
+                                    placeholder='Add all locations...'
                                     ref={locationRef}
                                     value={locationInput}
                                     onChange={(e) =>
@@ -176,7 +159,7 @@ const JobsPage = () => {
                                     }
                                 />
                                 <Button
-                                    variant='outline-secondary'
+                                    variant='secondary'
                                     id='button-addon2'
                                     onClick={handleAddLocation}
                                     disabled={!locationInput}
@@ -184,6 +167,13 @@ const JobsPage = () => {
                                     Add
                                 </Button>
                             </InputGroup>
+                            <Form.Group controlId='remote'>
+                                <Form.Check
+                                    label='Include remote'
+                                    ref={remoteRef}
+                                    defaultChecked={false}
+                                />
+                            </Form.Group>
                             <div
                                 style={{
                                     marginTop: '.5rem',
@@ -195,12 +185,10 @@ const JobsPage = () => {
                                         key={location}
                                         pill
                                         bg='light'
-                                        className='me-1'
                                         style={{
                                             display: 'flex',
                                             alignItems: 'center',
-                                            color: 'var(--grey-600)',
-                                            border: '1px solid var(--grey-300)',
+                                            color: 'var(--primary-500)',
                                             fontWeight: '600',
                                             cursor: 'default',
                                         }}
@@ -225,27 +213,15 @@ const JobsPage = () => {
                                 ))}
                             </div>
                         </Form.Group>
-
-                        <Form.Group className='mb-4' controlId='remote'>
-                            <Form.Check
-                                label='Remote preferred'
-                                ref={remoteRef}
-                                defaultChecked={false}
-                            />
-                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant='primary' onClick={handleSubmit}>
+                    <Button variant='primary' onClick={handleAddPref}>
                         Submit
                     </Button>
                 </Modal.Footer>
             </Modal>
         );
-    }
-
-    if (!userProfile) {
-        return <></>;
     }
 
     if (isOnboarded === true && userJobs && userJobs.length === 0) {
@@ -276,6 +252,7 @@ const JobsPage = () => {
             </Wrapper>
         );
     }
+
     return (
         <>
             <Loader />

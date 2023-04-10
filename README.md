@@ -6,13 +6,9 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
--   Onboarding isnt working
-    -   Error logging into new account
-        "nonIterableRest.js:2 Uncaught (in promise) TypeError: Invalid attempt to destructure non-iterable instance.
-        In order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+-   How do I do password reset?
 -   Template isn't resetting on close
--   Remove all location stuff for profile only. (But fix issue first!)
--   AddSheetModal missing title count & limitation. (May use context for this)
+
 -   Add footer back to sheet? Need to solve for mobile FAB getting in the way.
 -   Add instruction on how to use app during onboarding
 
@@ -22,9 +18,15 @@ https://foli2023.netlify.app
     -   Grab the end of the job description sheet and make it smaller
     -   Delete this sheet when done
 
--   "target" role, salary, etc...
 -   Sticky survey at bottom
-    -   What do you like, what's missing, what to chat about it?
+    What do you like, what's missing, what to chat about it?
+
+-   Mobile: Simplify single job page by removing the navbar and adding a back button.
+
+---LOW PRIORITY---
+
+-   AddSheetModal missing title count & limitation. (May use context for this)
+-   Figure out refactoring modal onboarding
 -   Add company research template
     -   How large is the company?
     -   Who is the hiring manager?
@@ -34,13 +36,9 @@ https://foli2023.netlify.app
 -   Add template to prep for initial interview screening (questions to ask and info to get)
 -   Add template for interview notes during / after interview.
 -   Add templates for different types of interviews (portfolio, group, negotiation, etc.)
-
----LOW PRIORITY---
-
--   Get VH to work on mobile with address bar
 -   Add Google Analytics
--   Filter on top of the jobs list, but only for status.
--   Open/Close Sheets bar
+-   Filter on top of the jobs list, but only for stage.
+-   Make sheets a sidebar on mobile
 -   Animate table row when adding a job
 
 ## Post-MVP Features
