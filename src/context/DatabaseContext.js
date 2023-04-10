@@ -74,9 +74,9 @@ const DatabaseProvider = ({ children }) => {
     // *
     // *
     // SET USER DATA
-    const [userProfile, setUserProfile] = useState(null);
-    const [userJobs, setUserJobs] = useState(null);
-    const [userSheets, setUserSheets] = useState(null);
+    const [userProfile, setUserProfile] = useState([]);
+    const [userJobs, setUserJobs] = useState([]);
+    const [userSheets, setUserSheets] = useState([]);
 
     async function fetchUserProfile() {
         if (auth0Email) {
