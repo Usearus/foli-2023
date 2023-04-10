@@ -13,6 +13,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import ModalProfile from './ModalProfile';
 import { DatabaseContext } from '../context/DatabaseContext';
 import { FiMenu } from 'react-icons/fi';
+import SiteIcon from '../Components/SiteIcon';
 
 const NavBar = () => {
     // const { logout } = useAuth0();
@@ -43,30 +44,7 @@ const NavBar = () => {
                 <Container fluid>
                     <LinkContainer to='/'>
                         <Nav.Link active={false}>
-                            <div>
-                                <span
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: '1.5rem',
-                                        cursor: 'pointer',
-                                        paddingRight: '.25rem',
-                                    }}
-                                >
-                                    fol<i>i</i>
-                                </span>
-                                <span>
-                                    <Badge
-                                        pill
-                                        bg='dark'
-                                        style={{
-                                            fontSize: '.6rem',
-                                            marginRight: '1rem',
-                                        }}
-                                    >
-                                        alpha
-                                    </Badge>
-                                </span>
-                            </div>
+                            <SiteIcon />
                         </Nav.Link>
                     </LinkContainer>
                     <Navbar.Toggle
@@ -127,22 +105,6 @@ const NavBar = () => {
                             </Nav>
 
                             <ModalProfile />
-
-                            {/* <Nav>
-                                <Button
-                                    variant='secondary'
-                                    onClick={() =>
-                                        logout({
-                                            logoutParams: {
-                                                returnTo:
-                                                    window.location.origin,
-                                            },
-                                        })
-                                    }
-                                >
-                                    Log Out
-                                </Button>
-                            </Nav> */}
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
                     {/* <Navbar.Collapse id='responsive-navbar-nav'>
