@@ -109,7 +109,6 @@ const JobsTableRow = (job) => {
                                 bg='light'
                                 style={{
                                     color: 'var(--primary-500)',
-                                    border: '1px solid var(--grey-300)',
                                     fontWeight: '600',
                                     cursor: 'default',
                                     padding: '6px 8px',
@@ -129,7 +128,6 @@ const JobsTableRow = (job) => {
                                 bg='light'
                                 style={{
                                     color: 'var(--primary-500)',
-                                    border: '1px solid var(--grey-300)',
                                     fontWeight: '600',
                                     cursor: 'default',
                                     padding: '6px 8px',
