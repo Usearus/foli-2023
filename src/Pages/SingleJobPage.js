@@ -122,7 +122,7 @@ const Wrapper = styled.div`
         gap: 0.5rem;
         height: 100%;
         width: 100%;
-        padding: 0rem 0.5rem 0.5rem 0.5rem;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
         overflow-x: scroll;
         scroll-snap-type: x mandatory;
         background: var(--grey-200);

@@ -120,8 +120,8 @@ const DatabaseProvider = ({ children }) => {
             .from('jobs')
             .insert({
                 account: auth0Email,
-                company: 'Foli',
-                position: 'Tutorial',
+                company: 'Foli Tutorial',
+                position: 'Start by opening this tutorial job',
                 salary_min: 45000,
                 salary_max: 55000,
                 location: 'Dallas, TX',
@@ -138,16 +138,17 @@ const DatabaseProvider = ({ children }) => {
             .insert([
                 {
                     title: 'Foli Tutorial',
-                    content: '<h3>Learn Foli</h3>',
+                    content:
+                        '<h2>Start here</h2><p><br></p><p>Each document in <em>Foli</em> is called a <strong>sheet</strong>!</p><p><br></p><p><em>F﻿oli </em>lets you manage all documents, research, &amp; notes you need during your job search on one page!</p><p><br></p><p>Follow these steps to learn how to use Foli:</p><p><br></p><ol><li>Press the <strong>edit icon</strong> on this sheet to enable editing this sheet.</li><li>Edit this sheet by <strong>deleting this bullet point</strong>.</li><li>Make this sheet wider by <strong>dragging the right edge</strong>.</li><li>Hide and show this sheet by finding this sheet on the sheet sidebar and pressing the<strong> eye icon</strong>.</li><li>Click the <strong>"add sheet"</strong> button and add a new sheet to this tutorial job.</li><li><strong>Scroll horizontally</strong> to see all the sheets visible on this page. </li><li>Finally, delete this sheet by clicking the <strong>three dots icon</strong> at the top-right of the sheet or by visiting the sheets sidebar.</li></ol>',
                     account: auth0Email,
                     jobid: onboardingJob.id,
                 },
-                {
-                    title: 'Foli Tutorial 2',
-                    content: '<h3>Learn Foli</h3>',
-                    account: auth0Email,
-                    jobid: onboardingJob.id,
-                },
+                // {
+                //     title: 'Foli Tutorial 2',
+                //     content: '<h3>Learn Foli</h3>',
+                //     account: auth0Email,
+                //     jobid: onboardingJob.id,
+                // },
             ])
             .select();
         fetchUserJobs();
