@@ -143,67 +143,60 @@ const ModalProfile = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <>
-                            {/* Account */}
-                            <section style={{ paddingBottom: '2rem' }}>
-                                <h4 style={{ paddingBottom: '1rem' }}>
-                                    Account
-                                </h4>
-                                <Form>
-                                    <Form.Group
-                                        className='mb-3'
-                                        controlId='name'
-                                    >
-                                        <Form.Label>User</Form.Label>
-                                        <Form.Control
-                                            type='text'
-                                            // ref={nameRef}
-                                            defaultValue={user.name}
-                                            readOnly
-                                            plaintext
-                                        />
-                                    </Form.Group>
-                                    <Form.Group
-                                        className='mb-3'
-                                        controlId='email'
-                                    >
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control
-                                            type='text'
-                                            // ref={emailRef}
-                                            defaultValue={user.email}
-                                            readOnly
-                                            plaintext
-                                        />
-                                    </Form.Group>
-                                </Form>
-                                <Button
-                                    variant='outline-secondary'
-                                    onClick={() =>
-                                        logout({
-                                            logoutParams: {
-                                                returnTo:
-                                                    window.location.origin,
-                                            },
-                                        })
-                                    }
-                                >
-                                    Log Out
-                                </Button>
-                            </section>
+                            {!editing ? (
+                                <>
+                                    {/* Account */}
+                                    <section style={{ paddingBottom: '2rem' }}>
+                                        <h4 style={{ paddingBottom: '1rem' }}>
+                                            Account
+                                        </h4>
+                                        <Form>
+                                            <Form.Group
+                                                className='mb-3'
+                                                controlId='name'
+                                            >
+                                                <Form.Label>User</Form.Label>
+                                                <Form.Control
+                                                    type='text'
+                                                    // ref={nameRef}
+                                                    defaultValue={user.name}
+                                                    readOnly
+                                                    plaintext
+                                                />
+                                            </Form.Group>
+                                            <Form.Group
+                                                className='mb-3'
+                                                controlId='email'
+                                            >
+                                                <Form.Label>Email</Form.Label>
+                                                <Form.Control
+                                                    type='text'
+                                                    // ref={emailRef}
+                                                    defaultValue={user.email}
+                                                    readOnly
+                                                    plaintext
+                                                />
+                                            </Form.Group>
+                                        </Form>
+                                    </section>
+                                </>
+                            ) : (
+                                ''
+                            )}
                             {/* Preferences */}
                             <section>
                                 <h4 style={{ paddingBottom: '1rem' }}>
-                                    Preferences
+                                    Job search goals
                                 </h4>
                                 {!editing ? (
                                     <>
                                         <Form>
                                             <Form.Group
-                                                className='mb-3'
+                                                className='mb-4'
                                                 controlId='position'
                                             >
                                                 <Form.Label>
-                                                    Position
+                                                    Target position
                                                 </Form.Label>
                                                 <Form.Control
                                                     type='text'
@@ -222,10 +215,12 @@ const ModalProfile = () => {
                                                 controlId='salary-range'
                                             >
                                                 <Form.Label>
-                                                    Salary Range
+                                                    Target salary range ($)
                                                 </Form.Label>
                                                 <div
-                                                    style={{ padding: '7px 0' }}
+                                                    style={{
+                                                        padding: '7px 0',
+                                                    }}
                                                 >
                                                     $
                                                     {initialValues.salary_min.toLocaleString()}{' '}
@@ -235,11 +230,11 @@ const ModalProfile = () => {
                                             </Form.Group>
 
                                             <Form.Group
-                                                className='mb-1'
+                                                className='mb-3'
                                                 controlId='location'
                                             >
                                                 <Form.Label>
-                                                    Locations
+                                                    Target locations
                                                 </Form.Label>
                                                 <div
                                                     style={{
@@ -273,7 +268,22 @@ const ModalProfile = () => {
                                                                 </Badge>
                                                             )
                                                         )}
-                                                    {initialValues.location_remote ? (
+                                                    {/* {userProfile.location_preference ?? (
+                                                        <p
+                                                            style={{
+                                                                margin: 0,
+                                                                fontSize:
+                                                                    'medium',
+                                                            }}
+                                                        >
+                                                            No locations added
+                                                        </p>
+                                                    )} */}
+                                                </div>
+
+                                                {/* TODO Figure out how to add remote badge */}
+                                                {/* 
+                                                    {initialValues.location_remote && (
                                                         <Badge
                                                             pill
                                                             bg='light'
@@ -291,30 +301,22 @@ const ModalProfile = () => {
                                                         >
                                                             Remote
                                                         </Badge>
-                                                    ) : (
-                                                        ''
-                                                    )}
-                                                </div>
+                                                    )} */}
+
+                                                <Form.Group
+                                                    className='mb-3'
+                                                    controlId='remote'
+                                                >
+                                                    <Form.Check
+                                                        label='Include remote'
+                                                        ref={remoteRef}
+                                                        defaultChecked={
+                                                            initialValues.location_remote
+                                                        }
+                                                        disabled
+                                                    />
+                                                </Form.Group>
                                             </Form.Group>
-                                            {/* 
-                                            <Form.Group
-                                                className='mb-4'
-                                                controlId='remote'
-                                            >
-                                                <Form.Check
-                                                    label='Include remote'
-                                                    ref={remoteRef}
-                                                    defaultChecked={
-                                                        initialValues.location_remote
-                                                    }
-                                                    disabled
-                                                />
-                                            </Form.Group> */}
-                                            <div
-                                                style={{
-                                                    marginBottom: '4.4rem',
-                                                }}
-                                            ></div>
                                         </Form>
                                     </>
                                 ) : (
@@ -322,11 +324,11 @@ const ModalProfile = () => {
                                         <Form>
                                             {/* Position */}
                                             <Form.Group
-                                                className='mb-3'
+                                                className='mb-4'
                                                 controlId='position'
                                             >
                                                 <Form.Label>
-                                                    Position
+                                                    Target position
                                                 </Form.Label>
                                                 <Form.Control
                                                     type='text'
@@ -347,11 +349,11 @@ const ModalProfile = () => {
                                                     controlId='salary-min'
                                                 >
                                                     <Form.Label>
-                                                        Salary Min ($)
+                                                        Target salary range ($)
                                                     </Form.Label>
                                                     <Form.Control
                                                         type='number'
-                                                        placeholder='Enter a number...'
+                                                        placeholder='Minimum'
                                                         ref={salary_minRef}
                                                         defaultValue={
                                                             initialValues.salary_min
@@ -370,31 +372,32 @@ const ModalProfile = () => {
                                                     className='mb-4'
                                                     controlId='salary-max'
                                                 >
-                                                    <Form.Label>
-                                                        Salary Max ($)
-                                                    </Form.Label>
                                                     <Form.Control
                                                         type='number'
-                                                        placeholder='Enter a number...'
+                                                        placeholder='Maximum'
                                                         ref={salary_maxRef}
                                                         defaultValue={
                                                             initialValues.salary_max
                                                         }
+                                                        style={{
+                                                            marginTop:
+                                                                '1.85rem',
+                                                        }}
                                                     />
                                                 </Form.Group>
                                             </Stack>
                                             {/* Locations */}
                                             <Form.Group
-                                                className='mb-1'
+                                                className='mb-2'
                                                 controlId='location'
                                             >
                                                 <Form.Label>
-                                                    Locations
+                                                    Target locations
                                                 </Form.Label>
-                                                <InputGroup className='mb-1'>
+                                                <InputGroup className='mb-2'>
                                                     <Form.Control
                                                         type='text'
-                                                        placeholder='Add a location...'
+                                                        placeholder='Add all locations...'
                                                         ref={locationRef}
                                                         value={locationInput}
                                                         onChange={(e) =>
@@ -404,7 +407,7 @@ const ModalProfile = () => {
                                                         }
                                                     />
                                                     <Button
-                                                        variant='outline-secondary'
+                                                        variant='secondary'
                                                         id='button-addon2'
                                                         onClick={
                                                             handleAddLocation
@@ -416,17 +419,7 @@ const ModalProfile = () => {
                                                         Add
                                                     </Button>
                                                 </InputGroup>
-                                                <Form.Text
-                                                    id='location text helper'
-                                                    muted
-                                                >
-                                                    Add all locations you prefer
-                                                    to work in.
-                                                </Form.Text>
-                                                <Form.Group
-                                                    className='mb-1'
-                                                    controlId='remote'
-                                                >
+                                                <Form.Group controlId='remote'>
                                                     <Form.Check
                                                         label='Include remote'
                                                         ref={remoteRef}
@@ -450,17 +443,17 @@ const ModalProfile = () => {
                                                                     }
                                                                     pill
                                                                     bg='light'
-                                                                    className='me-1'
                                                                     style={{
                                                                         display:
                                                                             'flex',
                                                                         alignItems:
                                                                             'center',
                                                                         color: 'var(--primary-500)',
-                                                                        border: '1px solid var(--grey-300)',
                                                                         fontWeight:
                                                                             '600',
                                                                         cursor: 'default',
+                                                                        marginRight:
+                                                                            '8px',
                                                                     }}
                                                                 >
                                                                     {location}
@@ -487,6 +480,7 @@ const ModalProfile = () => {
                                                                 </Badge>
                                                             )
                                                         )}
+
                                                     {/* {initialValues.location_remote ? (
                                                         <Badge
                                                             pill
@@ -513,6 +507,16 @@ const ModalProfile = () => {
                                         </Form>
                                     </>
                                 )}
+                                {!editing ? (
+                                    <Button
+                                        variant='outline-secondary'
+                                        onClick={handleEditClick}
+                                    >
+                                        Edit
+                                    </Button>
+                                ) : (
+                                    ''
+                                )}
                             </section>
                         </>
                     </Modal.Body>
@@ -527,9 +531,16 @@ const ModalProfile = () => {
                             {!editing ? (
                                 <Button
                                     variant='outline-secondary'
-                                    onClick={handleEditClick}
+                                    onClick={() =>
+                                        logout({
+                                            logoutParams: {
+                                                returnTo:
+                                                    window.location.origin,
+                                            },
+                                        })
+                                    }
                                 >
-                                    Edit
+                                    Log Out
                                 </Button>
                             ) : (
                                 <>
