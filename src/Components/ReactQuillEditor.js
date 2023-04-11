@@ -1,15 +1,32 @@
 import ReactQuill from 'react-quill';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
+import { Quill } from 'react-quill';
 
 const ReactQuillEditor = ({ value, onChange }) => {
+
+    const fontSizeArr = ['8px','9px','10px','12px','14px','16px','20px','24px','32px','42px','54px','68px','84px','98px'];
+    var Size = Quill.import('attributors/style/size');
+    Size.whitelist = fontSizeArr;
+    Quill.register(Size, true);
+
+    // const fontWhitelist = ['Ubuntu', 'Raleway', 'Roboto'];
+    // var Font = Quill.import('formats/font');
+    // Font.whitelist = fontWhitelist;
+    // Quill.register(Font, true);
+    
+
     const modules = {
         toolbar: [
+            // [{ 'font': Font.whitelist }],
             [{ header: [1, 2, false] }],
+            [{ 'size': fontSizeArr }],
             ['bold', 'italic', 'underline'],
-            [{ align: [] }],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            // ['code-block'],
+            [],
+            [{ align: [] },{ list: 'ordered' }, { list: 'bullet' }],
+            // [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'color': [] }, { 'background': [] } ,'clean' ],           
+            [ 'link'],
         ],
     };
 
@@ -76,4 +93,17 @@ const Wrapper = styled.div`
             font-size: 1rem !important;
         }
     }
+    
+    .ql-snow{
+.ql-picker{
+    &.ql-size{
+        .ql-picker-label,
+        .ql-picker-item{
+            &::before{
+                content: attr(data-value) !important;
+            }
+        }
+    }
+}
+}
 `;
