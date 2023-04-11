@@ -21,6 +21,7 @@ const ModalEditSheet = ({
                 fullscreen='md-down'
                 show={showEditSheetModal}
                 onHide={handleCancelClick}
+                scrollable
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Edit sheet</Modal.Title>

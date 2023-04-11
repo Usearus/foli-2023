@@ -7,10 +7,11 @@ import useAlert from "../Custom Hooks/useAlert";
 import ReactQuillEditor from "../Components/ReactQuillEditor";
 import ModalDeleteConfirmation from "../Components/ModalDeleteConfirmation";
 import { FiMoreVertical } from "react-icons/fi";
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillEdit,AiOutlineClose } from "react-icons/ai";
 import ModalEditSheet from "./ModalEditSheet";
 import { supabase } from "../API/supabase";
 import { Resizable } from "re-resizable";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const Sheet = (sheet) => {
   const [editing, setEditing] = useState(false);
@@ -112,9 +113,8 @@ const Sheet = (sheet) => {
         {isMobile ? 
         (
           <div className="sheet-content sheets-mobile">
-            {/* <div className="sheet-content sheets-mobile mobile-only"></div> */}
             <header className="sheet-title">
-              {!editing ? (
+              {/* {!editing ? ( */}
                 <Stack direction="horizontal">
                   <h6>{sheet.title}</h6>
                   <Stack direction="horizontal" className="ms-auto">
@@ -168,8 +168,8 @@ const Sheet = (sheet) => {
                     />
                   )}
                 </Stack>
-              ) : (
-                <div>
+              {/* ) : ( */}
+                {/* <div>
                   <Stack direction="horizontal" gap="1">
                     <Form>
                       <Form.Group className="title-field" controlId="title">
@@ -193,7 +193,7 @@ const Sheet = (sheet) => {
                       className="ms-auto"
                       onClick={handleCancelClick}
                     >
-                      Cancel
+                      TEST CANCEL
                     </Button>
                     <Button
                       variant="primary"
@@ -203,7 +203,7 @@ const Sheet = (sheet) => {
                     </Button>
                   </Stack>
                 </div>
-              )}
+              )} */}
             </header>
             <hr />
 
@@ -309,17 +309,15 @@ const Sheet = (sheet) => {
                       {characterCount}/{titleMaxChar}
                     </div>
                     <Button
-                      variant="outline-secondary"
-                      className="ms-auto"
+                      variant="light"
+                        style={{
+                          background: "var(--white)",
+                          border: 0,
+                        }}
+                        className="ms-auto"
                       onClick={handleCancelClick}
                     >
-                      Cancel
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={handleUpdateContentClick}
-                    >
-                      Save
+                      <AiOutlineClose/>
                     </Button>
                   </Stack>
                 </div>
@@ -333,6 +331,7 @@ const Sheet = (sheet) => {
                 markdown={sheet.content}
               />
             ) : (
+              <>
               <Form className="sheet-scroll">
                 <Form.Group controlId="content">
                   <ReactQuillEditor
@@ -341,6 +340,16 @@ const Sheet = (sheet) => {
                   />
                 </Form.Group>
               </Form>
+              <div className="sheet-footer">
+                    <Button
+                      variant="primary"
+                      onClick={handleUpdateContentClick}
+                      // className="ms-auto"
+                    >
+                      Save
+                    </Button>
+                    </div>
+                    </>
             )}
             </Resizable>
             
@@ -388,6 +397,12 @@ const Wrapper = styled.div`
     height: 100%;
   }
 
+  .sheet-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem;
+  }
   .markdown-content {
     padding: 1rem 2rem;
     h1 {
