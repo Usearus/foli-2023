@@ -33,7 +33,9 @@ const App = () => {
                         element={
                             <PrivateRoute>
                                 <AlertPopup />
+                            <div className='nav-desktop-only'>
                                 <NavBar />
+                            </div>
                                 <SingleJobPage />
                             </PrivateRoute>
                         }
@@ -70,4 +72,16 @@ const Wrapper = styled.div`
     height: 100%;
     width: 100vw;
     position: relative;
+
+    @media (min-width: 576px) {
+    .nav-desktop-only {
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-desktop-only {
+        display: none;
+    }
+}
 `;

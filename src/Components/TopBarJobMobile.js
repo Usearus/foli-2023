@@ -5,7 +5,10 @@ import { Navbar, Nav, Container, Stack, Form, Button } from 'react-bootstrap';
 import { DatabaseContext } from '../context/DatabaseContext';
 import { supabase } from '../API/supabase';
 import useAlert from '../Custom Hooks/useAlert';
-import { GoChevronDown, GoChevronUp } from 'react-icons/go';
+import { GoChevronDown, GoChevronUp, GoChevronLeft } from 'react-icons/go';
+import { LinkContainer } from 'react-router-bootstrap';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+
 
 const TopBarJobMobile = ({ className }) => {
     const { currentJob, fetchUserJobs } = useContext(DatabaseContext);
@@ -41,7 +44,7 @@ const TopBarJobMobile = ({ className }) => {
                     collapseOnSelect
                     expand='md'
                     style={{
-                        padding: '8px 16px',
+                        padding: '8px 0px',
                         background: 'var(--grey-200)',
                         position: 'sticky',
                         top: '0',
@@ -50,7 +53,20 @@ const TopBarJobMobile = ({ className }) => {
                     onToggle={() => setToggle(!toggle)}
                 >
                     <div className='title-content'>
-                        <h6
+                    <LinkContainer to='/'>
+        <Nav.Link active={false}>
+                    <Button
+                                    variant='light'
+                                    style={{
+                                        background: 'var(--grey-200)',
+                                        border: 0,
+                                    }}
+                                >
+                    <IoMdArrowRoundBack/>
+                    </Button>
+                    </Nav.Link>
+                    </LinkContainer>
+                        {/* <h6
                             style={{
                                 fontWeight: '600',
                                 margin: 0,
@@ -59,7 +75,22 @@ const TopBarJobMobile = ({ className }) => {
                             {currentJob
                                 ? `${currentJob.company} - ${currentJob.position}`
                                 : ''}
-                        </h6>
+                        </h6> */}
+                        {currentJob ? (
+                                <Stack className='truncate-parent'>
+                                    <div style={{ fontWeight: '600', fontSize: '16px' }}>
+                                        {currentJob.company}
+                                    </div>
+                                    <div
+                                        className='truncate'
+                                        style={{ margin: '0', fontSize: '14px' }}
+                                    >
+                                        {currentJob.position}
+                                    </div>
+                                </Stack>
+                            ) : (
+                                ''
+                            )}
                         <div className='ms-auto'>
                             <Navbar.Toggle
                                 as='div'
@@ -81,7 +112,7 @@ const TopBarJobMobile = ({ className }) => {
                             </Navbar.Toggle>
                         </div>
                     </div>
-                    <Navbar.Collapse id='responsive-navbar-nav'>
+                    <Navbar.Collapse id='responsive-navbar-nav' style={{ padding: '16px' }}>
                         <Form>
                             <Form.Select
                                 size='sm'
@@ -149,5 +180,15 @@ const Wrapper = styled.div`
         justify-content: flex-end;
         align-items: center;
         width: 100%;
+    }
+
+    .truncate {
+        white-space: nowrap; /* prevent the text from wrapping to a new line */
+        overflow: hidden; /* hide any text that overflows the element */
+        text-overflow: ellipsis;
+    }
+
+    .truncate-parent {
+        max-width: 250px;
     }
 `;
