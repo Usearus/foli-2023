@@ -70,28 +70,21 @@ const TemplateTopbar = () => {
 export default TemplateTopbar;
 
 const Wrapper = styled.div`
-    position: fixed;
-    z-index: 2;
-    display: flex;
-    
-    label {
-        font-weight: bold;
-    }
 
-    .topbar-container {
-    display: flex;
+
+.topbar-container {
     width: 100%;
-    background: var(--grey-100)
-    }
-
-    .category-container {
-    /* background: var(--grey-600) */
-    }
+    background: var(--grey-100);
+}
 
     .select {
         cursor: pointer;
         border: 1px solid var(--grey-600);
         border-radius: 90px;
         max-width: 240px;
+    }
+
+    label {
+        font-weight: bold;
     }
 `;
