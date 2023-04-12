@@ -1,11 +1,11 @@
 import React from 'react';
-import { Badge, Nav } from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const SiteIcon = () => {
     return (
     <LinkContainer to='/'>
-        <Nav.Link active={false}>
+<>
             <span
                 style={{
                     fontWeight: 700,
@@ -28,7 +28,7 @@ const SiteIcon = () => {
                     alpha
                 </Badge>
             </span>
-        </Nav.Link>
+    </>
     </LinkContainer>
     );
 };

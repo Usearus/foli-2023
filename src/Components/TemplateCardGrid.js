@@ -7,6 +7,8 @@ import MarkdownView from 'react-showdown';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAlert from '../Custom Hooks/useAlert';
 import { supabase } from '../API/supabase';
+import TemplateTopbar from './TemplateTopbar';
+
 
 const TemplateCardGrid = ({ closeTemplateModal }) => {
     const {
@@ -67,16 +69,20 @@ const TemplateCardGrid = ({ closeTemplateModal }) => {
     return (
         <Wrapper>
             {!previewTemplate ? (
-                <div className='grid-container'>
-                    {currentTemplates
-                        .sort((a, b) => a.category.localeCompare(b.category))
-                        .map((template) => (
-                            <TemplateCard
-                                key={template.id}
-                                template={template}
-                                handleClick={handleClick}
-                            />
-                        ))}
+                <div className='container'>
+                    <TemplateTopbar />
+                    <div className='grid-container'>
+                        
+                        {currentTemplates
+                            .sort((a, b) => a.category.localeCompare(b.category))
+                            .map((template) => (
+                                <TemplateCard
+                                    key={template.id}
+                                    template={template}
+                                    handleClick={handleClick}
+                                />
+                            ))}
+                    </div>
                 </div>
             ) : (
                 <div className='sheet-container'>
@@ -114,27 +120,28 @@ export default TemplateCardGrid;
 
 const Wrapper = styled.div`
     display: flex;
+
     .grid-container {
-        margin: 0 1rem;
-        overflow-x: scroll;
-        height: 800px;
-        display: flex;
-        flex-wrap: wrap;
+        /* overflow-x: scroll; */
+        margin-top: 100px;
         gap: 1rem;
-        align-content: flex-start;
     }
+    
     .sheet-container {
-        height: 800px;
+        
+        /* height: 800px; */
         margin: 0 1rem;
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
     .sheet-body {
+        
         box-shadow: var(--shadow-4);
         background: var(--white);
     }
     .sheet-content {
+        
         overflow-x: scroll;
         max-width: 500px;
         padding: 1rem 1rem 0 1rem;

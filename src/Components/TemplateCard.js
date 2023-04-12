@@ -25,7 +25,8 @@ export default TemplateCard;
 
 const Wrapper = styled.div`
     cursor: pointer;
-
+    padding-bottom: 1rem;
+    
     .card {
         transition: var(--transition);
         width: 22rem;
