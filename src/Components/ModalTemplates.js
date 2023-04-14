@@ -8,13 +8,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import useAlert from '../Custom Hooks/useAlert';
 import styled from 'styled-components';
 
-
 const ModalTemplates = ({ show, closeTemplateModal }) => {
   const { user } = useAuth0();
   const { setAlert } = useAlert();
 
   const {
-    currentTemplates,
     previewTemplate,
     activeTemplate,
     setActiveTemplate,
@@ -24,13 +22,8 @@ const ModalTemplates = ({ show, closeTemplateModal }) => {
     currentSheets,
 } = useContext(DatabaseContext);
 
-const handleCloseActive = () => {
-  setActiveTemplate(null);
-  setPreviewTemplate(false);
-};
-
 const addSheet = async () => {
-  const { data } = await supabase
+  await supabase
       .from('sheets')
       .select()
       .eq('id', currentJob.id);
@@ -51,18 +44,29 @@ const addSheet = async () => {
   }
 };
 
+const handleCloseActive = () => {
+  setActiveTemplate(null);
+  setPreviewTemplate(false);
+};
+
+const handleCloseAndReset = () => {
+  setActiveTemplate(null);
+  setPreviewTemplate(false);
+  closeTemplateModal();
+};
+
 const handleAddSheetClick = () => {
   addSheet();
   closeTemplateModal();
 };
 
-  return (
 
+  return (
       <Modal
         size='md'
         fullscreen='sm-down'
         show={show}
-        onHide={closeTemplateModal}
+        onHide={handleCloseAndReset}
         scrollable
       >
           <Modal.Header closeButton style={{ background: 'var(--grey-100)' }}>
@@ -71,9 +75,9 @@ const handleAddSheetClick = () => {
           <Modal.Body style={{ background: 'var(--grey-100)' }}>
               <TemplateCardGrid />
           </Modal.Body>
+              {!previewTemplate ? ( "" ) : (
           <Modal.Footer style={{ background: 'var(--grey-100)' }}>
             <Wrapper>
-              {!previewTemplate ? ( "" ) : (
                 <div className='sheet-footer' style={{}}>
                   <Button
                       variant='outline-secondary'
@@ -87,9 +91,10 @@ const handleAddSheetClick = () => {
                       >
                       Add sheet
                   </Button>
-              </div>)}
+              </div>
             </Wrapper>
           </Modal.Footer>
+          )}
       </Modal>
   );
 };
@@ -102,4 +107,5 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   gap: 1rem;
 }
+
 `

@@ -23,9 +23,9 @@ const TemplateCardGrid = () => {
     return (
         <Wrapper>
             {!previewTemplate ? (
-                <div className='list-container'>
+                <>
                     <TemplateTopbar />
-                    <div className='grid-container'>
+                    <div className='list-container'>
                         {currentTemplates
                             .sort((a, b) => a.category.localeCompare(b.category))
                             .map((template) => (
@@ -36,7 +36,7 @@ const TemplateCardGrid = () => {
                                 />
                             ))}
                     </div>
-                </div>
+                </>
             ) : (
                     <div className='sheet-body'>
                         <header className='sheet-title'>
@@ -56,15 +56,14 @@ const TemplateCardGrid = () => {
 export default TemplateCardGrid;
 
 const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    
-    .grid-container {
-        margin-top: 24px;
-        overflow-x: scroll;
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1.5rem;
+        overflow-x: hidden;
         min-height: 500px;
         max-height: 700px;
-        gap: 1rem;
     }
 
     .sheet-body {
