@@ -7,27 +7,13 @@ https://foli2023.netlify.app
 ---CRITICAL---
 
 -   Templates need to be rewritten in Font Size to be picked up by new px.
--   Template isn't resetting on close
-
-
-
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
 
 
 ---LOW PRIORITY---
-
+-   Sidebar with templates pre-chosen based on stage.
 -   AddSheetModal missing title count & limitation. (May use context for this)
--   Figure out refactoring modal onboarding
--   Add company research template
-    -   How large is the company?
-    -   Who is the hiring manager?
-    -   Interesting facts?
-    -   When was the company established?
-    -   Why do you like this job?
--   Add template to prep for initial interview screening (questions to ask and info to get)
--   Add template for interview notes during / after interview.
--   Add templates for different types of interviews (portfolio, group, negotiation, etc.)
 -   Add Google Analytics
 -   Filter on top of the jobs list, but only for stage.
 -   Make sheets a sidebar on mobile

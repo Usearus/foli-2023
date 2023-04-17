@@ -57,6 +57,8 @@ const handleCloseAndReset = () => {
 
 const handleAddSheetClick = () => {
   addSheet();
+  setActiveTemplate(null);
+  setPreviewTemplate(false);
   closeTemplateModal();
 };
 
