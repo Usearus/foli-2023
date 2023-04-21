@@ -87,6 +87,7 @@ const JobsPage = () => {
 
     if (isOnboarded === false) {
         return (
+            // FAILED ATTEMPT AT MAKING A COMPONENT FOR THIS
             // <ModalOnboarding
             //     show={showModal}
             //     setIsOnboarded={setIsOnboarded}
@@ -191,6 +192,7 @@ const JobsPage = () => {
                                             color: 'var(--primary-500)',
                                             fontWeight: '600',
                                             cursor: 'default',
+                                            marginRight: '.5rem'
                                         }}
                                     >
                                         {location}
