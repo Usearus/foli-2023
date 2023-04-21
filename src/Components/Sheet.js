@@ -168,42 +168,6 @@ const Sheet = (sheet) => {
                     />
                   )}
                 </Stack>
-              {/* ) : ( */}
-                {/* <div>
-                  <Stack direction="horizontal" gap="1">
-                    <Form>
-                      <Form.Group className="title-field" controlId="title">
-                        <Form.Control
-                          type="text"
-                          required
-                          ref={titleRef}
-                          defaultValue={initialTitleValue}
-                          placeholder="Add sheet title"
-                          size="md"
-                          maxLength={titleMaxChar}
-                          onChange={handleTitleChange}
-                        />
-                      </Form.Group>
-                    </Form>
-                    <span className="character-count">
-                      {characterCount}/{titleMaxChar}
-                    </span>
-                    <Button
-                      variant="outline-secondary"
-                      className="ms-auto"
-                      onClick={handleCancelClick}
-                    >
-                      TEST CANCEL
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={handleUpdateContentClick}
-                    >
-                      Save
-                    </Button>
-                  </Stack>
-                </div>
-              )} */}
             </header>
             <hr />
 
@@ -224,7 +188,6 @@ const Sheet = (sheet) => {
             )}
           </div> 
           ) : ( 
-          
             <Resizable
             className="sheet-content shadow-on"
             minWidth="300px"
@@ -392,7 +355,7 @@ const Wrapper = styled.div`
   }
 
   .sheet-scroll {
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 98%;
     height: 100%;
   }

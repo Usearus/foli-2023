@@ -48,44 +48,46 @@ const SideBar = ({ className }) => {
         <Wrapper className={className}>
             <section className='sidebar-container'>
                 <label>Sheets</label>
-                <DragDropContext
-                    onDragStart={() => setIsDragging(true)}
-                    onDragEnd={(result) => {
-                        setIsDragging(false);
-                        updatePositionsOnDragEnd(result);
-                    }}
-                >
-                    <Droppable droppableId='sheets'>
-                        {(provided) => (
-                            <div
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                                className={`draggable-area ${
-                                    isDragging ? 'dragging' : ''
-                                }`}
-                            >
-                                {currentSheets.map((sheet, index) => (
-                                    <Draggable
-                                        key={sheet.id}
-                                        draggableId={sheet.id}
-                                        index={index}
-                                    >
-                                        {(provided) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <SideBarItem sheet={sheet} />
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </DragDropContext>
+                <div className='scroll-container'>
+                    <DragDropContext
+                        onDragStart={() => setIsDragging(true)}
+                        onDragEnd={(result) => {
+                            setIsDragging(false);
+                            updatePositionsOnDragEnd(result);
+                        }}
+                    >
+                        <Droppable droppableId='sheets'>
+                            {(provided) => (
+                                <div
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                    className={`draggable-area ${
+                                        isDragging ? 'dragging' : ''
+                                    }`}
+                                >
+                                    {currentSheets.map((sheet, index) => (
+                                        <Draggable
+                                            key={sheet.id}
+                                            draggableId={sheet.id}
+                                            index={index}
+                                        >
+                                            {(provided) => (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
+                                                >
+                                                    <SideBarItem sheet={sheet} />
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    ))}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
+                </div>
             </section>
         </Wrapper>
     );
@@ -99,8 +101,13 @@ const Wrapper = styled.div`
         height: 100%;
         background: var(--grey-200);
         color: var(--grey-800);
-        width: 100%;
-        /* border-right: 1px solid var(--grey-300); */
+        width: 100%;        
+    }
+    
+    .scroll-container {
+        height: 80%;
+        max-height: 300px;
+        overflow-y: auto;
     }
 
     .draggable-area {
@@ -119,7 +126,12 @@ const Wrapper = styled.div`
     // Desktop
     @media (min-width: 576px) {
         .sidebar-container {
-            padding: 1rem 1rem;
+            padding: 1rem 0rem 1rem 1rem;
         }
+        .scroll-container {
+        height: 80%;
+        max-height: 600px;
+        overflow-y: auto;
+    }
     }
 `;

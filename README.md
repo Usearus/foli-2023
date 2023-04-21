@@ -6,7 +6,6 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 
--   Templates need to be rewritten in Font Size to be picked up by new px.
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
 
@@ -47,11 +46,5 @@ https://foli2023.netlify.app
 
 ## UX Issues
 
--   Adding more sheets than visible in UI sidebar are hidden
--   User didn't realize adding a blank sheet added another page offscreen
--   User thought there was a dashboard beyond the Jobs page and got confused on how to get back to it
-
 ## Bugs
 
--   Adding locations to profile while onboarding the user didn't know locations were added until they pressed save. But when you are in the website it works and you can see the lcoations you type in
--   Position details default sheet sometimes doesnt appear when the button shows visible

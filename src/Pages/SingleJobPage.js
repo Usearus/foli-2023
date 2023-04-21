@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import SideBar from '../Components/SideBar';
 import SheetList from '../Components/SheetList';
 import TopBarJobDesktop from '../Components/TopBarJobDesktop';
@@ -9,11 +9,15 @@ import ModalAddSheet from '../Components/ModalAddSheet';
 import ModalTemplates from '../Components/ModalTemplates';
 import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
+import { DatabaseContext } from '../context/DatabaseContext';
+
 
 const SingleJobPage = () => {
     const [showAddSheetModal, setShowAddSheetModal] = useState(false);
     const [showTemplateModal, setShowTemplateModal] = useState(false);
     const [selectedEventKey, setSelectedEventKey] = useState(null);
+    const { currentSheets } =
+    useContext(DatabaseContext);
 
     const handleSelect = (eventKey) => {
         setSelectedEventKey(eventKey);
@@ -30,60 +34,130 @@ const SingleJobPage = () => {
         setShowTemplateModal(false);
     };
 
-    return (
-        <Wrapper>
-            <Stack className='top'>
-                <div className='mobile-only'>
-                    <TopBarJobMobile />
+    if (currentSheets.length === 0) {
+        return (
+            <>
+                
+                <Wrapper>
+                <Stack className='top'>
+                    <div className='mobile-only'>
+                        <TopBarJobMobile />
+                    </div>
+                    <TopBarJobDesktop className='desktop-only' />
+                    <div className='empty-state'>
+                        <h5>
+                            No sheets added yet. Add your first sheet to get started.
+                        </h5>
+                    </div>
+                </Stack>
+                <div className='add-sheet-fab mobile-only'>
+                    <DropdownButton
+                        title='Add Sheet'
+                        id='add-sheet-dropdown'
+                        onSelect={handleSelect}
+                    >
+                        <Dropdown.Item
+                            eventKey='1'
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '.5rem 1rem',
+                            }}
+                        >
+                            <BiFileBlank style={{ marginRight: '.5rem' }} />
+                            Blank Sheet
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                            eventKey='2'
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '.5rem 1rem',
+                            }}
+                        >
+                            <GrTemplate style={{ marginRight: '.5rem' }} /> From
+                            Template
+                        </Dropdown.Item>
+                    </DropdownButton>
+                    {showAddSheetModal && (
+                        <ModalAddSheet
+                            show={showAddSheetModal}
+                            handleClose={handleCloseReset}
+                        />
+                    )}
+                    {showTemplateModal && (
+                        <ModalTemplates
+                            show={showTemplateModal}
+                            closeTemplateModal={handleCloseReset}
+                        />
+                    )}
                 </div>
-                <TopBarJobDesktop className='desktop-only' />
-            </Stack>
-            <SideBar className='sidebar desktop-only' />
-            <SheetList className='right' />
-            <div className='add-sheet-fab mobile-only'>
-                <DropdownButton
-                    title='Add Sheet'
-                    id='add-sheet-dropdown'
-                    onSelect={handleSelect}
-                >
-                    <Dropdown.Item
-                        eventKey='1'
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: '.5rem 1rem',
-                        }}
+                </Wrapper>
+            
+                
+                
+        
+                
+            </>
+        );
+    }
+
+    if (currentSheets.length > 0) {
+        return (
+            <Wrapper>
+                <Stack className='top'>
+                    <div className='mobile-only'>
+                        <TopBarJobMobile />
+                    </div>
+                    <TopBarJobDesktop className='desktop-only' />
+                </Stack>
+                <SideBar className='sidebar desktop-only' />
+                <SheetList className='right' />
+                <div className='add-sheet-fab mobile-only'>
+                    <DropdownButton
+                        title='Add Sheet'
+                        id='add-sheet-dropdown'
+                        onSelect={handleSelect}
                     >
-                        <BiFileBlank style={{ marginRight: '.5rem' }} />
-                        Blank Sheet
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                        eventKey='2'
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: '.5rem 1rem',
-                        }}
-                    >
-                        <GrTemplate style={{ marginRight: '.5rem' }} /> From
-                        Template
-                    </Dropdown.Item>
-                </DropdownButton>
-                {showAddSheetModal && (
-                    <ModalAddSheet
-                        show={showAddSheetModal}
-                        handleClose={handleCloseReset}
-                    />
-                )}
-                {showTemplateModal && (
-                    <ModalTemplates
-                        show={showTemplateModal}
-                        closeTemplateModal={handleCloseReset}
-                    />
-                )}
-            </div>
-        </Wrapper>
-    );
+                        <Dropdown.Item
+                            eventKey='1'
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '.5rem 1rem',
+                            }}
+                        >
+                            <BiFileBlank style={{ marginRight: '.5rem' }} />
+                            Blank Sheet
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                            eventKey='2'
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '.5rem 1rem',
+                            }}
+                        >
+                            <GrTemplate style={{ marginRight: '.5rem' }} /> From
+                            Template
+                        </Dropdown.Item>
+                    </DropdownButton>
+                    {showAddSheetModal && (
+                        <ModalAddSheet
+                            show={showAddSheetModal}
+                            handleClose={handleCloseReset}
+                        />
+                    )}
+                    {showTemplateModal && (
+                        <ModalTemplates
+                            show={showTemplateModal}
+                            closeTemplateModal={handleCloseReset}
+                        />
+                    )}
+                </div>
+            </Wrapper>
+        );
+    }
 };
 
 export default SingleJobPage;
@@ -96,15 +170,14 @@ const Wrapper = styled.div`
         'right';
     grid-template-columns: 1fr;
     grid-template-rows: 60px auto;
-    /* height: calc(100vh - 63px);
-    height: calc(100dvh - 63px); */
-    
+
     /* This keeps the height to 100% whenever the navbar disappears on mobile. */
     height: 100dvh;
 
     overflow: hidden;
     position: relative;
-
+    background: var(--grey-200);
+    
     .add-sheet-fab {
         position: absolute;
         bottom: 1rem;
@@ -118,7 +191,13 @@ const Wrapper = styled.div`
     .top {
         grid-area: top;
     }
-
+    .empty-state{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+    
     .right {
         grid-area: right;
         display: flex;
