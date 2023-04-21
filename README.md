@@ -5,7 +5,9 @@ https://foli2023.netlify.app
 ## Things to add
 
 ---CRITICAL---
-
+-   Figure out where my linting/formatting went wrong...
+-   Setup activeCategory variable to context to be able to access when a template closes.
+-   Learn how to do validations (Required name on a sheet, etc.)
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
 
@@ -17,6 +19,8 @@ https://foli2023.netlify.app
 -   Filter on top of the jobs list, but only for stage.
 -   Make sheets a sidebar on mobile
 -   Animate table row when adding a job
+-   Make 14px font default on React-Quill component
+-   Add full job sample to onboarding with as many docs that make sense.
 
 ## Post-MVP Features
 
