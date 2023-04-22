@@ -40,7 +40,6 @@ https://foli2023.netlify.app
     -   Simple vs advanced. What is minimal and what can be added?
 -   Add contacts (May go over sheets sidebar)
     -   Name, Role, Notes
--   Highlight Skills (Skills API)
 
 ## Non-priority
 
