@@ -11,24 +11,85 @@ import { AiFillEdit,AiOutlineClose } from "react-icons/ai";
 import ModalEditSheet from "./ModalEditSheet";
 import { supabase } from "../API/supabase";
 import { Resizable } from "re-resizable";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 const Sheet = (sheet) => {
-  const [editing, setEditing] = useState(false);
-  const [content, setContent] = useState(sheet.content);
+  // Context Variables
   const { fetchCurrentSheets, currentJob } = useContext(DatabaseContext);
   const { setAlert } = useAlert();
+
+  // Modals
+
+  // Modal Variables
   const [selectedEventKey, setSelectedEventKey] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditSheetModal, setShowEditSheetModal] = useState(false);
+    
+  const handleSelect = (eventKey) => {
+    setSelectedEventKey(eventKey);
+    if (eventKey === "1") {
+      setShowDeleteModal(true);
+      console.log("handleSelect called");
+    }
+  };
 
-  const titleRef = useRef();
-  const initialTitleValue = sheet.title ?? "";
+  const handleOpenSheetModalClick = () => {
+    setShowEditSheetModal(true);
+  };
+  
+  const handleCloseReset = () => {
+    // Will close any modal opened by the dropdown
+    console.log("handleCloseReset called");
+    setShowDeleteModal(false);
+  };
+
+
+
+
+
+  // SHEET FUNCTIONS
   const initialVisibleValue = sheet.visible;
-  const [characterCount, setCharacterCount] = useState(content.length);
-  const titleMaxChar = 32;
-
+  const initialTitleValue = sheet.title ?? "";
+      // Check width on load and render mobile or desktop sheets
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  
+  // Resizing
   const [sheetWidth, setSheetWidth] = useState(sheet.width);
+  const handleUpdateWidthClick = async (newSheetWidth) => {
+    setSheetWidth(newSheetWidth);
+    const { error } = await supabase
+      .from("sheets")
+      .update({
+        width: newSheetWidth,
+      })
+      .eq("id", sheet.id);
+
+    if (error) {
+      setAlert("Something went wrong. Sheet width not updated.", "danger");
+      console.log("error is", error);
+      return;
+    }
+  };
+
+  // EDITING SHEET FUNCTIONS
+  const [editing, setEditing] = useState(false);
+  const handleEditClick = () => {
+    setEditing(true);
+  };
+
+  const handleCancelClick = () => {
+    setContent(sheet.content);
+    setEditing(false);
+    setShowEditSheetModal(false);
+  };
+
+
+  // React Quill Editor Variables & Functions
+  const [content, setContent] = useState(sheet.content);
+
+  
+  const handleEditorChange = (value) => {
+    setContent(value);
+  };
 
   const handleUpdateContentClick = async () => {
     const { error } = await supabase
@@ -49,60 +110,21 @@ const Sheet = (sheet) => {
     }
   };
 
-  const handleUpdateWidthClick = async (newSheetWidth) => {
-    setSheetWidth(newSheetWidth);
-    const { error } = await supabase
-      .from("sheets")
-      .update({
-        width: newSheetWidth,
-      })
-      .eq("id", sheet.id);
-
-    if (error) {
-      setAlert("Something went wrong. Sheet width not updated.", "danger");
-      console.log("error is", error);
-      return;
-    }
-  };
-
-  const handleEditClick = () => {
-    setEditing(true);
-  };
-
-  const handleCancelClick = () => {
-    setContent(sheet.content);
-    setEditing(false);
-    setShowEditSheetModal(false);
-  };
-
-  const handleEditorChange = (value) => {
-    setContent(value);
-  };
+  // Editing Title
+  const [title, setTitle] = useState(sheet.title)
+  const titleRef = useRef();
+  const [characterCount, setCharacterCount] = useState(title.length);
+  const titleMaxChar = 32;
 
   const handleTitleChange = (event) => {
     const newValue = event.target.value;
     setCharacterCount(newValue.length);
   };
 
-  const handleSelect = (eventKey) => {
-    setSelectedEventKey(eventKey);
-    if (eventKey === "1") {
-      setShowDeleteModal(true);
-      console.log("handleSelect called");
-    }
-  };
 
-  const handleOpenSheetModalClick = () => {
-    setShowEditSheetModal(true);
-  };
 
-  // Will close any modal opened by the dropdown
-  const handleCloseReset = () => {
-    console.log("handleCloseReset called");
-    setShowDeleteModal(false);
-  };
 
-  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
 
   return (
     <Wrapper>

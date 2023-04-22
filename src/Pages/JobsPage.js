@@ -219,7 +219,7 @@ const JobsPage = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant='primary' onClick={handleAddPref}>
-                        Submit
+                        Continue
                     </Button>
                 </Modal.Footer>
             </Modal>

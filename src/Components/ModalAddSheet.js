@@ -11,13 +11,13 @@ const ModalAddSheet = ({ show, handleClose }) => {
     const { user } = useAuth0();
     const { currentJob, currentSheets, fetchCurrentSheets } =
         useContext(DatabaseContext);
-
+    const [validated, setValidated] = useState(false);
+    const titleRef = useRef();
     const [content, setContent] = useState('');
+
     const handleEditorChange = (value) => {
         setContent(value);
     };
-
-    const titleRef = useRef();
 
     const handleAddSheetClick = async () => {
         if (currentJob) {
@@ -40,39 +40,57 @@ const ModalAddSheet = ({ show, handleClose }) => {
         }
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const form = event.currentTarget;
+        if (form.checkValidity() === true) {
+            setValidated(false);
+            handleAddSheetClick();
+        } else {
+            setValidated(true);
+        }
+    };
+
+    
     return (
         <Modal scrollable fullscreen='md-down' show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Add a new sheet</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
-                    <Form.Group className='mb-3 ' controlId='title'>
-                        <Form.Label>Sheet Title</Form.Label>
-                        <Form.Control
-                            type='text'
-                            autoFocus
-                            required
-                            ref={titleRef}
-                        />
-                    </Form.Group>
-                    <Form.Label>Content</Form.Label>
-                    <Form.Group className='mb-3' controlId='content'>
-                        <ReactQuillEditor
-                            value={content}
-                            onChange={handleEditorChange}
-                        />
-                    </Form.Group>
-                </Form>
+            <Form id='addSheetForm' noValidate validated={validated} onSubmit={handleSubmit}>
+                {/* Title */}
+                <Form.Group className='mb-3' controlId='title'>
+                    <Form.Label>Sheet Title *</Form.Label>
+                    <Form.Control
+                        required
+                        type='text'
+                        autoFocus
+                        ref={titleRef}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        Sheet title cannot be blank.
+                    </Form.Control.Feedback>
+                </Form.Group>
+                {/* Content */}
+                <Form.Label>Content</Form.Label>
+                <Form.Group className='mb-3' controlId='content'>
+                    <ReactQuillEditor
+                        value={content}
+                        onChange={handleEditorChange}
+                    />
+                </Form.Group>
+            </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='outline-secondary' onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant='primary' onClick={handleAddSheetClick}>
+                <Button type="submit" variant='primary' form="addSheetForm">
                     Confirm
                 </Button>
-            </Modal.Footer>
+            </Modal.Footer>     
         </Modal>
     );
 };

@@ -59,7 +59,7 @@ const NavBar = () => {
                     <Navbar.Offcanvas
                         id='offcanvas-navbar-nav'
                         placement='start'
-                        style={{ background: 'var(--grey-100)'}}
+                        style={{ background: 'var(--grey-100)', cursor: 'pointer'}}
                     >
                         <OffcanvasHeader closeButton>
                             <OffcanvasTitle id='title'>
