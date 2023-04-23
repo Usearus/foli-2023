@@ -77,6 +77,7 @@ const DatabaseProvider = ({ children }) => {
     const [userProfile, setUserProfile] = useState([]);
     const [userJobs, setUserJobs] = useState([]);
     const [userSheets, setUserSheets] = useState([]);
+    const [settingPageStack, setSettingPageStack] = useState('');
 
     async function fetchUserProfile() {
         if (auth0Email) {
@@ -87,7 +88,8 @@ const DatabaseProvider = ({ children }) => {
                 .single();
             if (data) {
                 setUserProfile(data);
-                // console.log('userProfile is', data);
+                setSettingPageStack(data.page_stack)
+                console.log('userProfile is', data);
             } else {
                 createUserProfile();
                 const onboardingJob = await createOnboardingJob();
@@ -96,6 +98,7 @@ const DatabaseProvider = ({ children }) => {
             }
         }
     }
+    console.log(settingPageStack)
 
     async function createUserProfile() {
         if (auth0Email) {
@@ -188,6 +191,7 @@ const DatabaseProvider = ({ children }) => {
             // Cleanup // TODO figure out how to fix this useEffect issue
         };
     }, [auth0Email]);
+
 
     // *
     // *
@@ -283,6 +287,9 @@ const DatabaseProvider = ({ children }) => {
                 previewTemplate,
                 setPreviewTemplate,
                 setActiveTemplate,
+                // Settings
+                settingPageStack,
+                setSettingPageStack,
             }}
         >
             {children}

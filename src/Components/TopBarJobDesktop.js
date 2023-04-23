@@ -4,14 +4,15 @@ import styled from 'styled-components';
 import ModalAddSheet from './ModalAddSheet';
 import { DatabaseContext } from '../context/DatabaseContext';
 import ModalTemplates from './ModalTemplates';
-import { Form, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Form, Dropdown, DropdownButton, ButtonGroup, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import useAlert from '../Custom Hooks/useAlert';
 import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
+import { RxViewVertical, RxViewHorizontal } from 'react-icons/rx';
 import { supabase } from '../API/supabase';
 
 const TopBarJobDesktop = ({ className }) => {
-    const { setCurrentJob, fetchUserJobs, currentJob } =
+    const { setCurrentJob, fetchUserJobs, currentJob, userProfile, fetchUserProfile, fetchCurrentSheets } =
         useContext(DatabaseContext);
     const { setAlert } = useAlert();
     const [selectedEventKey, setSelectedEventKey] = useState(null);
@@ -57,6 +58,22 @@ const TopBarJobDesktop = ({ className }) => {
     const handleCloseReset = () => {
         setShowAddSheetModal(false);
         setShowTemplateModal(false);
+    };
+
+    const handleUpdateSettingPageStackClick = async (selectedStack) => {
+        const { error } = await supabase
+            .from('profiles')
+            .update({
+                page_stack: selectedStack,
+            })
+            .eq('id', userProfile.id);
+            fetchUserProfile();
+            // fetchCurrentSheets();
+        if (error) {
+            setAlert('Something went wrong. Setting not updated.', 'danger');
+            console.log('error is', error);
+            return;
+        }
     };
 
     return (
@@ -107,6 +124,40 @@ const TopBarJobDesktop = ({ className }) => {
                         </Form>
                     </div>
                     <div className='right-content'>
+                        <ButtonGroup aria-label="page-stack-buttons">
+                            <OverlayTrigger
+                                placement='top'
+                                delay={{ show: 500, hide: 0 }}
+                                overlay={
+                                <Tooltip id='vertical-stack'>
+                                    Page stack vertical
+                                </Tooltip>
+                            }>
+                                <Button
+                                    variant="outline-secondary"
+                                    onClick={() => handleUpdateSettingPageStackClick('vertical')}
+                                    active={userProfile.page_stack === 'vertical'}
+                                    >
+                                    <RxViewHorizontal/>
+                                </Button>
+                            </OverlayTrigger>
+                            <OverlayTrigger
+                                placement='top'
+                                delay={{ show: 500, hide: 0 }}
+                                overlay={
+                                <Tooltip id='horizontal-stack'>
+                                    Page stack horizontal
+                                </Tooltip>
+                            }>
+                                <Button
+                                    variant="outline-secondary"
+                                    onClick={() => handleUpdateSettingPageStackClick('horizontal')}
+                                    active={userProfile.page_stack === 'horizontal'}
+                                    >
+                                    <RxViewVertical/>
+                                </Button>
+                            </OverlayTrigger>
+                        </ButtonGroup>
                         <DropdownButton
                             title='Add Sheet'
                             id='add-sheet-dropdown'
@@ -159,6 +210,16 @@ export default TopBarJobDesktop;
 const Wrapper = styled.div`
     position: sticky;
     z-index: 1;
+    
+    .horizontal-stack{
+        flex-wrap: none;
+    }
+
+    .vertical-stack{
+        flex-wrap: wrap;
+        padding: 0.5rem 5rem 0.5rem 5rem;
+    }
+
     .top-bar-container {
         background: var(--grey-200);
         justify-content: space-between;

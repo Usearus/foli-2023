@@ -16,8 +16,12 @@ const SingleJobPage = () => {
     const [showAddSheetModal, setShowAddSheetModal] = useState(false);
     const [showTemplateModal, setShowTemplateModal] = useState(false);
     const [selectedEventKey, setSelectedEventKey] = useState(null);
-    const { currentSheets } =
-    useContext(DatabaseContext);
+    const { currentSheets, settingPageStack } = useContext(DatabaseContext);
+
+    const stackClassName = 
+        settingPageStack === 'horizontal' ? 'horizontal-stack-sheet-list' : 
+        settingPageStack === 'vertical' ? 'vertical-stack-sheet-list' : 
+        '';
 
     const handleSelect = (eventKey) => {
         setSelectedEventKey(eventKey);
@@ -112,7 +116,7 @@ const SingleJobPage = () => {
                     <TopBarJobDesktop className='desktop-only' />
                 </Stack>
                 <SideBar className='sidebar desktop-only' />
-                <SheetList className='right' />
+                <SheetList className={`right ${stackClassName}`} />
                 <div className='add-sheet-fab mobile-only'>
                     <DropdownButton
                         title='Add Sheet'
@@ -210,6 +214,12 @@ const Wrapper = styled.div`
         background: var(--grey-200);
     }
 
+/* On Mobile we always want flex-wrap to none */
+.vertical-stack-sheet-list{
+    flex-wrap: none;
+
+}
+
     /* Desktop */
     @media (min-width: 576px) {
         display: grid;
@@ -232,6 +242,15 @@ const Wrapper = styled.div`
 
         .right {
         scroll-snap-type: none;
-    }
+        }
+
+        .horizontal-stack-sheet-list{
+        flex-wrap: none;
+        }
+
+        .vertical-stack-sheet-list{
+        flex-wrap: wrap;
+        padding: .5rem 5rem .5rem 5rem;
+        }
     }
 `;

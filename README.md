@@ -5,6 +5,8 @@ https://foli2023.netlify.app
 ## Things to add
 
 ---CRITICAL---
+-   Change to pages
+-   Click to scroll
 -   Figure out where my linting/formatting went wrong...
 -   Setup activeCategory variable to context to be able to access when a template closes.
 -   Learn how to do validations (Required name on a sheet, etc.)
