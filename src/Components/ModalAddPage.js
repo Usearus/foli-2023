@@ -22,7 +22,7 @@ const ModalAddPage = ({ show, handleClose }) => {
     const handleAddPageClick = async () => {
         if (currentJob) {
             await supabase.from('jobs').select().eq('id', currentJob.id);
-            const { error } = await supabase.from('sheets').insert({
+            const { error } = await supabase.from('pages').insert({
                 account: user.email,
                 title: titleRef.current.value,
                 content: content,

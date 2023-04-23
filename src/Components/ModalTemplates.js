@@ -24,10 +24,10 @@ const ModalTemplates = ({ show, closeTemplateModal }) => {
 
 const addPage = async () => {
   await supabase
-      .from('sheets')
+      .from('pages')
       .select()
       .eq('id', currentJob.id);
-  const { error } = await supabase.from('sheets').insert({
+  const { error } = await supabase.from('pages').insert({
       account: user.email,
       title: activeTemplate.title,
       content: activeTemplate.content,

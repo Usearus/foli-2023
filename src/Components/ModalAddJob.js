@@ -65,7 +65,7 @@ const ModalAddJob = () => {
         setAlert('Job successfully added!', 'success');
         const newJobId = data[0].id;
         // console.log('newJobId', newJobId);
-        await supabase.from('sheets').insert({
+        await supabase.from('pages').insert({
             title: 'Job Description',
             content: '<p>Start by pasting in the job description.</p>',
             account: user.email,

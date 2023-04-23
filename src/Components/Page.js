@@ -57,7 +57,7 @@ const Page = (page) => {
   const handleUpdateWidthClick = async (newPageWidth) => {
     setPageWidth(newPageWidth);
     const { error } = await supabase
-      .from("sheets")
+      .from("pages")
       .update({
         width: newPageWidth,
       })
@@ -93,7 +93,7 @@ const Page = (page) => {
 
   const handleUpdateContentClick = async () => {
     const { error } = await supabase
-      .from("sheets")
+      .from("pages")
       .update({
         content: content,
         title: titleRef.current.value,

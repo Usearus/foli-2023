@@ -26,7 +26,7 @@ const ModalDeleteConfirmation = ({ show, close, type, object }) => {
         }
         if (type === 'page') {
             const { error } = await supabase
-                .from('sheets')
+                .from('pages')
                 .delete()
                 .eq('id', object.id);
             if (error) {

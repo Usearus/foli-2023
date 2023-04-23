@@ -28,7 +28,7 @@ const DatabaseProvider = ({ children }) => {
     // FETCH ALL DATA
 
     async function fetchAllPages() {
-        const { data, error } = await supabase.from('sheets').select('*');
+        const { data, error } = await supabase.from('pages').select('*');
         // console.log('allPages are', data);
         setAllPages(data);
         if (error) {
@@ -137,7 +137,7 @@ const DatabaseProvider = ({ children }) => {
 
     async function createOnboardingPages(onboardingJob) {
         await supabase
-            .from('sheets')
+            .from('pages')
             .insert([
                 {
                     title: 'Foli Tutorial',
@@ -173,7 +173,7 @@ const DatabaseProvider = ({ children }) => {
     async function fetchUserPages() {
         if (auth0Email) {
             const { data } = await supabase
-                .from('sheets')
+                .from('pages')
                 .select('*')
                 .filter('account', 'eq', auth0Email);
             if (data) {
@@ -217,7 +217,7 @@ const DatabaseProvider = ({ children }) => {
     async function fetchCurrentPages(job) {
         // console.log('job received for fetch:', job);
         const { data } = await supabase
-            .from('sheets')
+            .from('pages')
             .select('*')
             .filter('jobid', 'eq', job.id);
         if (data) {

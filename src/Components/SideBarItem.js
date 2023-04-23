@@ -14,7 +14,7 @@ const SideBarItem = ({ page }) => {
     const handleVisibilityClick = async () => {
         const visible = page.visible;
         await supabase
-            .from('sheets')
+            .from('pages')
             .update({
                 visible: !visible,
             })
