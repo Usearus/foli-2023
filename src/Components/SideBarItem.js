@@ -7,19 +7,19 @@ import { supabase } from '../API/supabase';
 import { DatabaseContext } from '../context/DatabaseContext';
 import ModalDeleteConfirmation from './ModalDeleteConfirmation';
 
-const SideBarItem = ({ sheet }) => {
-    const { fetchCurrentSheets, currentJob } = useContext(DatabaseContext);
+const SideBarItem = ({ page }) => {
+    const { fetchCurrentPages, currentJob } = useContext(DatabaseContext);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const handleVisibilityClick = async () => {
-        const visible = sheet.visible;
+        const visible = page.visible;
         await supabase
             .from('sheets')
             .update({
                 visible: !visible,
             })
-            .eq('id', sheet.id);
-        fetchCurrentSheets(currentJob);
+            .eq('id', page.id);
+        fetchCurrentPages(currentJob);
     };
 
     // Will close any modal opened by the dropdown
@@ -40,12 +40,12 @@ const SideBarItem = ({ sheet }) => {
                     placement='top'
                     delay={{ show: 1000, hide: 0 }}
                     overlay={
-                        <Tooltip id={`tooltip-${sheet.id}`}>
-                            {sheet.title}
+                        <Tooltip id={`tooltip-${page.id}`}>
+                            {page.title}
                         </Tooltip>
                     }
                 >
-                    <span>{sheet.title}</span>
+                    <span>{page.title}</span>
                 </OverlayTrigger>
                 <div
                     className='ms-auto fade-in'
@@ -80,7 +80,7 @@ const SideBarItem = ({ sheet }) => {
                     }}
                     onClick={handleVisibilityClick}
                 >
-                    {sheet.visible ? (
+                    {page.visible ? (
                         <BiShow
                             style={{
                                 minWidth: '16px',
@@ -104,8 +104,8 @@ const SideBarItem = ({ sheet }) => {
                     <ModalDeleteConfirmation
                         show={showDeleteModal}
                         close={handleCloseModal}
-                        object={sheet}
-                        type='sheet'
+                        object={page}
+                        type='page'
                     />
                 )}
             </div>

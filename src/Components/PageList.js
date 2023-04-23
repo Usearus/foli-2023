@@ -1,27 +1,27 @@
 import { useContext } from 'react';
 import { DatabaseContext } from '../context/DatabaseContext';
-import Sheet from './Sheet';
+import Page from './Page';
 import styled from 'styled-components';
 
-const SheetList = ({ className }) => {
-    const { currentSheets, settingPageStack } = useContext(DatabaseContext);
-    const visibleSheets = currentSheets.filter((sheet) => sheet.visible);
+const PageList = ({ className }) => {
+    const { currentPages, settingPageStack } = useContext(DatabaseContext);
+    const visiblePages = currentPages.filter((page) => page.visible);
 
     const stackClassName = 
-        settingPageStack === 'horizontal' ? 'horizontal-stack-sheet' : 
-        settingPageStack === 'vertical' ? 'vertical-stack-sheet' : 
+        settingPageStack === 'horizontal' ? 'horizontal-stack-page' : 
+        settingPageStack === 'vertical' ? 'vertical-stack-page' : 
         '';
 
     return (
         <Wrapper className={`${className}`}>
-            {visibleSheets.map((sheet) => {
+            {visiblePages.map((page) => {
                 return (
                     <div
-                        key={sheet.id}
+                        key={page.id}
                         style={{ scrollSnapAlign: 'center' }}
                         className={stackClassName}
                     >
-                        <Sheet key={sheet.id} {...sheet} id={sheet.id} />
+                        <Page key={page.id} {...page} id={page.id} />
                     </div>
                 );
             })}
@@ -29,21 +29,21 @@ const SheetList = ({ className }) => {
     );
 };
 
-export default SheetList;
+export default PageList;
 
 const Wrapper = styled.div`
-    .horizontal-stack-sheet{
+    .horizontal-stack-page{
         height: 100%;
     }
 
-    .vertical-stack-sheet{
+    .vertical-stack-page{
         height: 100%;
         
     }
 
     /* Desktop */
     @media (min-width: 576px) {
-    .vertical-stack-sheet{
+    .vertical-stack-page{
     height: 90%;
     }
 }

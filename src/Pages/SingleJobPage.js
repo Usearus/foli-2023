@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
 import SideBar from '../Components/SideBar';
-import SheetList from '../Components/SheetList';
+import PageList from '../Components/PageList';
 import TopBarJobDesktop from '../Components/TopBarJobDesktop';
 import styled from 'styled-components';
 import TopBarJobMobile from '../Components/TopBarJobMobile';
 import { Stack, DropdownButton, Dropdown } from 'react-bootstrap';
-import ModalAddSheet from '../Components/ModalAddSheet';
+import ModalAddPage from '../Components/ModalAddPage';
 import ModalTemplates from '../Components/ModalTemplates';
 import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
@@ -13,20 +13,20 @@ import { DatabaseContext } from '../context/DatabaseContext';
 
 
 const SingleJobPage = () => {
-    const [showAddSheetModal, setShowAddSheetModal] = useState(false);
+    const [showAddPageModal, setShowAddPageModal] = useState(false);
     const [showTemplateModal, setShowTemplateModal] = useState(false);
     const [selectedEventKey, setSelectedEventKey] = useState(null);
-    const { currentSheets, settingPageStack } = useContext(DatabaseContext);
+    const { currentPages, settingPageStack } = useContext(DatabaseContext);
 
     const stackClassName = 
-        settingPageStack === 'horizontal' ? 'horizontal-stack-sheet-list' : 
-        settingPageStack === 'vertical' ? 'vertical-stack-sheet-list' : 
+        settingPageStack === 'horizontal' ? 'horizontal-stack-page-list' : 
+        settingPageStack === 'vertical' ? 'vertical-stack-page-list' : 
         '';
 
     const handleSelect = (eventKey) => {
         setSelectedEventKey(eventKey);
         if (eventKey === '1') {
-            setShowAddSheetModal(true);
+            setShowAddPageModal(true);
         }
         if (eventKey === '2') {
             setShowTemplateModal(true);
@@ -34,11 +34,11 @@ const SingleJobPage = () => {
     };
 
     const handleCloseReset = () => {
-        setShowAddSheetModal(false);
+        setShowAddPageModal(false);
         setShowTemplateModal(false);
     };
 
-    if (currentSheets.length === 0) {
+    if (currentPages.length === 0) {
         return (
             <>
                 
@@ -50,14 +50,14 @@ const SingleJobPage = () => {
                     <TopBarJobDesktop className='desktop-only' />
                     <div className='empty-state'>
                         <h5>
-                            No sheets added yet. Add your first sheet to get started.
+                            No pages added yet. Add your first page to get started.
                         </h5>
                     </div>
                 </Stack>
-                <div className='add-sheet-fab mobile-only'>
+                <div className='add-page-fab mobile-only'>
                     <DropdownButton
-                        title='Add Sheet'
-                        id='add-sheet-dropdown'
+                        title='Add Page'
+                        id='add-page-dropdown'
                         onSelect={handleSelect}
                     >
                         <Dropdown.Item
@@ -69,7 +69,7 @@ const SingleJobPage = () => {
                             }}
                         >
                             <BiFileBlank style={{ marginRight: '.5rem' }} />
-                            Blank Sheet
+                            Blank page
                         </Dropdown.Item>
                         <Dropdown.Item
                             eventKey='2'
@@ -80,12 +80,12 @@ const SingleJobPage = () => {
                             }}
                         >
                             <GrTemplate style={{ marginRight: '.5rem' }} /> From
-                            Template
+                            template
                         </Dropdown.Item>
                     </DropdownButton>
-                    {showAddSheetModal && (
-                        <ModalAddSheet
-                            show={showAddSheetModal}
+                    {showAddPageModal && (
+                        <ModalAddPage
+                            show={showAddPageModal}
                             handleClose={handleCloseReset}
                         />
                     )}
@@ -106,7 +106,7 @@ const SingleJobPage = () => {
         );
     }
 
-    if (currentSheets.length > 0) {
+    if (currentPages.length > 0) {
         return (
             <Wrapper>
                 <Stack className='top'>
@@ -116,11 +116,11 @@ const SingleJobPage = () => {
                     <TopBarJobDesktop className='desktop-only' />
                 </Stack>
                 <SideBar className='sidebar desktop-only' />
-                <SheetList className={`right ${stackClassName}`} />
-                <div className='add-sheet-fab mobile-only'>
+                <PageList className={`right ${stackClassName}`} />
+                <div className='add-page-fab mobile-only'>
                     <DropdownButton
-                        title='Add Sheet'
-                        id='add-sheet-dropdown'
+                        title='Add page'
+                        id='add-page-dropdown'
                         onSelect={handleSelect}
                     >
                         <Dropdown.Item
@@ -132,7 +132,7 @@ const SingleJobPage = () => {
                             }}
                         >
                             <BiFileBlank style={{ marginRight: '.5rem' }} />
-                            Blank Sheet
+                            Blank page
                         </Dropdown.Item>
                         <Dropdown.Item
                             eventKey='2'
@@ -143,12 +143,12 @@ const SingleJobPage = () => {
                             }}
                         >
                             <GrTemplate style={{ marginRight: '.5rem' }} /> From
-                            Template
+                            template
                         </Dropdown.Item>
                     </DropdownButton>
-                    {showAddSheetModal && (
-                        <ModalAddSheet
-                            show={showAddSheetModal}
+                    {showAddPageModal && (
+                        <ModalAddPage
+                            show={showAddPageModal}
                             handleClose={handleCloseReset}
                         />
                     )}
@@ -182,7 +182,7 @@ const Wrapper = styled.div`
     position: relative;
     background: var(--grey-200);
     
-    .add-sheet-fab {
+    .add-page-fab {
         position: absolute;
         bottom: 1rem;
         right: 1rem;
@@ -215,7 +215,7 @@ const Wrapper = styled.div`
     }
 
 /* On Mobile we always want flex-wrap to none */
-.vertical-stack-sheet-list{
+.vertical-stack-page-list{
     flex-wrap: none;
 
 }
@@ -244,11 +244,11 @@ const Wrapper = styled.div`
         scroll-snap-type: none;
         }
 
-        .horizontal-stack-sheet-list{
+        .horizontal-stack-page-list{
         flex-wrap: none;
         }
 
-        .vertical-stack-sheet-list{
+        .vertical-stack-page-list{
         flex-wrap: wrap;
         padding: .5rem 5rem .5rem 5rem;
         }

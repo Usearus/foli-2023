@@ -38,13 +38,13 @@ const TemplateCardGrid = () => {
                     </div>
                 </>
             ) : (
-                    <div className='sheet-body'>
-                        <header className='sheet-title'>
+                    <div className='page-body'>
+                        <header className='page-title'>
                             <h6>{activeTemplate.title}</h6>
                             <hr />
                         </header>
                         <MarkdownView
-                            className='sheet-content markdown-content'
+                            className='page-content markdown-content'
                             markdown={activeTemplate.content}
                         />
                     </div>
@@ -66,21 +66,21 @@ const Wrapper = styled.div`
         max-height: 700px;
     }
 
-    .sheet-body {
+    .page-body {
         height: 100%;
         background: var(--white);
     }
 
-    .sheet-title {
+    .page-title {
         padding: 1rem 1rem 0.5rem 1rem;
     }
-    .sheet-title h6 {
+    .page-title h6 {
         margin-bottom: 0rem;
         font-weight: 600;
         margin: 0 1rem;
         padding: 0.85rem 0;
     }
-    .sheet-content {
+    .page-content {
         overflow-x: scroll;
         max-height: 700px;
         height: auto;

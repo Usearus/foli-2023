@@ -10,7 +10,7 @@ import { supabase } from '../API/supabase';
 import ModalEditJob from './ModalEditJob';
 
 const JobsTableRow = (job) => {
-    const { fetchUserJobs, fetchCurrentJob, fetchCurrentSheets } =
+    const { fetchUserJobs, fetchCurrentJob, fetchCurrentPages } =
         useContext(DatabaseContext);
 
     const { setAlert } = useAlert();
@@ -41,7 +41,7 @@ const JobsTableRow = (job) => {
 
     const handleTableRowClick = async () => {
         await fetchCurrentJob(job);
-        await fetchCurrentSheets(job);
+        await fetchCurrentPages(job);
         navigate(`/job/id:${job.id}`);
     };
 

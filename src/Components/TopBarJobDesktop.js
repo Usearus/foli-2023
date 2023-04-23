@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
-import ModalAddSheet from './ModalAddSheet';
+import ModalAddPage from './ModalAddPage';
 import { DatabaseContext } from '../context/DatabaseContext';
 import ModalTemplates from './ModalTemplates';
 import { Form, Dropdown, DropdownButton, ButtonGroup, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
@@ -12,11 +12,11 @@ import { RxViewVertical, RxViewHorizontal } from 'react-icons/rx';
 import { supabase } from '../API/supabase';
 
 const TopBarJobDesktop = ({ className }) => {
-    const { setCurrentJob, fetchUserJobs, currentJob, userProfile, fetchUserProfile, fetchCurrentSheets } =
+    const { setCurrentJob, fetchUserJobs, currentJob, userProfile, fetchUserProfile, fetchCurrentPages } =
         useContext(DatabaseContext);
     const { setAlert } = useAlert();
     const [selectedEventKey, setSelectedEventKey] = useState(null);
-    const [showAddSheetModal, setShowAddSheetModal] = useState(false);
+    const [showAddPageModal, setShowAddPageModal] = useState(false);
     const [showTemplateModal, setShowTemplateModal] = useState(false);
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const TopBarJobDesktop = ({ className }) => {
     const handleSelect = (eventKey) => {
         setSelectedEventKey(eventKey);
         if (eventKey === '1') {
-            setShowAddSheetModal(true);
+            setShowAddPageModal(true);
         }
         if (eventKey === '2') {
             setShowTemplateModal(true);
@@ -56,7 +56,7 @@ const TopBarJobDesktop = ({ className }) => {
     };
 
     const handleCloseReset = () => {
-        setShowAddSheetModal(false);
+        setShowAddPageModal(false);
         setShowTemplateModal(false);
     };
 
@@ -68,7 +68,7 @@ const TopBarJobDesktop = ({ className }) => {
             })
             .eq('id', userProfile.id);
             fetchUserProfile();
-            // fetchCurrentSheets();
+            // fetchCurrentPages();
         if (error) {
             setAlert('Something went wrong. Setting not updated.', 'danger');
             console.log('error is', error);
@@ -159,8 +159,8 @@ const TopBarJobDesktop = ({ className }) => {
                             </OverlayTrigger>
                         </ButtonGroup>
                         <DropdownButton
-                            title='Add Sheet'
-                            id='add-sheet-dropdown'
+                            title='Add page'
+                            id='add-page-dropdown'
                             onSelect={handleSelect}
                         >
                             <Dropdown.Item
@@ -172,7 +172,7 @@ const TopBarJobDesktop = ({ className }) => {
                                 }}
                             >
                                 <BiFileBlank style={{ marginRight: '.5rem' }} />
-                                Blank Sheet
+                                Blank page
                             </Dropdown.Item>
                             <Dropdown.Item
                                 eventKey='2'
@@ -183,12 +183,12 @@ const TopBarJobDesktop = ({ className }) => {
                                 }}
                             >
                                 <GrTemplate style={{ marginRight: '.5rem' }} />{' '}
-                                From Template
+                                From template
                             </Dropdown.Item>
                         </DropdownButton>
-                        {showAddSheetModal && (
-                            <ModalAddSheet
-                                show={showAddSheetModal}
+                        {showAddPageModal && (
+                            <ModalAddPage
+                                show={showAddPageModal}
                                 handleClose={handleCloseReset}
                             />
                         )}

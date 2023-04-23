@@ -7,7 +7,7 @@ import { supabase } from '../API/supabase';
 
 const ModalDeleteConfirmation = ({ show, close, type, object }) => {
     const { setAlert } = useAlert();
-    const { fetchUserJobs, fetchCurrentSheets, currentJob } =
+    const { fetchUserJobs, fetchCurrentPages, currentJob } =
         useContext(DatabaseContext);
 
     const handleDelete = async (e) => {
@@ -24,18 +24,18 @@ const ModalDeleteConfirmation = ({ show, close, type, object }) => {
             setAlert('Job successfully deleted!', 'success');
             fetchUserJobs();
         }
-        if (type === 'sheet') {
+        if (type === 'page') {
             const { error } = await supabase
                 .from('sheets')
                 .delete()
                 .eq('id', object.id);
             if (error) {
                 console.error(error);
-                setAlert('Something went wrong. Sheet not deleted.', 'Danger');
+                setAlert('Something went wrong. Page not deleted.', 'Danger');
                 return;
             }
-            setAlert('Sheet successfully deleted!', 'success');
-            fetchCurrentSheets(currentJob);
+            setAlert('Page successfully deleted!', 'success');
+            fetchCurrentPages(currentJob);
         }
     };
 

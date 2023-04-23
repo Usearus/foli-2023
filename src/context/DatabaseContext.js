@@ -20,17 +20,17 @@ const DatabaseProvider = ({ children }) => {
     );
 
     // ALL DATA
-    const [allSheets, setAllSheets] = useState([]);
+    const [allPages, setAllPages] = useState([]);
     const [allJobs, setAllJobs] = useState([]);
     const [allProfiles, setAllProfiles] = useState([]);
     const [allTemplates, setAllTemplates] = useState([]);
 
     // FETCH ALL DATA
 
-    async function fetchAllSheets() {
+    async function fetchAllPages() {
         const { data, error } = await supabase.from('sheets').select('*');
-        // console.log('allSheets are', data);
-        setAllSheets(data);
+        // console.log('allPages are', data);
+        setAllPages(data);
         if (error) {
             console.log(error);
         }
@@ -65,7 +65,7 @@ const DatabaseProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        fetchAllSheets();
+        fetchAllPages();
         fetchAllJobs();
         fetchAllProfiles();
         fetchAllTemplates();
@@ -76,7 +76,7 @@ const DatabaseProvider = ({ children }) => {
     // SET USER DATA
     const [userProfile, setUserProfile] = useState([]);
     const [userJobs, setUserJobs] = useState([]);
-    const [userSheets, setUserSheets] = useState([]);
+    const [userPages, setUserPages] = useState([]);
     const [settingPageStack, setSettingPageStack] = useState('');
 
     async function fetchUserProfile() {
@@ -93,7 +93,7 @@ const DatabaseProvider = ({ children }) => {
             } else {
                 createUserProfile();
                 const onboardingJob = await createOnboardingJob();
-                await createOnboardingSheets(onboardingJob);
+                await createOnboardingPages(onboardingJob);
                 fetchUserJobs();
             }
         }
@@ -135,14 +135,14 @@ const DatabaseProvider = ({ children }) => {
         return onboardingJob;
     }
 
-    async function createOnboardingSheets(onboardingJob) {
+    async function createOnboardingPages(onboardingJob) {
         await supabase
             .from('sheets')
             .insert([
                 {
                     title: 'Foli Tutorial',
                     content:
-                        '<h2><span style="font-size: 20px;">Start here</span></h2><p><br></p><p><span style="font-size: 14px;">Each document in </span><em style="font-size: 14px;">Foli</em><span style="font-size: 14px;"> is called a </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">sheet</strong><span style="font-size: 14px;">!</span></p><p><br></p><p><em style="font-size: 14px;">F﻿oli </em><span style="font-size: 14px;">lets you manage all documents, research, &amp; notes you need during your job search on one page!</span></p><p><br></p><p><span style="font-size: 14px;">Follow these steps to learn how to use Foli:</span></p><p><br></p><ol><li><span style="font-size: 14px;">Press the</span><span style="color: rgb(153, 51, 255); font-size: 14px;"> </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">edit icon</strong><span style="font-size: 14px;"> on this sheet to enable editing this sheet.</span></li><li><span style="font-size: 14px;">Edit this sheet by</span><span style="color: rgb(153, 51, 255); font-size: 14px;"> </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">deleting this bullet point</strong><span style="font-size: 14px;">.</span></li><li><span style="font-size: 14px;">Make this sheet wider by </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">dragging the right edge</strong><span style="font-size: 14px;">.</span></li><li><span style="font-size: 14px;">Hide and show this sheet by finding this sheet on the sheet sidebar and pressing the</span><strong style="font-size: 14px;"> </strong><strong style="color: rgb(153, 51, 255); font-size: 14px;">eye icon</strong><span style="font-size: 14px;">.</span></li><li><span style="font-size: 14px;">Click the</span><span style="color: rgb(153, 51, 255); font-size: 14px;"> </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">"add sheet"</strong><span style="color: rgb(153, 51, 255); font-size: 14px;"> </span><span style="font-size: 14px;">button and add a new sheet to this tutorial job.</span></li><li><strong style="color: rgb(153, 51, 255); font-size: 14px;">Scroll horizontally</strong><span style="font-size: 14px;"> to see all the sheets visible on this page.</span></li><li><span style="font-size: 14px;">Finally, delete this sheet by clicking the </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">three dots icon</strong><span style="font-size: 14px;"> at the top-right of the sheet or by visiting the sheets sidebar.</span></li></ol>',
+                        '<h2><span style="font-size: 20px;">Start here</span></h2><p><br></p><p><span style="font-size: 14px;">Each document in </span><em style="font-size: 14px;">Foli</em><span style="font-size: 14px;"> is called a </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">page</strong><span style="font-size: 14px;">!</span></p><p><br></p><p><em style="font-size: 14px;">F﻿oli </em><span style="font-size: 14px;">lets you manage all documents, research, &amp; notes you need during your job search on one page!</span></p><p><br></p><p><span style="font-size: 14px;">Follow these steps to learn how to use Foli:</span></p><p><br></p><ol><li><span style="font-size: 14px;">Press the</span><span style="color: rgb(153, 51, 255); font-size: 14px;"> </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">edit icon</strong><span style="font-size: 14px;"> on this page to enable editing this page.</span></li><li><span style="font-size: 14px;">Edit this page by</span><span style="color: rgb(153, 51, 255); font-size: 14px;"> </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">deleting this bullet point</strong><span style="font-size: 14px;">.</span></li><li><span style="font-size: 14px;">Make this page wider by </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">dragging the right edge</strong><span style="font-size: 14px;">.</span></li><li><span style="font-size: 14px;">Hide and show this page by finding this page on the pages sidebar and pressing the</span><strong style="font-size: 14px;"> </strong><strong style="color: rgb(153, 51, 255); font-size: 14px;">eye icon</strong><span style="font-size: 14px;">.</span></li><li><span style="font-size: 14px;">Click the</span><span style="color: rgb(153, 51, 255); font-size: 14px;"> </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">"add page"</strong><span style="color: rgb(153, 51, 255); font-size: 14px;"> </span><span style="font-size: 14px;">button and add a new page to this tutorial job.</span></li><li><strong style="color: rgb(153, 51, 255); font-size: 14px;">Scroll horizontally</strong><span style="font-size: 14px;"> to see all the pages visible on this page.</span></li><li><span style="font-size: 14px;">Finally, delete this page by clicking the </span><strong style="color: rgb(153, 51, 255); font-size: 14px;">three dots icon</strong><span style="font-size: 14px;"> at the top-right of the page or by visiting the pages sidebar.</span></li></ol>',
                     account: auth0Email,
                     jobid: onboardingJob.id,
                 },
@@ -170,15 +170,15 @@ const DatabaseProvider = ({ children }) => {
         }
     }
 
-    async function fetchUserSheets() {
+    async function fetchUserPages() {
         if (auth0Email) {
             const { data } = await supabase
                 .from('sheets')
                 .select('*')
                 .filter('account', 'eq', auth0Email);
             if (data) {
-                setUserSheets(data);
-                // console.log('userSheets are', data);
+                setUserPages(data);
+                // console.log('userPages are', data);
             }
         }
     }
@@ -186,7 +186,7 @@ const DatabaseProvider = ({ children }) => {
     useEffect(() => {
         fetchUserProfile();
         fetchUserJobs();
-        fetchUserSheets();
+        fetchUserPages();
         return () => {
             // Cleanup // TODO figure out how to fix this useEffect issue
         };
@@ -196,10 +196,8 @@ const DatabaseProvider = ({ children }) => {
     // *
     // *
     // SET CURRENTLY VIEWED JOB DATA
-    const [currentSheets, setCurrentSheets] = useState([]);
+    const [currentPages, setCurrentPages] = useState([]);
     const [currentJob, setCurrentJob] = useState([]);
-    // Needed to conditionally show position sheet by visibility toggle
-    const [positionSheet, setPositionSheet] = useState(true);
 
     async function fetchCurrentJob(job) {
         // console.log('job received for fetch:', job);
@@ -216,19 +214,19 @@ const DatabaseProvider = ({ children }) => {
         }
     }
 
-    async function fetchCurrentSheets(job) {
+    async function fetchCurrentPages(job) {
         // console.log('job received for fetch:', job);
         const { data } = await supabase
             .from('sheets')
             .select('*')
             .filter('jobid', 'eq', job.id);
         if (data) {
-            console.log('currentSheets are', data);
-            localStorage.setItem('currentSheets', JSON.stringify(data));
-            const sortedSheets = [...data].sort(
+            console.log('currentPages are', data);
+            localStorage.setItem('currentPages', JSON.stringify(data));
+            const sortedPages = [...data].sort(
                 (a, b) => a.position - b.position
             );
-            setCurrentSheets(sortedSheets);
+            setCurrentPages(sortedPages);
         }
     }
 
@@ -254,15 +252,13 @@ const DatabaseProvider = ({ children }) => {
     return (
         <DatabaseContext.Provider
             value={{
-                //Sheets
-                allSheets,
-                userSheets,
-                currentSheets,
-                positionSheet,
-                fetchAllSheets,
-                setCurrentSheets,
-                fetchCurrentSheets,
-                setPositionSheet,
+                //Pages
+                allPages,
+                userPages,
+                currentPages,
+                fetchAllPages,
+                setCurrentPages,
+                fetchCurrentPages,
                 //Jobs
                 allJobs,
                 userJobs,

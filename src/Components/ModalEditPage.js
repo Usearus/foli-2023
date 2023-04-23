@@ -1,10 +1,10 @@
 import { Button, Modal, Form, Stack } from 'react-bootstrap';
-import ReactQuillEditor from '../Components/ReactQuillEditor';
+import ReactQuillEditor from './ReactQuillEditor';
 
-const ModalEditSheet = ({
-    showEditSheetModal,
+const ModalEditPage = ({
+    showEditPageModal,
     handleCancelClick,
-    sheet,
+    page,
     content,
     setContent,
     titleRef,
@@ -19,25 +19,25 @@ const ModalEditSheet = ({
         <>
             <Modal
                 fullscreen='md-down'
-                show={showEditSheetModal}
+                show={showEditPageModal}
                 onHide={handleCancelClick}
                 scrollable
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit sheet</Modal.Title>
+                    <Modal.Title>Edit page</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <header>
                         <Stack direction='horizontal' gap='1'>
                             <Form>
-                                <Form.Label>Sheet Title </Form.Label>
+                                <Form.Label>Page Title </Form.Label>
                                 <Form.Group controlId='title' className='mb-3'>
                                     <Form.Control
                                         type='text'
                                         required
                                         ref={titleRef}
                                         defaultValue={initialTitleValue}
-                                        placeholder='Add sheet title'
+                                        placeholder='Add page title'
                                         size='md'
                                         maxLength={titleMaxChar}
                                         onChange={handleTitleChange}
@@ -84,4 +84,4 @@ const ModalEditSheet = ({
     );
 };
 
-export default ModalEditSheet;
+export default ModalEditPage;

@@ -6,10 +6,10 @@ import useAlert from '../Custom Hooks/useAlert';
 import ReactQuillEditor from './ReactQuillEditor';
 import { Button, Modal, Form } from 'react-bootstrap';
 
-const ModalAddSheet = ({ show, handleClose }) => {
+const ModalAddPage = ({ show, handleClose }) => {
     const { setAlert } = useAlert();
     const { user } = useAuth0();
-    const { currentJob, currentSheets, fetchCurrentSheets } =
+    const { currentJob, currentPages, fetchCurrentPages } =
         useContext(DatabaseContext);
     const [validated, setValidated] = useState(false);
     const titleRef = useRef();
@@ -19,7 +19,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
         setContent(value);
     };
 
-    const handleAddSheetClick = async () => {
+    const handleAddPageClick = async () => {
         if (currentJob) {
             await supabase.from('jobs').select().eq('id', currentJob.id);
             const { error } = await supabase.from('sheets').insert({
@@ -27,13 +27,13 @@ const ModalAddSheet = ({ show, handleClose }) => {
                 title: titleRef.current.value,
                 content: content,
                 jobid: currentJob.id,
-                position: currentSheets.length,
+                position: currentPages.length,
             });
-            fetchCurrentSheets(currentJob);
+            fetchCurrentPages(currentJob);
             handleClose();
-            setAlert('Sheet successfully added!', 'success');
+            setAlert('Page successfully added!', 'success');
             if (error) {
-                setAlert('There was an error adding the sheet.', 'error');
+                setAlert('There was an error adding the page.', 'error');
                 console.log(error);
                 return;
             }
@@ -46,7 +46,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
         const form = event.currentTarget;
         if (form.checkValidity() === true) {
             setValidated(false);
-            handleAddSheetClick();
+            handleAddPageClick();
         } else {
             setValidated(true);
         }
@@ -56,13 +56,13 @@ const ModalAddSheet = ({ show, handleClose }) => {
     return (
         <Modal scrollable fullscreen='md-down' show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Add a new sheet</Modal.Title>
+                <Modal.Title>Add a new page</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <Form id='addSheetForm' noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form id='addPageForm' noValidate validated={validated} onSubmit={handleSubmit}>
                 {/* Title */}
                 <Form.Group className='mb-3' controlId='title'>
-                    <Form.Label>Sheet Title *</Form.Label>
+                    <Form.Label>Page Title *</Form.Label>
                     <Form.Control
                         required
                         type='text'
@@ -70,7 +70,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
                         ref={titleRef}
                     />
                     <Form.Control.Feedback type="invalid">
-                        Sheet title cannot be blank.
+                        Page title cannot be blank.
                     </Form.Control.Feedback>
                 </Form.Group>
                 {/* Content */}
@@ -87,7 +87,7 @@ const ModalAddSheet = ({ show, handleClose }) => {
                 <Button variant='outline-secondary' onClick={handleClose}>
                     Close
                 </Button>
-                <Button type="submit" variant='primary' form="addSheetForm">
+                <Button type="submit" variant='primary' form="addPageForm">
                     Confirm
                 </Button>
             </Modal.Footer>     
@@ -95,4 +95,4 @@ const ModalAddSheet = ({ show, handleClose }) => {
     );
 };
 
-export default ModalAddSheet;
+export default ModalAddPage;

@@ -4,17 +4,17 @@ import { DatabaseContext } from "../context/DatabaseContext";
 import styled from "styled-components";
 import MarkdownView from "react-showdown";
 import useAlert from "../Custom Hooks/useAlert";
-import ReactQuillEditor from "../Components/ReactQuillEditor";
-import ModalDeleteConfirmation from "../Components/ModalDeleteConfirmation";
+import ReactQuillEditor from "./ReactQuillEditor";
+import ModalDeleteConfirmation from "./ModalDeleteConfirmation";
 import { FiMoreVertical } from "react-icons/fi";
 import { AiFillEdit,AiOutlineClose } from "react-icons/ai";
-import ModalEditSheet from "./ModalEditSheet";
+import ModalEditPage from "./ModalEditPage";
 import { supabase } from "../API/supabase";
 import { Resizable } from "re-resizable";
 
-const Sheet = (sheet) => {
+const Page = (page) => {
   // Context Variables
-  const { fetchCurrentSheets, currentJob } = useContext(DatabaseContext);
+  const { fetchCurrentPages, currentJob } = useContext(DatabaseContext);
   const { setAlert } = useAlert();
 
   // Modals
@@ -22,7 +22,7 @@ const Sheet = (sheet) => {
   // Modal Variables
   const [selectedEventKey, setSelectedEventKey] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showEditSheetModal, setShowEditSheetModal] = useState(false);
+  const [showEditPageModal, setShowEditPageModal] = useState(false);
     
   const handleSelect = (eventKey) => {
     setSelectedEventKey(eventKey);
@@ -32,8 +32,8 @@ const Sheet = (sheet) => {
     }
   };
 
-  const handleOpenSheetModalClick = () => {
-    setShowEditSheetModal(true);
+  const handleOpenPageModalClick = () => {
+    setShowEditPageModal(true);
   };
   
   const handleCloseReset = () => {
@@ -46,45 +46,45 @@ const Sheet = (sheet) => {
 
 
 
-  // SHEET FUNCTIONS
-  const initialVisibleValue = sheet.visible;
-  const initialTitleValue = sheet.title ?? "";
-      // Check width on load and render mobile or desktop sheets
+  // PAGE FUNCTIONS
+  const initialVisibleValue = page.visible;
+  const initialTitleValue = page.title ?? "";
+      // Check width on load and render mobile or desktop pages
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
   
   // Resizing
-  const [sheetWidth, setSheetWidth] = useState(sheet.width);
-  const handleUpdateWidthClick = async (newSheetWidth) => {
-    setSheetWidth(newSheetWidth);
+  const [pageWidth, setPageWidth] = useState(page.width);
+  const handleUpdateWidthClick = async (newPageWidth) => {
+    setPageWidth(newPageWidth);
     const { error } = await supabase
       .from("sheets")
       .update({
-        width: newSheetWidth,
+        width: newPageWidth,
       })
-      .eq("id", sheet.id);
+      .eq("id", page.id);
 
     if (error) {
-      setAlert("Something went wrong. Sheet width not updated.", "danger");
+      setAlert("Something went wrong. Page width not updated.", "danger");
       console.log("error is", error);
       return;
     }
   };
 
-  // EDITING SHEET FUNCTIONS
+  // EDITING PAGE FUNCTIONS
   const [editing, setEditing] = useState(false);
   const handleEditClick = () => {
     setEditing(true);
   };
 
   const handleCancelClick = () => {
-    setContent(sheet.content);
+    setContent(page.content);
     setEditing(false);
-    setShowEditSheetModal(false);
+    setShowEditPageModal(false);
   };
 
 
   // React Quill Editor Variables & Functions
-  const [content, setContent] = useState(sheet.content);
+  const [content, setContent] = useState(page.content);
 
   
   const handleEditorChange = (value) => {
@@ -98,20 +98,20 @@ const Sheet = (sheet) => {
         content: content,
         title: titleRef.current.value,
       })
-      .eq("id", sheet.id);
-    setAlert("Sheet successfully updated!", "success");
-    fetchCurrentSheets(currentJob);
+      .eq("id", page.id);
+    setAlert("Page successfully updated!", "success");
+    fetchCurrentPages(currentJob);
     setEditing(false);
-    setShowEditSheetModal(false);
+    setShowEditPageModal(false);
     if (error) {
-      setAlert("Something went wrong. Sheet not updated.", "danger");
+      setAlert("Something went wrong. Page not updated.", "danger");
       console.log("error is", error);
       return;
     }
   };
 
   // Editing Title
-  const [title, setTitle] = useState(sheet.title)
+  const [title, setTitle] = useState(page.title)
   const titleRef = useRef();
   const [characterCount, setCharacterCount] = useState(title.length);
   const titleMaxChar = 32;
@@ -134,11 +134,11 @@ const Sheet = (sheet) => {
         <>
         {isMobile ? 
         (
-          <div className="sheet-content sheets-mobile">
-            <header className="sheet-title">
+          <div className="page-content pages-mobile">
+            <header className="page-title">
               {/* {!editing ? ( */}
                 <Stack direction="horizontal">
-                  <h6>{sheet.title}</h6>
+                  <h6>{page.title}</h6>
                   <Stack direction="horizontal" className="ms-auto">
                     <Button
                       variant="light"
@@ -146,7 +146,7 @@ const Sheet = (sheet) => {
                         background: "var(--white)",
                         border: 0,
                       }}
-                      onClick={handleOpenSheetModalClick}
+                      onClick={handleOpenPageModalClick}
                     >
                       <AiFillEdit />
                     </Button>
@@ -161,15 +161,15 @@ const Sheet = (sheet) => {
                         <FiMoreVertical />
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
-                        <Dropdown.Item eventKey="1">Delete Sheet</Dropdown.Item>
+                        <Dropdown.Item eventKey="1">Delete page</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </Stack>
-                  {showEditSheetModal && (
-                    <ModalEditSheet
-                      showEditSheetModal={showEditSheetModal}
+                  {showEditPageModal && (
+                    <ModalEditPage
+                      showEditPageModal={showEditPageModal}
                       handleCancelClick={handleCancelClick}
-                      sheet={sheet}
+                      page={page}
                       content={content}
                       setContent={setContent}
                       initialTitleValue={initialTitleValue}
@@ -185,8 +185,8 @@ const Sheet = (sheet) => {
                     <ModalDeleteConfirmation
                       show={showDeleteModal}
                       close={handleCloseReset}
-                      object={sheet}
-                      type="sheet"
+                      object={page}
+                      type="page"
                     />
                   )}
                 </Stack>
@@ -195,11 +195,11 @@ const Sheet = (sheet) => {
 
             {!editing ? (
               <MarkdownView
-                className="sheet-scroll markdown-content"
-                markdown={sheet.content}
+                className="page-scroll markdown-content"
+                markdown={page.content}
               />
             ) : (
-              <Form className="sheet-scroll">
+              <Form className="page-scroll">
                 <Form.Group controlId="content">
                   <ReactQuillEditor
                     value={content}
@@ -211,16 +211,16 @@ const Sheet = (sheet) => {
           </div> 
           ) : ( 
             <Resizable
-            className="sheet-content shadow-on"
+            className="page-content shadow-on"
             minWidth="300px"
             maxWidth="700px"
             size={{
               height: "100%",
-              width: sheetWidth,
+              width: pageWidth,
             }}
             onResizeStop={(e, direction, ref, d) => {
-              const newSheetWidth = sheetWidth + d.width;
-              handleUpdateWidthClick(newSheetWidth);
+              const newPageWidth = pageWidth + d.width;
+              handleUpdateWidthClick(newPageWidth);
             }}
             enable={{
               top: false,
@@ -233,10 +233,10 @@ const Sheet = (sheet) => {
               topLeft: false,
             }}
           >
-            <header className="sheet-title">
+            <header className="page-title">
               {!editing ? (
                 <Stack direction="horizontal">
-                  <h6>{sheet.title}</h6>
+                  <h6>{page.title}</h6>
                   <Stack direction="horizontal" className="ms-auto">
                     <Dropdown className="fade-in" onSelect={handleSelect}>
                       <Button
@@ -260,7 +260,7 @@ const Sheet = (sheet) => {
                         <FiMoreVertical />
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
-                        <Dropdown.Item eventKey="1">Delete Sheet</Dropdown.Item>
+                        <Dropdown.Item eventKey="1">Delete page</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </Stack>
@@ -268,8 +268,8 @@ const Sheet = (sheet) => {
                     <ModalDeleteConfirmation
                       show={showDeleteModal}
                       close={handleCloseReset}
-                      object={sheet}
-                      type="sheet"
+                      object={page}
+                      type="page"
                     />
                   )}
                 </Stack>
@@ -283,7 +283,7 @@ const Sheet = (sheet) => {
                           required
                           ref={titleRef}
                           defaultValue={initialTitleValue}
-                          placeholder="Add sheet title"
+                          placeholder="Add page title"
                           size="md"
                           maxLength={titleMaxChar}
                           onChange={handleTitleChange}
@@ -312,12 +312,12 @@ const Sheet = (sheet) => {
 
             {!editing ? (
               <MarkdownView
-                className="sheet-scroll markdown-content"
-                markdown={sheet.content}
+                className="page-scroll markdown-content"
+                markdown={page.content}
               />
             ) : (
               <>
-              <Form className="sheet-scroll">
+              <Form className="page-scroll">
                 <Form.Group controlId="content">
                   <ReactQuillEditor
                     value={content}
@@ -325,7 +325,7 @@ const Sheet = (sheet) => {
                   />
                 </Form.Group>
               </Form>
-              <div className="sheet-footer">
+              <div className="page-footer">
                     <Button
                       variant="primary"
                       onClick={handleUpdateContentClick}
@@ -349,11 +349,11 @@ const Sheet = (sheet) => {
 
 const Wrapper = styled.div`
   height: 100%;
-  .sheet-title {
+  .page-title {
     padding: 1rem 1rem 0.5rem 1rem;
   }
 
-  .sheet-title h6 {
+  .page-title h6 {
     margin-bottom: 0rem;
     font-weight: 600;
     margin: 0 1rem;
@@ -363,7 +363,7 @@ const Wrapper = styled.div`
     margin: 0 1.5rem;
   }
 
-  .sheet-content {
+  .page-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -376,13 +376,13 @@ const Wrapper = styled.div`
     font-size: small;
   }
 
-  .sheet-scroll {
+  .page-scroll {
     overflow-y: auto;
     width: 98%;
     height: 100%;
   }
 
-  .sheet-footer {
+  .page-footer {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
@@ -420,7 +420,7 @@ const Wrapper = styled.div`
     }
   }
 
-  // React Quill Customization for SHEET Component only!
+  // React Quill Customization for page Component only!
 
   .ql-container {
     border: none !important;
@@ -456,10 +456,10 @@ const Wrapper = styled.div`
     box-shadow: 0px 5px 10px var(--grey-500);
   }
 
-  .sheets-mobile {
+  .pages-mobile {
     width: 90vw;
     max-width: 500px;
   }
 `;
 
-export default Sheet;
+export default Page;

@@ -18,11 +18,11 @@ const ModalTemplates = ({ show, closeTemplateModal }) => {
     setActiveTemplate,
     setPreviewTemplate,
     currentJob,
-    fetchCurrentSheets,
-    currentSheets,
+    fetchCurrentPages,
+    currentPages,
 } = useContext(DatabaseContext);
 
-const addSheet = async () => {
+const addPage = async () => {
   await supabase
       .from('sheets')
       .select()
@@ -32,11 +32,11 @@ const addSheet = async () => {
       title: activeTemplate.title,
       content: activeTemplate.content,
       jobid: currentJob.id,
-      position: currentSheets.length,
+      position: currentPages.length,
   });
   // console.log(data, 'template added');
-  fetchCurrentSheets(currentJob);
-  setAlert('Sheet successfully added!', 'success');
+  fetchCurrentPages(currentJob);
+  setAlert('Page successfully added!', 'success');
   if (error) {
       setAlert('There was an error adding the template.', 'error');
       console.log(error);
@@ -55,8 +55,8 @@ const handleCloseAndReset = () => {
   closeTemplateModal();
 };
 
-const handleAddSheetClick = () => {
-  addSheet();
+const handleAddPageClick = () => {
+  addPage();
   setActiveTemplate(null);
   setPreviewTemplate(false);
   closeTemplateModal();
@@ -80,7 +80,7 @@ const handleAddSheetClick = () => {
               {!previewTemplate ? ( "" ) : (
           <Modal.Footer style={{ background: 'var(--grey-100)' }}>
             <Wrapper>
-                <div className='sheet-footer' style={{}}>
+                <div className='page-footer' style={{}}>
                   <Button
                       variant='outline-secondary'
                       onClick={handleCloseActive}
@@ -89,9 +89,9 @@ const handleAddSheetClick = () => {
                   </Button>
                   <Button
                       variant='primary'
-                      onClick={handleAddSheetClick}
+                      onClick={handleAddPageClick}
                       >
-                      Add sheet
+                      Add page
                   </Button>
               </div>
             </Wrapper>
@@ -104,7 +104,7 @@ const handleAddSheetClick = () => {
 export default ModalTemplates;
 const Wrapper = styled.div`
 
-.sheet-footer {
+.page-footer {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;

@@ -6,16 +6,16 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { supabase } from '../API/supabase';
 
 const SideBar = ({ className }) => {
-    const { currentSheets, setCurrentSheets } = useContext(DatabaseContext);
+    const { currentPages, setCurrentPages } = useContext(DatabaseContext);
     const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
-        const sheetsFromStorage = localStorage.getItem('currentSheets');
-        const sortedSheets = JSON.parse(sheetsFromStorage).sort(
+        const pagesFromStorage = localStorage.getItem('currentPages');
+        const sortedPages = JSON.parse(pagesFromStorage).sort(
             (a, b) => a.position - b.position
         );
-        setCurrentSheets(sortedSheets);
-    }, [setCurrentSheets]);
+        setCurrentPages(sortedPages);
+    }, [setCurrentPages]);
 
     const updatePositionsOnDragEnd = async (result) => {
         console.log(result);
@@ -23,31 +23,31 @@ const SideBar = ({ className }) => {
             return;
         }
 
-        const newCurrentSheets = Array.from(currentSheets);
-        const [reorderedItem] = newCurrentSheets.splice(result.source.index, 1);
-        newCurrentSheets.splice(result.destination.index, 0, reorderedItem);
+        const newCurrentPages = Array.from(currentPages);
+        const [reorderedItem] = newCurrentPages.splice(result.source.index, 1);
+        newCurrentPages.splice(result.destination.index, 0, reorderedItem);
 
-        newCurrentSheets.forEach((sheet, index) => {
-            sheet.position = index;
+        newCurrentPages.forEach((page, index) => {
+            page.position = index;
         });
 
         await Promise.all(
-            newCurrentSheets.map(async (sheet, index) => {
+            newCurrentPages.map(async (page, index) => {
                 await supabase
                     .from('sheets')
                     .update({ position: index })
-                    .eq('id', sheet.id);
-                console.log('currentSheets update', currentSheets);
+                    .eq('id', page.id);
+                console.log('currentPages update', currentPages);
             })
         );
-        setCurrentSheets(newCurrentSheets);
-        localStorage.setItem('currentSheets', JSON.stringify(newCurrentSheets));
+        setCurrentPages(newCurrentPages);
+        localStorage.setItem('currentPages', JSON.stringify(newCurrentPages));
     };
 
     return (
         <Wrapper className={className}>
             <section className='sidebar-container'>
-                <label>Sheets</label>
+                <label>Pages</label>
                 <div className='scroll-container'>
                     <DragDropContext
                         onDragStart={() => setIsDragging(true)}
@@ -56,7 +56,7 @@ const SideBar = ({ className }) => {
                             updatePositionsOnDragEnd(result);
                         }}
                     >
-                        <Droppable droppableId='sheets'>
+                        <Droppable droppableId='pages'>
                             {(provided) => (
                                 <div
                                     {...provided.droppableProps}
@@ -65,10 +65,10 @@ const SideBar = ({ className }) => {
                                         isDragging ? 'dragging' : ''
                                     }`}
                                 >
-                                    {currentSheets.map((sheet, index) => (
+                                    {currentPages.map((page, index) => (
                                         <Draggable
-                                            key={sheet.id}
-                                            draggableId={sheet.id}
+                                            key={page.id}
+                                            draggableId={page.id}
                                             index={index}
                                         >
                                             {(provided) => (
@@ -77,7 +77,7 @@ const SideBar = ({ className }) => {
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}
                                                 >
-                                                    <SideBarItem sheet={sheet} />
+                                                    <SideBarItem page={page} />
                                                 </div>
                                             )}
                                         </Draggable>

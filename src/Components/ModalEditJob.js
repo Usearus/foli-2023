@@ -61,7 +61,7 @@ const ModalEditJob = ({ show, close, job }) => {
         fetchUserJobs();
         close();
         if (error) {
-            setAlert('Something went wrong. Sheet not updated.', 'danger');
+            setAlert('Something went wrong. Page not updated.', 'danger');
             console.log('error is', error);
             return;
         }
