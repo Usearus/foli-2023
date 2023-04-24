@@ -89,7 +89,7 @@ const DatabaseProvider = ({ children }) => {
             if (data) {
                 setUserProfile(data);
                 setSettingPageStack(data.page_stack)
-                console.log('userProfile is', data);
+                // console.log('userProfile is', data);
             } else {
                 createUserProfile();
                 const onboardingJob = await createOnboardingJob();
@@ -210,7 +210,7 @@ const DatabaseProvider = ({ children }) => {
             setCurrentJob(data);
             // console.log('currentJob is', data);
             localStorage.setItem('currentJob', JSON.stringify(data));
-            console.log('currentJob is', data);
+            // console.log('currentJob is', data);
         }
     }
 
@@ -221,7 +221,7 @@ const DatabaseProvider = ({ children }) => {
             .select('*')
             .filter('jobid', 'eq', job.id);
         if (data) {
-            console.log('currentPages are', data);
+            // console.log('currentPages are', data);
             localStorage.setItem('currentPages', JSON.stringify(data));
             const sortedPages = [...data].sort(
                 (a, b) => a.position - b.position

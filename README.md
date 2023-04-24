@@ -24,6 +24,10 @@ https://foli2023.netlify.app
 -   Make 14px font default on React-Quill component
 -   Add full job sample to onboarding with as many docs that make sense.
 
+---NEED HELP WITH---
+-   Create function that knows if user is on mobile or not.
+-   What is the best way to set a timer for token renewal in React?
+
 ## Post-MVP Features
 
 -   Add Google Analytics
