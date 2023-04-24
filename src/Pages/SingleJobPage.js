@@ -250,7 +250,8 @@ const Wrapper = styled.div`
 
         .vertical-stack-page-list{
         flex-wrap: wrap;
-        padding: .5rem 5rem .5rem 5rem;
+        padding: .5rem 3rem .5rem 3rem;
+        justify-content: center;
         }
     }
 `;

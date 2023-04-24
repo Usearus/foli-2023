@@ -45,6 +45,7 @@ const Wrapper = styled.div`
     @media (min-width: 576px) {
     .vertical-stack-page{
     height: 90%;
+    margin: 0 0 1rem 0 ;
     }
 }
 `

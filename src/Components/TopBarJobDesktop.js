@@ -131,7 +131,7 @@ const TopBarJobDesktop = ({ className }) => {
                                 delay={{ show: 250, hide: 0 }}
                                 overlay={
                                 <Tooltip id='vertical-stack'>
-                                    Page stack vertical
+                                    Vertical layout
                                 </Tooltip>
                             }>
                                 <Button
@@ -147,7 +147,7 @@ const TopBarJobDesktop = ({ className }) => {
                                 delay={{ show: 250, hide: 0 }}
                                 overlay={
                                 <Tooltip id='horizontal-stack'>
-                                    Page stack horizontal
+                                    Horizontal layout
                                 </Tooltip>
                             }>
                                 <Button
