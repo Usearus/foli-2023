@@ -10,9 +10,10 @@ import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
 import { RxViewVertical, RxViewHorizontal } from 'react-icons/rx';
 import { supabase } from '../API/supabase';
+import SideBarAssistant from './SideBarAssistant';
 
 const TopBarJobDesktop = ({ className }) => {
-    const { setCurrentJob, fetchUserJobs, currentJob, userProfile, fetchUserProfile, fetchCurrentPages } =
+    const { setCurrentJob, fetchUserJobs, currentJob, userProfile, fetchUserProfile } =
         useContext(DatabaseContext);
     const { setAlert } = useAlert();
     const [selectedEventKey, setSelectedEventKey] = useState(null);
@@ -127,7 +128,7 @@ const TopBarJobDesktop = ({ className }) => {
                         <ButtonGroup aria-label="page-stack-buttons">
                             <OverlayTrigger
                                 placement='top'
-                                delay={{ show: 500, hide: 0 }}
+                                delay={{ show: 250, hide: 0 }}
                                 overlay={
                                 <Tooltip id='vertical-stack'>
                                     Page stack vertical
@@ -143,7 +144,7 @@ const TopBarJobDesktop = ({ className }) => {
                             </OverlayTrigger>
                             <OverlayTrigger
                                 placement='top'
-                                delay={{ show: 500, hide: 0 }}
+                                delay={{ show: 250, hide: 0 }}
                                 overlay={
                                 <Tooltip id='horizontal-stack'>
                                     Page stack horizontal
@@ -158,6 +159,7 @@ const TopBarJobDesktop = ({ className }) => {
                                 </Button>
                             </OverlayTrigger>
                         </ButtonGroup>
+                        <SideBarAssistant/>
                         <DropdownButton
                             title='Add page'
                             id='add-page-dropdown'
