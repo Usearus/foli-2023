@@ -337,12 +337,13 @@ const Page = (page) => {
               ) : (
               <Resizable
             className="page-content shadow-on"
-            
+            minWidth="400px"
+            maxWidth="600px"
             size={{
               height: "100%",
               width: "500px",
             }}
-
+            
             enable={{
               top: false,
               right: false,

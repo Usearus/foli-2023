@@ -10,12 +10,10 @@ const Loader = () => {
 };
 
 const Wrapper = styled.section`
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  img {
-    width: 150px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Loader;

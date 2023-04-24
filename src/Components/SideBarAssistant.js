@@ -129,8 +129,6 @@ const SideBarAssistant = () => {
             model: "gpt-3.5-turbo",
             messages: [{
                 role: "user", 
-                // content: `You are a career coach named "Foli" that helps people land their dream job. Format all responses in HTML & do not use headers bigger than <h4>. For context, I am job searching for the target role of ${userProfile.position}. I want you to ${promptNewPage} using the following content: 
-                // ${selectedExistingPageContent}.`
                 content: `You are a career coach named "Foli" that helps people land their dream job. Format all responses in HTML & do not use headers bigger than <h4>. Do not send intro and outro text to me, only the content I ask for. Company: ${currentJob.company} 
                 Job Position: ${currentJob.position}
                 ${promptNewPage}`
@@ -149,7 +147,7 @@ return (
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>
                     <div>Assistant</div>
-                    <p style={{margin: '0'}}>Powered by ChatGPT</p>
+                    <p style={{margin: '0'}}>Powered by Chat GPT</p>
                 </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
@@ -159,13 +157,12 @@ return (
                                 <div className='empty-state'>
                                     <h4>Use AI to create a new page from existing ones</h4>
                                     <br/>
-                                    <p>For example,</p>
-                                    <p> Create a <b>resume</b> from a <b>job description</b>.</p>
-                                    {/* <p> Create a <b>cover letter</b> from a <b>job description</b>.</p>
-                                    <p> Create <b>interview questions</b> from a <b>job description</b>.</p> */}
+                                    <p>For example:</p>
+                                    <p>Create a <b>resume</b> from a <b>job description</b>.</p>
+                                    <p> Create <b>interview questions</b> from a <b>job description</b>.</p>
                                 </div>
                             ) : (
-                                <>
+                                <div className='loading-state'>
                                 {isLoading ? ( 
                                     <div>
                                         <h6>Processing a lot of text. Responses can take up to 30 seconds in some cases.</h6>
@@ -178,7 +175,7 @@ return (
                                     {/* <Button variant='outline-secondary'>
                                         <BiCopy onClick={handleCopyLinkClick}/> Copy
                                     </Button> */}
-                                </> 
+                                </div> 
                             )}
                             
                         </div>
@@ -249,7 +246,18 @@ height: 100%;
 }
 
 .empty-state {
-    padding: 2rem;
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.loading-state {
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .response-form {
