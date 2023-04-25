@@ -8,6 +8,7 @@ import useAlert from '../Custom Hooks/useAlert';
 import { GoChevronDown, GoChevronUp, GoChevronLeft } from 'react-icons/go';
 import { LinkContainer } from 'react-router-bootstrap';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import SideBarAssistant from './SideBarAssistant';
 
 
 const TopBarJobMobile = ({ className }) => {
@@ -92,6 +93,7 @@ const TopBarJobMobile = ({ className }) => {
                                 ''
                             )}
                         <div className='ms-auto'>
+                        
                             <Navbar.Toggle
                                 as='div'
                                 aria-controls='responsive-navbar-nav'
@@ -134,6 +136,7 @@ const TopBarJobMobile = ({ className }) => {
                             </Form.Select>
                         </Form>
                         <hr />
+                        <SideBarAssistant/>
                         <SideBar />
                         <Nav variant='pills' className='me-auto'></Nav>
                     </Navbar.Collapse>
