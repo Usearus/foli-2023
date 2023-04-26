@@ -5,10 +5,9 @@ https://foli2023.netlify.app
 ## Things to add
 
 ---CRITICAL---
--   Change to pages
--   Click to scroll
--   If I add a page scroll to the end
--   Figure out where my linting/formatting went wrong...
+-   Assistant CSS issue. Also add to mobile in top bar
+-   Change FAB to top bar on mobile for Job and Pages 
+-   Click to scroll to a new page or from sidebar
 -   Setup activeCategory variable to context to be able to access when a template closes.
 -   Learn how to do validations (Required name on a sheet, etc.)
 -   Sticky survey at bottom
