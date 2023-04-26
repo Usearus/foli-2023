@@ -5,6 +5,7 @@ https://foli2023.netlify.app
 ## Things to add
 
 ---CRITICAL---
+-   Add validation to Assistant fields
 -   Assistant CSS issue. Also add to mobile in top bar
 -   Change FAB to top bar on mobile for Job and Pages 
 -   Click to scroll to a new page or from sidebar
