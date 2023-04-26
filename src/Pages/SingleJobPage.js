@@ -63,7 +63,7 @@ const Wrapper = styled.div`
 		'top'
 		'right';
 	grid-template-columns: 1fr;
-	grid-template-rows: 112px auto;
+	grid-template-rows: 120px auto;
 
 	/* This keeps the height to 100% whenever the navbar disappears on mobile. */
 	height: 100dvh;
