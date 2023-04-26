@@ -1,20 +1,13 @@
-import { useState, useContext } from 'react';
-import SideBar from '../Components/SideBar';
-import PageList from '../Components/PageList';
-import TopBarJobDesktop from '../Components/TopBarJobDesktop';
+import { useContext } from 'react';
+import SideBar from '../Components/single-job-components/pages-sidebar-components/SideBar';
+import PageList from '../Components/single-job-components/PageList';
+import TopBarJobDesktop from '../Components/single-job-components/TopBarJobDesktop';
 import styled from 'styled-components';
-import TopBarJobMobile from '../Components/TopBarJobMobile';
-import { Stack, DropdownButton, Dropdown } from 'react-bootstrap';
-import ModalAddPage from '../Components/ModalAddPage';
-import ModalTemplates from '../Components/ModalTemplates';
-import { BiFileBlank } from 'react-icons/bi';
-import { GrTemplate } from 'react-icons/gr';
+import TopBarJobMobile from '../Components/single-job-components/TopBarJobMobile';
+import { Stack } from 'react-bootstrap';
 import { DatabaseContext } from '../context/DatabaseContext';
 
 const SingleJobPage = () => {
-	const [showAddPageModal, setShowAddPageModal] = useState(false);
-	const [showTemplateModal, setShowTemplateModal] = useState(false);
-	const [selectedEventKey, setSelectedEventKey] = useState(null);
 	const { currentPages, settingPageStack } = useContext(DatabaseContext);
 
 	const stackClassName =
@@ -23,21 +16,6 @@ const SingleJobPage = () => {
 			: settingPageStack === 'vertical'
 			? 'vertical-stack-page-list'
 			: '';
-
-	const handleSelect = (eventKey) => {
-		setSelectedEventKey(eventKey);
-		if (eventKey === '1') {
-			setShowAddPageModal(true);
-		}
-		if (eventKey === '2') {
-			setShowTemplateModal(true);
-		}
-	};
-
-	const handleCloseReset = () => {
-		setShowAddPageModal(false);
-		setShowTemplateModal(false);
-	};
 
 	if (currentPages.length === 0) {
 		return (
@@ -52,44 +30,9 @@ const SingleJobPage = () => {
 							<h5>No pages added yet. Add your first page to get started.</h5>
 						</div>
 					</Stack>
-					<div className='add-page-fab mobile-only'>
-						<DropdownButton
-							title='Add Page'
-							id='add-page-dropdown'
-							onSelect={handleSelect}>
-							<Dropdown.Item
-								eventKey='1'
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									padding: '.5rem 1rem',
-								}}>
-								<BiFileBlank style={{ marginRight: '.5rem' }} />
-								Blank page
-							</Dropdown.Item>
-							<Dropdown.Item
-								eventKey='2'
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									padding: '.5rem 1rem',
-								}}>
-								<GrTemplate style={{ marginRight: '.5rem' }} /> From template
-							</Dropdown.Item>
-						</DropdownButton>
-						{showAddPageModal && (
-							<ModalAddPage
-								show={showAddPageModal}
-								handleClose={handleCloseReset}
-							/>
-						)}
-						{showTemplateModal && (
-							<ModalTemplates
-								show={showTemplateModal}
-								closeTemplateModal={handleCloseReset}
-							/>
-						)}
-					</div>
+					{/* <div className='add-page-fab mobile-only'>
+						<DropdownAddPage />
+					</div> */}
 				</Wrapper>
 			</>
 		);
@@ -106,44 +49,6 @@ const SingleJobPage = () => {
 				</Stack>
 				<SideBar className='sidebar desktop-only' />
 				<PageList className={`right ${stackClassName}`} />
-				<div className='add-page-fab mobile-only'>
-					<DropdownButton
-						title='Add page'
-						id='add-page-dropdown'
-						onSelect={handleSelect}>
-						<Dropdown.Item
-							eventKey='1'
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								padding: '.5rem 1rem',
-							}}>
-							<BiFileBlank style={{ marginRight: '.5rem' }} />
-							Blank page
-						</Dropdown.Item>
-						<Dropdown.Item
-							eventKey='2'
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								padding: '.5rem 1rem',
-							}}>
-							<GrTemplate style={{ marginRight: '.5rem' }} /> From template
-						</Dropdown.Item>
-					</DropdownButton>
-					{showAddPageModal && (
-						<ModalAddPage
-							show={showAddPageModal}
-							handleClose={handleCloseReset}
-						/>
-					)}
-					{showTemplateModal && (
-						<ModalTemplates
-							show={showTemplateModal}
-							closeTemplateModal={handleCloseReset}
-						/>
-					)}
-				</div>
 			</Wrapper>
 		);
 	}
@@ -158,7 +63,7 @@ const Wrapper = styled.div`
 		'top'
 		'right';
 	grid-template-columns: 1fr;
-	grid-template-rows: 60px auto;
+	grid-template-rows: 112px auto;
 
 	/* This keeps the height to 100% whenever the navbar disappears on mobile. */
 	height: 100dvh;
@@ -166,17 +71,6 @@ const Wrapper = styled.div`
 	overflow: hidden;
 	position: relative;
 	background: var(--grey-200);
-
-	.add-page-fab {
-		position: absolute;
-		bottom: 1rem;
-		right: 1rem;
-	}
-
-	.dropdown-toggle {
-		border-radius: 99px;
-		padding: 9px 16px;
-	}
 
 	.top {
 		grid-area: top;

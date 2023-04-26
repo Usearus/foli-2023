@@ -1,14 +1,15 @@
 import { useState, useContext, useEffect, useRef } from 'react';
-import JobsTable from '../Components/job-table-components/JobsTable';
+import JobsTable from '../Components/JobsTable';
 import { DatabaseContext } from '../context/DatabaseContext';
-import SiteIcon from '../Components/atom-components/SiteIcon';
-import TopBarTable from '../Components/job-table-components/TopBarTable';
-import Loader from '../Components/atom-components/Loader';
+import SiteIcon from '../Components/SiteIcon';
+import TopBarTable from '../Components/TopBarTable';
+import Loader from '../Components/Loader';
 import styled from 'styled-components';
+import ModalAddJob from '../Components/ModalAddJob';
 import useAlert from '../Custom Hooks/useAlert';
-import { Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
+import { MdOutlineClose } from 'react-icons/md';
+import { Badge, Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
 import { supabase } from '../API/supabase';
-import FoliBadge from '../Components/atom-components/FoliBadge';
 // import ModalOnboarding from '../Components/ModalOnboarding';
 
 const JobsPage = () => {
@@ -170,12 +171,31 @@ const JobsPage = () => {
 									display: 'flex',
 								}}>
 								{tempLocations.map((location) => (
-									<FoliBadge
-										content={location}
-										closeBtn
-										handleRemoveLocation={handleRemoveLocation}
-										location={location}
-									/>
+									<Badge
+										key={location}
+										pill
+										bg='light'
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											color: 'var(--primary-500)',
+											fontWeight: '600',
+											cursor: 'default',
+											marginRight: '.5rem',
+										}}>
+										{location}
+										<span style={{ paddingLeft: '8px' }}>
+											<MdOutlineClose
+												onClick={() => handleRemoveLocation(location)}
+												style={{
+													color: 'var(--grey-500)',
+													width: '16px',
+													height: '16px',
+													cursor: 'pointer',
+												}}
+											/>
+										</span>
+									</Badge>
 								))}
 							</div>
 						</Form.Group>
@@ -197,6 +217,9 @@ const JobsPage = () => {
 				<Wrapper>
 					<h5>No jobs are being tracked. Add your first job to get started.</h5>
 				</Wrapper>
+				<div className='add-job-fab mobile-only'>
+					<ModalAddJob />
+				</div>
 			</>
 		);
 	}
@@ -204,8 +227,11 @@ const JobsPage = () => {
 	if (isOnboarded === true && userJobs && userJobs.length > 0) {
 		return (
 			<Wrapper>
-				<TopBarTable />
+				<TopBarTable className='desktop-only' />
 				<JobsTable jobs={userJobs} />
+				<div className='add-job-fab mobile-only'>
+					<ModalAddJob />
+				</div>
 			</Wrapper>
 		);
 	}
@@ -227,4 +253,18 @@ const Wrapper = styled.div`
 	height: calc(100vh - 63px);
 	height: calc(100dvh - 63px);
 	background: var(--grey-100);
+
+	.add-job-fab {
+		position: absolute;
+		right: 1rem;
+		bottom: 1rem;
+	}
+
+	/* Mobile */
+	@media (max-width: 576px) {
+		.btn.btn-primary {
+			border-radius: 99px;
+			padding: 9px 16px;
+		}
+	}
 `;

@@ -7,11 +7,11 @@ import SingleJobPage from './SingleJobPage';
 import TestingPage from './TestingPage';
 
 export {
-  LoginPage,
-  ErrorPage,
-  JobsPage,
-  SingleJobPage,
-  TestingPage,
-  PrivateRoute,
-  AuthWrapper,
+	LoginPage,
+	ErrorPage,
+	JobsPage,
+	SingleJobPage,
+	TestingPage,
+	PrivateRoute,
+	AuthWrapper,
 };

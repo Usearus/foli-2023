@@ -1,13 +1,13 @@
 import { useState, useContext } from 'react';
-import { supabase } from '../API/supabase';
+import { supabase } from '../../API/supabase';
 import { useAuth0 } from '@auth0/auth0-react';
-import useAlert from '../Custom Hooks/useAlert';
-import { DatabaseContext } from '../context/DatabaseContext';
+import useAlert from '../../Custom Hooks/useAlert';
+import { DatabaseContext } from '../../context/DatabaseContext';
 import { Button, Form, Offcanvas } from 'react-bootstrap';
 import { TbRefresh } from 'react-icons/tb';
 import styled from 'styled-components';
-import { openai } from '../API/gpt';
-import Loader from '../Components/Loader';
+import { openai } from '../../API/gpt';
+import Loader from '../atom-components/Loader';
 import MarkdownView from 'react-showdown';
 
 const SideBarAssistant = () => {

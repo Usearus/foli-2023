@@ -6,23 +6,19 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 -   Add validation to Assistant fields
--   Assistant CSS issue. Also add to mobile in top bar
--   Change FAB to top bar on mobile for Job and Pages 
 -   Click to scroll to a new page or from sidebar
--   Setup activeCategory variable to context to be able to access when a template closes.
 -   Learn how to do validations (Required name on a sheet, etc.)
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
-
 
 ---LOW PRIORITY---
 -   Sidebar with templates pre-chosen based on stage.
 -   AddSheetModal missing title count & limitation. (May use context for this)
 -   Filter on top of the jobs list, but only for stage.
--   Make pages a sidebar on mobile
 -   Animate table row when adding a job
 -   Make 14px font default on React-Quill component
 -   Add full job sample to onboarding with as many docs that make sense.
+-   Cancel confirm while editing a page
 
 ---NEED HELP WITH---
 -   Create function that knows if user is on mobile or not.
@@ -33,10 +29,7 @@ https://foli2023.netlify.app
 -   Add Google Analytics
 -   ChatGPT API
     -   Make job description persistant and automatic on job creation (will make future GPT links easier).
-    -   Sidebar
-    -   Prompts dropdown to start off with
     -   Settings button that shows what info is prefilled from preferences
-    -   Add sheet from GPT button
 
 -   Spaces
     -   Negotiation Space

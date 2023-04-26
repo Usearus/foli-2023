@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from 'react';
-import { DatabaseContext } from '../context/DatabaseContext';
+import { DatabaseContext } from '../../context/DatabaseContext';
 import Page from './Page';
 import styled from 'styled-components';
 

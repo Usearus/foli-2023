@@ -1,15 +1,15 @@
 import { useState, useContext, useRef } from 'react';
 import { Button, Form, Dropdown, Stack } from 'react-bootstrap';
-import { DatabaseContext } from '../context/DatabaseContext';
+import { DatabaseContext } from '../../context/DatabaseContext';
 import styled from 'styled-components';
 import MarkdownView from 'react-showdown';
-import useAlert from '../Custom Hooks/useAlert';
-import ReactQuillEditor from './ReactQuillEditor';
-import ModalDeleteConfirmation from './ModalDeleteConfirmation';
+import useAlert from '../../Custom Hooks/useAlert';
+import ReactQuillEditor from '../atom-components/ReactQuillEditor';
+import ModalDeleteConfirmation from '../modal-components/ModalDeleteConfirmation';
 import { FiMoreVertical } from 'react-icons/fi';
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai';
-import ModalEditPage from './ModalEditPage';
-import { supabase } from '../API/supabase';
+import ModalEditPage from '../modal-components/ModalEditPage';
+import { supabase } from '../../API/supabase';
 import { Resizable } from 're-resizable';
 
 const Page = (page) => {
@@ -135,10 +135,8 @@ const Page = (page) => {
 							<header className='page-title'>
 								{/* {!editing ? ( */}
 								<Stack direction='horizontal'>
-									<h6>{page.title}</h6>
-									<Stack
-										direction='horizontal'
-										className='ms-auto'>
+									<h6 style={{ color: 'var(--primary-700)' }}>{page.title}</h6>
+									<Stack direction='horizontal' className='ms-auto'>
 										<Button
 											variant='light'
 											style={{
@@ -158,38 +156,24 @@ const Page = (page) => {
 												<FiMoreVertical />
 											</Dropdown.Toggle>
 											<Dropdown.Menu>
-												<Dropdown.Item eventKey='1'>
-													Delete page
-												</Dropdown.Item>
+												<Dropdown.Item eventKey='1'>Delete page</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>
 									</Stack>
 									{showEditPageModal && (
 										<ModalEditPage
-											showEditPageModal={
-												showEditPageModal
-											}
-											handleCancelClick={
-												handleCancelClick
-											}
+											showEditPageModal={showEditPageModal}
+											handleCancelClick={handleCancelClick}
 											page={page}
 											content={content}
 											setContent={setContent}
-											initialTitleValue={
-												initialTitleValue
-											}
+											initialTitleValue={initialTitleValue}
 											titleRef={titleRef}
 											titleMaxChar={titleMaxChar}
-											handleTitleChange={
-												handleTitleChange
-											}
+											handleTitleChange={handleTitleChange}
 											characterCount={characterCount}
-											handleUpdateContentClick={
-												handleUpdateContentClick
-											}
-											handleEditorChange={
-												handleEditorChange
-											}
+											handleUpdateContentClick={handleUpdateContentClick}
+											handleEditorChange={handleEditorChange}
 										/>
 									)}
 									{showDeleteModal && (
@@ -245,18 +229,19 @@ const Page = (page) => {
 							<header className='page-title'>
 								{!editing ? (
 									<Stack direction='horizontal'>
-										<h6>{page.title}</h6>
-										<Stack
-											direction='horizontal'
-											className='ms-auto'>
-											<Dropdown
-												className='fade-in'
-												onSelect={handleSelect}>
+										<h6
+											style={{
+												color: 'var(--primary-700)',
+												fontWeight: '600',
+											}}>
+											{page.title}
+										</h6>
+										<Stack direction='horizontal' className='ms-auto'>
+											<Dropdown className='fade-in' onSelect={handleSelect}>
 												<Button
 													variant='light'
 													style={{
-														background:
-															'var(--white)',
+														background: 'var(--white)',
 														border: 0,
 													}}
 													onClick={handleEditClick}>
@@ -291,22 +276,16 @@ const Page = (page) => {
 									<div>
 										<Stack direction='horizontal' gap='1'>
 											<Form>
-												<Form.Group
-													className='title-field'
-													controlId='title'>
+												<Form.Group className='title-field' controlId='title'>
 													<Form.Control
 														type='text'
 														required
 														ref={titleRef}
-														defaultValue={
-															initialTitleValue
-														}
+														defaultValue={initialTitleValue}
 														placeholder='Add page title'
 														size='md'
 														maxLength={titleMaxChar}
-														onChange={
-															handleTitleChange
-														}
+														onChange={handleTitleChange}
 													/>
 												</Form.Group>
 											</Form>
@@ -379,17 +358,12 @@ const Page = (page) => {
 								{!editing ? (
 									<Stack direction='horizontal'>
 										<h6>{page.title}</h6>
-										<Stack
-											direction='horizontal'
-											className='ms-auto'>
-											<Dropdown
-												className='fade-in'
-												onSelect={handleSelect}>
+										<Stack direction='horizontal' className='ms-auto'>
+											<Dropdown className='fade-in' onSelect={handleSelect}>
 												<Button
 													variant='light'
 													style={{
-														background:
-															'var(--white)',
+														background: 'var(--white)',
 														border: 0,
 													}}
 													onClick={handleEditClick}>
@@ -424,22 +398,16 @@ const Page = (page) => {
 									<div>
 										<Stack direction='horizontal' gap='1'>
 											<Form>
-												<Form.Group
-													className='title-field'
-													controlId='title'>
+												<Form.Group className='title-field' controlId='title'>
 													<Form.Control
 														type='text'
 														required
 														ref={titleRef}
-														defaultValue={
-															initialTitleValue
-														}
+														defaultValue={initialTitleValue}
 														placeholder='Add page title'
 														size='md'
 														maxLength={titleMaxChar}
-														onChange={
-															handleTitleChange
-														}
+														onChange={handleTitleChange}
 													/>
 												</Form.Group>
 											</Form>
