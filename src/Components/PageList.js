@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { DatabaseContext } from '../context/DatabaseContext';
 import Page from './Page';
 import styled from 'styled-components';
@@ -14,6 +14,18 @@ const PageList = ({ className }) => {
 			? 'vertical-stack-page'
 			: '';
 
+	// create a ref to the last page
+	const lastPageRef = useRef(null);
+	const prevLengthRef = useRef(currentPages.length);
+
+	// useEffect to scroll to the last page when currentPages increases
+	useEffect(() => {
+		if (currentPages.length > prevLengthRef.current) {
+			lastPageRef.current.scrollIntoView({ behavior: 'smooth' });
+		}
+		prevLengthRef.current = currentPages.length;
+	}, [currentPages.length]);
+
 	return (
 		<Wrapper className={`${className}`}>
 			{visiblePages.map((page) => {
@@ -22,10 +34,11 @@ const PageList = ({ className }) => {
 						key={page.id}
 						style={{ scrollSnapAlign: 'center' }}
 						className={stackClassName}>
-						<Page key={page.id} {...page} id={page.id} />
+						<Page key={page.id} id={page.id} {...page} />
 					</div>
 				);
 			})}
+			<div ref={lastPageRef} style={{ visibility: 'hidden' }} />
 		</Wrapper>
 	);
 };
