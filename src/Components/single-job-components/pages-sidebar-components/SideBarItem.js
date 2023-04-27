@@ -8,7 +8,8 @@ import { DatabaseContext } from '../../../context/DatabaseContext';
 import ModalDeleteConfirmation from '../../modal-components/ModalDeleteConfirmation';
 
 const SideBarItem = ({ page }) => {
-	const { fetchCurrentPages, currentJob } = useContext(DatabaseContext);
+	const { fetchCurrentPages, currentJob, setSelectedPageID } =
+		useContext(DatabaseContext);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const handleVisibilityClick = async () => {
@@ -34,7 +35,7 @@ const SideBarItem = ({ page }) => {
 
 	return (
 		<Wrapper>
-			<div className='parent-btn'>
+			<div className='parent-btn' onClick={() => setSelectedPageID(page.id)}>
 				<OverlayTrigger
 					key='title'
 					placement='top'

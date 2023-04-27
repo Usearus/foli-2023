@@ -1,10 +1,11 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, createRef } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import Page from './Page';
 import styled from 'styled-components';
 
 const PageList = ({ className }) => {
-	const { currentPages, settingPageStack } = useContext(DatabaseContext);
+	const { currentPages, settingPageStack, selectedPageID } =
+		useContext(DatabaseContext);
 	const visiblePages = currentPages.filter((page) => page.visible);
 
 	const stackClassName =
@@ -26,14 +27,30 @@ const PageList = ({ className }) => {
 		prevLengthRef.current = currentPages.length;
 	}, [currentPages.length]);
 
+	// create a ref to the each page
+	const pageRef = useRef([]);
+
+	// useEffect to scroll to the page selected from sidebar
+	useEffect(() => {
+		const pageToScrollTo = pageRef.current.find(
+			(page) => page.id === selectedPageID
+		);
+		if (pageToScrollTo) {
+			pageToScrollTo.ref.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	}, [selectedPageID]);
+
 	return (
 		<Wrapper className={`${className}`}>
-			{visiblePages.map((page) => {
+			{visiblePages.map((page, index) => {
+				const ref = createRef();
+				pageRef.current[index] = { id: page.id, ref };
 				return (
 					<div
 						key={page.id}
 						style={{ scrollSnapAlign: 'center' }}
-						className={stackClassName}>
+						className={stackClassName}
+						ref={ref}>
 						<Page key={page.id} id={page.id} {...page} />
 					</div>
 				);

@@ -6,7 +6,6 @@ https://foli2023.netlify.app
 
 ---CRITICAL---
 -   Add validation to Assistant fields
--   Click to scroll to a new page or from sidebar
 -   Learn how to do validations (Required name on a sheet, etc.)
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
@@ -14,9 +13,8 @@ https://foli2023.netlify.app
 ---LOW PRIORITY---
 -   Sidebar with templates pre-chosen based on stage.
 -   AddSheetModal missing title count & limitation. (May use context for this)
--   Filter on top of the jobs list, but only for stage.
+
 -   Animate table row when adding a job
--   Make 14px font default on React-Quill component
 -   Add full job sample to onboarding with as many docs that make sense.
 -   Cancel confirm while editing a page
 
@@ -27,10 +25,12 @@ https://foli2023.netlify.app
 ## Post-MVP Features
 
 -   Add Google Analytics
+-   Import LinkedIn profile
+-   Import existing Resume
+-   Filter on top of the jobs list, but only for stage.
 -   ChatGPT API
     -   Make job description persistant and automatic on job creation (will make future GPT links easier).
     -   Settings button that shows what info is prefilled from preferences
-
 -   Spaces
     -   Negotiation Space
     -   Interview Space

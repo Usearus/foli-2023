@@ -98,7 +98,7 @@ const DatabaseProvider = ({ children }) => {
 			}
 		}
 	}
-	console.log(settingPageStack);
+	// console.log(settingPageStack);
 
 	async function createUserProfile() {
 		if (auth0Email) {
@@ -197,6 +197,7 @@ const DatabaseProvider = ({ children }) => {
 	// SET CURRENTLY VIEWED JOB DATA
 	const [currentPages, setCurrentPages] = useState([]);
 	const [currentJob, setCurrentJob] = useState([]);
+	const [selectedPageID, setSelectedPageID] = useState(null); // used to select a page to scroll to on page list
 
 	async function fetchCurrentJob(job) {
 		// console.log('job received for fetch:', job);
@@ -257,6 +258,8 @@ const DatabaseProvider = ({ children }) => {
 				fetchAllPages,
 				setCurrentPages,
 				fetchCurrentPages,
+				selectedPageID,
+				setSelectedPageID,
 				//Jobs
 				allJobs,
 				userJobs,
