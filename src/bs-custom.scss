@@ -49,3 +49,64 @@ $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
 
 @import '../node_modules/bootstrap/scss/bootstrap';
 // @import '../node_modules/bootstrap/scss/_variables';
+
+
+// Removes dropdowns from all dropdown buttons
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+/* React Bootstrap Changes */
+
+div .container-fluid {
+    /* Removes padding from fluid containers */
+    padding: 0;
+}
+
+.navbar-nav .nav-link.active {
+    --bs-navbar-active-color: var(--white);
+}
+
+.form-label {
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primaryTextColor);
+}
+
+label {
+    color: var(--primaryTextColor) !important;
+    margin-bottom: 1rem;
+    color: var(--grey-700);
+    font-size: 14px;
+}
+
+// Truncates overflow text everywhere on inputs
+input {
+    text-overflow: ellipsis;
+}
+
+.start-hidden {
+    display: none;
+}
+
+// BS Card component edits
+.fSIGcG {
+    .card {
+        border-radius: 0;
+        box-shadow: var(--shadow-2);
+        background: var(--grey-50);
+        border: 0;
+    }
+    .footer {
+        border-radius: 0;
+        background-color: var(--grey-50) !important;
+        border-color: var(--grey-200);
+    }
+
+    .header {
+        border-radius: 0;
+        background-color: var(--grey-50) !important;
+        border-color: var(--grey-200);
+    }
+}

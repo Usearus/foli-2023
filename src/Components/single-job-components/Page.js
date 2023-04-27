@@ -244,13 +244,7 @@ const Page = (page) => {
 							<header className='page-title'>
 								{!editing ? (
 									<Stack direction='horizontal'>
-										<h6
-											style={{
-												color: 'var(--primary-700)',
-												fontWeight: '600',
-											}}>
-											{page.title}
-										</h6>
+										<h6>{page.title}</h6>
 										<Stack direction='horizontal' className='ms-auto'>
 											<Dropdown className='fade-in' onSelect={handleSelect}>
 												<Button
@@ -487,7 +481,7 @@ const Wrapper = styled.div`
 
 	.page-title h6 {
 		margin-bottom: 0rem;
-		font-weight: 600;
+		font-weight: 800;
 		margin: 0 1rem;
 	}
 
@@ -521,6 +515,10 @@ const Wrapper = styled.div`
 		padding: 1rem;
 	}
 	.markdown-content {
+		* {
+			color: var(--secondaryTextColor);
+		}
+
 		padding: 1rem 2rem;
 		h1 {
 			font-size: 1.8rem;

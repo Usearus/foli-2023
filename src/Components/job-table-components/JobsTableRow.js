@@ -46,6 +46,7 @@ const JobsTableRow = (job) => {
 			<tr style={{ background: 'var(--white)' }}>
 				<td
 					onClick={handleTableRowClick}
+					className=' align-middle'
 					style={{ minWidth: '100', maxWidth: '200px' }}>
 					<div style={{ fontWeight: '600', color: 'var(--primary-700)' }}>
 						{job.company}
@@ -60,7 +61,7 @@ const JobsTableRow = (job) => {
 					</div>
 				</td>
 				<td
-					className='desktop-only-table-cell'
+					className='desktop-only-table-cell align-middle'
 					onClick={handleTableRowClick}
 					style={{
 						minWidth: '88px',
@@ -71,7 +72,7 @@ const JobsTableRow = (job) => {
 						: '-'}
 				</td>
 				<td
-					className='desktop-only-table-cell'
+					className='desktop-only-table-cell align-middle'
 					style={{
 						minWidth: '130px',
 					}}
@@ -79,16 +80,16 @@ const JobsTableRow = (job) => {
 					{job.location ? <FoliBadge content={job.location} /> : ''}
 					{job.remote ? <FoliBadge content='Remote' /> : ''}
 				</td>
-				<td style={{ width: '160px' }}>
+				<td className='align-middle' style={{ width: '160px' }}>
 					<DropdownStageSelect job={job} />
 				</td>
 				<td
-					className='desktop-only-table-cell'
+					className='desktop-only-table-cell align-middle'
 					style={{ width: '100px' }}
 					onClick={handleTableRowClick}>
 					{new Date(job.edited).toLocaleDateString()}
 				</td>
-				<td style={{ width: '48px' }}>
+				<td className='align-middle' style={{ width: '48px' }}>
 					<Dropdown onSelect={handleSelect}>
 						<Dropdown.Toggle
 							id='dropdown'

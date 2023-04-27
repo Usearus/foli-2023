@@ -93,6 +93,11 @@ const Wrapper = styled.div`
 		border-radius: 8px 8px 8px 8px !important;
 		font-size: 1rem !important;
 
+		/* Set all color to secondary by default to be different than the standard colors in the app */
+		* {
+			color: var(--secondaryTextColor);
+		}
+
 		ul li {
 			padding-bottom: 1rem !important;
 			padding-left: 0;
