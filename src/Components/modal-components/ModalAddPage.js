@@ -4,7 +4,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import useAlert from '../../Custom Hooks/useAlert';
 import ReactQuillEditor from '../atom-components/ReactQuillEditor';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button, Modal, Form, Stack } from 'react-bootstrap';
+import styled from 'styled-components';
 
 const ModalAddPage = ({ show, handleClose }) => {
 	const { setAlert } = useAlert();
@@ -12,6 +13,7 @@ const ModalAddPage = ({ show, handleClose }) => {
 	const { currentJob, currentPages, fetchCurrentPages } =
 		useContext(DatabaseContext);
 	const [validated, setValidated] = useState(false);
+
 	const titleRef = useRef();
 	const [content, setContent] = useState('');
 
@@ -52,6 +54,14 @@ const ModalAddPage = ({ show, handleClose }) => {
 		}
 	};
 
+	const handleTitleChange = (event) => {
+		const newValue = event.target.value;
+		setCharacterCount(newValue.length);
+	};
+
+	const [characterCount, setCharacterCount] = useState(0);
+	const titleMaxChar = 32;
+
 	return (
 		<Modal scrollable fullscreen='md-down' show={show} onHide={handleClose}>
 			<Modal.Header closeButton>
@@ -64,13 +74,30 @@ const ModalAddPage = ({ show, handleClose }) => {
 					validated={validated}
 					onSubmit={handleSubmit}>
 					{/* Title */}
-					<Form.Group className='mb-3' controlId='title'>
-						<Form.Label>Page Title *</Form.Label>
-						<Form.Control required type='text' autoFocus ref={titleRef} />
-						<Form.Control.Feedback type='invalid'>
-							Page title cannot be blank.
-						</Form.Control.Feedback>
-					</Form.Group>
+					<Wrapper>
+						<Stack
+							classname='page-title-container'
+							direction='horizontal'
+							gap='2'>
+							<Form.Group className='mb-3 page-title' controlId='title'>
+								<Form.Label>Page Title *</Form.Label>
+								<Form.Control
+									required
+									type='text'
+									autoFocus
+									ref={titleRef}
+									onChange={handleTitleChange}
+									maxLength={titleMaxChar}
+								/>
+								<Form.Control.Feedback type='invalid'>
+									Page title cannot be blank.
+								</Form.Control.Feedback>
+								<div className='character-count'>
+									{characterCount}/{titleMaxChar}
+								</div>
+							</Form.Group>
+						</Stack>
+					</Wrapper>
 					{/* Content */}
 					<Form.Label>Content</Form.Label>
 					<Form.Group className='mb-3' controlId='content'>
@@ -91,3 +118,21 @@ const ModalAddPage = ({ show, handleClose }) => {
 };
 
 export default ModalAddPage;
+
+const Wrapper = styled.div`
+	.character-count {
+		font-style: italic;
+		font-size: small;
+		/* padding-top: 0.75rem; */
+		width: 3rem;
+	}
+
+	.page-title {
+		width: 100%;
+	}
+
+	.page-title-container {
+		align-items: flex-end;
+		justify-content: center;
+	}
+`;

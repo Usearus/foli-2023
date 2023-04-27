@@ -124,6 +124,21 @@ const Page = (page) => {
 		setCharacterCount(newValue.length);
 	};
 
+	// Validation for Title
+	// const [validated, setValidated] = useState(false);
+
+	// const handleSubmit = (event) => {
+	// 	event.preventDefault();
+	// 	event.stopPropagation();
+	// 	const form = event.currentTarget;
+	// 	if (form.checkValidity() === true) {
+	// 		setValidated(false);
+	// 		handleUpdateContentClick();
+	// 	} else {
+	// 		setValidated(true);
+	// 	}
+	// };
+
 	return (
 		<Wrapper>
 			{initialVisibleValue === false ? (

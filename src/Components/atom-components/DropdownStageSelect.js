@@ -64,6 +64,7 @@ const Wrapper = styled.section`
 		margin-top: 0.5rem;
 		font-weight: 600;
 		font-size: 12px;
+		margin: 0;
 	}
 
 	/* 

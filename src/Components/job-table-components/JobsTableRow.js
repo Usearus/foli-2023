@@ -62,10 +62,12 @@ const JobsTableRow = (job) => {
 				<td
 					className='desktop-only-table-cell'
 					onClick={handleTableRowClick}
-					style={{ minWidth: '88px' }}>
+					style={{
+						minWidth: '88px',
+					}}>
 					{job.salary_min && job.salary_max
 						? `$${job.salary_min.toLocaleString()} -
-                            ${job.salary_max.toLocaleString()}`
+                ${job.salary_max.toLocaleString()}`
 						: '-'}
 				</td>
 				<td
