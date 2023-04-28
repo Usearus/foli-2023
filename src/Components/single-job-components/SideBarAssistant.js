@@ -156,8 +156,9 @@ const SideBarAssistant = () => {
 			<Offcanvas
 				show={show}
 				onHide={handleClose}
-				backdrop='false'
-				placement='end'>
+				placement='end'
+				backdrop={false}
+				scroll={true}>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>
 						<div>AI Assistant</div>

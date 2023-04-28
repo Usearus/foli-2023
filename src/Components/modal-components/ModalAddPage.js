@@ -12,7 +12,6 @@ const ModalAddPage = ({ show, handleClose }) => {
 	const { user } = useAuth0();
 	const { currentJob, currentPages, fetchCurrentPages, setSelectedPageID } =
 		useContext(DatabaseContext);
-	const [validated, setValidated] = useState(false);
 
 	const titleRef = useRef();
 	const [content, setContent] = useState('');
@@ -49,6 +48,8 @@ const ModalAddPage = ({ show, handleClose }) => {
 		}
 	};
 
+	const [validated, setValidated] = useState(false);
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		event.stopPropagation();
@@ -83,15 +84,15 @@ const ModalAddPage = ({ show, handleClose }) => {
 					{/* Title */}
 					<Wrapper>
 						<Stack
-							classname='page-title-container'
+							className='page-title-container'
 							direction='horizontal'
 							gap='2'>
 							<Form.Group className='mb-3 page-title' controlId='title'>
 								<Form.Label>Page Title *</Form.Label>
 								<Form.Control
+									autoFocus
 									required
 									type='text'
-									autoFocus
 									ref={titleRef}
 									onChange={handleTitleChange}
 									maxLength={titleMaxChar}

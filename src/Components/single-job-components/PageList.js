@@ -15,52 +15,60 @@ const PageList = ({ className }) => {
 			? 'vertical-stack-page'
 			: '';
 
-	// create a ref to the last page
+	// create a ref to the Pages
+	const pageRef = useRef([]);
 	const lastPageRef = useRef(null);
 	const prevLengthRef = useRef(currentPages.length);
 
-	// useEffect to scroll to the last page when currentPages increases
-	useEffect(() => {
-		if (currentPages.length > prevLengthRef.current) {
-			lastPageRef.current.scrollIntoView({ behavior: 'smooth' });
-		}
-		prevLengthRef.current = currentPages.length;
-	}, [currentPages.length]);
-
-	// create a ref to the each page
-	const pageRef = useRef([]);
-
-	// useEffect to scroll to the page selected from sidebar
 	useEffect(() => {
 		const pageToScrollTo = pageRef.current.find(
 			(page) => page.id === selectedPageID
 		);
+		// Scroll to the Page that is selected in Sidebar
 		if (pageToScrollTo) {
 			pageToScrollTo.ref.current.scrollIntoView({ behavior: 'smooth' });
 		}
-	}, [selectedPageID]);
+		// Scroll to the last page when currentPages increases
+		if (currentPages.length > prevLengthRef.current) {
+			lastPageRef.current.scrollIntoView({ behavior: 'smooth' });
+		}
 
-	return (
-		<Wrapper className={`${className}`}>
-			{visiblePages.map((page, index) => {
-				const ref = createRef();
-				pageRef.current[index] = { id: page.id, ref };
-				const isSelectedPage = page.id === selectedPageID;
-				const pageClassName = isSelectedPage ? 'selected-page' : '';
+		prevLengthRef.current = currentPages.length;
+	}, [selectedPageID, currentPages.length]);
 
-				return (
-					<div
-						key={page.id}
-						style={{ scrollSnapAlign: 'center' }}
-						className={`${stackClassName} ${pageClassName}`}
-						ref={ref}>
-						<Page key={page.id} id={page.id} {...page} />
-					</div>
-				);
-			})}
-			<div ref={lastPageRef} style={{ visibility: 'hidden' }} />
-		</Wrapper>
-	);
+	if (visiblePages.length > 0) {
+		return (
+			<Wrapper className={`${className}`}>
+				{visiblePages.map((page, index) => {
+					const ref = createRef();
+					pageRef.current[index] = { id: page.id, ref };
+					const isSelectedPage = page.id === selectedPageID;
+					const pageClassName = isSelectedPage ? 'selected-page' : '';
+
+					return (
+						<div
+							key={page.id}
+							style={{ scrollSnapAlign: 'center' }}
+							className={`${stackClassName} ${pageClassName}`}
+							ref={ref}>
+							<Page key={page.id} id={page.id} {...page} />
+						</div>
+					);
+				})}
+				<div ref={lastPageRef} style={{ visibility: 'hidden' }} />
+			</Wrapper>
+		);
+	}
+
+	if (visiblePages.length === 0) {
+		return (
+			<Wrapper className={`${className}`}>
+				<div className='empty-state'>
+					<h5>No pages are visible. Toggle visibility in Pages list.</h5>
+				</div>
+			</Wrapper>
+		);
+	}
 };
 
 export default PageList;
@@ -74,6 +82,16 @@ const Wrapper = styled.div`
 		height: 100%;
 	}
 
+	.empty-state {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 2rem;
+		min-width: 400px;
+		height: 4rem;
+		/* width: 500px; */
+	}
+
 	/* Desktop */
 	@media (min-width: 576px) {
 		.vertical-stack-page {
@@ -81,8 +99,8 @@ const Wrapper = styled.div`
 			margin: 0 0 1rem 0;
 		}
 		.selected-page {
-			-webkit-animation: pulsate-fwd 1s ease-in-out 2 both;
-			animation: pulsate-fwd 1s ease-in-out 2 both;
+			-webkit-animation: pulsate-fwd 1s ease-in-out 1 both;
+			animation: pulsate-fwd 1s ease-in-out 1 both;
 		}
 
 		@-webkit-keyframes pulsate-fwd {

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import ReactQuill from 'react-quill';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
@@ -7,13 +7,12 @@ import { Quill } from 'react-quill';
 const ReactQuillEditor = ({ value, onChange }) => {
 	const editor = useRef(null);
 
-	useEffect(() => {
+	const handleOnFocus = () => {
 		if (editor.current) {
-			editor.current.focus();
 			const quill = editor.current.getEditor();
 			quill.format('size', '14px'); // set default font size
 		}
-	}, []);
+	};
 
 	const fontSizeArr = [
 		'8px',
@@ -63,6 +62,8 @@ const ReactQuillEditor = ({ value, onChange }) => {
 				value={value}
 				onChange={onChange}
 				ref={editor}
+				onFocus={handleOnFocus}
+				placeholder='Start typing content...'
 			/>
 		</Wrapper>
 	);
@@ -73,6 +74,7 @@ export default ReactQuillEditor;
 const Wrapper = styled.div`
 	.ql-container {
 		border-radius: 0 0 8px 8px !important;
+		/* padding-left: 0rem; */
 	}
 
 	.ql-toolbar {
