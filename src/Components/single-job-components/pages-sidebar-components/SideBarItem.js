@@ -7,7 +7,7 @@ import { supabase } from '../../../API/supabase';
 import { DatabaseContext } from '../../../context/DatabaseContext';
 import ModalDeleteConfirmation from '../../modal-components/ModalDeleteConfirmation';
 
-const SideBarItem = ({ page }) => {
+const SideBarItem = ({ page, setShowOffcanvas }) => {
 	const { fetchCurrentPages, currentJob, setSelectedPageID } =
 		useContext(DatabaseContext);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -33,9 +33,14 @@ const SideBarItem = ({ page }) => {
 		setShowDeleteModal(true);
 	};
 
+	const handleSideBarItemClick = () => {
+		setSelectedPageID(page.id);
+		setShowOffcanvas(false);
+	};
+
 	return (
 		<Wrapper>
-			<div className='parent-btn' onClick={() => setSelectedPageID(page.id)}>
+			<div className='parent-btn' onClick={handleSideBarItemClick}>
 				<OverlayTrigger
 					key='title'
 					placement='top'

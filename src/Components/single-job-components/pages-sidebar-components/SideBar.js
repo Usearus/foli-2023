@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { supabase } from '../../../API/supabase';
 
-const SideBar = ({ className }) => {
+const SideBar = ({ className, setShowOffcanvas }) => {
 	const { currentPages, setCurrentPages } = useContext(DatabaseContext);
 	const [isDragging, setIsDragging] = useState(false);
 
@@ -71,7 +71,10 @@ const SideBar = ({ className }) => {
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}>
-													<SideBarItem page={page} />
+													<SideBarItem
+														page={page}
+														setShowOffcanvas={setShowOffcanvas}
+													/>
 												</div>
 											)}
 										</Draggable>

@@ -20,7 +20,7 @@ import DropdownAddPage from '../atom-components/DropdownAddPage';
 
 const TopBarJobMobile = ({ className }) => {
 	const { currentJob } = useContext(DatabaseContext);
-	const [toggle, setToggle] = useState(false);
+	const [showOffcanvas, setShowOffcanvas] = useState(false);
 
 	return (
 		<Wrapper className={className}>
@@ -34,7 +34,8 @@ const TopBarJobMobile = ({ className }) => {
 					top: '0',
 					zIndex: '1',
 				}}
-				onToggle={() => setToggle(!toggle)}>
+				// onToggle={() => setToggle(!toggle)}
+			>
 				<Stack direction='vertical'>
 					<div className='first-row'>
 						<LinkContainer to='/'>
@@ -69,7 +70,10 @@ const TopBarJobMobile = ({ className }) => {
 						)}
 
 						<div className='ms-auto'>
-							<Navbar.Toggle as='div' aria-controls='responsive-navbar-nav'>
+							<Navbar.Toggle
+								as='div'
+								aria-controls='responsive-navbar-nav'
+								onClick={() => setShowOffcanvas(!showOffcanvas)}>
 								<Button
 									variant='light'
 									style={{
@@ -91,7 +95,9 @@ const TopBarJobMobile = ({ className }) => {
 						style={{
 							background: 'var(--grey-200)',
 							cursor: 'pointer',
-						}}>
+						}}
+						show={showOffcanvas}
+						onHide={() => setShowOffcanvas(false)}>
 						<OffcanvasHeader closeButton>
 							<OffcanvasTitle id='title'>Job Details</OffcanvasTitle>
 						</OffcanvasHeader>
@@ -100,7 +106,7 @@ const TopBarJobMobile = ({ className }) => {
 							<div className='dropdown-container'>
 								<DropdownStageSelect job={currentJob} />
 							</div>
-							<SideBar />
+							<SideBar setShowOffcanvas={setShowOffcanvas} />
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>
 				</Stack>
