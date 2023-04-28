@@ -14,7 +14,8 @@ const ModalAddJob = () => {
 	const { setAlert } = useAlert();
 
 	const { user } = useAuth0();
-	const { fetchUserJobs } = useContext(DatabaseContext);
+	const { fetchUserJobs, setCreatedJobID, createdJobID } =
+		useContext(DatabaseContext);
 
 	const companyRef = useRef();
 	const positionRef = useRef();
@@ -71,8 +72,10 @@ const ModalAddJob = () => {
 			account: user.email,
 			jobid: newJobId,
 		});
+		setCreatedJobID(newJobId);
 		handleClose();
 	};
+	// console.log(createdJobID);
 
 	return (
 		<Wrapper>

@@ -248,6 +248,9 @@ const DatabaseProvider = ({ children }) => {
 		}
 	}
 
+	// Used for picking out a created job and animating it
+	const [createdJobID, setCreatedJobID] = useState(null);
+
 	return (
 		<DatabaseContext.Provider
 			value={{
@@ -269,6 +272,8 @@ const DatabaseProvider = ({ children }) => {
 				fetchUserJobs,
 				setCurrentJob,
 				fetchCurrentJob,
+				createdJobID,
+				setCreatedJobID,
 				//Profiles
 				allProfiles,
 				userProfile,

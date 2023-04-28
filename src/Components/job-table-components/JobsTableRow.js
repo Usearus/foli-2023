@@ -42,84 +42,82 @@ const JobsTableRow = (job) => {
 	};
 
 	return (
-		<>
-			<tr style={{ background: 'var(--white)' }}>
-				<td
-					onClick={handleTableRowClick}
-					className=' align-middle'
-					style={{ minWidth: '100', maxWidth: '200px' }}>
-					<div style={{ fontWeight: '600', color: 'var(--primary-700)' }}>
-						{job.company}
-					</div>
-					<div
-						style={{
-							whiteSpace: 'nowrap',
-							overflow: 'hidden',
-							textOverflow: 'ellipsis',
-						}}>
-						{job.position}
-					</div>
-				</td>
-				<td
-					className='desktop-only-table-cell align-middle'
-					onClick={handleTableRowClick}
+		<tr style={{ background: 'var(--white)' }}>
+			<td
+				onClick={handleTableRowClick}
+				className=' align-middle'
+				style={{ minWidth: '100', maxWidth: '200px' }}>
+				<div style={{ fontWeight: '600', color: 'var(--primary-700)' }}>
+					{job.company}
+				</div>
+				<div
 					style={{
-						minWidth: '88px',
+						whiteSpace: 'nowrap',
+						overflow: 'hidden',
+						textOverflow: 'ellipsis',
 					}}>
-					{job.salary_min && job.salary_max
-						? `$${job.salary_min.toLocaleString()} -
+					{job.position}
+				</div>
+			</td>
+			<td
+				className='desktop-only-table-cell align-middle'
+				onClick={handleTableRowClick}
+				style={{
+					minWidth: '88px',
+				}}>
+				{job.salary_min && job.salary_max
+					? `$${job.salary_min.toLocaleString()} -
                 ${job.salary_max.toLocaleString()}`
-						: '-'}
-				</td>
-				<td
-					className='desktop-only-table-cell align-middle'
-					style={{
-						minWidth: '130px',
-					}}
-					onClick={handleTableRowClick}>
-					{job.location ? <FoliBadge content={job.location} /> : ''}
-					{job.remote ? <FoliBadge content='Remote' /> : ''}
-				</td>
-				<td className='align-middle' style={{ width: '160px' }}>
-					<DropdownStageSelect job={job} />
-				</td>
-				<td
-					className='desktop-only-table-cell align-middle'
-					style={{ width: '100px' }}
-					onClick={handleTableRowClick}>
-					{new Date(job.edited).toLocaleDateString()}
-				</td>
-				<td className='align-middle' style={{ width: '48px' }}>
-					<Dropdown onSelect={handleSelect}>
-						<Dropdown.Toggle
-							id='dropdown'
-							variant='link'
-							style={{ color: 'var(--grey-800)' }}>
-							<FiMoreVertical />
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item eventKey='1'>Edit Job</Dropdown.Item>
-							<Dropdown.Item eventKey='2'>Delete Job</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					{showDeleteModal && (
-						<ModalDeleteConfirmation
-							show={showDeleteModal}
-							close={handleCloseReset}
-							object={job}
-							type='job'
-						/>
-					)}
-					{showEditModal && (
-						<ModalEditJob
-							show={showEditModal}
-							close={handleCloseReset}
-							job={job}
-						/>
-					)}
-				</td>
-			</tr>
-		</>
+					: '-'}
+			</td>
+			<td
+				className='desktop-only-table-cell align-middle'
+				style={{
+					minWidth: '130px',
+				}}
+				onClick={handleTableRowClick}>
+				{job.location ? <FoliBadge content={job.location} /> : ''}
+				{job.remote ? <FoliBadge content='Remote' /> : ''}
+			</td>
+			<td className='align-middle' style={{ width: '160px' }}>
+				<DropdownStageSelect job={job} />
+			</td>
+			<td
+				className='desktop-only-table-cell align-middle'
+				style={{ width: '100px' }}
+				onClick={handleTableRowClick}>
+				{new Date(job.edited).toLocaleDateString()}
+			</td>
+			<td className='align-middle' style={{ width: '48px' }}>
+				<Dropdown onSelect={handleSelect}>
+					<Dropdown.Toggle
+						id='dropdown'
+						variant='link'
+						style={{ color: 'var(--grey-800)' }}>
+						<FiMoreVertical />
+					</Dropdown.Toggle>
+					<Dropdown.Menu>
+						<Dropdown.Item eventKey='1'>Edit Job</Dropdown.Item>
+						<Dropdown.Item eventKey='2'>Delete Job</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+				{showDeleteModal && (
+					<ModalDeleteConfirmation
+						show={showDeleteModal}
+						close={handleCloseReset}
+						object={job}
+						type='job'
+					/>
+				)}
+				{showEditModal && (
+					<ModalEditJob
+						show={showEditModal}
+						close={handleCloseReset}
+						job={job}
+					/>
+				)}
+			</td>
+		</tr>
 	);
 };
 

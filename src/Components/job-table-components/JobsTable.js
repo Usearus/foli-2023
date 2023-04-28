@@ -102,7 +102,7 @@ const JobsTable = ({ jobs }) => {
 					</thead>
 					<tbody>
 						{sortedJobs.map((job) => {
-							return <JobsTableRow key={job.id} {...job} />;
+							return <JobsTableRow key={job.id} {...job} id={job.id} />;
 						})}
 					</tbody>
 				</Table>
