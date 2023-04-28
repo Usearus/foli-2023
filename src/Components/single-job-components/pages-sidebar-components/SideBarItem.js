@@ -7,7 +7,7 @@ import { supabase } from '../../../API/supabase';
 import { DatabaseContext } from '../../../context/DatabaseContext';
 import ModalDeleteConfirmation from '../../modal-components/ModalDeleteConfirmation';
 
-const SideBarItem = ({ page, setShowOffcanvas }) => {
+const SideBarItem = ({ page, setShowOffcanvas, showOffcanvas }) => {
 	const { fetchCurrentPages, currentJob, setSelectedPageID } =
 		useContext(DatabaseContext);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -35,18 +35,20 @@ const SideBarItem = ({ page, setShowOffcanvas }) => {
 
 	const handleSideBarItemClick = () => {
 		setSelectedPageID(page.id);
-		setShowOffcanvas(false);
+		if (showOffcanvas === true) {
+			setShowOffcanvas(false);
+		}
 	};
 
 	return (
 		<Wrapper>
-			<div className='parent-btn' onClick={handleSideBarItemClick}>
+			<div className='parent-btn'>
 				<OverlayTrigger
 					key='title'
 					placement='top'
 					delay={{ show: 1000, hide: 0 }}
 					overlay={<Tooltip id={`tooltip-${page.id}`}>{page.title}</Tooltip>}>
-					<span>{page.title}</span>
+					<span onClick={handleSideBarItemClick}>{page.title}</span>
 				</OverlayTrigger>
 				<div
 					className='ms-auto fade-in'

@@ -21,7 +21,7 @@ import DropdownAddPage from '../atom-components/DropdownAddPage';
 const TopBarJobMobile = ({ className }) => {
 	const { currentJob } = useContext(DatabaseContext);
 	const [showOffcanvas, setShowOffcanvas] = useState(false);
-
+	// console.log('showOffcanvas is', showOffcanvas);
 	return (
 		<Wrapper className={className}>
 			<Navbar
@@ -108,7 +108,10 @@ const TopBarJobMobile = ({ className }) => {
 									<DropdownStageSelect job={currentJob} />
 								</div>
 							</div>
-							<SideBar setShowOffcanvas={setShowOffcanvas} />
+							<SideBar
+								setShowOffcanvas={setShowOffcanvas}
+								showOffcanvas={showOffcanvas}
+							/>
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>
 				</Stack>

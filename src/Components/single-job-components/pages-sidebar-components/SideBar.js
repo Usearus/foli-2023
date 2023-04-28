@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { supabase } from '../../../API/supabase';
 
-const SideBar = ({ className, setShowOffcanvas }) => {
+const SideBar = ({ className, setShowOffcanvas, showOffcanvas }) => {
 	const { currentPages, setCurrentPages } = useContext(DatabaseContext);
 	const [isDragging, setIsDragging] = useState(false);
 
@@ -18,7 +18,7 @@ const SideBar = ({ className, setShowOffcanvas }) => {
 	}, [setCurrentPages]);
 
 	const updatePositionsOnDragEnd = async (result) => {
-		console.log(result);
+		// console.log(result);
 		if (!result.destination) {
 			return;
 		}
@@ -37,7 +37,7 @@ const SideBar = ({ className, setShowOffcanvas }) => {
 					.from('pages')
 					.update({ position: index })
 					.eq('id', page.id);
-				console.log('currentPages update', currentPages);
+				// console.log('currentPages update', currentPages);
 			})
 		);
 		setCurrentPages(newCurrentPages);
@@ -74,6 +74,7 @@ const SideBar = ({ className, setShowOffcanvas }) => {
 													<SideBarItem
 														page={page}
 														setShowOffcanvas={setShowOffcanvas}
+														showOffcanvas={showOffcanvas}
 													/>
 												</div>
 											)}
