@@ -77,6 +77,20 @@ const ModalAddJob = () => {
 	};
 	// console.log(createdJobID);
 
+	const [validated, setValidated] = useState(false);
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		event.stopPropagation();
+		const form = event.currentTarget;
+		if (form.checkValidity() === true) {
+			setValidated(false);
+			handleAddJobClick();
+		} else {
+			setValidated(true);
+		}
+	};
+
 	return (
 		<Wrapper>
 			<Button variant='primary' onClick={handleShow}>
@@ -89,18 +103,29 @@ const ModalAddJob = () => {
 				</Modal.Header>
 
 				<Modal.Body>
-					<Form>
+					<Form
+						id='addJobForm'
+						noValidate
+						validated={validated}
+						onSubmit={handleSubmit}>
 						<Form.Group className='mb-3' controlId='company'>
-							<Form.Label>Company</Form.Label>
+							<Form.Label>Company *</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Google, Apple, etc.'
 								ref={companyRef}
+								required
 							/>
+							<Form.Control.Feedback type='invalid'>
+								Company name required.
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group className='mb-3 ' controlId='position'>
-							<Form.Label>Position</Form.Label>
-							<Form.Control type='text' ref={positionRef} />
+							<Form.Label>Position *</Form.Label>
+							<Form.Control type='text' ref={positionRef} required />
+							<Form.Control.Feedback type='invalid'>
+								Job position required.
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Stack direction='horizontal' gap={4}>
 							<Form.Group className='mb-3' controlId='salary-min'>
@@ -154,7 +179,7 @@ const ModalAddJob = () => {
 						onClick={handleClose}>
 						Close
 					</Button>
-					<Button variant='primary' onClick={handleAddJobClick}>
+					<Button variant='primary' type='submit' form='addJobForm'>
 						Confirm
 					</Button>
 				</Modal.Footer>
