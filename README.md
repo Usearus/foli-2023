@@ -19,7 +19,6 @@ https://foli2023.netlify.app
 -   Cancel confirm while editing a page
 
 ---NEED HELP WITH---
--   Create function that knows if user is on mobile or not.
 -   What is the best way to set a timer for token renewal in React?
 
 ## Post-MVP Features
