@@ -4,6 +4,16 @@ https://foli2023.netlify.app
 
 ## Things to add
 
+two sheets side by side min and max width
+
+BUG
+Hiding all sheets on desktop causes bug in PageList & SideBar
+    TypeError: Cannot read properties of null (reading 'scrollIntoView')
+    TypeError: Cannot read properties of null (reading 'scrollIntoView')
+    TypeError: setShowOffcanvas is not a function
+    TypeError: Cannot convert undefined or null to object
+ 
+
 ---CRITICAL---
 -   Add validation to Assistant fields
 -   Learn how to do validations (Required name on a sheet, etc.)

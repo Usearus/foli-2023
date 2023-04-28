@@ -52,13 +52,12 @@ const TopBarJobMobile = ({ className }) => {
 						</LinkContainer>
 						{currentJob ? (
 							<Stack className='truncate-parent'>
-								<div
+								<h6
 									style={{
-										fontSize: '16px',
-										color: 'var(--primary-700)',
+										fontWeight: '600',
 									}}>
 									{currentJob.company}
-								</div>
+								</h6>
 								<div
 									className='truncate'
 									style={{ margin: '0', fontSize: '14px' }}>
@@ -99,12 +98,15 @@ const TopBarJobMobile = ({ className }) => {
 						show={showOffcanvas}
 						onHide={() => setShowOffcanvas(false)}>
 						<OffcanvasHeader closeButton>
-							<OffcanvasTitle id='title'>Job Details</OffcanvasTitle>
+							<OffcanvasTitle id='title'>Details</OffcanvasTitle>
 						</OffcanvasHeader>
 						<Offcanvas.Body>
 							{/* <hr /> */}
 							<div className='dropdown-container'>
-								<DropdownStageSelect job={currentJob} />
+								<label style={{ fontWeight: '700' }}>Stage</label>
+								<div style={{ paddingBottom: '1rem' }}>
+									<DropdownStageSelect job={currentJob} />
+								</div>
 							</div>
 							<SideBar setShowOffcanvas={setShowOffcanvas} />
 						</Offcanvas.Body>

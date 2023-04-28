@@ -31,6 +31,7 @@ const DropdownAddPage = () => {
 			<DropdownButton
 				title='Add page'
 				id='add-page-dropdown'
+				align='end'
 				onSelect={handleSelect}>
 				<Dropdown.Item
 					eventKey='1'
