@@ -10,7 +10,7 @@ import styled from 'styled-components';
 const ModalAddPage = ({ show, handleClose }) => {
 	const { setAlert } = useAlert();
 	const { user } = useAuth0();
-	const { currentJob, currentPages, fetchCurrentPages } =
+	const { currentJob, currentPages, fetchCurrentPages, setSelectedPageID } =
 		useContext(DatabaseContext);
 	const [validated, setValidated] = useState(false);
 
@@ -24,21 +24,28 @@ const ModalAddPage = ({ show, handleClose }) => {
 	const handleAddPageClick = async () => {
 		if (currentJob) {
 			await supabase.from('jobs').select().eq('id', currentJob.id);
-			const { error } = await supabase.from('pages').insert({
-				account: user.email,
-				title: titleRef.current.value,
-				content: content,
-				jobid: currentJob.id,
-				position: currentPages.length,
-			});
-			fetchCurrentPages(currentJob);
-			handleClose();
+
+			const { data, error } = await supabase
+				.from('pages')
+				.insert({
+					account: user.email,
+					title: titleRef.current.value,
+					content: content,
+					jobid: currentJob.id,
+					position: currentPages.length,
+				})
+				.select();
 			setAlert('Page successfully added!', 'success');
 			if (error) {
 				setAlert('There was an error adding the page.', 'error');
 				console.log(error);
 				return;
 			}
+
+			fetchCurrentPages(currentJob);
+			handleClose();
+			const newPageId = data[0].id;
+			setSelectedPageID(newPageId);
 		}
 	};
 

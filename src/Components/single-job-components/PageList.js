@@ -45,11 +45,14 @@ const PageList = ({ className }) => {
 			{visiblePages.map((page, index) => {
 				const ref = createRef();
 				pageRef.current[index] = { id: page.id, ref };
+				const isSelectedPage = page.id === selectedPageID;
+				const pageClassName = isSelectedPage ? 'selected-page' : '';
+
 				return (
 					<div
 						key={page.id}
 						style={{ scrollSnapAlign: 'center' }}
-						className={stackClassName}
+						className={`${stackClassName} ${pageClassName}`}
 						ref={ref}>
 						<Page key={page.id} id={page.id} {...page} />
 					</div>
@@ -76,6 +79,41 @@ const Wrapper = styled.div`
 		.vertical-stack-page {
 			height: 90%;
 			margin: 0 0 1rem 0;
+		}
+	}
+
+	/* Animate when a page is selected */
+	.selected-page {
+		-webkit-animation: pulsate-fwd 1s ease-in-out 2 both;
+		animation: pulsate-fwd 1s ease-in-out 2 both;
+	}
+
+	@-webkit-keyframes pulsate-fwd {
+		0% {
+			-webkit-transform: scale(1);
+			transform: scale(1);
+		}
+		50% {
+			-webkit-transform: scale(1.02);
+			transform: scale(1.02);
+		}
+		100% {
+			-webkit-transform: scale(1);
+			transform: scale(1);
+		}
+	}
+	@keyframes pulsate-fwd {
+		0% {
+			-webkit-transform: scale(1);
+			transform: scale(1);
+		}
+		50% {
+			-webkit-transform: scale(1.02);
+			transform: scale(1.02);
+		}
+		100% {
+			-webkit-transform: scale(1);
+			transform: scale(1);
 		}
 	}
 `;

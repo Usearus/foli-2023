@@ -45,7 +45,6 @@ const Page = (page) => {
 
 	// PAGE FUNCTIONS
 	const initialVisibleValue = page.visible;
-	const initialTitleValue = page.title ?? '';
 	// Check width on load and render mobile or desktop pages
 	const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
@@ -66,14 +65,6 @@ const Page = (page) => {
 			return;
 		}
 	};
-
-	// Stack Setting
-	const stackClassName =
-		settingPageStack === 'horizontal'
-			? 'horizontal-stack-page'
-			: settingPageStack === 'vertical'
-			? 'vertical-stack-page'
-			: '';
 
 	// EDITING PAGE FUNCTIONS
 	const [editing, setEditing] = useState(false);
@@ -114,6 +105,7 @@ const Page = (page) => {
 	};
 
 	// Editing Title
+	const initialTitleValue = page.title ?? '';
 	const [title, setTitle] = useState(page.title);
 	const titleRef = useRef();
 	const [characterCount, setCharacterCount] = useState(title.length);
@@ -124,353 +116,344 @@ const Page = (page) => {
 		setCharacterCount(newValue.length);
 	};
 
-	// Validation for Title
-	// const [validated, setValidated] = useState(false);
+	if (initialVisibleValue === false) {
+		return <></>;
+	}
 
-	// const handleSubmit = (event) => {
-	// 	event.preventDefault();
-	// 	event.stopPropagation();
-	// 	const form = event.currentTarget;
-	// 	if (form.checkValidity() === true) {
-	// 		setValidated(false);
-	// 		handleUpdateContentClick();
-	// 	} else {
-	// 		setValidated(true);
-	// 	}
-	// };
+	if (isMobile === true && initialVisibleValue === true) {
+		return (
+			<Wrapper>
+				<div className='page-content pages-mobile'>
+					<header className='page-title'>
+						{/* {!editing ? ( */}
+						<Stack direction='horizontal'>
+							<h6 style={{ color: 'var(--primary-700)' }}>{page.title}</h6>
+							<Stack direction='horizontal' className='ms-auto'>
+								<Button
+									variant='light'
+									style={{
+										background: 'var(--white)',
+										border: 0,
+									}}
+									onClick={handleOpenPageModalClick}>
+									<AiFillEdit />
+								</Button>
+								<Dropdown onSelect={handleSelect}>
+									<Dropdown.Toggle
+										id='dropdown'
+										variant='link'
+										style={{
+											color: 'var(--grey-800)',
+										}}>
+										<FiMoreVertical />
+									</Dropdown.Toggle>
+									<Dropdown.Menu>
+										<Dropdown.Item eventKey='1'>Delete page</Dropdown.Item>
+									</Dropdown.Menu>
+								</Dropdown>
+							</Stack>
+							{showEditPageModal && (
+								<ModalEditPage
+									showEditPageModal={showEditPageModal}
+									handleCancelClick={handleCancelClick}
+									page={page}
+									content={content}
+									setContent={setContent}
+									initialTitleValue={initialTitleValue}
+									titleRef={titleRef}
+									titleMaxChar={titleMaxChar}
+									handleTitleChange={handleTitleChange}
+									characterCount={characterCount}
+									handleUpdateContentClick={handleUpdateContentClick}
+									handleEditorChange={handleEditorChange}
+								/>
+							)}
+							{showDeleteModal && (
+								<ModalDeleteConfirmation
+									show={showDeleteModal}
+									close={handleCloseReset}
+									object={page}
+									type='page'
+								/>
+							)}
+						</Stack>
+					</header>
+					<hr />
+					{!editing ? (
+						<MarkdownView
+							className='page-scroll markdown-content'
+							markdown={page.content}
+						/>
+					) : (
+						<Form className='page-scroll'>
+							<Form.Group controlId='content'>
+								<ReactQuillEditor
+									value={content}
+									onChange={handleEditorChange}
+								/>
+							</Form.Group>
+						</Form>
+					)}
+				</div>
+			</Wrapper>
+		);
+	}
 
-	return (
-		<Wrapper>
-			{initialVisibleValue === false ? (
-				<></>
-			) : (
-				<>
-					{isMobile ? (
-						<div className='page-content pages-mobile'>
-							<header className='page-title'>
-								{/* {!editing ? ( */}
-								<Stack direction='horizontal'>
-									<h6 style={{ color: 'var(--primary-700)' }}>{page.title}</h6>
-									<Stack direction='horizontal' className='ms-auto'>
+	if (isMobile === false && settingPageStack === 'horizontal') {
+		return (
+			<Wrapper>
+				<Resizable
+					className='page-content shadow-on'
+					minWidth='300px'
+					maxWidth='700px'
+					size={{
+						height: '100%',
+						width: pageWidth,
+					}}
+					onResizeStop={(e, direction, ref, d) => {
+						const newPageWidth = pageWidth + d.width;
+						handleUpdateWidthClick(newPageWidth);
+					}}
+					enable={{
+						top: false,
+						right: true,
+						bottom: false,
+						left: false,
+						topRight: false,
+						bottomRight: false,
+						bottomLeft: false,
+						topLeft: false,
+					}}>
+					<header className='page-title'>
+						{!editing ? (
+							<Stack direction='horizontal'>
+								<h6>{page.title}</h6>
+								<Stack direction='horizontal' className='ms-auto'>
+									<Dropdown className='fade-in' onSelect={handleSelect}>
 										<Button
 											variant='light'
 											style={{
 												background: 'var(--white)',
 												border: 0,
 											}}
-											onClick={handleOpenPageModalClick}>
+											onClick={handleEditClick}>
 											<AiFillEdit />
 										</Button>
-										<Dropdown onSelect={handleSelect}>
-											<Dropdown.Toggle
-												id='dropdown'
-												variant='link'
-												style={{
-													color: 'var(--grey-800)',
-												}}>
-												<FiMoreVertical />
-											</Dropdown.Toggle>
-											<Dropdown.Menu>
-												<Dropdown.Item eventKey='1'>Delete page</Dropdown.Item>
-											</Dropdown.Menu>
-										</Dropdown>
-									</Stack>
-									{showEditPageModal && (
-										<ModalEditPage
-											showEditPageModal={showEditPageModal}
-											handleCancelClick={handleCancelClick}
-											page={page}
-											content={content}
-											setContent={setContent}
-											initialTitleValue={initialTitleValue}
-											titleRef={titleRef}
-											titleMaxChar={titleMaxChar}
-											handleTitleChange={handleTitleChange}
-											characterCount={characterCount}
-											handleUpdateContentClick={handleUpdateContentClick}
-											handleEditorChange={handleEditorChange}
-										/>
-									)}
-									{showDeleteModal && (
-										<ModalDeleteConfirmation
-											show={showDeleteModal}
-											close={handleCloseReset}
-											object={page}
-											type='page'
-										/>
-									)}
+
+										<Dropdown.Toggle
+											id='dropdown'
+											variant='link'
+											style={{
+												color: 'var(--grey-800)',
+											}}>
+											<FiMoreVertical />
+										</Dropdown.Toggle>
+										<Dropdown.Menu>
+											<Dropdown.Item eventKey='1'>Delete page</Dropdown.Item>
+										</Dropdown.Menu>
+									</Dropdown>
 								</Stack>
-							</header>
-							<hr />
-							{!editing ? (
-								<MarkdownView
-									className='page-scroll markdown-content'
-									markdown={page.content}
-								/>
-							) : (
-								<Form className='page-scroll'>
-									<Form.Group controlId='content'>
-										<ReactQuillEditor
-											value={content}
-											onChange={handleEditorChange}
-										/>
-									</Form.Group>
-								</Form>
-							)}
-						</div>
-					) : settingPageStack === 'horizontal' ? (
-						<Resizable
-							className='page-content shadow-on'
-							minWidth='300px'
-							maxWidth='700px'
-							size={{
-								height: '100%',
-								width: pageWidth,
-							}}
-							onResizeStop={(e, direction, ref, d) => {
-								const newPageWidth = pageWidth + d.width;
-								handleUpdateWidthClick(newPageWidth);
-							}}
-							enable={{
-								top: false,
-								right: true,
-								bottom: false,
-								left: false,
-								topRight: false,
-								bottomRight: false,
-								bottomLeft: false,
-								topLeft: false,
-							}}>
-							<header className='page-title'>
-								{!editing ? (
-									<Stack direction='horizontal'>
-										<h6>{page.title}</h6>
-										<Stack direction='horizontal' className='ms-auto'>
-											<Dropdown className='fade-in' onSelect={handleSelect}>
-												<Button
-													variant='light'
-													style={{
-														background: 'var(--white)',
-														border: 0,
-													}}
-													onClick={handleEditClick}>
-													<AiFillEdit />
-												</Button>
-
-												<Dropdown.Toggle
-													id='dropdown'
-													variant='link'
-													style={{
-														color: 'var(--grey-800)',
-													}}>
-													<FiMoreVertical />
-												</Dropdown.Toggle>
-												<Dropdown.Menu>
-													<Dropdown.Item eventKey='1'>
-														Delete page
-													</Dropdown.Item>
-												</Dropdown.Menu>
-											</Dropdown>
-										</Stack>
-										{showDeleteModal && (
-											<ModalDeleteConfirmation
-												show={showDeleteModal}
-												close={handleCloseReset}
-												object={page}
-												type='page'
-											/>
-										)}
-									</Stack>
-								) : (
-									<div>
-										<Stack direction='horizontal' gap='1'>
-											<Form>
-												<Form.Group className='title-field' controlId='title'>
-													<Form.Control
-														type='text'
-														required
-														ref={titleRef}
-														defaultValue={initialTitleValue}
-														placeholder='Add page title'
-														size='md'
-														maxLength={titleMaxChar}
-														onChange={handleTitleChange}
-													/>
-												</Form.Group>
-											</Form>
-											<div className='character-count'>
-												{characterCount}/{titleMaxChar}
-											</div>
-											<Button
-												variant='light'
-												style={{
-													background: 'var(--white)',
-													border: 0,
-												}}
-												className='ms-auto'
-												onClick={handleCancelClick}>
-												<AiOutlineClose />
-											</Button>
-										</Stack>
-									</div>
+								{showDeleteModal && (
+									<ModalDeleteConfirmation
+										show={showDeleteModal}
+										close={handleCloseReset}
+										object={page}
+										type='page'
+									/>
 								)}
-							</header>
-							<hr />
-
-							{!editing ? (
-								<MarkdownView
-									className='page-scroll markdown-content'
-									markdown={page.content}
-								/>
-							) : (
-								<>
-									<Form className='page-scroll'>
-										<Form.Group controlId='content'>
-											<ReactQuillEditor
-												value={content}
-												onChange={handleEditorChange}
+							</Stack>
+						) : (
+							<div>
+								<Stack direction='horizontal' gap='1'>
+									<Form>
+										<Form.Group className='title-field' controlId='title'>
+											<Form.Control
+												type='text'
+												required
+												ref={titleRef}
+												defaultValue={initialTitleValue}
+												placeholder='Add page title'
+												size='md'
+												maxLength={titleMaxChar}
+												onChange={handleTitleChange}
 											/>
 										</Form.Group>
 									</Form>
-									<div className='page-footer'>
-										<Button
-											variant='primary'
-											onClick={handleUpdateContentClick}
-											// className="ms-auto"
-										>
-											Save
-										</Button>
+									<div className='character-count'>
+										{characterCount}/{titleMaxChar}
 									</div>
-								</>
-							)}
-						</Resizable>
+									<Button
+										variant='light'
+										style={{
+											background: 'var(--white)',
+											border: 0,
+										}}
+										className='ms-auto'
+										onClick={handleCancelClick}>
+										<AiOutlineClose />
+									</Button>
+								</Stack>
+							</div>
+						)}
+					</header>
+					<hr />
+
+					{!editing ? (
+						<MarkdownView
+							className='page-scroll markdown-content'
+							markdown={page.content}
+						/>
 					) : (
-						<Resizable
-							className='page-content shadow-on'
-							minWidth='400px'
-							maxWidth='600px'
-							size={{
-								height: '100%',
-								width: '500px',
-							}}
-							enable={{
-								top: false,
-								right: false,
-								bottom: false,
-								left: false,
-								topRight: false,
-								bottomRight: false,
-								bottomLeft: false,
-								topLeft: false,
-							}}>
-							<header className='page-title'>
-								{!editing ? (
-									<Stack direction='horizontal'>
-										<h6>{page.title}</h6>
-										<Stack direction='horizontal' className='ms-auto'>
-											<Dropdown className='fade-in' onSelect={handleSelect}>
-												<Button
-													variant='light'
-													style={{
-														background: 'var(--white)',
-														border: 0,
-													}}
-													onClick={handleEditClick}>
-													<AiFillEdit />
-												</Button>
+						<>
+							<Form className='page-scroll'>
+								<Form.Group controlId='content'>
+									<ReactQuillEditor
+										value={content}
+										onChange={handleEditorChange}
+									/>
+								</Form.Group>
+							</Form>
+							<div className='page-footer'>
+								<Button
+									variant='primary'
+									onClick={handleUpdateContentClick}
+									// className="ms-auto"
+								>
+									Save
+								</Button>
+							</div>
+						</>
+					)}
+				</Resizable>
+			</Wrapper>
+		);
+	}
 
-												<Dropdown.Toggle
-													id='dropdown'
-													variant='link'
-													style={{
-														color: 'var(--grey-800)',
-													}}>
-													<FiMoreVertical />
-												</Dropdown.Toggle>
-												<Dropdown.Menu>
-													<Dropdown.Item eventKey='1'>
-														Delete page
-													</Dropdown.Item>
-												</Dropdown.Menu>
-											</Dropdown>
-										</Stack>
-										{showDeleteModal && (
-											<ModalDeleteConfirmation
-												show={showDeleteModal}
-												close={handleCloseReset}
-												object={page}
-												type='page'
-											/>
-										)}
-									</Stack>
-								) : (
-									<div>
-										<Stack direction='horizontal' gap='1'>
-											<Form>
-												<Form.Group className='title-field' controlId='title'>
-													<Form.Control
-														type='text'
-														required
-														ref={titleRef}
-														defaultValue={initialTitleValue}
-														placeholder='Add page title'
-														size='md'
-														maxLength={titleMaxChar}
-														onChange={handleTitleChange}
-													/>
-												</Form.Group>
-											</Form>
-											<div className='character-count'>
-												{characterCount}/{titleMaxChar}
-											</div>
-											<Button
-												variant='light'
-												style={{
-													background: 'var(--white)',
-													border: 0,
-												}}
-												className='ms-auto'
-												onClick={handleCancelClick}>
-												<AiOutlineClose />
-											</Button>
-										</Stack>
-									</div>
+	if (isMobile === false && settingPageStack === 'vertical') {
+		return (
+			<Wrapper>
+				<Resizable
+					className='page-content shadow-on'
+					minWidth='400px'
+					maxWidth='600px'
+					size={{
+						height: '100%',
+						width: '500px',
+					}}
+					enable={{
+						top: false,
+						right: false,
+						bottom: false,
+						left: false,
+						topRight: false,
+						bottomRight: false,
+						bottomLeft: false,
+						topLeft: false,
+					}}>
+					<header className='page-title'>
+						{!editing ? (
+							<Stack direction='horizontal'>
+								<h6>{page.title}</h6>
+								<Stack direction='horizontal' className='ms-auto'>
+									<Dropdown className='fade-in' onSelect={handleSelect}>
+										<Button
+											variant='light'
+											style={{
+												background: 'var(--white)',
+												border: 0,
+											}}
+											onClick={handleEditClick}>
+											<AiFillEdit />
+										</Button>
+
+										<Dropdown.Toggle
+											id='dropdown'
+											variant='link'
+											style={{
+												color: 'var(--grey-800)',
+											}}>
+											<FiMoreVertical />
+										</Dropdown.Toggle>
+										<Dropdown.Menu>
+											<Dropdown.Item eventKey='1'>Delete page</Dropdown.Item>
+										</Dropdown.Menu>
+									</Dropdown>
+								</Stack>
+								{showDeleteModal && (
+									<ModalDeleteConfirmation
+										show={showDeleteModal}
+										close={handleCloseReset}
+										object={page}
+										type='page'
+									/>
 								)}
-							</header>
-							<hr />
-
-							{!editing ? (
-								<MarkdownView
-									className='page-scroll markdown-content'
-									markdown={page.content}
-								/>
-							) : (
-								<>
-									<Form className='page-scroll'>
-										<Form.Group controlId='content'>
-											<ReactQuillEditor
-												value={content}
-												onChange={handleEditorChange}
+							</Stack>
+						) : (
+							<div>
+								<Stack direction='horizontal' gap='1'>
+									<Form>
+										<Form.Group className='title-field' controlId='title'>
+											<Form.Control
+												type='text'
+												required
+												ref={titleRef}
+												defaultValue={initialTitleValue}
+												placeholder='Add page title'
+												size='md'
+												maxLength={titleMaxChar}
+												onChange={handleTitleChange}
 											/>
 										</Form.Group>
 									</Form>
-									<div className='page-footer'>
-										<Button
-											variant='primary'
-											onClick={handleUpdateContentClick}
-											// className="ms-auto"
-										>
-											Save
-										</Button>
+									<div className='character-count'>
+										{characterCount}/{titleMaxChar}
 									</div>
-								</>
-							)}
-						</Resizable>
+									<Button
+										variant='light'
+										style={{
+											background: 'var(--white)',
+											border: 0,
+										}}
+										className='ms-auto'
+										onClick={handleCancelClick}>
+										<AiOutlineClose />
+									</Button>
+								</Stack>
+							</div>
+						)}
+					</header>
+					<hr />
+
+					{!editing ? (
+						<MarkdownView
+							className='page-scroll markdown-content'
+							markdown={page.content}
+						/>
+					) : (
+						<>
+							<Form className='page-scroll'>
+								<Form.Group controlId='content'>
+									<ReactQuillEditor
+										value={content}
+										onChange={handleEditorChange}
+									/>
+								</Form.Group>
+							</Form>
+							<div className='page-footer'>
+								<Button
+									variant='primary'
+									onClick={handleUpdateContentClick}
+									// className="ms-auto"
+								>
+									Save
+								</Button>
+							</div>
+						</>
 					)}
-				</>
-			)}
-		</Wrapper>
-	);
+				</Resizable>
+			</Wrapper>
+		);
+	}
 };
 
 const Wrapper = styled.div`
@@ -514,6 +497,7 @@ const Wrapper = styled.div`
 		gap: 1rem;
 		padding: 1rem;
 	}
+
 	.markdown-content {
 		* {
 			color: var(--secondaryTextColor);
