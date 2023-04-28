@@ -11,7 +11,7 @@ import {
 	OffcanvasTitle,
 } from 'react-bootstrap';
 import { DatabaseContext } from '../../context/DatabaseContext';
-import { GoChevronDown, GoChevronUp } from 'react-icons/go';
+import { FiMoreVertical } from 'react-icons/fi';
 import { LinkContainer } from 'react-router-bootstrap';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import DropdownStageSelect from '../atom-components/DropdownStageSelect';
@@ -76,7 +76,7 @@ const TopBarJobMobile = ({ className }) => {
 										background: 'var(--grey-200)',
 										border: 0,
 									}}>
-									{toggle ? <GoChevronUp /> : <GoChevronDown />}
+									<FiMoreVertical />
 								</Button>
 							</Navbar.Toggle>
 						</div>

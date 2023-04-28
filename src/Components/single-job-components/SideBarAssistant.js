@@ -150,7 +150,7 @@ const SideBarAssistant = () => {
 	return (
 		<>
 			<Button variant='outline-secondary' onClick={handleShow}>
-				Open assistant
+				AI assistant
 			</Button>
 
 			<Offcanvas
@@ -160,7 +160,7 @@ const SideBarAssistant = () => {
 				placement='end'>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>
-						<div>Assistant</div>
+						<div>AI Assistant</div>
 						<p style={{ margin: '0' }}>Powered by Chat GPT</p>
 					</Offcanvas.Title>
 				</Offcanvas.Header>
