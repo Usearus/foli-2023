@@ -4,6 +4,8 @@ https://foli2023.netlify.app
 
 ## Things to add
 
+SNIPPETS
+
 ---CRITICAL---
 -   Add Master Resume Fields
 -   Add validation to Assistant fields

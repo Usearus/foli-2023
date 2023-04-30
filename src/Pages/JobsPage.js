@@ -10,6 +10,7 @@ import { Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
 import { supabase } from '../API/supabase';
 import FoliBadge from '../Components/atom-components/FoliBadge';
 // import ModalOnboarding from '../Components/ModalOnboarding';
+import foliHiImage from '../assets/Foli-Hi.png';
 
 const JobsPage = () => {
 	const { userJobs, userProfile, fetchUserProfile } =
@@ -101,12 +102,11 @@ const JobsPage = () => {
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<h2 style={{ paddingBottom: '.5rem' }}>
-						Tell us about your job search
-					</h2>
-					<p>
-						Responses personalize your experience and can be updated anytime.
-					</p>
+					<h4 style={{ paddingBottom: '.5rem' }}>
+						Tell us about your job search!
+					</h4>
+
+					<p>Responses can be updated anytime.</p>
 					<Form>
 						<Form.Group className='mb-4' controlId='position'>
 							<Form.Label>Target position</Form.Label>
@@ -179,6 +179,18 @@ const JobsPage = () => {
 								))}
 							</div>
 						</Form.Group>
+						{/* <div
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}>
+							<img
+								src={foliExcitedImage}
+								alt='foliExcitedImage'
+								style={{ width: '150px' }}
+							/>
+						</div> */}
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
@@ -195,6 +207,13 @@ const JobsPage = () => {
 			<>
 				<TopBarTable />
 				<Wrapper>
+					<div className='img-container'>
+						<img
+							src={foliHiImage}
+							alt='foliHiImage'
+							style={{ width: '150px' }}
+						/>
+					</div>
 					<h5>No jobs are being tracked. Add your first job to get started.</h5>
 				</Wrapper>
 			</>
@@ -227,4 +246,10 @@ const Wrapper = styled.div`
 	height: calc(100vh - 63px);
 	height: calc(100dvh - 63px);
 	background: var(--grey-100);
+
+	.img-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 `;

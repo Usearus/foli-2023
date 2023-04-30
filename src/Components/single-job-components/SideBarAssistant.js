@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { openai } from '../../API/gpt';
 import Loader from '../atom-components/Loader';
 import MarkdownView from 'react-showdown';
+import foliExcitedImage from '../../assets/Foli-Excited.png';
 
 const SideBarAssistant = () => {
 	const { currentPages, currentJob, fetchCurrentPages } =
@@ -169,16 +170,23 @@ const SideBarAssistant = () => {
 					<Wrapper>
 						{isLoading ? (
 							<div className='loading-state'>
+								<Loader />
 								<h6>
 									Processing a lot of text. Responses can take up to 30 seconds
 									in some cases.
 								</h6>
-								<Loader />
 							</div>
 						) : (
 							<div className='assistant-container'>
 								{!generatedAttempt ? (
 									<div className='empty-state-container'>
+										<div className='img-container'>
+											<img
+												src={foliExcitedImage}
+												alt='foliExcitedImage'
+												style={{ width: '150px' }}
+											/>
+										</div>
 										<h4>Use AI to create a new page from existing pages</h4>
 										<br />
 										<p>For example:</p>
@@ -312,5 +320,11 @@ const Wrapper = styled.div`
 		justify-content: flex-end;
 		gap: 1rem;
 		padding: 1rem 0 0 0;
+	}
+
+	.img-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 `;
