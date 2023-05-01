@@ -52,7 +52,7 @@ const ModalAddJob = () => {
 				location: locationRef.current.value,
 				remote: remoteRef.current.checked,
 				link: linkRef.current.value,
-				status: 'Bookmarked',
+				status: 'Interested',
 				edited: new Date().toLocaleDateString('en-US'),
 			})
 			.select();

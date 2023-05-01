@@ -39,7 +39,7 @@ const DropdownStageSelect = ({ job }) => {
 					onChange={handleUpdateStatusClick}
 					value={selectedStatus}
 					className={`select ${selectedStatus}`}>
-					<option value='Bookmarked'>Bookmarked</option>
+					<option value='Interested'>Interested</option>
 					<option value='Applied'>Applied</option>
 					<option value='Interviewing'>Interviewing</option>
 					<option value='Negotiating'>Negotiating</option>
