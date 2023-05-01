@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 	top: 63px;
 	z-index: 1;
 	width: 100%;
-	background: var(--grey-100);
+	background: var(--grey-200);
 
 	.top-bar-container {
 		/* justify-content: space-between; */
