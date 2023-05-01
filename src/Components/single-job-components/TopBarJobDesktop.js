@@ -1,12 +1,11 @@
 import { useContext, useEffect } from 'react';
-import { Container, Stack, Button } from 'react-bootstrap';
+import { Container, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import SideBarAssistant from './SideBarAssistant';
 import DropdownAddPage from '../atom-components/DropdownAddPage';
 import DropdownStageSelect from '../atom-components/DropdownStageSelect';
 import TogglePageLayout from '../atom-components/TogglePageLayout';
-import { BiLinkExternal } from 'react-icons/bi';
 
 const TopBarJobDesktop = ({ className }) => {
 	const { setCurrentJob, currentJob } = useContext(DatabaseContext);
@@ -28,14 +27,19 @@ const TopBarJobDesktop = ({ className }) => {
 										style={{ fontWeight: '600', color: 'var(--primary-700)' }}>
 										{currentJob.company}{' '}
 									</h5>
-									<a
-										className='truncate'
-										style={{ margin: '0', cursor: 'pointer' }}
-										onClick={() => {
-											window.location.href = currentJob.link;
-										}}>
-										{currentJob.position}
-									</a>
+									<div className='truncate'>
+										{currentJob.link ? 
+										<a
+											style={{ cursor: 'pointer' }}
+											href={currentJob.link}
+											target='_blank'
+											rel="noreferrer">
+										{currentJob.position} 
+										</a>
+										: currentJob.position}
+										
+									</div>
+									
 								</>
 							) : (
 								''
