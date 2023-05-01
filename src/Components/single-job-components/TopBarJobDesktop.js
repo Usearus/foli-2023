@@ -37,9 +37,7 @@ const TopBarJobDesktop = ({ className }) => {
 										{currentJob.position} 
 										</a>
 										: currentJob.position}
-										
 									</div>
-									
 								</>
 							) : (
 								''

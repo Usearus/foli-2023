@@ -58,11 +58,17 @@ const TopBarJobMobile = ({ className }) => {
 									}}>
 									{currentJob.company}
 								</h6>
-								<div
-									className='truncate'
-									style={{ margin: '0', fontSize: '14px' }}>
-									{currentJob.position}
-								</div>
+								<div className='truncate'>
+										{currentJob.link ? 
+										<a
+											style={{ cursor: 'pointer' }}
+											href={currentJob.link}
+											target='_blank'
+											rel="noreferrer">
+										{currentJob.position} 
+										</a>
+										: currentJob.position}
+									</div>
 							</Stack>
 						) : (
 							''
