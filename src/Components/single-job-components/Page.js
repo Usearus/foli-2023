@@ -432,6 +432,10 @@ const Wrapper = styled.div`
 			color: var(--secondaryTextColor);
 		}
 
+		a {
+			color: var(--primary-400);
+		}
+
 		padding: 1rem 2rem;
 		h1 {
 			font-size: 1.8rem;

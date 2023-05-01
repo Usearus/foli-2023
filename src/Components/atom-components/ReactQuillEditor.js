@@ -100,6 +100,10 @@ const Wrapper = styled.div`
 			color: var(--secondaryTextColor);
 		}
 
+		a {
+			color: var(--primary-400);
+		}
+
 		ul li {
 			padding-bottom: 1rem !important;
 			padding-left: 0;
