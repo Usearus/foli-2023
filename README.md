@@ -4,25 +4,19 @@ https://foli2023.netlify.app
 
 ## Things to add
 
-SNIPPETS
-
 ---CRITICAL---
--   Add Master Resume Fields
+-   Create website page that links to the app
+-   Add Master Resume Fields - SNIPPETS
 -   Add validation to Assistant fields
--   Learn how to do validations (Required name on a sheet, etc.)
--   Sticky survey at bottom
-    What do you like, what's missing, what to chat about it?
+-   Add full job sample to onboarding with as many docs that make sense.
+
 
 ---LOW PRIORITY---
--   Sidebar with templates pre-chosen based on stage.
--   AddSheetModal missing title count & limitation. (May use context for this)
-
--   Animate table row when adding a job
--   Add full job sample to onboarding with as many docs that make sense.
+-   Sticky survey at bottom
+    What do you like, what's missing, what to chat about it?
+-   AddSheetModal missing title count & limitation. 
 -   Cancel confirm while editing a page
 
----NEED HELP WITH---
--   What is the best way to set a timer for token renewal in React?
 
 ## Post-MVP Features
 
@@ -30,9 +24,15 @@ SNIPPETS
 -   Import LinkedIn profile
 -   Import existing Resume
 -   Filter on top of the jobs list, but only for stage.
+-   Sidebar with templates pre-chosen based on stage.
+-   Animate table row when adding a job
+
 -   ChatGPT API
     -   Make job description persistant and automatic on job creation (will make future GPT links easier).
     -   Settings button that shows what info is prefilled from preferences
+    ---NEED HELP WITH---
+-   What is the best way to set a timer for token renewal in React?
+
 -   Spaces
     -   Negotiation Space
     -   Interview Space
