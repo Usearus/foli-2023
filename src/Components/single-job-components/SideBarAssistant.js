@@ -11,14 +11,14 @@ import Loader from '../atom-components/Loader';
 import MarkdownView from 'react-showdown';
 import foliExcitedImage from '../../assets/Foli-Excited.png';
 
-const SideBarAssistant = () => {
+const SideBarAssistant = ({ show, close }) => {
 	const { currentPages, currentJob, fetchCurrentPages } =
 		useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 	const { user } = useAuth0();
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [show, setShow] = useState(false);
+	// const [show, setShow] = useState(false);
 	const [generatedAttempt, setGeneratedAttempt] = useState(false);
 
 	const [response, setResponse] = useState([]);
@@ -29,10 +29,11 @@ const SideBarAssistant = () => {
 	const [selectedExistingPageContent, setSelectedExistingPageContent] =
 		useState('');
 
-	const handleShow = () => setShow(true);
+	// const handleShow = () => setShow(true);
 	const handleClose = () => {
-		setShow(false);
+		// setShow(false);
 		setGeneratedAttempt(false);
+		close()
 	};
 
 	const handleGenerateClick = () => {
@@ -73,7 +74,7 @@ const SideBarAssistant = () => {
 			}
 		}
 		setGeneratedAttempt(false);
-		setShow(false);
+		close();
 	};
 
 	const handleNewPageSelect = (event) => {
@@ -150,9 +151,9 @@ const SideBarAssistant = () => {
 
 	return (
 		<>
-			<Button variant='outline-secondary' onClick={handleShow}>
+			{/* <Button variant='outline-secondary' onClick={show}>
 				AI assistant
-			</Button>
+			</Button> */}
 
 			<Offcanvas
 				show={show}
