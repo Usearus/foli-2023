@@ -1,18 +1,19 @@
 import React from 'react';
 import { Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import foliLogo from '../../assets/Logo-Foli-Alpha.png';
+// import foliLogo from '../../assets/Logo-Foli-Alpha.png';
 
 const SiteIcon = () => {
 	return (
 		<LinkContainer to='/'>
 			<>
-				{/* <span
+				<span
 					style={{
 						fontWeight: 700,
 						fontSize: '1.5rem',
 						cursor: 'default',
 						paddingRight: '.25rem',
+						color: 'var(--primary-700)',
 					}}>
 					fol<i>i</i>
 				</span>
@@ -25,12 +26,12 @@ const SiteIcon = () => {
 						}}>
 						alpha
 					</Badge>
-				</span> */}
-				<img
+				</span>
+				{/* <img
 					src={foliLogo}
 					alt='foliLogo'
 					style={{ width: '80px', marginRight: '20px' }}
-				/>
+				/> */}
 			</>
 		</LinkContainer>
 	);
