@@ -8,7 +8,6 @@ https://foli2023.netlify.app
 -   Create website page that links to the app
 -   Add Master Resume Fields - SNIPPETS
 -   Add validation to Assistant fields
--   Add full job sample to onboarding with as many docs that make sense.
 
 
 ---LOW PRIORITY---
