@@ -12,6 +12,7 @@ https://foli2023.netlify.app
 
 
 ---LOW PRIORITY---
+-   job.link broken 
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
 -   AddSheetModal missing title count & limitation. 
@@ -20,6 +21,8 @@ https://foli2023.netlify.app
 
 ## Post-MVP Features
 
+-   Export Page to PDF
+-   Import LinkedIn or PDF
 -   Add Google Analytics
 -   Import LinkedIn profile
 -   Import existing Resume
@@ -43,6 +46,8 @@ https://foli2023.netlify.app
 
 ## Non-priority
 
+-   Take archived out of list
+-   Ad archive toggle
 -   Add location info
 -   Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 -   Add focus state to all pages using React-Quill
