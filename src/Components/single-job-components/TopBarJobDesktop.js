@@ -6,6 +6,7 @@ import SideBarAssistant from './SideBarAssistant';
 import DropdownAddPage from '../atom-components/DropdownAddPage';
 import DropdownStageSelect from '../atom-components/DropdownStageSelect';
 import TogglePageLayout from '../atom-components/TogglePageLayout';
+import SideBarSnippets from './SideBarSnippets';
 
 const TopBarJobDesktop = ({ className }) => {
 	const { setCurrentJob, currentJob } = useContext(DatabaseContext);
@@ -28,15 +29,17 @@ const TopBarJobDesktop = ({ className }) => {
 										{currentJob.company}{' '}
 									</h5>
 									<div className='truncate'>
-										{currentJob.link ? 
-										<a
-											style={{ cursor: 'pointer' }}
-											href={currentJob.link}
-											target='_blank'
-											rel="noreferrer">
-										{currentJob.position} 
-										</a>
-										: currentJob.position}
+										{currentJob.link ? (
+											<a
+												style={{ cursor: 'pointer' }}
+												href={currentJob.link}
+												target='_blank'
+												rel='noreferrer'>
+												{currentJob.position}
+											</a>
+										) : (
+											currentJob.position
+										)}
 									</div>
 								</>
 							) : (
@@ -47,6 +50,7 @@ const TopBarJobDesktop = ({ className }) => {
 					</div>
 					<div className='right-content'>
 						<TogglePageLayout />
+						<SideBarSnippets />
 						<SideBarAssistant />
 						<DropdownAddPage />
 					</div>

@@ -110,3 +110,23 @@ input {
         border-color: var(--grey-200);
     }
 }
+
+
+// .accordion-flush .accordion-item .accordion-button {
+//      color: red;
+// }
+.accordion-button {
+    padding: .5rem;
+
+}
+.accordion-body {
+    padding: 1rem;
+    padding-bottom: 2rem;
+}
+
+// .accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed {
+//     border-radius: .25rem;
+// }
+// .accordion-button:not(.collapsed) {
+//     background-color: var(--primary-50) !important;
+// }
