@@ -72,6 +72,7 @@
     --borderRadius: 0.25rem;
     --letterSpacing: 1px;
     --transition: 0.3s ease-in-out all;
+    --transition-2: 0.2s ease-in-out all;
     --max-width: 1120px;
     --fixed-width: 600px;
 
@@ -84,7 +85,7 @@ html {
     height: 100%;
 }
 body {
-    background: var(--white);
+    background: var(--grey-200) !important;
     font-family: var(--bodyFont);
     font-weight: 400;
     line-height: 1.75;

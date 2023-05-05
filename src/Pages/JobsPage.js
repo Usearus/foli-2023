@@ -245,7 +245,6 @@ const Wrapper = styled.div`
 	position: relative;
 	height: calc(100vh - 63px);
 	height: calc(100dvh - 63px);
-	background: var(--grey-200);
 
 	.img-container {
 		display: flex;

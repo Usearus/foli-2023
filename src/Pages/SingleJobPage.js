@@ -76,7 +76,6 @@ const Wrapper = styled.div`
 
 	overflow: hidden;
 	position: relative;
-	background: var(--grey-200);
 
 	.top {
 		grid-area: top;
@@ -99,7 +98,6 @@ const Wrapper = styled.div`
 		padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 		overflow-x: scroll;
 		scroll-snap-type: x mandatory;
-		background: var(--grey-200);
 	}
 
 	/* On Mobile we always want flex-wrap to none */
