@@ -15,7 +15,6 @@ import { FiMenu } from 'react-icons/fi';
 import SiteIcon from '../atom-components/SiteIcon';
 
 const NavBar = () => {
-	// const { logout } = useAuth0();
 	const [admin, setAdmin] = useState(false);
 	const { userProfile } = useContext(DatabaseContext);
 
@@ -69,6 +68,9 @@ const NavBar = () => {
 							<Nav variant='pills' className='me-auto'>
 								<LinkContainer to='/'>
 									<Nav.Link active={false}>Jobs</Nav.Link>
+								</LinkContainer>
+								<LinkContainer to='/resume'>
+									<Nav.Link active={false}>Resume</Nav.Link>
 								</LinkContainer>
 
 								{admin ? (

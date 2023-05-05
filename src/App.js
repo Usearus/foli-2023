@@ -8,6 +8,7 @@ import {
 	PrivateRoute,
 	AuthWrapper,
 } from './Pages';
+import ResumeBuilderPage from './Pages/ResumeBuilderPage';
 import NavBar from './Components/global-components/NavBar';
 import AlertPopup from './Components/global-components/AlertPopup';
 import styled from 'styled-components';
@@ -40,7 +41,6 @@ const App = () => {
 							</PrivateRoute>
 						}
 					/>
-
 					<Route
 						path='/testing'
 						element={
@@ -48,6 +48,16 @@ const App = () => {
 								<AlertPopup />
 								<NavBar />
 								<TestingPage />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/resume'
+						element={
+							<PrivateRoute>
+								<AlertPopup />
+								<NavBar />
+								<ResumeBuilderPage />
 							</PrivateRoute>
 						}
 					/>
