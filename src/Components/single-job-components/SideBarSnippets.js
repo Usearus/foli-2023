@@ -5,8 +5,13 @@ import SnippetTextInput from '../atom-components/SnippetTextInput';
 import styled from 'styled-components';
 
 const SideBarSnippets = () => {
-	const { userResume, fetchUserResume, fetchUserProfile, userProfile } =
-		useContext(DatabaseContext);
+	const {
+		userResume,
+		fetchUserResume,
+		fetchUserProfile,
+		userProfile,
+		currentJob,
+	} = useContext(DatabaseContext);
 
 	const [show, setShow] = useState(false);
 	const handleShow = () => setShow(true);
@@ -31,14 +36,22 @@ const SideBarSnippets = () => {
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<Wrapper>
+						{/* <p style={{ paddingBottom: '1rem' }}>
+							Quickly copy & paste anything from your profile
+						</p> */}
+						<label>Job listing</label>
 						<Accordion flush alwaysOpen>
-							<p style={{ paddingBottom: '1rem' }}>
-								Quickly copy & paste anything from your profile
-							</p>
 							<Accordion.Item eventKey='0'>
-								<Accordion.Header>Job Details</Accordion.Header>
+								<Accordion.Header>Details</Accordion.Header>
 							</Accordion.Item>
 							<Accordion.Item eventKey='1'>
+								<Accordion.Header>Contacts</Accordion.Header>
+							</Accordion.Item>
+							<br />
+						</Accordion>
+						<label>Resume</label>
+						<Accordion flush alwaysOpen>
+							<Accordion.Item eventKey='0'>
 								<Accordion.Header>Contact</Accordion.Header>
 								<Accordion.Body>
 									<SnippetTextInput
@@ -55,15 +68,20 @@ const SideBarSnippets = () => {
 										valueSource={userResume}
 										fetchSource={fetchUserResume}
 									/>
-									<SnippetTextInput
+									{/* <SnippetTextInput
 										label1='Target position'
 										value1='position'
 										database='profiles'
 										valueSource={userProfile}
 										fetchSource={fetchUserProfile}
-									/>
+									/> */}
 								</Accordion.Body>
 							</Accordion.Item>
+							<Accordion.Item eventKey='1'>
+								<Accordion.Header>Professional Summary</Accordion.Header>
+								<Accordion.Body></Accordion.Body>
+							</Accordion.Item>
+
 							<Accordion.Item eventKey='2'>
 								<Accordion.Header>Work history</Accordion.Header>
 								<Accordion.Body>
@@ -75,6 +93,22 @@ const SideBarSnippets = () => {
 										// fetchSource={fetchUserResume}
 									/>
 								</Accordion.Body>
+							</Accordion.Item>
+							<Accordion.Item eventKey='3'>
+								<Accordion.Header>Education</Accordion.Header>
+								<Accordion.Body></Accordion.Body>
+							</Accordion.Item>
+							<Accordion.Item eventKey='4'>
+								<Accordion.Header>Skills</Accordion.Header>
+								<Accordion.Body></Accordion.Body>
+							</Accordion.Item>
+						</Accordion>
+						<br />
+						<label>Custom</label>
+						<Accordion flush alwaysOpen>
+							<Accordion.Item eventKey='4'>
+								<Accordion.Header>Create custom Snippet</Accordion.Header>
+								<Accordion.Body></Accordion.Body>
 							</Accordion.Item>
 						</Accordion>
 					</Wrapper>
@@ -91,4 +125,8 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	justify-content: flex-start;
 	height: 100%;
+
+	label {
+		font-weight: 700;
+	}
 `;
