@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import ModalAddPage from '../modal-components/ModalAddPage';
@@ -7,12 +7,14 @@ import SideBarAssistant from '../single-job-components/SideBarAssistant';
 import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
 import { AiOutlineRobot } from 'react-icons/ai';
+import { DatabaseContext } from '../../context/DatabaseContext';
 
 const DropdownAddPage = () => {
 	const [selectedEventKey, setSelectedEventKey] = useState(null);
 	const [showAddPageModal, setShowAddPageModal] = useState(false);
 	const [showSideBarTemplates, setShowSideBarTemplates] = useState(false);
 	const [showSidebarAssistant, setShowSidebarAssistant] = useState(false);
+	const { setPreviewTemplate, setActiveTemplate } = useContext(DatabaseContext);
 
 	const handleSelect = (eventKey) => {
 		setSelectedEventKey(eventKey);
@@ -31,6 +33,8 @@ const DropdownAddPage = () => {
 		setShowAddPageModal(false);
 		setShowSideBarTemplates(false);
 		setShowSidebarAssistant(false);
+		setActiveTemplate(null);
+		setPreviewTemplate(false);
 	};
 
 	return (
