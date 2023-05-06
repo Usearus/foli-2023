@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import {
 	Nav,
@@ -15,14 +15,7 @@ import { FiMenu } from 'react-icons/fi';
 import SiteIcon from '../atom-components/SiteIcon';
 
 const NavBar = () => {
-	const [admin, setAdmin] = useState(false);
-	const { userProfile } = useContext(DatabaseContext);
-
-	useEffect(() => {
-		if (userProfile && userProfile.email === 'adamdenais@gmail.com') {
-			setAdmin(true);
-		}
-	}, [userProfile]);
+	const { userProfile, adminProfile } = useContext(DatabaseContext);
 
 	if (userProfile) {
 		return (
@@ -69,14 +62,16 @@ const NavBar = () => {
 								<LinkContainer to='/'>
 									<Nav.Link active={false}>Jobs</Nav.Link>
 								</LinkContainer>
-								<LinkContainer to='/resume'>
-									<Nav.Link active={false}>Resume</Nav.Link>
-								</LinkContainer>
 
-								{admin ? (
-									<LinkContainer to='/testing'>
-										<Nav.Link active={false}>Admin</Nav.Link>
-									</LinkContainer>
+								{adminProfile ? (
+									<>
+										<LinkContainer to='/resume'>
+											<Nav.Link active={false}>Resume</Nav.Link>
+										</LinkContainer>
+										<LinkContainer to='/testing'>
+											<Nav.Link active={false}>Admin</Nav.Link>
+										</LinkContainer>
+									</>
 								) : null}
 							</Nav>
 

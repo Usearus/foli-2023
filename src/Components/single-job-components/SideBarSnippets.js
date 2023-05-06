@@ -11,6 +11,7 @@ const SideBarSnippets = () => {
 		fetchUserProfile,
 		userProfile,
 		currentJob,
+		adminProfile,
 	} = useContext(DatabaseContext);
 
 	const [show, setShow] = useState(false);
@@ -21,9 +22,11 @@ const SideBarSnippets = () => {
 
 	return (
 		<>
-			<Button variant='outline-secondary' onClick={handleShow}>
-				Snippets
-			</Button>
+			{adminProfile ? (
+				<Button variant='outline-secondary' onClick={handleShow}>
+					Snippets
+				</Button>
+			) : null}
 
 			<Offcanvas
 				show={show}

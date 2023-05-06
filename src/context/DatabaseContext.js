@@ -80,6 +80,14 @@ const DatabaseProvider = ({ children }) => {
 	const [settingPageStack, setSettingPageStack] = useState('');
 	const [userResume, setUserResume] = useState([]);
 
+	// SET ADMIN DATA
+	const [adminProfile, setAdminProfile] = useState(false);
+	useEffect(() => {
+		if (userProfile && userProfile.email === 'adamdenais@gmail.com') {
+			setAdminProfile(true);
+		}
+	}, [userProfile]);
+
 	async function fetchUserProfile() {
 		if (auth0Email) {
 			const { data } = await supabase
@@ -363,6 +371,8 @@ const DatabaseProvider = ({ children }) => {
 	return (
 		<DatabaseContext.Provider
 			value={{
+				//Admin
+				adminProfile,
 				//Pages
 				allPages,
 				userPages,
