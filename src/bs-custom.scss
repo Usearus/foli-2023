@@ -124,7 +124,10 @@ input {
     padding: 1rem;
     padding-bottom: 1.5rem;
 }
+.accordion-button:focus {
+    box-shadow: none;
 
+}
 // .accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed {
 //     border-radius: .25rem;
 // }
