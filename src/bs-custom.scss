@@ -116,12 +116,13 @@ input {
 //      color: red;
 // }
 .accordion-button {
-    padding: .5rem;
-
+    padding: .75rem;
+    font-size: small;
+    font-weight: 500;
 }
 .accordion-body {
     padding: 1rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
 }
 
 // .accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed {

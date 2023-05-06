@@ -7,7 +7,7 @@ import ReactQuillEditor from '../atom-components/ReactQuillEditor';
 import { Button, Modal, Form, Stack } from 'react-bootstrap';
 import styled from 'styled-components';
 
-const ModalAddPage = ({ show, handleClose }) => {
+const ModalAddPage = ({ show, close }) => {
 	const { setAlert } = useAlert();
 	const { user } = useAuth0();
 	const { currentJob, currentPages, fetchCurrentPages, setSelectedPageID } =
@@ -42,7 +42,7 @@ const ModalAddPage = ({ show, handleClose }) => {
 			}
 
 			fetchCurrentPages(currentJob);
-			handleClose();
+			close();
 			const newPageId = data[0].id;
 			setSelectedPageID(newPageId);
 		}
@@ -71,7 +71,7 @@ const ModalAddPage = ({ show, handleClose }) => {
 	const titleMaxChar = 32;
 
 	return (
-		<Modal scrollable fullscreen='md-down' show={show} onHide={handleClose}>
+		<Modal scrollable fullscreen='md-down' show={show} onHide={close}>
 			<Modal.Header closeButton>
 				<Modal.Title>Add a new page</Modal.Title>
 			</Modal.Header>
@@ -114,7 +114,7 @@ const ModalAddPage = ({ show, handleClose }) => {
 				</Form>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button variant='outline-secondary' onClick={handleClose}>
+				<Button variant='outline-secondary' onClick={close}>
 					Close
 				</Button>
 				<Button type='submit' variant='primary' form='addPageForm'>

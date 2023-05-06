@@ -17,6 +17,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import DropdownStageSelect from '../atom-components/DropdownStageSelect';
 import SideBarAssistant from './SideBarAssistant';
 import DropdownAddPage from '../atom-components/DropdownAddPage';
+import SideBarSnippets from '../single-job-components/SideBarSnippets';
 
 const TopBarJobMobile = ({ className }) => {
 	const { currentJob } = useContext(DatabaseContext);
@@ -59,16 +60,18 @@ const TopBarJobMobile = ({ className }) => {
 									{currentJob.company}
 								</h6>
 								<div className='truncate'>
-										{currentJob.link ? 
+									{currentJob.link ? (
 										<a
 											style={{ cursor: 'pointer' }}
 											href={currentJob.link}
 											target='_blank'
-											rel="noreferrer">
-										{currentJob.position} 
+											rel='noreferrer'>
+											{currentJob.position}
 										</a>
-										: currentJob.position}
-									</div>
+									) : (
+										currentJob.position
+									)}
+								</div>
 							</Stack>
 						) : (
 							''
@@ -92,6 +95,8 @@ const TopBarJobMobile = ({ className }) => {
 					</div>
 					<div className='second-row'>
 						<SideBarAssistant />
+						<SideBarSnippets />
+
 						<DropdownAddPage />
 					</div>
 					<Navbar.Offcanvas

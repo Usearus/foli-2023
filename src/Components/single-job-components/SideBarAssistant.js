@@ -153,10 +153,6 @@ const SideBarAssistant = ({ show, close }) => {
 
 	return (
 		<>
-			{/* <Button variant='outline-secondary' onClick={show}>
-				AI assistant
-			</Button> */}
-
 			<Offcanvas
 				show={show}
 				onHide={handleClose}

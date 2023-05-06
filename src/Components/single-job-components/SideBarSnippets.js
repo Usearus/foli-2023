@@ -131,5 +131,6 @@ const Wrapper = styled.div`
 
 	label {
 		font-weight: 700;
+		margin: 0;
 	}
 `;
