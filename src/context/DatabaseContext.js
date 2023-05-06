@@ -58,7 +58,6 @@ const DatabaseProvider = ({ children }) => {
 		const { data, error } = await supabase.from('templates').select('*');
 		// console.log('allTemplates are', data);
 		setAllTemplates(data);
-		setCurrentTemplates(data);
 		if (error) {
 			console.log(error);
 		}
@@ -348,22 +347,8 @@ const DatabaseProvider = ({ children }) => {
 	// *
 	// *
 	// SET CURRENTLY VIEWED TEMPLATE DATA
-	const [currentTemplates, setCurrentTemplates] = useState(allTemplates);
 	const [previewTemplate, setPreviewTemplate] = useState(false);
 	const [activeTemplate, setActiveTemplate] = useState(null);
-	const [selectedCategory, setSelectedCategory] = useState('All');
-
-	async function fetchTemplatesByCategory(category) {
-		// console.log('category received:', category);
-		const { data } = await supabase
-			.from('templates')
-			.select('*')
-			.filter('category', 'eq', category);
-		if (data) {
-			setCurrentTemplates(data);
-			// console.log('currentTemplates are', data);
-		}
-	}
 
 	// Used for picking out a created job and animating it
 	const [createdJobID, setCreatedJobID] = useState(null);
@@ -397,19 +382,14 @@ const DatabaseProvider = ({ children }) => {
 				allProfiles,
 				userProfile,
 				fetchUserProfile,
-				//Templates
-				currentTemplates,
+				//Templates\
 				allTemplates,
 				setAllTemplates,
-				fetchTemplatesByCategory,
-				setCurrentTemplates,
 				fetchAllTemplates,
 				activeTemplate,
 				previewTemplate,
 				setPreviewTemplate,
 				setActiveTemplate,
-				selectedCategory,
-				setSelectedCategory,
 				// Resumes
 				userResume,
 				fetchUserResume,
