@@ -3,15 +3,39 @@ import { DatabaseContext } from '../../../context/DatabaseContext';
 import styled from 'styled-components';
 import TemplateCard from './TemplateCard';
 import MarkdownView from 'react-showdown';
-import AccordianTemplates from './AccordianTemplates';
+import TemplateTopbar from './TemplateTopbar';
 
 const TemplateCardGrid = () => {
-	const { previewTemplate, activeTemplate } = useContext(DatabaseContext);
+	const {
+		currentTemplates,
+		previewTemplate,
+		activeTemplate,
+		setActiveTemplate,
+		setPreviewTemplate,
+	} = useContext(DatabaseContext);
+
+	const handleClick = (template) => {
+		setActiveTemplate(template);
+		setPreviewTemplate(true);
+	};
 
 	return (
 		<Wrapper>
 			{!previewTemplate ? (
-				<AccordianTemplates />
+				<>
+					<TemplateTopbar />
+					<div className='list-container'>
+						{currentTemplates
+							.sort((a, b) => a.category.localeCompare(b.category))
+							.map((template) => (
+								<TemplateCard
+									key={template.id}
+									template={template}
+									handleClick={handleClick}
+								/>
+							))}
+					</div>
+				</>
 			) : (
 				<div className='page-body'>
 					<header className='page-title'>
@@ -37,7 +61,8 @@ const Wrapper = styled.div`
 		align-items: center;
 		margin-top: 1.5rem;
 		overflow-x: hidden;
-		height: 100%;
+		min-height: 500px;
+		max-height: 700px;
 	}
 
 	.page-body {

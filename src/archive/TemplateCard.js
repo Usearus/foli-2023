@@ -1,14 +1,15 @@
 import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
+import { BiFileBlank } from 'react-icons/bi';
 
 const TemplateCard = ({ template, handleClick }) => {
 	return (
 		<Wrapper>
 			<Card onClick={() => handleClick(template)}>
-				{/* <Card.Header className='text-muted header'>
+				<Card.Header className='text-muted header'>
 					<BiFileBlank />
 					{template.category}
-				</Card.Header> */}
+				</Card.Header>
 				<Card.Body className='body'>
 					<Card.Title className='title'>{template.title}</Card.Title>
 					<Card.Text className='text'>{template.description}</Card.Text>
@@ -22,19 +23,27 @@ export default TemplateCard;
 
 const Wrapper = styled.div`
 	cursor: pointer;
-	padding-bottom: 1.5rem;
+	padding-bottom: 1rem;
 
 	.card {
 		transition: var(--transition);
-		height: 7rem;
+		width: 22rem;
+		height: 11rem;
 		border-radius: 0;
-		border: 1px solid var(--primary-100);
+		border: 0;
 		box-shadow: var(--shadow-1);
 	}
 
 	.card:hover {
-		box-shadow: var(--shadow-3);
-		border: 1px solid var(--primary-400);
+		box-shadow: var(--shadow-4);
+	}
+
+	.header {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: small;
+		background-color: var(--white);
 	}
 
 	.body {
@@ -49,10 +58,9 @@ const Wrapper = styled.div`
 	}
 
 	.title {
-		font-size: 0.85rem;
+		font-size: medium;
 		text-align: left;
-		margin: 0;
-		font-weight: 700;
+		font-weight: 600;
 	}
 
 	.text {
