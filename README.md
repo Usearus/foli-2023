@@ -5,6 +5,9 @@ https://foli2023.netlify.app
 ## Things to add
 
 ---CRITICAL---
+-   Key prop error in templates
+-   Fix in supabase the length of some templates
+-   simplify code for template files
 -   Create website page that links to the app
 -   Add Master Resume Fields - SNIPPETS
 -   Add validation to Assistant fields
