@@ -11,14 +11,12 @@ import styled from 'styled-components';
 import { supabase } from '../../API/supabase';
 import { AiFillEdit } from 'react-icons/ai';
 
-const SnippetTextInput = ({
+const SnippetNumberInput = ({
 	label1,
 	value1,
 	database,
 	valueSource,
 	fetchSource,
-	textArea,
-	type,
 }) => {
 	const { setAlert } = useAlert();
 
@@ -41,7 +39,7 @@ const SnippetTextInput = ({
 		const { error } = await supabase
 			.from(database)
 			.update({
-				[value1]: value1Ref.current.value,
+				[value1]: value1Ref.current.value * 1,
 			})
 			.eq('id', valueSource.id);
 		fetchSource();
@@ -79,25 +77,13 @@ const SnippetTextInput = ({
 								placement='top'
 								// delay={{ show: 250, hide: 0 }}
 								overlay={<Tooltip id='copy'>Copy to clipboard</Tooltip>}>
-								{textArea ? (
-									<Form.Control
-										as='textarea'
-										rows={3}
-										type={type}
-										ref={value1Ref}
-										value={initialValues.value1}
-										readOnly
-										onClick={handleCopyClick}
-									/>
-								) : (
-									<Form.Control
-										type={type}
-										ref={value1Ref}
-										value={initialValues.value1}
-										readOnly
-										onClick={handleCopyClick}
-									/>
-								)}
+								<Form.Control
+									type='number'
+									ref={value1Ref}
+									value={initialValues.value1 * 1}
+									readOnly
+									onClick={handleCopyClick}
+								/>
 							</OverlayTrigger>
 							<OverlayTrigger
 								key='edit-snippet'
@@ -115,23 +101,12 @@ const SnippetTextInput = ({
 						{/* VALUE 1 */}
 						<Form.Label>{label1}</Form.Label>
 						<Form.Group className='mb-2' controlId={value1}>
-							{textArea ? (
-								<Form.Control
-									as='textarea'
-									rows={3}
-									type={type}
-									ref={value1Ref}
-									defaultValue={initialValues.value1}
-									size='sm'
-								/>
-							) : (
-								<Form.Control
-									type={type}
-									ref={value1Ref}
-									defaultValue={initialValues.value1}
-									size='sm'
-								/>
-							)}
+							<Form.Control
+								type='number'
+								ref={value1Ref}
+								defaultValue={initialValues.value1}
+								size='sm'
+							/>
 						</Form.Group>
 						<div
 							style={{
@@ -156,7 +131,7 @@ const SnippetTextInput = ({
 	}
 };
 
-export default SnippetTextInput;
+export default SnippetNumberInput;
 
 const Wrapper = styled.div`
 	display: flex;

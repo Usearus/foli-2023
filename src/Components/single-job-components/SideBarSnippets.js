@@ -3,14 +3,16 @@ import { DatabaseContext } from '../../context/DatabaseContext';
 import { Button, Offcanvas, Accordion } from 'react-bootstrap';
 import SnippetTextInput from '../atom-components/SnippetTextInput';
 import styled from 'styled-components';
+import SnippetNumberInput from '../atom-components/SnippetNumberInput';
 
 const SideBarSnippets = () => {
 	const {
 		userResume,
 		fetchUserResume,
-		fetchUserProfile,
 		userProfile,
+		fetchUserProfile,
 		currentJob,
+		fetchCurrentJob,
 		adminProfile,
 	} = useContext(DatabaseContext);
 
@@ -46,10 +48,60 @@ const SideBarSnippets = () => {
 						<Accordion flush alwaysOpen>
 							<Accordion.Item eventKey='0'>
 								<Accordion.Header>Details</Accordion.Header>
+								<Accordion.Body>
+									<SnippetTextInput
+										label1='Company'
+										value1='company'
+										database='jobs'
+										valueSource={currentJob}
+										fetchSource={fetchCurrentJob}
+										type='text'
+									/>
+									<SnippetTextInput
+										label1='Position'
+										value1='position'
+										database='jobs'
+										valueSource={currentJob}
+										fetchSource={fetchCurrentJob}
+										type='text'
+									/>
+									<SnippetTextInput
+										label1='Salary min ($)'
+										value1='salary_min'
+										database='jobs'
+										valueSource={currentJob}
+										fetchSource={fetchCurrentJob}
+										type='number'
+									/>
+									<SnippetTextInput
+										label1='Salary Max ($)'
+										value1='salary_max'
+										database='jobs'
+										valueSource={currentJob}
+										fetchSource={fetchCurrentJob}
+										type='number'
+									/>
+									<SnippetTextInput
+										label1='Location'
+										value1='location'
+										database='jobs'
+										valueSource={currentJob}
+										fetchSource={fetchCurrentJob}
+										type='text'
+									/>
+									<SnippetTextInput
+										label1='Listing URL'
+										value1='link'
+										database='jobs'
+										valueSource={currentJob}
+										fetchSource={fetchCurrentJob}
+										type='text'
+									/>
+								</Accordion.Body>
 							</Accordion.Item>
-							<Accordion.Item eventKey='1'>
+							{/* <Accordion.Item eventKey='1'>
 								<Accordion.Header>Contacts</Accordion.Header>
-							</Accordion.Item>
+							</Accordion.Item> */}
 							<br />
 						</Accordion>
 						<label>Resume</label>
@@ -63,6 +115,7 @@ const SideBarSnippets = () => {
 										database='resumes'
 										valueSource={userResume}
 										fetchSource={fetchUserResume}
+										type='text'
 									/>
 									<SnippetTextInput
 										label1='Last name'
@@ -70,6 +123,7 @@ const SideBarSnippets = () => {
 										database='resumes'
 										valueSource={userResume}
 										fetchSource={fetchUserResume}
+										type='text'
 									/>
 									{/* <SnippetTextInput
 										label1='Target position'
@@ -94,6 +148,7 @@ const SideBarSnippets = () => {
 										// database='resumes'
 										// valueSource={userResume}
 										// fetchSource={fetchUserResume}
+										// type='text'
 									/>
 								</Accordion.Body>
 							</Accordion.Item>
