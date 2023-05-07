@@ -3,16 +3,15 @@ import { DatabaseContext } from '../../context/DatabaseContext';
 import { Button, Offcanvas, Accordion } from 'react-bootstrap';
 import SnippetTextInput from '../atom-components/SnippetTextInput';
 import styled from 'styled-components';
-import SnippetNumberInput from '../atom-components/SnippetNumberInput';
-
+import AddSnippet from './AddSnippet';
 const SideBarSnippets = () => {
 	const {
 		userResume,
 		fetchUserResume,
-		userProfile,
-		fetchUserProfile,
 		currentJob,
 		fetchCurrentJob,
+		userSnippets,
+		fetchUserSnippets,
 		adminProfile,
 	} = useContext(DatabaseContext);
 
@@ -41,57 +40,57 @@ const SideBarSnippets = () => {
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<Wrapper>
-						{/* <p style={{ paddingBottom: '1rem' }}>
-							Quickly copy & paste anything from your profile
-						</p> */}
+						{/* JOB DETAILS */}
 						<label>Job listing</label>
 						<Accordion flush alwaysOpen>
 							<Accordion.Item eventKey='0'>
 								<Accordion.Header>Details</Accordion.Header>
 								<Accordion.Body>
 									<SnippetTextInput
-										label1='Company'
-										value1='company'
+										label='Company'
+										value='company'
 										database='jobs'
 										valueSource={currentJob}
 										fetchSource={fetchCurrentJob}
 										type='text'
 									/>
 									<SnippetTextInput
-										label1='Position'
-										value1='position'
+										label='Position'
+										value='position'
 										database='jobs'
 										valueSource={currentJob}
 										fetchSource={fetchCurrentJob}
 										type='text'
 									/>
 									<SnippetTextInput
-										label1='Salary min ($)'
-										value1='salary_min'
+										label='Salary min ($)'
+										value='salary_min'
 										database='jobs'
 										valueSource={currentJob}
 										fetchSource={fetchCurrentJob}
 										type='number'
+										placeholder='0'
 									/>
 									<SnippetTextInput
-										label1='Salary Max ($)'
-										value1='salary_max'
+										label='Salary Max ($)'
+										value='salary_max'
 										database='jobs'
 										valueSource={currentJob}
 										fetchSource={fetchCurrentJob}
 										type='number'
+										placeholder='0'
 									/>
 									<SnippetTextInput
-										label1='Location'
-										value1='location'
+										label='Location'
+										value='location'
 										database='jobs'
 										valueSource={currentJob}
 										fetchSource={fetchCurrentJob}
 										type='text'
 									/>
 									<SnippetTextInput
-										label1='Listing URL'
-										value1='link'
+										label='Listing URL'
+										value='link'
 										database='jobs'
 										valueSource={currentJob}
 										fetchSource={fetchCurrentJob}
@@ -99,76 +98,157 @@ const SideBarSnippets = () => {
 									/>
 								</Accordion.Body>
 							</Accordion.Item>
-							{/* <Accordion.Item eventKey='1'>
-								<Accordion.Header>Contacts</Accordion.Header>
-							</Accordion.Item> */}
 							<br />
 						</Accordion>
 						<label>Resume</label>
 						<Accordion flush alwaysOpen>
+							{/* CONTACT */}
 							<Accordion.Item eventKey='0'>
 								<Accordion.Header>Contact</Accordion.Header>
 								<Accordion.Body>
 									<SnippetTextInput
-										label1='First name'
-										value1='firstName'
+										label='First name'
+										value='firstName'
 										database='resumes'
 										valueSource={userResume}
 										fetchSource={fetchUserResume}
 										type='text'
 									/>
 									<SnippetTextInput
-										label1='Last name'
-										value1='lastName'
+										label='Last name'
+										value='lastName'
 										database='resumes'
 										valueSource={userResume}
 										fetchSource={fetchUserResume}
 										type='text'
 									/>
-									{/* <SnippetTextInput
-										label1='Target position'
-										value1='position'
-										database='profiles'
-										valueSource={userProfile}
-										fetchSource={fetchUserProfile}
-									/> */}
+									<SnippetTextInput
+										label='Email address'
+										value='resumeEmail'
+										database='resumes'
+										valueSource={userResume}
+										fetchSource={fetchUserResume}
+										type='text'
+									/>
+									<SnippetTextInput
+										label='Phone number'
+										value='resumePhone'
+										database='resumes'
+										valueSource={userResume}
+										fetchSource={fetchUserResume}
+										type='text'
+									/>
+									<SnippetTextInput
+										label='LinkedIn URL'
+										value='resumeLinkedin'
+										database='resumes'
+										valueSource={userResume}
+										fetchSource={fetchUserResume}
+										type='text'
+									/>
+									<SnippetTextInput
+										label='Address'
+										value='resumeAddress'
+										database='resumes'
+										valueSource={userResume}
+										fetchSource={fetchUserResume}
+										type='text'
+									/>
+									<SnippetTextInput
+										label='Website URL'
+										value='resumeWebsite'
+										database='resumes'
+										valueSource={userResume}
+										fetchSource={fetchUserResume}
+										type='text'
+									/>
 								</Accordion.Body>
 							</Accordion.Item>
-							<Accordion.Item eventKey='1'>
-								<Accordion.Header>Professional Summary</Accordion.Header>
-								<Accordion.Body></Accordion.Body>
-							</Accordion.Item>
 
-							<Accordion.Item eventKey='2'>
-								<Accordion.Header>Work history</Accordion.Header>
+							{/* PROFESSIONAL SUMMARY */}
+							<Accordion.Item eventKey='1'>
+								<Accordion.Header>Professional summary</Accordion.Header>
 								<Accordion.Body>
-									<SnippetTextInput
-										label1='Coming soon'
-										// value1='firstName'
-										// database='resumes'
-										// valueSource={userResume}
-										// fetchSource={fetchUserResume}
+									{userSnippets
+										.filter(
+											(snippet) => snippet.category === 'professional summary'
+										)
+										.sort((a, b) => a.created_at.localeCompare(b.created_at))
+										.map((snippet) => (
+											<SnippetTextInput
+												key={snippet.id}
+												value='content'
+												database='snippets'
+												valueSource={snippet}
+												fetchSource={fetchUserSnippets}
+												textArea
+												deleteIcon
+											/>
+										))}
+									<AddSnippet
+										label='professional summary'
+										value='content'
+										database='snippets'
+										valueSource={userSnippets}
+										fetchSource={fetchUserSnippets}
+										textArea
 										// type='text'
 									/>
 								</Accordion.Body>
 							</Accordion.Item>
-							<Accordion.Item eventKey='3'>
+
+							{/* WORK HISTORY */}
+							{/* <Accordion.Item eventKey='2'>
+								<Accordion.Header>Work history</Accordion.Header>
+								<Accordion.Body></Accordion.Body>
+							</Accordion.Item> */}
+
+							{/* Education */}
+							{/* <Accordion.Item eventKey='3'>
 								<Accordion.Header>Education</Accordion.Header>
 								<Accordion.Body></Accordion.Body>
-							</Accordion.Item>
+							</Accordion.Item> */}
+
+							{/* Skills */}
 							<Accordion.Item eventKey='4'>
 								<Accordion.Header>Skills</Accordion.Header>
-								<Accordion.Body></Accordion.Body>
+								<Accordion.Body>
+									{userSnippets
+										.filter((snippet) => snippet.category === 'skill')
+										.sort((a, b) => a.created_at.localeCompare(b.created_at))
+										.map((snippet) => (
+											<SnippetTextInput
+												key={snippet.id}
+												value='content'
+												database='snippets'
+												valueSource={snippet}
+												fetchSource={fetchUserSnippets}
+												type='text'
+												deleteIcon
+											/>
+										))}
+									<AddSnippet
+										label='skill'
+										value='content'
+										database='snippets'
+										valueSource={userSnippets}
+										fetchSource={fetchUserSnippets}
+										type='text'
+									/>
+								</Accordion.Body>
 							</Accordion.Item>
 						</Accordion>
 						<br />
+
+						{/* CUSTOM */}
+						{/* 						
 						<label>Custom</label>
 						<Accordion flush alwaysOpen>
 							<Accordion.Item eventKey='4'>
 								<Accordion.Header>Create custom Snippet</Accordion.Header>
 								<Accordion.Body></Accordion.Body>
 							</Accordion.Item>
-						</Accordion>
+						</Accordion> */}
 					</Wrapper>
 				</Offcanvas.Body>
 			</Offcanvas>
@@ -185,7 +265,6 @@ const Wrapper = styled.div`
 	height: 100%;
 
 	label {
-		font-weight: 700;
 		margin: 0;
 	}
 `;

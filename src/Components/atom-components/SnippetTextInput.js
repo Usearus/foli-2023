@@ -1,31 +1,34 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import useAlert from '../../Custom Hooks/useAlert';
-import {
-	Form,
-	Button,
-	InputGroup,
-	OverlayTrigger,
-	Tooltip,
-} from 'react-bootstrap';
+import { Form, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import styled from 'styled-components';
 import { supabase } from '../../API/supabase';
 import { AiFillEdit } from 'react-icons/ai';
+import { MdDelete } from 'react-icons/md';
+import { DatabaseContext } from '../../context/DatabaseContext';
+import ModalDeleteConfirmation from '../modal-components/ModalDeleteConfirmation';
 
 const SnippetTextInput = ({
-	label1,
-	value1,
+	label,
+	value,
 	database,
 	valueSource,
 	fetchSource,
 	textArea,
 	type,
+	placeholder,
+	deleteIcon,
 }) => {
 	const { setAlert } = useAlert();
 
+	const { currentJob } = useContext(DatabaseContext);
+
 	const [editing, setEditing] = useState(false);
-	const value1Ref = useRef();
+	const valueRef = useRef();
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+
 	const initialValues = {
-		value1: valueSource && valueSource[value1] ? valueSource[value1] : '',
+		value: valueSource?.[value] || '',
 	};
 
 	const handleEditClick = () => {
@@ -33,7 +36,7 @@ const SnippetTextInput = ({
 	};
 
 	const handleCancelClick = () => {
-		value1Ref.current.value = initialValues.value1;
+		valueRef.current.value = initialValues.value;
 		setEditing(false);
 	};
 
@@ -41,10 +44,15 @@ const SnippetTextInput = ({
 		const { error } = await supabase
 			.from(database)
 			.update({
-				[value1]: value1Ref.current.value,
+				[value]: valueRef.current.value,
 			})
 			.eq('id', valueSource.id);
-		fetchSource();
+		if (valueSource === currentJob) {
+			fetchSource(currentJob);
+		} else {
+			fetchSource();
+		}
+
 		setAlert('Successfully updated!', 'success');
 		setEditing(false);
 
@@ -55,9 +63,13 @@ const SnippetTextInput = ({
 		}
 	};
 
+	const handleDeleteClick = async (e) => {
+		setShowDeleteModal(true);
+	};
+
 	const handleCopyClick = () => {
 		navigator.clipboard
-			.writeText(value1Ref.current.value)
+			.writeText(valueRef.current.value)
 			.then(() => {
 				setAlert('Snippet copied to clickboard', 'success');
 			})
@@ -66,70 +78,100 @@ const SnippetTextInput = ({
 			});
 	};
 
+	const handleCloseReset = () => {
+		setShowDeleteModal(false);
+	};
+
 	if ([valueSource]) {
 		return (
 			<Wrapper>
 				{!editing ? (
 					<div className='view-container'>
-						<Form.Label>{label1}</Form.Label>
-						<InputGroup size='sm' className='mb-2'>
-							{/* VALUE 1 */}
+						{label ? <Form.Label>{label}</Form.Label> : ''}
+						<div className='button-group-container'>
+							{/* COPY */}
 							<OverlayTrigger
 								key='copy-snippet'
-								placement='top'
-								// delay={{ show: 250, hide: 0 }}
+								placement='left'
+								delay={{ show: 750, hide: 0 }}
 								overlay={<Tooltip id='copy'>Copy to clipboard</Tooltip>}>
 								{textArea ? (
 									<Form.Control
 										as='textarea'
 										rows={3}
 										type={type}
-										ref={value1Ref}
-										value={initialValues.value1}
+										ref={valueRef}
+										value={initialValues.value}
 										readOnly
 										onClick={handleCopyClick}
+										placeholder={placeholder}
 									/>
 								) : (
 									<Form.Control
 										type={type}
-										ref={value1Ref}
-										value={initialValues.value1}
+										ref={valueRef}
+										value={initialValues.value}
 										readOnly
 										onClick={handleCopyClick}
+										placeholder={placeholder}
 									/>
 								)}
 							</OverlayTrigger>
+
+							{/* DELETE */}
+							{!deleteIcon ? null : (
+								<OverlayTrigger
+									key='delete-snippet'
+									placement='left'
+									delay={{ show: 750, hide: 0 }}
+									overlay={<Tooltip id='copy'>Delete Snippet</Tooltip>}>
+									<Button
+										size='sm'
+										variant='outline-secondary'
+										onClick={handleDeleteClick}
+										style={{ borderColor: 'var(--white)', height: '32px' }}>
+										<MdDelete />
+									</Button>
+								</OverlayTrigger>
+							)}
+							{/* EDIT */}
 							<OverlayTrigger
 								key='edit-snippet'
 								placement='top'
-								// delay={{ show: 250, hide: 0 }}
+								delay={{ show: 750, hide: 0 }}
 								overlay={<Tooltip id='copy'>Edit Snippet</Tooltip>}>
-								<Button variant='outline-secondary' onClick={handleEditClick}>
+								<Button
+									size='sm'
+									variant='outline-secondary'
+									onClick={handleEditClick}
+									style={{ borderColor: 'var(--white)', height: '32px' }}>
 									<AiFillEdit />
 								</Button>
 							</OverlayTrigger>
-						</InputGroup>
+						</div>
 					</div>
 				) : (
 					<div className='edit-container'>
 						{/* VALUE 1 */}
-						<Form.Label>{label1}</Form.Label>
-						<Form.Group className='mb-2' controlId={value1}>
+						<Form.Label>{label}</Form.Label>
+						<Form.Group className='mb-2' controlId={value}>
 							{textArea ? (
 								<Form.Control
 									as='textarea'
 									rows={3}
 									type={type}
-									ref={value1Ref}
-									defaultValue={initialValues.value1}
+									ref={valueRef}
+									defaultValue={initialValues.value}
 									size='sm'
+									placeholder={placeholder}
 								/>
 							) : (
 								<Form.Control
 									type={type}
-									ref={value1Ref}
-									defaultValue={initialValues.value1}
+									ref={valueRef}
+									defaultValue={initialValues.value}
 									size='sm'
+									placeholder={placeholder}
 								/>
 							)}
 						</Form.Group>
@@ -151,6 +193,14 @@ const SnippetTextInput = ({
 						</div>
 					</div>
 				)}
+				{showDeleteModal && (
+					<ModalDeleteConfirmation
+						show={showDeleteModal}
+						close={handleCloseReset}
+						object={valueSource}
+						type='snippet'
+					/>
+				)}
 			</Wrapper>
 		);
 	}
@@ -165,10 +215,23 @@ const Wrapper = styled.div`
 	/* min-width: 500px; */
 
 	.view-container .form-control {
-		/* background: var(--grey-100); */
+		/* background: var(--grey-50); */
 		cursor: pointer;
 		transition: var(--transition-2);
-		/* border: none; */
+		border-color: var(--white);
+		font-size: 14px;
+		padding-left: 0.55rem;
+	}
+
+	.view-container {
+		display: flex;
+		flex-direction: column;
+		padding: 0.3rem 0;
+	}
+
+	.button-group-container {
+		display: flex;
+		flex-direction: row;
 	}
 
 	.view-container .form-control:hover {
@@ -180,5 +243,10 @@ const Wrapper = styled.div`
 
 	.form-control:focus {
 		box-shadow: none;
+	}
+
+	.button:hover {
+		color: var(--grey-500);
+		background: var(--grey-600);
 	}
 `;

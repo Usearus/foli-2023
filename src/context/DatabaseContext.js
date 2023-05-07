@@ -78,6 +78,7 @@ const DatabaseProvider = ({ children }) => {
 	const [userPages, setUserPages] = useState([]);
 	const [settingPageStack, setSettingPageStack] = useState('');
 	const [userResume, setUserResume] = useState([]);
+	const [userSnippets, setUserSnippets] = useState([]);
 
 	// SET ADMIN DATA
 	const [adminProfile, setAdminProfile] = useState(false);
@@ -279,7 +280,7 @@ const DatabaseProvider = ({ children }) => {
 				.filter('account', 'eq', auth0Email);
 			if (data) {
 				setUserPages(data);
-				// console.log('userPages are', data);
+				console.log('userPages are', data);
 			}
 		}
 	}
@@ -298,11 +299,25 @@ const DatabaseProvider = ({ children }) => {
 		}
 	}
 
+	async function fetchUserSnippets() {
+		if (auth0Email) {
+			const { data } = await supabase
+				.from('snippets')
+				.select('*')
+				.filter('account', 'eq', auth0Email);
+			if (data) {
+				setUserSnippets(data);
+				console.log('userSnippets are', data);
+			}
+		}
+	}
+
 	useEffect(() => {
 		fetchUserProfile();
 		fetchUserJobs();
 		fetchUserPages();
 		fetchUserResume();
+		fetchUserSnippets();
 		return () => {
 			// Cleanup // TODO figure out how to fix this useEffect issue
 		};
@@ -393,6 +408,9 @@ const DatabaseProvider = ({ children }) => {
 				// Resumes
 				userResume,
 				fetchUserResume,
+				// Snippets
+				userSnippets,
+				fetchUserSnippets,
 				// Settings
 				settingPageStack,
 				setSettingPageStack,
