@@ -9,6 +9,7 @@ https://foli2023.netlify.app
 -   Create website page that links to the app
 -   Add Master Resume Fields - SNIPPETS
 -   Add validation to Assistant fields
+-   Change remote to match Indeed
 
 
 ---LOW PRIORITY---
