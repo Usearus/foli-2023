@@ -115,21 +115,40 @@ const Page = (page) => {
 	};
 
 	const handleUpdateContentClick = async () => {
-		const { error } = await supabase
-			.from('pages')
-			.update({
-				content: content,
-				title: titleRef.current.value,
-			})
-			.eq('id', page.id);
-		setAlert('Page successfully updated!', 'success');
-		fetchCurrentPages(currentJob);
-		setEditing(false);
-		setShowEditPageModal(false);
-		if (error) {
-			setAlert('Something went wrong. Page not updated.', 'danger');
-			console.log('error is', error);
-			return;
+		if (page.locked) {
+			const { error } = await supabase
+				.from('pages')
+				.update({
+					content: content,
+				})
+				.eq('id', page.id);
+			setAlert('Page successfully updated!', 'success');
+			fetchCurrentPages(currentJob);
+			setEditing(false);
+			setShowEditPageModal(false);
+			if (error) {
+				setAlert('Something went wrong. Page not updated.', 'danger');
+				console.log('error is', error);
+				return;
+			}
+		}
+		if (!page.locked) {
+			const { error } = await supabase
+				.from('pages')
+				.update({
+					content: content,
+					title: titleRef.current.value,
+				})
+				.eq('id', page.id);
+			setAlert('Page successfully updated!', 'success');
+			fetchCurrentPages(currentJob);
+			setEditing(false);
+			setShowEditPageModal(false);
+			if (error) {
+				setAlert('Something went wrong. Page not updated.', 'danger');
+				console.log('error is', error);
+				return;
+			}
 		}
 	};
 
