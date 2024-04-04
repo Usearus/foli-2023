@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import TopBarJobMobile from '../Components/single-job-components/TopBarJobMobile';
 import { Stack } from 'react-bootstrap';
 import { DatabaseContext } from '../context/DatabaseContext';
-import foliHappyImage from '../assets/Foli-Happy.png';
 
 const SingleJobPage = () => {
 	const { currentPages, settingPageStack } = useContext(DatabaseContext);
@@ -28,11 +27,6 @@ const SingleJobPage = () => {
 						</div>
 						<TopBarJobDesktop className='desktop-only' />
 						<div className='empty-state'>
-							<img
-								src={foliHappyImage}
-								alt='foliHappyImage'
-								style={{ width: '150px' }}
-							/>
 							<h5>No pages added yet. Add your first page to get started.</h5>
 						</div>
 					</Stack>

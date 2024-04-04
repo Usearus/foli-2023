@@ -1,17 +1,9 @@
 import styled from 'styled-components';
 import Spinner from 'react-bootstrap/Spinner';
-import foliLoadingImage from '../../assets/Foli-Loading.gif';
 
 const Loader = () => {
 	return (
 		<Wrapper>
-			{/* <div className='img-container'>
-				<img
-					src={foliLoadingImage}
-					alt='foliLoadingImage'
-					style={{ width: '150px' }}
-				/>
-			</div> */}
 			<Spinner />
 		</Wrapper>
 	);

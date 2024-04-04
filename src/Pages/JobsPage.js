@@ -10,7 +10,6 @@ import { Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
 import { supabase } from '../API/supabase';
 import FoliBadge from '../Components/atom-components/FoliBadge';
 // import ModalOnboarding from '../Components/ModalOnboarding';
-import foliHiImage from '../assets/Foli-Hi.png';
 
 const JobsPage = () => {
 	const { userJobs, userProfile, fetchUserProfile } =
@@ -179,18 +178,6 @@ const JobsPage = () => {
 								))}
 							</div>
 						</Form.Group>
-						{/* <div
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								justifyContent: 'center',
-							}}>
-							<img
-								src={foliExcitedImage}
-								alt='foliExcitedImage'
-								style={{ width: '150px' }}
-							/>
-						</div> */}
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
@@ -207,13 +194,6 @@ const JobsPage = () => {
 			<>
 				<TopBarTable />
 				<Wrapper>
-					<div className='img-container'>
-						{/* <img
-							src={foliHiImage}
-							alt='foliHiImage'
-							style={{ width: '150px' }}
-						/> */}
-					</div>
 					<h5>No jobs are being tracked. Add your first job to get started.</h5>
 				</Wrapper>
 			</>

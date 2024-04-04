@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import { openai } from '../../API/gpt';
 import Loader from '../atom-components/Loader';
 import MarkdownView from 'react-showdown';
-import foliExcitedImage from '../../assets/Foli-Excited.png';
 
 const SideBarAssistant = ({ show, close }) => {
 	const { currentPages, currentJob, fetchCurrentPages } =
@@ -179,13 +178,6 @@ const SideBarAssistant = ({ show, close }) => {
 							<div className='assistant-container'>
 								{!generatedAttempt ? (
 									<div className='empty-state-container'>
-										{/* <div className='img-container'>
-											<img
-												src={foliExcitedImage}
-												alt='foliExcitedImage'
-												style={{ width: '150px' }}
-											/>
-										</div> */}
 										<h4>Use AI to create a new page from existing pages</h4>
 										<br />
 										<p>For example:</p>
