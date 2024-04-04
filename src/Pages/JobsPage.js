@@ -208,11 +208,11 @@ const JobsPage = () => {
 				<TopBarTable />
 				<Wrapper>
 					<div className='img-container'>
-						<img
+						{/* <img
 							src={foliHiImage}
 							alt='foliHiImage'
 							style={{ width: '150px' }}
-						/>
+						/> */}
 					</div>
 					<h5>No jobs are being tracked. Add your first job to get started.</h5>
 				</Wrapper>

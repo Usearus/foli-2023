@@ -179,13 +179,13 @@ const SideBarAssistant = ({ show, close }) => {
 							<div className='assistant-container'>
 								{!generatedAttempt ? (
 									<div className='empty-state-container'>
-										<div className='img-container'>
+										{/* <div className='img-container'>
 											<img
 												src={foliExcitedImage}
 												alt='foliExcitedImage'
 												style={{ width: '150px' }}
 											/>
-										</div>
+										</div> */}
 										<h4>Use AI to create a new page from existing pages</h4>
 										<br />
 										<p>For example:</p>
