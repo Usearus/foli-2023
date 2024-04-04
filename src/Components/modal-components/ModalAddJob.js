@@ -71,6 +71,7 @@ const ModalAddJob = () => {
 			content: '<p>Start by pasting in the job description.</p>',
 			account: user.email,
 			jobid: newJobId,
+			locked: true,
 		});
 		setCreatedJobID(newJobId);
 		handleClose();

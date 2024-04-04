@@ -1,19 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import ModalAddPage from '../modal-components/ModalAddPage';
-import ModalTemplates from '../modal-components/ModalTemplates';
+import SideBarTemplates from '../single-job-components/template-components/SideBarTemplates';
 import SideBarAssistant from '../single-job-components/SideBarAssistant';
 import { BiFileBlank } from 'react-icons/bi';
 import { GrTemplate } from 'react-icons/gr';
 import { AiOutlineRobot } from 'react-icons/ai';
-
+import { DatabaseContext } from '../../context/DatabaseContext';
 
 const DropdownAddPage = () => {
 	const [selectedEventKey, setSelectedEventKey] = useState(null);
 	const [showAddPageModal, setShowAddPageModal] = useState(false);
-	const [showTemplateModal, setShowTemplateModal] = useState(false);
+	const [showSideBarTemplates, setShowSideBarTemplates] = useState(false);
 	const [showSidebarAssistant, setShowSidebarAssistant] = useState(false);
+	const { setPreviewTemplate, setActiveTemplate } = useContext(DatabaseContext);
 
 	const handleSelect = (eventKey) => {
 		setSelectedEventKey(eventKey);
@@ -21,7 +22,7 @@ const DropdownAddPage = () => {
 			setShowAddPageModal(true);
 		}
 		if (eventKey === '2') {
-			setShowTemplateModal(true);
+			setShowSideBarTemplates(true);
 		}
 		if (eventKey === '3') {
 			setShowSidebarAssistant(true);
@@ -30,10 +31,11 @@ const DropdownAddPage = () => {
 
 	const handleCloseReset = () => {
 		setShowAddPageModal(false);
-		setShowTemplateModal(false);
+		setShowSideBarTemplates(false);
 		setShowSidebarAssistant(false);
+		setActiveTemplate(null);
+		setPreviewTemplate(false);
 	};
-
 
 	return (
 		<Wrapper>
@@ -70,15 +72,14 @@ const DropdownAddPage = () => {
 					}}>
 					<AiOutlineRobot style={{ marginRight: '.5rem' }} /> Use AI assistant
 				</Dropdown.Item>
-				
 			</DropdownButton>
 			{showAddPageModal && (
-				<ModalAddPage show={showAddPageModal} handleClose={handleCloseReset} />
+				<ModalAddPage show={showAddPageModal} close={handleCloseReset} />
 			)}
-			{showTemplateModal && (
-				<ModalTemplates
-					show={showTemplateModal}
-					closeTemplateModal={handleCloseReset}
+			{showSideBarTemplates && (
+				<SideBarTemplates
+					show={showSideBarTemplates}
+					close={handleCloseReset}
 				/>
 			)}
 			{showSidebarAssistant && (

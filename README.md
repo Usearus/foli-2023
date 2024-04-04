@@ -5,13 +5,15 @@ https://foli2023.netlify.app
 ## Things to add
 
 ---CRITICAL---
+-   simplify code for template files
 -   Create website page that links to the app
 -   Add Master Resume Fields - SNIPPETS
 -   Add validation to Assistant fields
--   Add full job sample to onboarding with as many docs that make sense.
+-   Change remote to match Indeed
 
 
 ---LOW PRIORITY---
+-   job.link broken 
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
 -   AddSheetModal missing title count & limitation. 
@@ -20,15 +22,14 @@ https://foli2023.netlify.app
 
 ## Post-MVP Features
 
+-   Import LinkedIn or PDF
 -   Add Google Analytics
 -   Import LinkedIn profile
 -   Import existing Resume
 -   Filter on top of the jobs list, but only for stage.
--   Sidebar with templates pre-chosen based on stage.
 -   Animate table row when adding a job
 
 -   ChatGPT API
-    -   Make job description persistant and automatic on job creation (will make future GPT links easier).
     -   Settings button that shows what info is prefilled from preferences
     ---NEED HELP WITH---
 -   What is the best way to set a timer for token renewal in React?
@@ -42,7 +43,9 @@ https://foli2023.netlify.app
 
 
 ## Non-priority
-
+-   Export Page to PDF
+-   Take archived out of list
+-   Add archive toggle
 -   Add location info
 -   Add (25mi, 50mi, 100mi) miles dropdown to add to a location
 -   Add focus state to all pages using React-Quill

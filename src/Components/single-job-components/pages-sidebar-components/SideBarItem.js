@@ -50,33 +50,38 @@ const SideBarItem = ({ page, setShowOffcanvas, showOffcanvas }) => {
 					overlay={<Tooltip id={`tooltip-${page.id}`}>{page.title}</Tooltip>}>
 					<span onClick={handleSideBarItemClick}>{page.title}</span>
 				</OverlayTrigger>
-				<div
-					className='ms-auto fade-in'
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						minWidth: '24px',
-						minHeight: '24px',
-					}}
-					onClick={handleDeleteModal}>
-					<RiDeleteBin6Line
-						className='show-on-hover'
-						style={{
-							minWidth: '16px',
-							minHeight: '16px',
-							cursor: 'pointer',
-							color: 'var(--grey-600)',
-						}}
-					/>
-				</div>
+				{page.locked ? (
+					''
+				) : (
+					<>
+						<div
+							className='ms-auto fade-in'
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								minWidth: '24px',
+								minHeight: '24px',
+							}}
+							onClick={handleDeleteModal}>
+							<RiDeleteBin6Line
+								className='show-on-hover'
+								style={{
+									minWidth: '16px',
+									minHeight: '16px',
+									cursor: 'pointer',
+									color: 'var(--grey-600)',
+								}}
+							/>
+						</div>
+					</>
+				)}
 				<div
 					className='ms-auto'
 					style={{
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
-
 						minWidth: '24px',
 						minHeight: '24px',
 					}}

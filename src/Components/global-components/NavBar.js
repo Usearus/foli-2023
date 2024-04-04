@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import {
 	Nav,
@@ -13,17 +13,48 @@ import ModalProfile from '../modal-components/ModalProfile';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import { FiMenu } from 'react-icons/fi';
 import SiteIcon from '../atom-components/SiteIcon';
+// import useAlert from '../../Custom Hooks/useAlert';
+// import { supabase } from '../../API/supabase';
 
 const NavBar = () => {
-	// const { logout } = useAuth0();
-	const [admin, setAdmin] = useState(false);
-	const { userProfile } = useContext(DatabaseContext);
+	const { userProfile, adminProfile, fetchUserProfile } =
+		useContext(DatabaseContext);
+	// const { setAlert } = useAlert();
 
-	useEffect(() => {
-		if (userProfile && userProfile.email === 'adamdenais@gmail.com') {
-			setAdmin(true);
-		}
-	}, [userProfile]);
+	// const handleSaveThemeClick = async () => {
+	// 	if (userProfile.theme === 'light') {
+	// 		const { error } = await supabase
+	// 			.from('profiles')
+	// 			.update({
+	// 				theme: 'dark',
+	// 			})
+	// 			.eq('id', userProfile.id);
+	// 		fetchUserProfile();
+	// 		setAlert('Theme updated.', 'success');
+
+	// 		if (error) {
+	// 			setAlert('Something went wrong. Preferences not updated.', 'danger');
+	// 			console.log('error is', error);
+	// 			return;
+	// 		}
+	// 	}
+	// 	if (userProfile.theme === 'dark') {
+	// 		const { error } = await supabase
+	// 			.from('profiles')
+	// 			.update({
+	// 				theme: 'light',
+	// 			})
+	// 			.eq('id', userProfile.id);
+	// 		fetchUserProfile();
+	// 		setAlert('Theme updated.', 'success');
+
+	// 		if (error) {
+	// 			setAlert('Something went wrong. Preferences not updated.', 'danger');
+	// 			console.log('error is', error);
+	// 			return;
+	// 		}
+	// 	}
+	// };
 
 	if (userProfile) {
 		return (
@@ -71,13 +102,22 @@ const NavBar = () => {
 									<Nav.Link active={false}>Jobs</Nav.Link>
 								</LinkContainer>
 
-								{admin ? (
-									<LinkContainer to='/testing'>
-										<Nav.Link active={false}>Admin</Nav.Link>
-									</LinkContainer>
+								{adminProfile ? (
+									<>
+										<LinkContainer to='/resume'>
+											<Nav.Link active={false}>Resume</Nav.Link>
+										</LinkContainer>
+										<LinkContainer to='/testing'>
+											<Nav.Link active={false}>Admin</Nav.Link>
+										</LinkContainer>
+									</>
 								) : null}
 							</Nav>
-
+							{/* <Button
+								style={{ marginRight: '1rem' }}
+								onClick={handleSaveThemeClick}>
+								{userProfile.theme}
+							</Button> */}
 							<ModalProfile />
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>

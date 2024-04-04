@@ -17,6 +17,7 @@ const SideBarAssistant = ({ show, close }) => {
 	const { setAlert } = useAlert();
 	const { user } = useAuth0();
 	const [isLoading, setIsLoading] = useState(false);
+	const [minimized, setMinimized] = useState(false);
 
 	// const [show, setShow] = useState(false);
 	const [generatedAttempt, setGeneratedAttempt] = useState(false);
@@ -33,13 +34,14 @@ const SideBarAssistant = ({ show, close }) => {
 	const handleClose = () => {
 		// setShow(false);
 		setGeneratedAttempt(false);
-		close()
+		close();
 	};
 
 	const handleGenerateClick = () => {
 		setGeneratedAttempt(true);
 		setIsLoading(true);
 		handleResponse();
+		setMinimized(true);
 	};
 
 	// const handleSubmit = (event) => {
@@ -151,10 +153,6 @@ const SideBarAssistant = ({ show, close }) => {
 
 	return (
 		<>
-			{/* <Button variant='outline-secondary' onClick={show}>
-				AI assistant
-			</Button> */}
-
 			<Offcanvas
 				show={show}
 				onHide={handleClose}
@@ -203,65 +201,78 @@ const SideBarAssistant = ({ show, close }) => {
 										</ol>
 									</div>
 								) : (
-									<div className='response-container'>
-										<MarkdownView
-											markdown={response}
-											options={{ tables: true, emoji: true }}
-										/>
-									</div>
+									<>
+										<label>Response</label>
+										<div className='response-container'>
+											<MarkdownView
+												markdown={response}
+												options={{ tables: true, emoji: true }}
+											/>
+										</div>
+									</>
 								)}
-								<Form id='assistantForm'>
-									{/* Title */}
-									<Form.Group className='mb-3' controlId='assistant'>
-										<Form.Label>Create new page *</Form.Label>
-										<Form.Select
-											value={selectedNewPage}
-											onChange={handleNewPageSelect}
-											aria-label='Default select example'>
-											<option value=''>Choose an option</option>
-											<option value='Resume'>Resume</option>
-											<option value='Cover letter'>Cover letter</option>
-											<option value='Interview questions you may be asked'>
-												Interview questions you may be asked
-											</option>
-											<option value='Interview questions you can ask'>
-												Interview questions you can ask
-											</option>
-										</Form.Select>
-									</Form.Group>
-									{/* Content */}
-									<Form.Group className='mb-3' controlId='content'>
-										<Form.Label>From existing page *</Form.Label>
-										<Form.Select
-											aria-label='Default select example'
-											onChange={handleExistingPageSelect}>
-											<option value=''>Choose an existing page</option>
-											{currentPages.map((page) => (
-												<option key={page.title} value={page.title}>
-													{page.title}
-												</option>
-											))}
-										</Form.Select>
-									</Form.Group>
-									<div className='assistant-footer-btns'>
-										{!generatedAttempt ? (
-											<Button variant='primary' onClick={handleGenerateClick}>
-												Generate
-											</Button>
-										) : (
-											<>
-												<Button
-													variant='outline-secondary'
-													onClick={handleGenerateClick}>
-													<TbRefresh /> Generate again
-												</Button>
-												<Button variant='primary' onClick={handleAddPageClick}>
-													Create page
-												</Button>
-											</>
-										)}
+								{minimized ? (
+									<div className='parameters-btn-container'>
+										<Button variant='link' onClick={() => setMinimized(false)}>
+											Update parameters
+										</Button>
 									</div>
-								</Form>
+								) : (
+									<Form id='assistantForm'>
+										{/* Title */}
+										<Form.Group
+											className='mb-3 assistant-form'
+											controlId='assistant'>
+											<Form.Label>Create new page *</Form.Label>
+											<Form.Select
+												value={selectedNewPage}
+												onChange={handleNewPageSelect}
+												aria-label='Default select example'>
+												<option value=''>Choose an option</option>
+												<option value='Resume'>Resume</option>
+												<option value='Cover letter'>Cover letter</option>
+												<option value='Interview questions you may be asked'>
+													Interview questions you may be asked
+												</option>
+												<option value='Interview questions you can ask'>
+													Interview questions you can ask
+												</option>
+											</Form.Select>
+										</Form.Group>
+										{/* Content */}
+										<Form.Group className='mb-3' controlId='content'>
+											<Form.Label>From existing page *</Form.Label>
+											<Form.Select
+												aria-label='Default select example'
+												onChange={handleExistingPageSelect}>
+												<option value=''>Choose an existing page</option>
+												{currentPages.map((page) => (
+													<option key={page.title} value={page.title}>
+														{page.title}
+													</option>
+												))}
+											</Form.Select>
+										</Form.Group>
+									</Form>
+								)}
+								<div className='assistant-footer-btns'>
+									{!generatedAttempt ? (
+										<Button variant='primary' onClick={handleGenerateClick}>
+											Generate
+										</Button>
+									) : (
+										<>
+											<Button
+												variant='outline-secondary'
+												onClick={handleGenerateClick}>
+												<TbRefresh /> Generate again
+											</Button>
+											<Button variant='primary' onClick={handleAddPageClick}>
+												Create page
+											</Button>
+										</>
+									)}
+								</div>
 							</div>
 						)}
 					</Wrapper>
@@ -282,13 +293,21 @@ const Wrapper = styled.div`
 	b {
 		color: var(--primary-400);
 	}
-
+	label {
+		font-weight: 700;
+		margin-bottom: 0.25rem;
+		font-size: 0.75rem;
+	}
 	.loading-state {
 		padding: 1rem;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+
+	.assistant-form {
+		margin-top: 1rem;
 	}
 
 	.assistant-container {
@@ -299,12 +318,16 @@ const Wrapper = styled.div`
 		/* align-items: center; */
 	}
 
+	.parameters-btn-container {
+		width: 200px;
+	}
 	.response-container {
 		overflow-y: auto;
-		margin-bottom: 2rem;
+		/* margin-bottom: 2rem; */
 		border: 1px solid var(--grey-400);
 		border-radius: 0.5rem;
 		padding: 0.75rem;
+		height: 100%;
 	}
 
 	.empty-state-container {

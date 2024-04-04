@@ -115,21 +115,40 @@ const Page = (page) => {
 	};
 
 	const handleUpdateContentClick = async () => {
-		const { error } = await supabase
-			.from('pages')
-			.update({
-				content: content,
-				title: titleRef.current.value,
-			})
-			.eq('id', page.id);
-		setAlert('Page successfully updated!', 'success');
-		fetchCurrentPages(currentJob);
-		setEditing(false);
-		setShowEditPageModal(false);
-		if (error) {
-			setAlert('Something went wrong. Page not updated.', 'danger');
-			console.log('error is', error);
-			return;
+		if (page.locked) {
+			const { error } = await supabase
+				.from('pages')
+				.update({
+					content: content,
+				})
+				.eq('id', page.id);
+			setAlert('Page successfully updated!', 'success');
+			fetchCurrentPages(currentJob);
+			setEditing(false);
+			setShowEditPageModal(false);
+			if (error) {
+				setAlert('Something went wrong. Page not updated.', 'danger');
+				console.log('error is', error);
+				return;
+			}
+		}
+		if (!page.locked) {
+			const { error } = await supabase
+				.from('pages')
+				.update({
+					content: content,
+					title: titleRef.current.value,
+				})
+				.eq('id', page.id);
+			setAlert('Page successfully updated!', 'success');
+			fetchCurrentPages(currentJob);
+			setEditing(false);
+			setShowEditPageModal(false);
+			if (error) {
+				setAlert('Something went wrong. Page not updated.', 'danger');
+				console.log('error is', error);
+				return;
+			}
 		}
 	};
 
@@ -168,19 +187,23 @@ const Page = (page) => {
 									onClick={handleOpenPageModalClick}>
 									<AiFillEdit />
 								</Button>
-								<Dropdown onSelect={handleSelect}>
-									<Dropdown.Toggle
-										id='dropdown'
-										variant='link'
-										style={{
-											color: 'var(--grey-800)',
-										}}>
-										<FiMoreVertical />
-									</Dropdown.Toggle>
-									<Dropdown.Menu>
-										<Dropdown.Item eventKey='1'>Delete page</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown>
+								{page.locked ? (
+									''
+								) : (
+									<Dropdown onSelect={handleSelect}>
+										<Dropdown.Toggle
+											id='dropdown'
+											variant='link'
+											style={{
+												color: 'var(--grey-800)',
+											}}>
+											<FiMoreVertical />
+										</Dropdown.Toggle>
+										<Dropdown.Menu>
+											<Dropdown.Item eventKey='1'>Delete page</Dropdown.Item>
+										</Dropdown.Menu>
+									</Dropdown>
+								)}
 							</Stack>
 							{showEditPageModal && (
 								<ModalEditPage
@@ -265,7 +288,6 @@ const Page = (page) => {
 					<header className='page-title'>
 						{!editing ? (
 							<Stack direction='horizontal'>
-								{/* <h6 onClick={() => setEditing(true)}> */}
 								<h6>{page.title}</h6>
 								<Stack direction='horizontal' className='ms-auto'>
 									<Dropdown className='fade-in' onSelect={handleSelect}>
@@ -278,15 +300,18 @@ const Page = (page) => {
 											onClick={handleEditClick}>
 											<AiFillEdit />
 										</Button>
-
-										<Dropdown.Toggle
-											id='dropdown'
-											variant='link'
-											style={{
-												color: 'var(--grey-800)',
-											}}>
-											<FiMoreVertical />
-										</Dropdown.Toggle>
+										{page.locked ? (
+											''
+										) : (
+											<Dropdown.Toggle
+												id='dropdown'
+												variant='link'
+												style={{
+													color: 'var(--grey-800)',
+												}}>
+												<FiMoreVertical />
+											</Dropdown.Toggle>
+										)}
 										<Dropdown.Menu>
 											<Dropdown.Item eventKey='1'>Delete page</Dropdown.Item>
 										</Dropdown.Menu>
@@ -304,24 +329,30 @@ const Page = (page) => {
 						) : (
 							<div>
 								<Stack direction='horizontal' gap='1'>
-									<Form className='title-form'>
-										<Form.Group className='title-field' controlId='title'>
-											<Form.Control
-												type='text'
-												required
-												autoFocus
-												ref={titleRef}
-												defaultValue={initialTitleValue}
-												placeholder='Add page title'
-												size='md'
-												maxLength={titleMaxChar}
-												onChange={handleTitleChange}
-											/>
-										</Form.Group>
-									</Form>
-									<div className='character-count'>
-										{characterCount}/{titleMaxChar}
-									</div>
+									{page.locked ? (
+										<h6>{page.title}</h6>
+									) : (
+										<>
+											<Form className='title-form'>
+												<Form.Group className='title-field' controlId='title'>
+													<Form.Control
+														type='text'
+														required
+														autoFocus
+														ref={titleRef}
+														defaultValue={initialTitleValue}
+														placeholder='Add page title'
+														size='md'
+														maxLength={titleMaxChar}
+														onChange={handleTitleChange}
+													/>
+												</Form.Group>
+											</Form>
+											<div className='character-count'>
+												{characterCount}/{titleMaxChar}
+											</div>{' '}
+										</>
+									)}
 									<Button
 										variant='light'
 										style={{

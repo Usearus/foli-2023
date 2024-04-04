@@ -32,8 +32,8 @@ $pink: #d63384 !default;
 $red: #dc3545 !default;
 $orange: #fd7e14 !default;
 $yellow: #ffc107 !default;
-$green: #8ac3a8 !default;
-// $green: #38976b !default;
+// $green: #8ac3a8 !default;
+$green: #38976b !default;
 $teal: #20c997 !default;
 $cyan: #0dcaf0 !default;
 
@@ -67,18 +67,21 @@ div .container-fluid {
     --bs-navbar-active-color: var(--white);
 }
 
-.form-label {
-    margin-bottom: 0;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--primaryTextColor);
-}
+
 
 label {
     color: var(--primaryTextColor) !important;
     margin-bottom: 1rem;
-    color: var(--grey-700);
     font-size: 14px;
+    font-weight: 700;
+    // margin: 0;
+}
+
+.form-label {
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--grey-500) !important;
 }
 
 // Truncates overflow text everywhere on inputs
@@ -110,3 +113,27 @@ input {
         border-color: var(--grey-200);
     }
 }
+
+
+// .accordion-flush .accordion-item .accordion-button {
+//      color: red;
+// }
+.accordion-button {
+    padding: .75rem;
+    font-size: small;
+    font-weight: 500;
+}
+.accordion-body {
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+}
+.accordion-button:focus {
+    box-shadow: none;
+
+}
+// .accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed {
+//     border-radius: .25rem;
+// }
+// .accordion-button:not(.collapsed) {
+//     background-color: var(--primary-50) !important;
+// }
