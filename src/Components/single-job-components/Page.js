@@ -51,7 +51,7 @@ const Page = (page) => {
 	// Resizing
 	const [pageWidth, setPageWidth] = useState(page.width);
 	const handleUpdateWidthClick = async (newPageWidth) => {
-		console.log(newPageWidth);
+		// console.log(newPageWidth);
 
 		setPageWidth(newPageWidth);
 		const { error } = await supabase
@@ -60,7 +60,7 @@ const Page = (page) => {
 				width: newPageWidth,
 			})
 			.eq('id', page.id);
-		setAlert('Page successfully added!', 'success');
+		// setAlert('Page successfully added!', 'success');
 
 		if (error) {
 			setAlert('Something went wrong. Page width not updated.', 'danger');
