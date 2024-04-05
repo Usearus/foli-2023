@@ -140,7 +140,7 @@ const ModalProfile = () => {
 										<h4 style={{ paddingBottom: '1rem' }}>Account</h4>
 										<Form>
 											<Form.Group className='mb-3' controlId='name'>
-												<Form.Label>User</Form.Label>
+												<Form.Label>Name</Form.Label>
 												<Form.Control
 													type='text'
 													// ref={nameRef}
