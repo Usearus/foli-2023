@@ -17,44 +17,10 @@ import SiteIcon from '../atom-components/SiteIcon';
 // import { supabase } from '../../API/supabase';
 
 const NavBar = () => {
-	const { userProfile, adminProfile, fetchUserProfile } =
-		useContext(DatabaseContext);
-	// const { setAlert } = useAlert();
+	const { userProfile, adminProfile } = useContext(DatabaseContext);
 
-	// const handleSaveThemeClick = async () => {
-	// 	if (userProfile.theme === 'light') {
-	// 		const { error } = await supabase
-	// 			.from('profiles')
-	// 			.update({
-	// 				theme: 'dark',
-	// 			})
-	// 			.eq('id', userProfile.id);
-	// 		fetchUserProfile();
-	// 		setAlert('Theme updated.', 'success');
-
-	// 		if (error) {
-	// 			setAlert('Something went wrong. Preferences not updated.', 'danger');
-	// 			console.log('error is', error);
-	// 			return;
-	// 		}
-	// 	}
-	// 	if (userProfile.theme === 'dark') {
-	// 		const { error } = await supabase
-	// 			.from('profiles')
-	// 			.update({
-	// 				theme: 'light',
-	// 			})
-	// 			.eq('id', userProfile.id);
-	// 		fetchUserProfile();
-	// 		setAlert('Theme updated.', 'success');
-
-	// 		if (error) {
-	// 			setAlert('Something went wrong. Preferences not updated.', 'danger');
-	// 			console.log('error is', error);
-	// 			return;
-	// 		}
-	// 	}
-	// };
+	// Show this if you want to test the auto-increment function
+	// const { IncrementNumberFromDatabase } = useContext(DatabaseContext);
 
 	if (userProfile) {
 		return (
@@ -101,7 +67,6 @@ const NavBar = () => {
 								<LinkContainer to='/'>
 									<Nav.Link active={false}>Jobs</Nav.Link>
 								</LinkContainer>
-
 								{adminProfile ? (
 									<>
 										<LinkContainer to='/resume'>
@@ -113,11 +78,8 @@ const NavBar = () => {
 									</>
 								) : null}
 							</Nav>
-							{/* <Button
-								style={{ marginRight: '1rem' }}
-								onClick={handleSaveThemeClick}>
-								{userProfile.theme}
-							</Button> */}
+							{/* Show this if you want to test the auto-increment function 
+							{IncrementNumberFromDatabase()}*/}
 							<ModalProfile />
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>

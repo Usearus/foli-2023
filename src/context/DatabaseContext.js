@@ -361,6 +361,63 @@ const DatabaseProvider = ({ children }) => {
 
 	// *
 	// *
+
+	const IncrementNumberFromDatabase = () => {
+		const [numberFromDatabase, setNumberFromDatabase] = useState(null);
+
+		useEffect(() => {
+			const fetchAndIncrementNumber = async () => {
+				try {
+					// Fetch the initial number from your Supabase database
+					const { data, error } = await supabase
+						.from('profiles')
+						.select('salary_max')
+						.filter('email', 'eq', 'adamdenais@gmail.com')
+						.single();
+
+					if (error) {
+						throw error;
+					}
+
+					// Increment the fetched number
+					const incrementedNumber = data.salary_max + 1;
+
+					// Update the number in the Supabase database
+					await supabase
+						.from('profiles')
+						.update({ salary_max: incrementedNumber })
+						.filter('email', 'eq', 'adamdenais@gmail.com');
+
+					// Set the incremented number to state
+					setNumberFromDatabase(incrementedNumber);
+				} catch (error) {
+					console.error(
+						'Error fetching and incrementing number from database:',
+						error.message
+					);
+				}
+			};
+
+			// Fetch and increment the number initially
+			fetchAndIncrementNumber();
+
+			// Fetch and increment the number every 10 seconds
+			const intervalId = setInterval(fetchAndIncrementNumber, 86400000);
+
+			return () => {
+				clearInterval(intervalId);
+			};
+		}, []); // Fetch number only once on component mount
+
+		return (
+			<div>
+				<p>{numberFromDatabase}</p>
+			</div>
+		);
+	};
+
+	// *
+	// *
 	// SET CURRENTLY VIEWED TEMPLATE DATA
 	const [previewTemplate, setPreviewTemplate] = useState(false);
 	const [activeTemplate, setActiveTemplate] = useState(null);
@@ -414,6 +471,8 @@ const DatabaseProvider = ({ children }) => {
 				// Settings
 				settingPageStack,
 				setSettingPageStack,
+				// Supabase Hack
+				IncrementNumberFromDatabase,
 			}}>
 			{children}
 		</DatabaseContext.Provider>
