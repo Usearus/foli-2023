@@ -1,0 +1,13 @@
+Terminal Commands:
+
+npm start  -  Launch react environment
+
+cd  -  go forwards in directory
+cd..   -  Navigate to previous folder
+
+npm error on new device? Open PowerShell as admin and type:
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+
+After grabbing an existing project:
+npm install  -  Install your modules from the project
+Copy over hidden files aka Environment keys from other device
