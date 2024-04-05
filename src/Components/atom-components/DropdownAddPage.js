@@ -10,14 +10,12 @@ import { AiOutlineRobot } from 'react-icons/ai';
 import { DatabaseContext } from '../../context/DatabaseContext';
 
 const DropdownAddPage = () => {
-	const [selectedEventKey, setSelectedEventKey] = useState(null);
 	const [showAddPageModal, setShowAddPageModal] = useState(false);
 	const [showSideBarTemplates, setShowSideBarTemplates] = useState(false);
 	const [showSidebarAssistant, setShowSidebarAssistant] = useState(false);
 	const { setPreviewTemplate, setActiveTemplate } = useContext(DatabaseContext);
 
 	const handleSelect = (eventKey) => {
-		setSelectedEventKey(eventKey);
 		if (eventKey === '1') {
 			setShowAddPageModal(true);
 		}

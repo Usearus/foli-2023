@@ -22,7 +22,6 @@ const SideBarAssistant = ({ show, close }) => {
 	const [generatedAttempt, setGeneratedAttempt] = useState(false);
 
 	const [response, setResponse] = useState([]);
-	const { userProfile } = useContext(DatabaseContext);
 	const [promptNewPage, setPromptNewPage] = useState('');
 
 	const [selectedNewPage, setSelectedNewPage] = useState('');
