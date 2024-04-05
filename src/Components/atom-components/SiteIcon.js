@@ -10,7 +10,7 @@ const SiteIcon = () => {
 						fontWeight: 700,
 						fontSize: '1.5rem',
 						cursor: 'default',
-						paddingRight: '.25rem',
+						paddingRight: '2rem',
 						color: 'var(--primary-700)',
 					}}>
 					fol<i>i</i>
