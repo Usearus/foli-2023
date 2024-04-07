@@ -25,14 +25,24 @@ const PageList = ({ className }) => {
 			(page) => page.id === selectedPageID
 		);
 		// Scroll to the Page that is selected in Sidebar
-		if (pageToScrollTo) {
+		if (pageToScrollTo && pageToScrollTo.ref.current) {
 			pageToScrollTo.ref.current.scrollIntoView({ behavior: 'smooth' });
-		}
-		// Scroll to the last page when currentPages increases
-		if (currentPages.length > prevLengthRef.current) {
-			lastPageRef.current.scrollIntoView({ behavior: 'smooth' });
+		} else {
+			// If scrollIntoView is null or pageToScrollTo is not found, set the current page to the first page
+			const firstPage = pageRef.current[0];
+			if (firstPage && firstPage.ref.current) {
+				firstPage.ref.current.scrollIntoView({ behavior: 'smooth' });
+			}
 		}
 
+		// Scroll to the last page when currentPages increases
+		if (currentPages.length > prevLengthRef.current) {
+			if (lastPageRef.current && lastPageRef.current.scrollIntoView) {
+				lastPageRef.current.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
+
+		// Update prevLengthRef.current
 		prevLengthRef.current = currentPages.length;
 	}, [selectedPageID, currentPages.length]);
 

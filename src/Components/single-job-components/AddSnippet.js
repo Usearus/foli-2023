@@ -3,7 +3,6 @@ import useAlert from '../../Custom Hooks/useAlert';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { supabase } from '../../API/supabase';
-import { IoIosAdd } from 'react-icons/io';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -19,7 +18,7 @@ const AddSnippet = ({
 	const { setAlert } = useAlert();
 	const { user } = useAuth0();
 
-	const { currentJob, fetchUserSnippets } = useContext(DatabaseContext);
+	const { currentJob } = useContext(DatabaseContext);
 	const [editing, setediting] = useState(false);
 	const valueRef = useRef();
 

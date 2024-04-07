@@ -7,9 +7,9 @@ const SiteIcon = () => {
 			<>
 				<span
 					style={{
-						fontWeight: 700,
+						fontWeight: 600,
 						fontSize: '1.5rem',
-						cursor: 'default',
+						cursor: 'pointer',
 						paddingRight: '2rem',
 						color: 'var(--primary-700)',
 					}}>

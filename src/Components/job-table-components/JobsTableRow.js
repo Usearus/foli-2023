@@ -3,7 +3,6 @@ import { DatabaseContext } from '../../context/DatabaseContext';
 import { useNavigate } from 'react-router-dom';
 import ModalDeleteConfirmation from '../modal-components/ModalDeleteConfirmation';
 import { Dropdown } from 'react-bootstrap';
-import styled from 'styled-components';
 import { FiMoreVertical } from 'react-icons/fi';
 import ModalEditJob from '../modal-components/ModalEditJob';
 import DropdownStageSelect from '../atom-components/DropdownStageSelect';
@@ -14,7 +13,6 @@ const JobsTableRow = (job) => {
 
 	const navigate = useNavigate();
 
-	const [selectedEventKey, setSelectedEventKey] = useState(null);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [showEditModal, setShowEditModal] = useState(false);
 
@@ -24,9 +22,7 @@ const JobsTableRow = (job) => {
 		navigate(`/job/id:${job.id}`);
 	};
 
-	// Will handle any modal option selected
 	const handleSelect = (eventKey) => {
-		setSelectedEventKey(eventKey);
 		if (eventKey === '1') {
 			setShowEditModal(true);
 		}
@@ -122,5 +118,3 @@ const JobsTableRow = (job) => {
 };
 
 export default JobsTableRow;
-
-const Wrapper = styled.div``;
