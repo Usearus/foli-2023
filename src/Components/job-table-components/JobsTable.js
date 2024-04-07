@@ -130,7 +130,7 @@ const Wrapper = styled.div`
 
 	th {
 		cursor: pointer;
-		font-weight: 600;
+		font-weight: 400;
 		background: var(--grey-50);
 	}
 
@@ -139,7 +139,7 @@ const Wrapper = styled.div`
 	}
 
 	th.active-header {
-		background-color: var(--primary-50);
+		background-color: var(--grey-100);
 	}
 
 	.table tbody:hover {

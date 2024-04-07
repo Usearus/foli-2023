@@ -424,7 +424,7 @@ const Wrapper = styled.div`
 		height: 100%;
 		background: var(--white);
 		border: 2px solid var(--primary-200);
-		border-radius: 0.5rem;
+		/* border-radius: 0.5rem; */
 	}
 
 	.page-content {
