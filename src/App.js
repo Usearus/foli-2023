@@ -12,18 +12,11 @@ import ResumeBuilderPage from './Pages/ResumeBuilderPage';
 import NavBar from './Components/global-components/NavBar';
 import AlertPopup from './Components/global-components/AlertPopup';
 import styled from 'styled-components';
-import { useEffect, useContext } from 'react';
-import { DatabaseContext } from './context/DatabaseContext';
+// import { useContext } from 'react';
+// import { DatabaseContext } from './context/DatabaseContext';
 
 const App = () => {
-	const { userProfile } = useContext(DatabaseContext);
-
-	useEffect(() => {
-		document.documentElement.style.setProperty(
-			'--use-dark-theme',
-			userProfile.theme === 'dark' ? 'true' : 'false'
-		);
-	}, [userProfile.theme]);
+	// const { userProfile } = useContext(DatabaseContext);
 
 	return (
 		<Wrapper>

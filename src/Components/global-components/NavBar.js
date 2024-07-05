@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import {
 	Nav,
 	Navbar,
-	// Button,
+	Button,
 	Offcanvas,
 	OffcanvasHeader,
 	OffcanvasTitle,
@@ -14,15 +14,9 @@ import ModalProfile from '../modal-components/ModalProfile';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import { FiMenu } from 'react-icons/fi';
 import SiteIcon from '../atom-components/SiteIcon';
-// import useAlert from '../../Custom Hooks/useAlert';
-// import { supabase } from '../../API/supabase';
-import { IconButton, Button } from '@fluentui/react-components';
 
 const NavBar = () => {
 	const { userProfile, adminProfile } = useContext(DatabaseContext);
-
-	// Show this if you want to test the auto-increment function
-	// const { IncrementNumberFromDatabase } = useContext(DatabaseContext);
 
 	if (userProfile) {
 		return (
@@ -71,25 +65,21 @@ const NavBar = () => {
 
 						{/* Navigation Header on sidebar modal */}
 						<Offcanvas.Body>
-							<Stack>
+							<Nav variant='pills' className='me-auto'>
 								<LinkContainer to='/'>
-									<Button active={false}>Jobs</Button>
+									<Nav.Link active={false}>Jobs</Nav.Link>
 								</LinkContainer>
 								{adminProfile ? (
 									<>
 										<LinkContainer to='/resume'>
-											<Button active={false}>Resume</Button>
+											<Nav.Link active={false}>Resume</Nav.Link>
 										</LinkContainer>
 										<LinkContainer to='/testing'>
 											<Nav.Link active={false}>Admin</Nav.Link>
 										</LinkContainer>
 									</>
 								) : null}
-							</Stack>
-
-							{/* Show this if you want to test the auto-increment function 
-							{IncrementNumberFromDatabase()}*/}
-
+							</Nav>{' '}
 							<ModalProfile />
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>
