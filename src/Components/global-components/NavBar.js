@@ -7,7 +7,7 @@ import {
 	Offcanvas,
 	OffcanvasHeader,
 	OffcanvasTitle,
-	Stack,
+	// Stack,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import ModalProfile from '../modal-components/ModalProfile';
