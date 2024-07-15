@@ -75,6 +75,7 @@ const DatabaseProvider = ({ children }) => {
 	// SET USER DATA
 	const [userProfile, setUserProfile] = useState([]);
 	const [userJobs, setUserJobs] = useState([]);
+	const [userJobsArchived, setUserJobsArchived] = useState([]);
 	const [userPages, setUserPages] = useState([]);
 	const [settingPageStack, setSettingPageStack] = useState('');
 	const [userResume, setUserResume] = useState([]);
@@ -106,6 +107,7 @@ const DatabaseProvider = ({ children }) => {
 				const onboardingJob2 = await createOnboardingJob2();
 				await createOnboardingPages2(onboardingJob2);
 				fetchUserJobs();
+				fetchUserJobsArchived();
 				createUserResume();
 				fetchUserResume();
 			}
@@ -264,10 +266,25 @@ const DatabaseProvider = ({ children }) => {
 			const { data } = await supabase
 				.from('jobs')
 				.select('*')
-				.filter('account', 'eq', auth0Email);
+				.filter('account', 'eq', auth0Email)
+				.not('status', 'eq', 'Archived');
 			if (data) {
 				setUserJobs(data);
 				// console.log('userJobs are', data);
+			}
+		}
+	}
+
+	async function fetchUserJobsArchived() {
+		if (auth0Email) {
+			const { data } = await supabase
+				.from('jobs')
+				.select('*')
+				.filter('account', 'eq', auth0Email)
+				.filter('status', 'eq', 'Archived');
+			if (data) {
+				setUserJobsArchived(data);
+				// console.log('userJobsArchived are', data);
 			}
 		}
 	}
@@ -315,6 +332,7 @@ const DatabaseProvider = ({ children }) => {
 	useEffect(() => {
 		fetchUserProfile();
 		fetchUserJobs();
+		fetchUserJobsArchived();
 		fetchUserPages();
 		fetchUserResume();
 		fetchUserSnippets();
@@ -442,10 +460,12 @@ const DatabaseProvider = ({ children }) => {
 				//Jobs
 				allJobs,
 				userJobs,
+				userJobsArchived,
 				currentJob,
 				setAllJobs,
 				fetchAllJobs,
 				fetchUserJobs,
+				fetchUserJobsArchived,
 				setCurrentJob,
 				fetchCurrentJob,
 				createdJobID,

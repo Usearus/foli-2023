@@ -6,13 +6,21 @@ import TopBarTable from '../Components/job-table-components/TopBarTable';
 import Loader from '../Components/atom-components/Loader';
 import styled from 'styled-components';
 import useAlert from '../Custom Hooks/useAlert';
-import { Form, Button, InputGroup, Stack, Modal } from 'react-bootstrap';
+import {
+	Form,
+	Button,
+	InputGroup,
+	Stack,
+	Modal,
+	Tabs,
+	Tab,
+} from 'react-bootstrap';
 import { supabase } from '../API/supabase';
 import FoliBadge from '../Components/atom-components/FoliBadge';
 // import ModalOnboarding from '../Components/ModalOnboarding';
 
 const JobsPage = () => {
-	const { userJobs, userProfile, fetchUserProfile } =
+	const { userJobs, userJobsArchived, userProfile, fetchUserProfile } =
 		useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 	const [showModal, setShowModal] = useState(false);
@@ -75,18 +83,15 @@ const JobsPage = () => {
 		}
 	};
 
+	// Function for Tabs to work correctly
+	const [key, setKey] = useState('active');
+
 	if (!userProfile) {
 		return <></>;
 	}
 
 	if (isOnboarded === false) {
 		return (
-			// FAILED ATTEMPT AT MAKING A COMPONENT FOR THIS
-			// <ModalOnboarding
-			//     show={showModal}
-			//     setIsOnboarded={setIsOnboarded}
-			//     setShowModal={setShowModal}
-			// />
 			<Modal
 				show={showModal}
 				backdrop='static'
@@ -204,7 +209,20 @@ const JobsPage = () => {
 		return (
 			<Wrapper>
 				<TopBarTable />
-				<JobsTable jobs={userJobs} />
+				<div id='table-container'>
+					<Tabs
+						id='controlled-tab-example'
+						activeKey={key}
+						onSelect={(k) => setKey(k)}
+						className='custom-tabs'>
+						<Tab eventKey='active' title='Active'>
+							<JobsTable jobs={userJobs} />
+						</Tab>
+						<Tab eventKey='archived' title='Archived'>
+							<JobsTable jobs={userJobsArchived} />
+						</Tab>
+					</Tabs>
+				</div>
 			</Wrapper>
 		);
 	}
@@ -220,9 +238,10 @@ export default JobsPage;
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: start;
 	align-items: center;
 	position: relative;
+	width: 100%;
 	height: calc(100vh - 63px);
 	height: calc(100dvh - 63px);
 
@@ -230,5 +249,42 @@ const Wrapper = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	#table-container {
+		display: flex;
+		flex-direction: column;
+		/* align-items: center; */
+		/* justify-content: center; */
+		max-width: 1200px;
+		width: 100%;
+		padding-left: 16px;
+		padding-right: 16px;
+		height: 100%;
+		overflow-x: hidden;
+	}
+
+	@media (max-width: 576px) {
+		/* Animate when a page is selected */
+		#table-container {
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+	}
+
+	.custom-tabs {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.custom-tabs .nav-item {
+		margin: 0;
+		padding: 0;
+	}
+
+	.custom-tabs .tab-content {
+		margin: 0;
+		padding: 0;
 	}
 `;

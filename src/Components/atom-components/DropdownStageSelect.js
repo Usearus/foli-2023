@@ -6,7 +6,7 @@ import useAlert from '../../Custom Hooks/useAlert';
 import { supabase } from '../../API/supabase';
 
 const DropdownStageSelect = ({ job }) => {
-	const { fetchUserJobs } = useContext(DatabaseContext);
+	const { fetchUserJobs, fetchUserJobsArchived } = useContext(DatabaseContext);
 
 	const { setAlert } = useAlert();
 	const [selectedStatus, setSelectedStatus] = useState(job.status);
@@ -20,8 +20,9 @@ const DropdownStageSelect = ({ job }) => {
 				edited: new Date().toLocaleDateString('en-US'),
 			})
 			.eq('id', job.id);
-		setAlert('Job successfully updated!', 'success');
+		setAlert('Status updated', 'success');
 		fetchUserJobs();
+		fetchUserJobsArchived();
 
 		if (error) {
 			setAlert('Something went wrong. Job not updated.', 'danger');
