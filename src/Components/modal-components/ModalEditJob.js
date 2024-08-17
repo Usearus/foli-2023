@@ -57,11 +57,11 @@ const ModalEditJob = ({ show, close, job }) => {
 				edited: new Date().toLocaleDateString('en-US'),
 			})
 			.eq('id', job.id);
-		setAlert('Job successfully updated!', 'success');
+		setAlert('Job updated', 'success');
 		fetchUserJobs();
 		close();
 		if (error) {
-			setAlert('Something went wrong. Page not updated.', 'danger');
+			setAlert('Unable to update job', 'danger');
 			console.log('error is', error);
 			return;
 		}

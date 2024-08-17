@@ -20,7 +20,7 @@ const TogglePageLayout = () => {
 		fetchUserProfile();
 		// fetchCurrentPages();
 		if (error) {
-			setAlert('Something went wrong. Setting not updated.', 'danger');
+			setAlert('Unable to update', 'danger');
 			console.log('error is', error);
 			return;
 		}

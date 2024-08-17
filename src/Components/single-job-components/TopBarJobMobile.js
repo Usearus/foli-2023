@@ -18,6 +18,7 @@ import DropdownStageSelect from '../atom-components/DropdownStageSelect';
 import SideBarAssistant from './SideBarAssistant';
 import DropdownAddPage from '../atom-components/DropdownAddPage';
 import SideBarSnippets from '../single-job-components/SideBarSnippets';
+import SideBarQuestions from '../single-job-components/SideBarQuestions';
 
 const TopBarJobMobile = ({ className }) => {
 	const { currentJob } = useContext(DatabaseContext);
@@ -95,8 +96,8 @@ const TopBarJobMobile = ({ className }) => {
 					</div>
 					<div className='second-row'>
 						<SideBarAssistant />
+						<SideBarQuestions />
 						<SideBarSnippets />
-
 						<DropdownAddPage />
 					</div>
 					<Navbar.Offcanvas

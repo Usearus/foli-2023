@@ -45,11 +45,11 @@ const AddSnippet = ({
 			fetchSource();
 		}
 
-		setAlert('Successfully updated!', 'success');
+		setAlert('Snippet updated', 'success');
 		setediting(false);
 
 		if (error) {
-			setAlert('Something went wrong. Not updated.', 'danger');
+			setAlert('Unable to update snippet', 'danger');
 			console.log('error is', error);
 			return;
 		}

@@ -25,7 +25,7 @@ const DropdownStageSelect = ({ job }) => {
 		fetchUserJobsArchived();
 
 		if (error) {
-			setAlert('Something went wrong. Job not updated.', 'danger');
+			setAlert('Unable to update', 'danger');
 			console.log('error is', error);
 			return;
 		}

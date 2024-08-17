@@ -97,11 +97,11 @@ const ModalProfile = () => {
 			})
 			.eq('id', userProfile.id);
 		fetchUserProfile();
-		setAlert('Preferences successfully updated!', 'success');
+		setAlert('Preferences updated', 'success');
 		setEditing(false);
 
 		if (error) {
-			setAlert('Something went wrong. Preferences not updated.', 'danger');
+			setAlert('Unable to update preferences', 'danger');
 			console.log('error is', error);
 			return;
 		}

@@ -34,9 +34,9 @@ const ModalAddPage = ({ show, close }) => {
 					position: currentPages.length,
 				})
 				.select();
-			setAlert('Page successfully added!', 'success');
+			setAlert('Page added', 'success');
 			if (error) {
-				setAlert('There was an error adding the page.', 'error');
+				setAlert('Unable to add page', 'error');
 				console.log(error);
 				return;
 			}

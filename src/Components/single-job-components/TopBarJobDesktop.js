@@ -7,6 +7,7 @@ import DropdownAddPage from '../atom-components/DropdownAddPage';
 import DropdownStageSelect from '../atom-components/DropdownStageSelect';
 import TogglePageLayout from '../atom-components/TogglePageLayout';
 import SideBarSnippets from './SideBarSnippets';
+import SideBarQuestions from '../single-job-components/SideBarQuestions';
 
 const TopBarJobDesktop = ({ className }) => {
 	const { setCurrentJob, currentJob } = useContext(DatabaseContext);
@@ -50,6 +51,7 @@ const TopBarJobDesktop = ({ className }) => {
 					</div>
 					<div className='right-content'>
 						<TogglePageLayout />
+						<SideBarQuestions />
 						<SideBarSnippets />
 						<SideBarAssistant />
 						<DropdownAddPage />

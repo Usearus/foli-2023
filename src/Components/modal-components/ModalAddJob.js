@@ -57,12 +57,12 @@ const ModalAddJob = () => {
 			.select();
 
 		if (error) {
-			setAlert('There was an error adding the job.', 'error');
+			setAlert('Unable to add job', 'error');
 			return;
 		}
 
 		fetchUserJobs();
-		setAlert('Job successfully added!', 'success');
+		setAlert('Job added', 'success');
 		const newJobId = data[0].id;
 		// console.log('newJobId', newJobId);
 		await supabase.from('pages').insert({

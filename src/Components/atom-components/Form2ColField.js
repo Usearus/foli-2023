@@ -48,11 +48,11 @@ const Form2ColField = ({
 			})
 			.eq('id', valueSource.id);
 		fetchSource();
-		setAlert('Successfully updated!', 'success');
+		setAlert('Updated', 'success');
 		setEditing(false);
 
 		if (error) {
-			setAlert('Something went wrong. Not updated.', 'danger');
+			setAlert('Unable to update', 'danger');
 			console.log('error is', error);
 			return;
 		}

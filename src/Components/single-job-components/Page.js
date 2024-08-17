@@ -63,7 +63,7 @@ const Page = (page) => {
 		// setAlert('Page successfully added!', 'success');
 
 		if (error) {
-			setAlert('Something went wrong. Page width not updated.', 'danger');
+			setAlert('Unable to update page width.', 'danger');
 			console.log('error is', error);
 			return;
 		}
@@ -122,12 +122,12 @@ const Page = (page) => {
 					content: content,
 				})
 				.eq('id', page.id);
-			setAlert('Page successfully updated!', 'success');
+			setAlert('Page updated', 'success');
 			fetchCurrentPages(currentJob);
 			setEditing(false);
 			setShowEditPageModal(false);
 			if (error) {
-				setAlert('Something went wrong. Page not updated.', 'danger');
+				setAlert('Unable to update page', 'danger');
 				console.log('error is', error);
 				return;
 			}
@@ -140,12 +140,12 @@ const Page = (page) => {
 					title: titleRef.current.value,
 				})
 				.eq('id', page.id);
-			setAlert('Page successfully updated!', 'success');
+			setAlert('Page updated', 'success');
 			fetchCurrentPages(currentJob);
 			setEditing(false);
 			setShowEditPageModal(false);
 			if (error) {
-				setAlert('Something went wrong. Page not updated.', 'danger');
+				setAlert('Unable to update page', 'danger');
 				console.log('error is', error);
 				return;
 			}

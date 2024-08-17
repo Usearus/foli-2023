@@ -18,10 +18,10 @@ const ModalDeleteConfirmation = ({ show, close, type, object }) => {
 				.eq('id', object.id);
 			if (error) {
 				console.error(error);
-				setAlert('Something went wrong. Job not deleted.', 'Danger');
+				setAlert('Unable to delete job.', 'Danger');
 				return;
 			}
-			setAlert('Job successfully deleted!', 'success');
+			setAlert('Job deleted', 'success');
 			fetchUserJobs();
 		}
 		if (type === 'page') {
@@ -31,10 +31,10 @@ const ModalDeleteConfirmation = ({ show, close, type, object }) => {
 				.eq('id', object.id);
 			if (error) {
 				console.error(error);
-				setAlert('Something went wrong. Page not deleted.', 'Danger');
+				setAlert('Unable to delete page', 'Danger');
 				return;
 			}
-			setAlert('Page successfully deleted!', 'success');
+			setAlert('Page deleted', 'success');
 			fetchCurrentPages(currentJob);
 		}
 
@@ -45,10 +45,10 @@ const ModalDeleteConfirmation = ({ show, close, type, object }) => {
 				.eq('id', object.id);
 			if (error) {
 				console.error(error);
-				setAlert('Something went wrong. Snippet not deleted.', 'Danger');
+				setAlert('Unable to delete snippet.', 'Danger');
 				return;
 			}
-			setAlert('Snippet successfully deleted!', 'success');
+			setAlert('Snippet deleted', 'success');
 			fetchUserSnippets();
 		}
 	};
