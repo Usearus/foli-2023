@@ -77,7 +77,7 @@ const JobsPage = () => {
 		setShowModal(false);
 		setIsOnboarded(true);
 		if (error) {
-			setAlert('Something went wrong. Preferences not updated.', 'danger');
+			setAlert('Unable to update preferences', 'danger');
 			console.log('error is', error);
 			return;
 		}

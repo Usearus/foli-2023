@@ -170,16 +170,14 @@ const SideBarSnippets = () => {
 								<Accordion.Header>Professional summary</Accordion.Header>
 								<Accordion.Body>
 									{userSnippets
-										.filter(
-											(snippet) => snippet.category === 'professional summary'
-										)
+										.filter((s) => s.category === 'professional summary')
 										.sort((a, b) => a.created_at.localeCompare(b.created_at))
-										.map((snippet) => (
+										.map((s) => (
 											<SnippetTextInput
-												key={snippet.id}
+												key={s.id}
 												value='content'
 												database='snippets'
-												valueSource={snippet}
+												valueSource={s}
 												fetchSource={fetchUserSnippets}
 												textArea
 												deleteIcon

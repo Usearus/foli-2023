@@ -24,6 +24,7 @@ const DatabaseProvider = ({ children }) => {
 	const [allJobs, setAllJobs] = useState([]);
 	const [allProfiles, setAllProfiles] = useState([]);
 	const [allTemplates, setAllTemplates] = useState([]);
+	const [allQuestions, setAllQuestions] = useState([]);
 
 	// FETCH ALL DATA
 
@@ -63,11 +64,21 @@ const DatabaseProvider = ({ children }) => {
 		}
 	}
 
+	async function fetchAllQuestions() {
+		const { data, error } = await supabase.from('questions').select('*');
+		console.log('allQuestions are', data);
+		setAllQuestions(data);
+		if (error) {
+			console.log(error);
+		}
+	}
+
 	useEffect(() => {
 		fetchAllPages();
 		fetchAllJobs();
 		fetchAllProfiles();
 		fetchAllTemplates();
+		fetchAllQuestions();
 	}, []);
 
 	// *
@@ -493,6 +504,9 @@ const DatabaseProvider = ({ children }) => {
 				setSettingPageStack,
 				// Supabase Hack
 				IncrementNumberFromDatabase,
+				// Questions
+				allQuestions,
+				fetchAllQuestions,
 			}}>
 			{children}
 		</DatabaseContext.Provider>
