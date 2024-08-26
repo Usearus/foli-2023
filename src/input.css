@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.markdown-content {
+  /* * {
+   color: var(--secondaryTextColor);
+ }  */
+/* 
+ a {
+   color: var(--primary-400);
+ } */
+
+ padding: 1rem 1rem;
+
+ h1 {
+   font-size: 1.8rem;
+ }
+
+ h2 {
+   font-size: 1.25rem;
+ }
+
+ h3 {
+   font-size: 1rem;
+ }
+
+ h4 {
+   font-size: 1rem;
+ }
+
+ h5 {
+   font-size: 1rem;
+ }
+ p {
+   margin-bottom: 0;
+ }
+
+ ul li {
+   padding-bottom: .5rem !important;
+   margin-left: 1.5rem;
+   list-style-type: circle !important;
+ }
+}
+
+.page-scroll {
+ height: calc(100vh - 320px); /* 100vh minus the height of the navbar */
+ overflow-y: auto;
+}

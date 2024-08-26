@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.scss';
-import './bs-custom.scss';
-import './animations-custom.scss';
+import './app.css';
+import './input.css';
+import './output.css';
+
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { DatabaseProvider } from './context/DatabaseContext';

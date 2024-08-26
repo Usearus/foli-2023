@@ -14,6 +14,7 @@ const DatabaseProvider = ({ children }) => {
 		function effectSetAuth0Email() {
 			if (user) {
 				setAuth0Email(user.email);
+				// console.log(user.email);
 			}
 		},
 		[user]
@@ -66,7 +67,7 @@ const DatabaseProvider = ({ children }) => {
 
 	async function fetchAllQuestions() {
 		const { data, error } = await supabase.from('questions').select('*');
-		console.log('allQuestions are', data);
+		// console.log('allQuestions are', data);
 		setAllQuestions(data);
 		if (error) {
 			console.log(error);
@@ -88,9 +89,9 @@ const DatabaseProvider = ({ children }) => {
 	const [userJobs, setUserJobs] = useState([]);
 	const [userJobsArchived, setUserJobsArchived] = useState([]);
 	const [userPages, setUserPages] = useState([]);
-	const [settingPageStack, setSettingPageStack] = useState('');
 	const [userResume, setUserResume] = useState([]);
 	const [userSnippets, setUserSnippets] = useState([]);
+	const [userTheme, setUserTheme] = useState([]);
 
 	// SET ADMIN DATA
 	const [adminProfile, setAdminProfile] = useState(false);
@@ -109,8 +110,12 @@ const DatabaseProvider = ({ children }) => {
 				.single();
 			if (data) {
 				setUserProfile(data);
-				setSettingPageStack(data.page_stack);
-				// console.log('userProfile is', data);
+				// THIS IS PROBABLY MAKING THE THEME REFRESH> NEED TO FIGURE OUT HOW TO DO ONLY ONCE.
+				const theme = data.theme || 'light';
+				setUserTheme(theme);
+				document.documentElement.setAttribute('data-theme', data.theme);
+				console.log('userProfile is', data);
+				// console.log('user theme is', data.theme);
 			} else {
 				createUserProfile();
 				const onboardingJob1 = await createOnboardingJob1();
@@ -121,11 +126,10 @@ const DatabaseProvider = ({ children }) => {
 				fetchUserJobsArchived();
 				createUserResume();
 				fetchUserResume();
+				setUserTheme('light');
 			}
 		}
 	}
-	// console.log(settingPageStack);
-	// console.log('userProfile is', userProfile);
 
 	async function createUserProfile() {
 		if (auth0Email) {
@@ -308,7 +312,7 @@ const DatabaseProvider = ({ children }) => {
 				.filter('account', 'eq', auth0Email);
 			if (data) {
 				setUserPages(data);
-				console.log('userPages are', data);
+				// console.log('userPages are', data);
 			}
 		}
 	}
@@ -335,7 +339,7 @@ const DatabaseProvider = ({ children }) => {
 				.filter('account', 'eq', auth0Email);
 			if (data) {
 				setUserSnippets(data);
-				console.log('userSnippets are', data);
+				// console.log('userSnippets are', data);
 			}
 		}
 	}
@@ -347,6 +351,8 @@ const DatabaseProvider = ({ children }) => {
 		fetchUserPages();
 		fetchUserResume();
 		fetchUserSnippets();
+		// console.log(localStorage);
+		// console.log(currentJob);
 		return () => {
 			// Cleanup // TODO figure out how to fix this useEffect issue
 		};
@@ -359,18 +365,45 @@ const DatabaseProvider = ({ children }) => {
 	const [currentJob, setCurrentJob] = useState([]);
 	const [selectedPageID, setSelectedPageID] = useState(null); // used to select a page to scroll to on page list
 
+	// Initialize currentJob from localStorage
+	useEffect(() => {
+		const savedJob = localStorage.getItem('currentJob');
+		if (savedJob) {
+			setCurrentJob(JSON.parse(savedJob));
+		}
+
+		const savedPages = localStorage.getItem('currentPages');
+		if (savedPages) {
+			setCurrentPages(JSON.parse(savedPages));
+		}
+	}, []);
+
 	async function fetchCurrentJob(job) {
-		// console.log('job received for fetch:', job);
-		const { data } = await supabase
+		// Fetch the job data from Supabase based on the job ID
+		const { data, error } = await supabase
 			.from('jobs')
 			.select('*')
 			.filter('id', 'eq', job.id)
 			.single();
+
+		if (error) {
+			console.error('Error fetching current job:', error);
+			return;
+		}
+
 		if (data) {
+			// Set the current job data to the state
 			setCurrentJob(data);
-			// console.log('currentJob is', data);
+
+			// Store the current job data in localStorage
 			localStorage.setItem('currentJob', JSON.stringify(data));
-			// console.log('currentJob is', data);
+
+			// Log the data to verify
+			console.log('currentJob is', data);
+			console.log(
+				'localStorage for currentJob',
+				JSON.parse(localStorage.getItem('currentJob'))
+			);
 		}
 	}
 
@@ -387,63 +420,6 @@ const DatabaseProvider = ({ children }) => {
 			setCurrentPages(sortedPages);
 		}
 	}
-
-	// *
-	// *
-
-	const IncrementNumberFromDatabase = () => {
-		const [numberFromDatabase, setNumberFromDatabase] = useState(null);
-
-		useEffect(() => {
-			const fetchAndIncrementNumber = async () => {
-				try {
-					// Fetch the initial number from your Supabase database
-					const { data, error } = await supabase
-						.from('profiles')
-						.select('salary_max')
-						.filter('email', 'eq', 'adamdenais@gmail.com')
-						.single();
-
-					if (error) {
-						throw error;
-					}
-
-					// Increment the fetched number
-					const incrementedNumber = data.salary_max + 1;
-
-					// Update the number in the Supabase database
-					await supabase
-						.from('profiles')
-						.update({ salary_max: incrementedNumber })
-						.filter('email', 'eq', 'adamdenais@gmail.com');
-
-					// Set the incremented number to state
-					setNumberFromDatabase(incrementedNumber);
-				} catch (error) {
-					console.error(
-						'Error fetching and incrementing number from database:',
-						error.message
-					);
-				}
-			};
-
-			// Fetch and increment the number initially
-			fetchAndIncrementNumber();
-
-			// Fetch and increment the number every 10 seconds
-			const intervalId = setInterval(fetchAndIncrementNumber, 86400000);
-
-			return () => {
-				clearInterval(intervalId);
-			};
-		}, []); // Fetch number only once on component mount
-
-		return (
-			<div>
-				<p>{numberFromDatabase}</p>
-			</div>
-		);
-	};
 
 	// *
 	// *
@@ -485,6 +461,8 @@ const DatabaseProvider = ({ children }) => {
 				allProfiles,
 				userProfile,
 				fetchUserProfile,
+				userTheme,
+				setUserTheme,
 				//Templates\
 				allTemplates,
 				setAllTemplates,
@@ -499,11 +477,6 @@ const DatabaseProvider = ({ children }) => {
 				// Snippets
 				userSnippets,
 				fetchUserSnippets,
-				// Settings
-				settingPageStack,
-				setSettingPageStack,
-				// Supabase Hack
-				IncrementNumberFromDatabase,
 				// Questions
 				allQuestions,
 				fetchAllQuestions,

@@ -1,117 +1,78 @@
-import { useContext, useEffect } from 'react';
-import { Container, Stack } from 'react-bootstrap';
-import styled from 'styled-components';
+import { useContext } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
-import SideBarAssistant from './SideBarAssistant';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
+
+// import SideBarAssistant from './SideBarAssistant';
 import DropdownAddPage from '../atom-components/DropdownAddPage';
-import DropdownStageSelect from '../atom-components/DropdownStageSelect';
-import TogglePageLayout from '../atom-components/TogglePageLayout';
-import SideBarSnippets from './SideBarSnippets';
-import SideBarQuestions from '../single-job-components/SideBarQuestions';
+// import DropdownStageSelect from '../atom-components/DropdownStageSelect';
+// import SideBarSnippets from './SideBarSnippets';
+// import SideBarQuestions from '../single-job-components/SideBarQuestions';
 
-const TopBarJobDesktop = ({ className }) => {
-	const { setCurrentJob, currentJob } = useContext(DatabaseContext);
-
-	useEffect(() => {
-		const jobFromStorage = localStorage.getItem('currentJob');
-		setCurrentJob(JSON.parse(jobFromStorage));
-	}, [setCurrentJob]);
+const TopBarJobDesktop = () => {
+	const { currentJob } = useContext(DatabaseContext);
 
 	return (
-		<Wrapper className={className}>
-			<Container fluid>
-				<Stack direction='horizontal' gap={3} className='top-bar-container'>
-					<div className='left-content'>
-						<div className='title-content'>
-							{currentJob ? (
-								<>
-									<h5
-										style={{ fontWeight: '600', color: 'var(--primary-700)' }}>
-										{currentJob.company}{' '}
-									</h5>
-									<div className='truncate'>
-										{currentJob.link ? (
-											<a
-												style={{ cursor: 'pointer' }}
-												href={currentJob.link}
-												target='_blank'
-												rel='noreferrer'>
-												{currentJob.position}
-											</a>
-										) : (
-											currentJob.position
-										)}
-									</div>
-								</>
-							) : (
-								''
-							)}
-						</div>
-						<DropdownStageSelect job={currentJob} />
+		<div className='p-4 row-span-1 col-span-1 lg:col-span-2 bg-base-200 flex items-center justify-between '>
+			<div className='flex gap-6 items-center'>
+				<div className='max-w-[200px]'>
+					<p className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>
+						{currentJob.company}
+					</p>
+
+					{currentJob.link ? (
+						<a href={currentJob.link} target='_blank' rel='noreferrer'>
+							<p className='link link-primary text-sm whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer'>
+								{currentJob.position}
+							</p>
+						</a>
+					) : (
+						<p className='text-sm whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer'>
+							{currentJob.position}
+						</p>
+					)}
+				</div>
+				<div className='dropdown dropdown-end'>
+					<div
+						tabIndex={0}
+						role='button'
+						className='btn btn-xs btn-outline flex justify-between min-w-32'>
+						{currentJob.status} <ChevronDownIcon />
 					</div>
-					<div className='right-content'>
-						<TogglePageLayout />
-						<SideBarQuestions />
-						<SideBarSnippets />
-						<SideBarAssistant />
-						<DropdownAddPage />
-					</div>
-				</Stack>
-			</Container>
-		</Wrapper>
+					<ul
+						tabIndex={0}
+						className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
+						<li>
+							<button>Interested</button>
+						</li>
+						<li>
+							<button>Applied</button>
+						</li>
+						<li>
+							<button>Interviewing</button>
+						</li>
+						<li>
+							<button>Negotiating</button>
+						</li>
+						<li>
+							<button>Accepted</button>
+						</li>
+						<li>
+							<button>Declined</button>
+						</li>
+						<li>
+							<button>Rejected</button>
+						</li>
+						<li>
+							<button>Archived</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div>
+				<DropdownAddPage />
+			</div>
+		</div>
 	);
 };
 
 export default TopBarJobDesktop;
-
-const Wrapper = styled.div`
-	position: sticky;
-	z-index: 1;
-
-	.horizontal-stack {
-		flex-wrap: none;
-	}
-
-	.vertical-stack {
-		flex-wrap: wrap;
-		padding: 0.5rem 5rem 0.5rem 5rem;
-	}
-
-	.top-bar-container {
-		background: var(--grey-200);
-		justify-content: space-between;
-		border-bottom: 1px solid var(--grey-200);
-		color: var(--grey-700);
-		padding: 1rem;
-	}
-
-	.left-content {
-		display: flex;
-		flex-direction: row;
-		justify-content: stretch;
-		align-items: center;
-		gap: 1rem;
-	}
-	.title-content {
-		max-width: 300px;
-	}
-
-	.truncate {
-		white-space: nowrap; /* prevent the text from wrapping to a new line */
-		overflow: hidden; /* hide any text that overflows the element */
-		text-overflow: ellipsis;
-	}
-
-	/* Mobile */
-	@media (max-width: 576px) {
-		.truncate {
-			display: none;
-		}
-	}
-
-	.right-content {
-		display: flex;
-		flex-direction: row;
-		gap: 1rem;
-	}
-`;

@@ -1,100 +1,150 @@
-import { useState, useContext } from 'react';
-import styled from 'styled-components';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
-import ModalAddPage from '../modal-components/ModalAddPage';
-import SideBarTemplates from '../single-job-components/template-components/SideBarTemplates';
-import SideBarAssistant from '../single-job-components/SideBarAssistant';
-import { BiFileBlank } from 'react-icons/bi';
-import { GrTemplate } from 'react-icons/gr';
-import { AiOutlineRobot } from 'react-icons/ai';
+import { useState, useRef, useContext } from 'react';
+import { supabase } from '../../API/supabase';
+import { useAuth0 } from '@auth0/auth0-react';
 import { DatabaseContext } from '../../context/DatabaseContext';
+import useAlert from '../../Custom Hooks/useAlert';
+import ReactQuillEditor from '../atom-components/ReactQuillEditor';
 
 const DropdownAddPage = () => {
-	const [showAddPageModal, setShowAddPageModal] = useState(false);
-	const [showSideBarTemplates, setShowSideBarTemplates] = useState(false);
-	const [showSidebarAssistant, setShowSidebarAssistant] = useState(false);
-	const { setPreviewTemplate, setActiveTemplate } = useContext(DatabaseContext);
+	const { setAlert } = useAlert();
+	const { user } = useAuth0();
+	const { currentJob, currentPages, fetchCurrentPages, setSelectedPageID } =
+		useContext(DatabaseContext);
+	const [validated, setValidated] = useState(false);
+	const titleRef = useRef();
+	const [content, setContent] = useState('');
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [characterCount, setCharacterCount] = useState(0);
+	const titleMaxChar = 32;
 
-	const handleSelect = (eventKey) => {
-		if (eventKey === '1') {
-			setShowAddPageModal(true);
-		}
-		if (eventKey === '2') {
-			setShowSideBarTemplates(true);
-		}
-		if (eventKey === '3') {
-			setShowSidebarAssistant(true);
+	const handleAddPageClick = async () => {
+		if (currentJob) {
+			await supabase.from('jobs').select().eq('id', currentJob.id);
+
+			const { data, error } = await supabase
+				.from('pages')
+				.insert({
+					account: user.email,
+					title: titleRef.current.value,
+					content: content,
+					jobid: currentJob.id,
+					position: currentPages.length,
+				})
+				.select();
+			setAlert('Page added', 'success');
+			if (error) {
+				setAlert('Unable to add page', 'error');
+				console.log(error);
+				return;
+			}
+
+			fetchCurrentPages(currentJob);
+			const newPageId = data[0].id;
+			setSelectedPageID(newPageId);
+			setIsModalOpen(false);
 		}
 	};
 
-	const handleCloseReset = () => {
-		setShowAddPageModal(false);
-		setShowSideBarTemplates(false);
-		setShowSidebarAssistant(false);
-		setActiveTemplate(null);
-		setPreviewTemplate(false);
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		event.stopPropagation();
+		const form = event.currentTarget;
+		if (form.checkValidity() === true) {
+			setValidated(false);
+			handleAddPageClick();
+		} else {
+			setValidated(true);
+		}
+	};
+
+	// const handleTitleChange = (event) => {
+	// 	const newValue = event.target.value;
+	// 	setCharacterCount(newValue.length);
+	// };
+
+	const handleClose = () => {
+		setIsModalOpen(false);
+		setContent('');
+	};
+
+	const AddPageModal = () => {
+		return (
+			<>
+				{isModalOpen && (
+					<dialog className='modal modal-open'>
+						<div className='modal-box bg-base-200'>
+							<form onSubmit={handleSubmit}>
+								<button
+									type='button'
+									onClick={handleClose}
+									className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>
+									✕
+								</button>
+								<h3 className='font-bold text-lg'>Add page</h3>
+								<div className='pt-4 flex flex-col gap-4'>
+									{/* Title */}
+									<label className='form-control w-full'>
+										<div className='label'>
+											<span className='label-text'>Page title</span>
+											{/* <span className='label-text-alt'>
+												{characterCount}/{titleMaxChar}
+											</span> */}
+										</div>
+										<input
+											type='text'
+											required
+											ref={titleRef}
+											maxLength={titleMaxChar}
+											// onChange={handleTitleChange}
+											className='input input-bordered w-full'
+										/>
+									</label>
+									{/* Quill Content */}
+									{/* <label className='form-control w-full'>
+										<div className='label'>
+											<span className='label-text'>Content</span>
+										</div>
+										<div className='min-h-[300px]'>
+											<ReactQuillEditor value={content} />
+										</div>
+									</label> */}
+									<div className='modal-action'>
+										<button type='submit' className='btn btn-primary btn-sm'>
+											Add
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</dialog>
+				)}
+			</>
+		);
 	};
 
 	return (
-		<Wrapper>
-			<DropdownButton
-				title='Add page'
-				id='add-page-dropdown'
-				align='end'
-				onSelect={handleSelect}>
-				<Dropdown.Item
-					eventKey='1'
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						padding: '.5rem 1rem',
-					}}>
-					<BiFileBlank style={{ marginRight: '.5rem' }} />
-					Blank page
-				</Dropdown.Item>
-				<Dropdown.Item
-					eventKey='2'
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						padding: '.5rem 1rem',
-					}}>
-					<GrTemplate style={{ marginRight: '.5rem' }} /> Use template
-				</Dropdown.Item>
-				<Dropdown.Item
-					eventKey='3'
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						padding: '.5rem 1rem',
-					}}>
-					<AiOutlineRobot style={{ marginRight: '.5rem' }} /> Use AI assistant
-				</Dropdown.Item>
-			</DropdownButton>
-			{showAddPageModal && (
-				<ModalAddPage show={showAddPageModal} close={handleCloseReset} />
-			)}
-			{showSideBarTemplates && (
-				<SideBarTemplates
-					show={showSideBarTemplates}
-					close={handleCloseReset}
-				/>
-			)}
-			{showSidebarAssistant && (
-				<SideBarAssistant
-					show={showSidebarAssistant}
-					close={handleCloseReset}
-				/>
-			)}
-		</Wrapper>
+		<>
+			<AddPageModal />
+			<div className='dropdown dropdown-bottom dropdown-end'>
+				<div tabIndex={0} role='button' className='btn btn-sm btn-primary m-1'>
+					Add page
+				</div>
+				<ul
+					tabIndex={0}
+					className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
+					<li>
+						<button onClick={() => setIsModalOpen(true)}>Blank page</button>
+					</li>
+					<li className='disabled'>
+						<button>Use template</button>
+					</li>
+					<li className='disabled'>
+						<button>Use AI assistant</button>
+					</li>
+				</ul>
+			</div>
+		</>
 	);
 };
-
-const Wrapper = styled.section`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-`;
 
 export default DropdownAddPage;

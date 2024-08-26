@@ -1,101 +1,72 @@
 import { Routes, Route } from 'react-router-dom';
-import {
-	LoginPage,
-	ErrorPage,
-	JobsPage,
-	SingleJobPage,
-	TestingPage,
-	PrivateRoute,
-	AuthWrapper,
-} from './Pages';
-import ResumeBuilderPage from './Pages/ResumeBuilderPage';
-import NavBar from './Components/global-components/NavBar';
-import AlertPopup from './Components/global-components/AlertPopup';
-import styled from 'styled-components';
-// import { useContext } from 'react';
-// import { DatabaseContext } from './context/DatabaseContext';
+import AuthWrapper from './Pages/AuthWrapper';
+import ErrorPage from './Pages/ErrorPage';
+import JobsPage from './Pages/JobsPage';
+import LoginPage from './Pages/LoginPage';
+import PrivateRoute from './Pages/PrivateRoute';
+import SingleJobPage from './Pages/SingleJobPage';
+import TestingPage from './Pages/TestingPage';
+import SettingsPage from './Pages/SettingsPage';
+import Layout from './layout';
 
 const App = () => {
-	// const { userProfile } = useContext(DatabaseContext);
-
 	return (
-		<Wrapper>
-			<AuthWrapper>
-				<Routes>
-					<Route path='/login' element={<LoginPage />} />
-					<Route
-						path='/'
-						element={
-							<PrivateRoute>
-								<AlertPopup />
-								<NavBar />
+		<AuthWrapper>
+			<Routes>
+				<Route path='/login' element={<LoginPage />} />
+				<Route
+					path='/'
+					element={
+						<PrivateRoute>
+							<Layout>
 								<JobsPage />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/job/:id'
-						element={
-							<PrivateRoute>
-								<AlertPopup />
-								<div className='nav-desktop-only'>
-									<NavBar />
-								</div>
+							</Layout>
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='/job/:id'
+					element={
+						<PrivateRoute>
+							<Layout>
 								<SingleJobPage />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/testing'
-						element={
-							<PrivateRoute>
-								<AlertPopup />
-								<NavBar />
+							</Layout>
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='/test'
+					element={
+						<PrivateRoute>
+							<Layout>
 								<TestingPage />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/resume'
-						element={
-							<PrivateRoute>
-								<AlertPopup />
-								<NavBar />
-								<ResumeBuilderPage />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='*'
-						element={
-							<>
-								<NavBar />
+							</Layout>
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='/settings'
+					element={
+						<PrivateRoute>
+							<Layout>
+								<SettingsPage />
+							</Layout>
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='*'
+					element={
+						<>
+							<Layout>
 								<ErrorPage />
-							</>
-						}
-					/>
-				</Routes>
-			</AuthWrapper>
-		</Wrapper>
+							</Layout>
+						</>
+					}
+				/>
+			</Routes>
+		</AuthWrapper>
 	);
 };
 
 export default App;
-
-const Wrapper = styled.div`
-	height: 100%;
-	width: 100vw;
-	position: relative;
-
-	@media (min-width: 576px) {
-		.nav-desktop-only {
-			display: block;
-		}
-	}
-
-	@media (max-width: 576px) {
-		.nav-desktop-only {
-			display: none;
-		}
-	}
-`;

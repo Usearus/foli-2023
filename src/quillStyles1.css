@@ -1,0 +1,152 @@
+/* quillStyles1.css */
+/* STYLING FOR PAGES */
+
+
+/* Define global CSS variables for light theme */
+:root {
+  --quill-border-color: #e5e7eb; /* Tailwind's border color */
+  --quill-border-radius: 0.5rem; /* Tailwind's rounded-lg */
+  --quill-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tailwind's shadow-sm */
+  
+  --quill-background-color: #FFFFFF; /* Tailwind's bg-base-100 */
+  --quill-text-color: #1f2937; /* Tailwind's text-base-content */
+  --quill-link-color: #2563eb; /* Tailwind's text-primary */
+  --quill-placeholder-color: #9ca3af; /* Tailwind's text-muted */
+  
+  --quill-toolbar-background: #ffffff; /* Tailwind's bg-base-100 */
+  --quill-toolbar-border-color: #e5e7eb; /* Tailwind's border color */
+  --quill-toolbar-button-color: #4b5563; /* Tailwind's text-secondary */
+  --quill-toolbar-button-hover-color: #2563eb; /* Tailwind's text-primary on hover */
+  --quill-toolbar-button-active-color: #1d4ed8; /* Tailwind's text-primary dark */
+
+  --quill-neutral-content: #A4A4AC; 
+}
+
+/* Define CSS variables for dark theme */
+[data-theme='dark'] {
+  --quill-border-color: #374151; /* Tailwind's border color in dark mode */
+  --quill-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Tailwind's shadow-md */
+  
+  --quill-background-color: #1D232A; /* Tailwind's bg-base-200 in dark mode */
+  --quill-text-color: #e5e7eb; /* Tailwind's text-base-content in dark mode */
+  --quill-link-color: #3b82f6; /* Tailwind's text-primary in dark mode */
+  --quill-placeholder-color: #6b7280; /* Tailwind's text-muted in dark mode */
+  
+  --quill-toolbar-background:#2d3748; /* Tailwind's bg-base-300 in dark mode */
+  --quill-toolbar-border-color: #4a5568; /* Tailwind's border color in dark mode */
+  --quill-toolbar-button-color: #e5e7eb; /* Tailwind's text-base-content in dark mode */
+  --quill-toolbar-button-hover-color: #60a5fa; /* Tailwind's text-primary on hover in dark mode */
+  --quill-toolbar-button-active-color: #2563eb; /* Tailwind's text-primary dark in dark mode */
+
+  --quill-neutral-content: #a6adbb;
+}
+
+/* Style the Quill editor */
+
+.ql-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--quill-background-color) !important;
+  /* padding: 0 !important; */
+  /* border-radius: 8px 8px 0 0 !important; */
+  /* border-color: var(--quill-border-color) !important; */
+  border: 0 !important;
+}
+
+/* Getting some of the buttons */
+.ql-formats > * {
+  color: var(--quill-toolbar-button-color) !important;
+  stroke: var(--quill-toolbar-button-color) !important;
+}
+
+/* This is items in a list when clicking a dropdown button */
+.ql-picker-item::before {
+  color: var(--quill-neutral-color) !important;
+}
+
+.ql-formats > span {
+  color: var(--quill-toolbar-button-color) !important;
+}
+
+.ql-formats > span.active {
+  color: var(--quill-toolbar-button-active-color) !important;
+}
+
+.ql-formats > span:hover {
+  color: var(--quill-toolbar-button-hover-color) !important;
+}
+
+
+/* Container that holds the editor */
+.ql-container {
+  border: 0 !important;
+  /* display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  min-height:0 !important; */
+}
+
+/* This is the placeholder text */
+.ql-blank::before {
+  color: var(--quill-neutral-color) !important;
+  font-style: normal !important;
+}
+
+/* Container that sets the content */
+.ql-editor ul > li::before {
+  content: '';
+}
+
+/* This is the editor */
+.ql-editor {
+  font-size: 16px !important;
+  /* flex-grow: 1 !important;
+  min-height:0 !important;
+  overflow-y: auto !important; */
+
+  /* Set all color to secondary by default to be different than the standard colors in the app */
+  * {
+      color: var(--quill-text-color) !important;
+  }
+
+  a {
+      color: var(--quill-link-color) !important;
+  }
+
+  h1 {
+      font-size: 1.8rem !important;
+  }
+
+  h2 {
+      font-size: 1.25rem !important;
+  }
+
+  h3 {
+      font-size: 1rem !important;
+  }
+
+  h4 {
+      font-size: 1rem !important;
+  }
+
+  h5 {
+      font-size: 1rem !important;
+  }
+
+}
+
+
+/* This enforces showing the px selector items somehow */
+.ql-snow {
+  .ql-picker {
+      &.ql-size {
+          .ql-picker-label,
+          .ql-picker-item {
+              &::before {
+                  content: attr(data-value) !important;
+              }
+          }
+      }
+  }
+}

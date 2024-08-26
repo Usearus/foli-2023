@@ -1,11 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
 import { DatabaseContext } from '../../../context/DatabaseContext';
-import SideBarItem from './SideBarItem';
-import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import SideBarItem from './SideBarItem';
 import { supabase } from '../../../API/supabase';
 
-const SideBar = ({ className, setShowOffcanvas, showOffcanvas }) => {
+const SideBar = () => {
 	const { currentPages, setCurrentPages } = useContext(DatabaseContext);
 	const [isDragging, setIsDragging] = useState(false);
 
@@ -45,91 +44,44 @@ const SideBar = ({ className, setShowOffcanvas, showOffcanvas }) => {
 	};
 
 	return (
-		<Wrapper className={className}>
-			<section className='sidebar-container'>
-				<label>Pages</label>
-				<div className='scroll-container'>
-					<DragDropContext
-						onDragStart={() => setIsDragging(true)}
-						onDragEnd={(result) => {
-							setIsDragging(false);
-							updatePositionsOnDragEnd(result);
-						}}>
-						<Droppable droppableId='pages'>
-							{(provided) => (
-								<div
-									{...provided.droppableProps}
-									ref={provided.innerRef}
-									className={`draggable-area ${isDragging ? 'dragging' : ''}`}>
-									{currentPages.map((page, index) => (
-										<Draggable
-											key={page.id}
-											draggableId={page.id}
-											index={index}>
-											{(provided) => (
-												<div
-													ref={provided.innerRef}
-													{...provided.draggableProps}
-													{...provided.dragHandleProps}>
-													<SideBarItem
-														page={page}
-														setShowOffcanvas={setShowOffcanvas}
-														showOffcanvas={showOffcanvas}
-													/>
-												</div>
-											)}
-										</Draggable>
-									))}
-									{provided.placeholder}
-								</div>
-							)}
-						</Droppable>
-					</DragDropContext>
-				</div>
-			</section>
-		</Wrapper>
+		<>
+			<label className='pl-4 pb-2 font-bold'>Pages</label>
+
+			<div className='scroll-container'>
+				<DragDropContext
+					onDragStart={() => {
+						setIsDragging(true);
+					}}
+					onDragEnd={(result) => {
+						setIsDragging(false);
+						updatePositionsOnDragEnd(result);
+					}}>
+					<Droppable droppableId='pages'>
+						{(provided) => (
+							<div
+								{...provided.droppableProps}
+								ref={provided.innerRef}
+								className={`draggable-area ${isDragging ? 'dragging' : ''}`}>
+								{currentPages.map((page, index) => (
+									<Draggable key={page.id} draggableId={page.id} index={index}>
+										{(provided) => (
+											<div
+												ref={provided.innerRef}
+												{...provided.draggableProps}
+												{...provided.dragHandleProps}>
+												<SideBarItem page={page} />
+											</div>
+										)}
+									</Draggable>
+								))}
+								{provided.placeholder}
+							</div>
+						)}
+					</Droppable>
+				</DragDropContext>
+			</div>
+		</>
 	);
 };
 
 export default SideBar;
-
-const Wrapper = styled.div`
-	.sidebar-container {
-		padding: 1rem 0;
-		height: 100%;
-		background: var(--grey-200);
-		color: var(--grey-800);
-		width: 100%;
-	}
-
-	.scroll-container {
-		height: 80%;
-		max-height: 300px;
-		overflow-y: auto;
-	}
-
-	.draggable-area {
-		border: 1px solid var(--grey-200);
-	}
-
-	.draggable-area.dragging {
-		box-sizing: border-box;
-		background-color: var(--grey-200);
-		border: 1px solid var(--grey-400);
-		border-radius: 4px;
-	}
-	label {
-		font-weight: 700;
-	}
-	// Desktop
-	@media (min-width: 576px) {
-		.sidebar-container {
-			padding: 1rem 0rem 1rem 1rem;
-		}
-		.scroll-container {
-			height: 80%;
-			max-height: 600px;
-			overflow-y: auto;
-		}
-	}
-`;

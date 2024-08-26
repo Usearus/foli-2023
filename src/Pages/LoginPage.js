@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button, Modal } from 'react-bootstrap';
-import styled from 'styled-components';
+// import { Button, Modal } from 'react-bootstrap';
 import foliImage from '../assets/Foli2023-Landing-Page-gif.gif';
 
 const LoginPage = () => {
@@ -14,7 +13,7 @@ const LoginPage = () => {
 
 	if (!isAuthenticated) {
 		return (
-			<Wrapper>
+			<>
 				<div className='above-the-fold'>
 					<div>
 						<div className='left-container'>
@@ -29,27 +28,27 @@ const LoginPage = () => {
 									We are currently in alpha. Expected unpolished design and
 									frequent bugs. Feedback & suggestions welcomed!
 								</p>
-								<Button variant='primary' onClick={() => loginWithRedirect()}>
+								<button
+									className='btn btn-primary'
+									onClick={() => loginWithRedirect()}>
 									Log In / Sign Up
-								</Button>
+								</button>
 							</div>
 							<p style={{ fontSize: 'small', maxWidth: '300px' }}>
 								By logging into this website you agree to our
-								<Button
-									variant='link'
-									size='sm'
-									onClick={() => setShowPrivacy(true)}
-									style={{ fontSize: 'small', padding: '0 4px ' }}>
+								<button
+									className='btn btn-ghost'
+									// onClick={() => setShowPrivacy(true)}
+								>
 									privacy policy
-								</Button>
+								</button>
 								and{' '}
-								<Button
-									variant='link'
-									size='sm'
-									onClick={() => setShowTerms(true)}
-									style={{ fontSize: 'small', padding: '0' }}>
+								<button
+									className='btn btn-ghost'
+									// onClick={() => setShowTerms(true)}
+								>
 									terms.
-								</Button>
+								</button>
 							</p>
 						</div>
 					</div>
@@ -66,7 +65,7 @@ const LoginPage = () => {
 					<div></div>
 				</div> */}
 				{/* Privacy Policy Modal */}
-				<Modal
+				{/* <Modal
 					scrollable
 					show={showPrivacy}
 					onHide={() => setShowPrivacy(false)}>
@@ -118,9 +117,9 @@ const LoginPage = () => {
 							adamdenais@gmail.com.
 						</p>
 					</Modal.Body>
-				</Modal>
+				</Modal> */}
 				{/* Terms Modal */}
-				<Modal scrollable show={showTerms} onHide={() => setShowTerms(false)}>
+				{/* <Modal scrollable show={showTerms} onHide={() => setShowTerms(false)}>
 					<Modal.Header closeButton>
 						<Modal.Title>Terms & Conditions</Modal.Title>
 					</Modal.Header>
@@ -166,93 +165,11 @@ const LoginPage = () => {
 							and effect.
 						</p>
 					</Modal.Body>
-				</Modal>
-			</Wrapper>
+				</Modal> */}
+			</>
 		);
 	}
 	return <Navigate to='/' />;
 };
 
 export default LoginPage;
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	.above-the-fold {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		height: 97vh;
-	}
-
-	.left-container {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.body-content {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		justify-content: center;
-		align-items: center;
-		min-width: 600px;
-
-		padding: 3rem;
-	}
-
-	.right-container {
-		background: var(--primary-100);
-		height: 100vh;
-		width: 100%;
-		padding-left: 5rem;
-		display: flex;
-		gap: 2rem;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-end;
-		display: none;
-	}
-
-	.home-container {
-		width: 100%;
-		height: 80vh;
-		background-color: red;
-		margin: 0;
-	}
-	@media (min-width: 1200px) {
-		.right-container {
-			display: flex;
-		}
-	}
-
-	.header-image {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	span {
-		font-weight: 700;
-		color: var(--primary-500);
-	}
-
-	p {
-		max-width: 500px;
-		text-align: center;
-	}
-
-	img {
-		max-width: 100%;
-		max-height: 80vh;
-		border-radius: 0.5rem 0rem 0rem 0.5rem;
-		box-shadow: var(--shadow-4);
-	}
-`;

@@ -1,137 +1,70 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import SideBar from '../Components/single-job-components/pages-sidebar-components/SideBar';
 import PageList from '../Components/single-job-components/PageList';
 import TopBarJobDesktop from '../Components/single-job-components/TopBarJobDesktop';
-import styled from 'styled-components';
-import TopBarJobMobile from '../Components/single-job-components/TopBarJobMobile';
-import { Stack } from 'react-bootstrap';
+// import TopBarJobMobile from '../Components/single-job-components/TopBarJobMobile';
 import { DatabaseContext } from '../context/DatabaseContext';
+import Loader from '../Components/atom-components/Loader';
 
 const SingleJobPage = () => {
-	const { currentPages, settingPageStack } = useContext(DatabaseContext);
+	const { currentPages } = useContext(DatabaseContext);
+	const [isLoading, setIsLoading] = useState(true);
 
-	const stackClassName =
-		settingPageStack === 'horizontal'
-			? 'horizontal-stack-page-list'
-			: settingPageStack === 'vertical'
-			? 'vertical-stack-page-list'
-			: '';
+	// Simulate loading
+	useEffect(() => {
+		// Assuming you have data loading or API calls here
+		// Set the loading state to false once everything is loaded
+		if (currentPages) {
+			setIsLoading(false);
+		}
+	}, [currentPages]);
 
-	if (currentPages.length === 0) {
+	if (isLoading) {
 		return (
-			<>
-				<Wrapper>
-					<Stack className='top'>
-						<div className='mobile-only'>
-							<TopBarJobMobile />
-						</div>
-						<TopBarJobDesktop className='desktop-only' />
-						<div className='empty-state'>
-							<h5>No pages added yet. Add your first page to get started.</h5>
-						</div>
-					</Stack>
-					{/* <div className='add-page-fab mobile-only'>
-						<DropdownAddPage />
-					</div> */}
-				</Wrapper>
-			</>
+			<div className='flex justify-center items-center h-full w-full'>
+				<Loader />
+			</div>
 		);
 	}
 
 	if (currentPages.length > 0) {
 		return (
-			<Wrapper>
-				<Stack className='top'>
-					<div className='mobile-only'>
-						<TopBarJobMobile />
+			<div className='flex flex-col h-full text-base-content'>
+				<div className='flex-grow grid grid-rows-[70px_auto] grid-cols-1 lg:grid-cols-[250px_auto]'>
+					{/* Top area */}
+					<TopBarJobDesktop />
+
+					{/* Bottom left area */}
+					<div className='hidden lg:flex flex-col row-span-1 bg-base-200 pt-4'>
+						<SideBar />
 					</div>
-					<TopBarJobDesktop className='desktop-only' />
-				</Stack>
-				<SideBar className='sidebar desktop-only' />
-				<PageList className={`right ${stackClassName}`} />
-			</Wrapper>
+
+					{/* Bottom right area */}
+					<div className='row-span-1 col-span-1 bg-base-200 pb-4 pt-0 px-0 overflow-hidden'>
+						<PageList />
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	if (currentPages.length === 0) {
+		return (
+			<div className='flex flex-col h-full text-base-content'>
+				<div className='flex-grow grid grid-rows-[70px_auto] grid-cols-1'>
+					{/* Top area */}
+					<TopBarJobDesktop />
+
+					{/* Bottom area */}
+					<div className='row-span-1 col-span-1 bg-base-200 p-4 flex justify-center items-center'>
+						<h2 className='text-lg font-bold'>
+							No pages added yet. Add your first page to get started.
+						</h2>
+					</div>
+				</div>
+			</div>
 		);
 	}
 };
 
 export default SingleJobPage;
-
-const Wrapper = styled.div`
-	/* Mobile */
-	display: grid;
-	grid-template-areas:
-		'top'
-		'right';
-	grid-template-columns: 1fr;
-	grid-template-rows: 120px auto;
-
-	/* This keeps the height to 100% whenever the navbar disappears on mobile. */
-	height: 100dvh;
-
-	overflow: hidden;
-	position: relative;
-
-	.top {
-		grid-area: top;
-	}
-
-	.empty-state {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 2rem;
-	}
-
-	.right {
-		grid-area: right;
-		display: flex;
-		gap: 1rem;
-		height: 100%;
-		width: 100%;
-		padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-		overflow-x: scroll;
-		scroll-snap-type: x mandatory;
-	}
-
-	/* On Mobile we always want flex-wrap to none */
-	.vertical-stack-page-list {
-		flex-wrap: none;
-	}
-
-	/* Desktop */
-	@media (min-width: 576px) {
-		display: grid;
-		grid-template-areas:
-			'top top'
-			'sidebar right';
-		grid-template-columns: 250px 1fr;
-		grid-template-rows: 71px auto;
-		height: calc(100vh - 63px);
-		overflow: hidden;
-
-		.sidebar {
-			grid-area: sidebar;
-		}
-
-		.dropdown-toggle {
-			border-radius: 0.37rem;
-			padding: 6px 12px;
-		}
-
-		.right {
-			scroll-snap-type: none;
-			padding: 3rem 30rem 2rem 2rem;
-		}
-
-		.horizontal-stack-page-list {
-			flex-wrap: none;
-		}
-
-		.vertical-stack-page-list {
-			flex-wrap: wrap;
-			padding: 3rem 3rem 0.5rem 3rem;
-			justify-content: center;
-		}
-	}
-`;

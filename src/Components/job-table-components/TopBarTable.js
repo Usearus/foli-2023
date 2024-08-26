@@ -1,32 +1,12 @@
-import { Container, Stack } from 'react-bootstrap';
-import styled from 'styled-components';
-import ModalAddJob from '../modal-components/ModalAddJob';
+// import ModalAddJob from '../modal-components/ModalAddJob';
 
-const TopBarTable = ({ className }) => {
+const TopBarTable = () => {
 	return (
-		<Wrapper className={className}>
-			<Container fluid>
-				<Stack direction='horizontal' gap={3} className='top-bar-container'>
-					<div className='ms-auto'>
-						<ModalAddJob />
-					</div>
-				</Stack>
-			</Container>
-		</Wrapper>
+		<div className='flex w-full justify-end p-4'>
+			<button className='btn btn-primary btn-sm'>Add job</button>
+			{/* <ModalAddJob/> */}
+		</div>
 	);
 };
-
-const Wrapper = styled.div`
-	position: sticky;
-	top: 63px;
-	z-index: 1;
-	width: 100%;
-	background: var(--grey-200);
-
-	.top-bar-container {
-		/* justify-content: space-between; */
-		padding: 1rem;
-	}
-`;
 
 export default TopBarTable;

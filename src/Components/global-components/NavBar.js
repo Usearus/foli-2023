@@ -1,90 +1,96 @@
-import { useContext } from 'react';
-import Container from 'react-bootstrap/Container';
-import {
-	Nav,
-	Navbar,
-	Button,
-	Offcanvas,
-	OffcanvasHeader,
-	OffcanvasTitle,
-	// Stack,
-} from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import ModalProfile from '../modal-components/ModalProfile';
+import { useContext, useState } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
-import { FiMenu } from 'react-icons/fi';
-import SiteIcon from '../atom-components/SiteIcon';
+// import SiteIcon from '../atom-components/SiteIcon';
+import { useAuth0 } from '@auth0/auth0-react';
+// import Container from 'react-bootstrap/Container';
+// import {
+// 	Nav,
+// 	Navbar,
+// 	Button,
+// 	Offcanvas,
+// 	OffcanvasHeader,
+// 	OffcanvasTitle,
+// } from 'react-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
+// import ModalProfile from '../modal-components/ModalProfile';
+
+// import { FiMenu } from 'react-icons/fi';
 
 const NavBar = () => {
 	const { userProfile, adminProfile } = useContext(DatabaseContext);
+	const { user } = useAuth0();
+
+	// const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+	// const toggleDropdown = () => {
+	// 	setIsDropdownOpen((prev) => !prev);
+	// };
+
+	// const closeDropdown = () => {
+	// 	setIsDropdownOpen(false);
+	// };
 
 	if (userProfile) {
 		return (
-			<Navbar
-				variant='light'
-				collapseOnSelect
-				expand='sm'
-				style={{
-					padding: '11px 11px 11px 16px',
-					background: 'var(--grey-100)',
-					borderBottom: '1px solid var(--grey-300)',
-					position: 'sticky',
-					top: '0',
-					zIndex: '1',
-				}}>
-				{/* Mobile NOT OPENED*/}
-				<Container fluid>
-					<LinkContainer to='/'>
-						<Nav.Link active={false}>
-							<SiteIcon />
-						</Nav.Link>
-					</LinkContainer>
-					<Navbar.Toggle
-						as='div'
-						aria-controls='responsive-navbar-nav'
-						style={{ border: 0 }}>
-						<Button variant='light'>
-							<FiMenu />
-						</Button>
-					</Navbar.Toggle>
+			<div className='text-base-content'>
+				<div
+					className='navbar bg-base-200 justify-between 
+			border-b-2 border-base-100 
+			'>
+					{/* Left content */}
+					<div>
+						<a href='/' className='btn btn-ghost btn-sm text-xl'>
+							Foli
+						</a>
 
-					{/* Mobile OPENED*/}
-					<Navbar.Offcanvas
-						id='offcanvas-navbar-nav'
-						placement='start'
-						style={{
-							background: 'var(--grey-100)',
-							cursor: 'pointer',
-						}}>
-						{/* Navigation Header on sidebar modal */}
-						<OffcanvasHeader closeButton>
-							<OffcanvasTitle id='title'>
-								<SiteIcon />
-							</OffcanvasTitle>
-						</OffcanvasHeader>
+						{/* Test page */}
+						{adminProfile ? (
+							<div className='navbar-center hidden lg:flex'>
+								<ul className='menu menu-horizontal px-1'>
+									<li>
+										<a href='/test' id='test'>
+											Test
+										</a>
+									</li>
+								</ul>
+							</div>
+						) : null}
+					</div>
 
-						{/* Navigation Header on sidebar modal */}
-						<Offcanvas.Body>
-							<Nav variant='pills' className='me-auto'>
-								<LinkContainer to='/'>
-									<Nav.Link active={false}>Jobs</Nav.Link>
-								</LinkContainer>
-								{adminProfile ? (
-									<>
-										<LinkContainer to='/resume'>
-											<Nav.Link active={false}>Resume</Nav.Link>
-										</LinkContainer>
-										<LinkContainer to='/testing'>
-											<Nav.Link active={false}>Admin</Nav.Link>
-										</LinkContainer>
-									</>
+					{/* Right content */}
+					<div className='flex-none'>
+						{/* Profile btn */}
+						<div className='dropdown dropdown-end'>
+							<div
+								tabIndex={0}
+								role='button'
+								className='btn btn-ghost btn-circle avatar'>
+								{userProfile ? (
+									<div className='w-10 rounded-full'>
+										<img
+											src={user.picture}
+											alt={user.name}
+											width='40'
+											height='40'
+										/>
+									</div>
 								) : null}
-							</Nav>{' '}
-							<ModalProfile />
-						</Offcanvas.Body>
-					</Navbar.Offcanvas>
-				</Container>
-			</Navbar>
+							</div>
+
+							<ul className='menu dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow'>
+								<li>
+									<a href='/settings' id='settings'>
+										Settings
+									</a>
+								</li>
+								<li>
+									<a href='/api/auth/logout'>Logout</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		);
 	}
 };
