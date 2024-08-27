@@ -5,9 +5,9 @@ import useAlert from '../../Custom Hooks/useAlert';
 import ReactQuillEditor from '../atom-components/ReactQuillEditor';
 import { supabase } from '../../API/supabase';
 import { Resizable } from 're-resizable';
-import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { DotsVerticalIcon, Pencil1Icon } from '@radix-ui/react-icons';
 import '../../quillStyles1.css';
-import { ModalDeletePage } from '../modal-components/ModalsAll';
+import DeletePageBtn from '../modal-components/DeletePageBtn';
 
 const Page = (page) => {
 	const { fetchCurrentPages, currentJob } = useContext(DatabaseContext);
@@ -135,126 +135,123 @@ const Page = (page) => {
 	}
 
 	// MOBILE PAGE
-	if (isMobile === true && initialVisibleValue === true) {
-		return (
-			<>
-				<ModalDeletePage page={page} />
-				<article className='bg-base-100 w-[92vw] h-hull py-4 px-0 flex flex-col gap-2'>
-					{/* Title Content */}
-					<header>
-						{editing ? (
-							<div className='flex justify-between'>
-								{page.locked ? (
-									<label className='font-bold pl-2'>{page.title}</label>
-								) : (
-									<label className='input input-xs flex grow items-center gap-2 mb-[2px]'>
-										<input
-											type='text'
-											required
-											ref={titleRef}
-											defaultValue={initialTitleValue}
-											maxLength={titleMaxChar}
-											onChange={handleTitleChange}
-											placeholder='Add page title'
-											className='grow font-bold text-base'
-										/>
+	// if (isMobile === true && initialVisibleValue === true) {
+	// 	return (
+	// 		<>
+	// 			<article className='bg-base-100 w-[92vw] h-hull py-4 px-0 flex flex-col gap-2'>
+	// 				{/* Title Content */}
+	// 				<header>
+	// 					{editing ? (
+	// 						<div className='flex justify-between'>
+	// 							{page.locked ? (
+	// 								<label className='font-bold pl-2'>{page.title}</label>
+	// 							) : (
+	// 								<label className='input input-xs flex grow items-center gap-2 mb-[2px]'>
+	// 									<input
+	// 										type='text'
+	// 										required
+	// 										ref={titleRef}
+	// 										defaultValue={initialTitleValue}
+	// 										maxLength={titleMaxChar}
+	// 										onChange={handleTitleChange}
+	// 										placeholder='Add page title'
+	// 										className='grow font-bold text-base'
+	// 									/>
+	// 									<span className='label-text-alt'>
+	// 										{characterCount}/{titleMaxChar}
+	// 									</span>
+	// 								</label>
+	// 							)}
+	// 						</div>
+	// 					) : (
+	// 						<div className='flex justify-between'>
+	// 							<label className='font-bold pl-[9px]'>{page.title}</label>
+	// 							<div className='flex justify-end gap-2'>
+	// 								{page.locked ? (
+	// 									''
+	// 								) : (
+	// 									<div className='dropdown dropdown-end'>
+	// 										<div
+	// 											tabIndex={0}
+	// 											role='button'
+	// 											className='btn btn-xs btn-ghost '>
+	// 											<DotsVerticalIcon />
+	// 										</div>
+	// 										<ul
+	// 											tabIndex={0}
+	// 											className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
+	// 											{/* Delete option */}
+	// 											<li>
+	// 												<button
+	// 													className='text-error'
+	// 													onClick={() =>
+	// 														document
+	// 															.getElementById('delete_page_modal')
+	// 															.showModal()
+	// 													}>
+	// 													Delete
+	// 												</button>
+	// 											</li>
+	// 										</ul>
+	// 									</div>
+	// 								)}
+	// 							</div>
+	// 						</div>
+	// 					)}
+	// 				</header>
+	// 				<hr />
 
-										<span className='label-text-alt'>
-											{characterCount}/{titleMaxChar}
-										</span>
-									</label>
-								)}
-							</div>
-						) : (
-							<div className='flex justify-between'>
-								<label className='font-bold pl-[9px]'>{page.title}</label>
-								<div className='flex justify-end gap-2'>
-									{page.locked ? (
-										''
-									) : (
-										<div className='dropdown dropdown-end'>
-											<div
-												tabIndex={0}
-												role='button'
-												className='btn btn-xs btn-ghost '>
-												<DotsVerticalIcon />
-											</div>
-											<ul
-												tabIndex={0}
-												className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
-												{/* Delete option */}
-												<li>
-													<button
-														className='text-error'
-														onClick={() =>
-															document
-																.getElementById('delete_page_modal')
-																.showModal()
-														}>
-														Delete
-													</button>
-												</li>
-											</ul>
-										</div>
-									)}
-								</div>
-							</div>
-						)}
-					</header>
-					<hr />
-
-					{/* Markdown/Quill content */}
-					{editing ? (
-						// Quill version
-						<div className='flex flex-col justify-between h-full'>
-							<div className='page-scroll'>
-								<ReactQuillEditor
-									value={content}
-									onChange={handleEditorChange}
-								/>
-							</div>
-							<div className='flex justify-end gap-2'>
-								<button
-									type='button'
-									className='btn btn-sm btn-ghost btn-primary w-fit'
-									onClick={handleCancelClick}>
-									Cancel
-								</button>
-								<button
-									type='button'
-									className='btn btn-sm btn-primary w-fit'
-									onClick={handleUpdateContentClick}>
-									Save page
-								</button>
-							</div>
-						</div>
-					) : (
-						// Markdown version
-						<div className='flex flex-col justify-between h-full'>
-							<MarkdownView
-								className='page-scroll markdown-content'
-								markdown={page.content}
-							/>
-							<div className='flex justify-end'>
-								<button
-									type='button'
-									className='btn btn-sm btn-outline btn-primary w-fit'
-									onClick={handleEditClick}>
-									Edit page
-								</button>
-							</div>
-						</div>
-					)}
-				</article>
-			</>
-		);
-	}
+	// 				{/* Markdown/Quill content */}
+	// 				{editing ? (
+	// 					// Quill version
+	// 					<div className='flex flex-col justify-between h-full'>
+	// 						<div className='page-scroll'>
+	// 							<ReactQuillEditor
+	// 								value={content}
+	// 								onChange={handleEditorChange}
+	// 							/>
+	// 						</div>
+	// 						<div className='flex justify-end gap-2'>
+	// 							<button
+	// 								type='button'
+	// 								className='btn btn-sm btn-ghost btn-primary w-fit'
+	// 								onClick={handleCancelClick}>
+	// 								Cancel
+	// 							</button>
+	// 							<button
+	// 								type='button'
+	// 								className='btn btn-sm btn-primary w-fit'
+	// 								onClick={handleUpdateContentClick}>
+	// 								Save page
+	// 							</button>
+	// 						</div>
+	// 					</div>
+	// 				) : (
+	// 					// Markdown version
+	// 					<div className='flex flex-col justify-between h-full'>
+	// 						<MarkdownView
+	// 							className='page-scroll markdown-content'
+	// 							markdown={page.content}
+	// 						/>
+	// 						<div className='flex justify-end'>
+	// 							<button
+	// 								type='button'
+	// 								className='btn btn-sm btn-outline btn-primary w-fit'
+	// 								onClick={handleEditClick}>
+	// 								Edit page
+	// 							</button>
+	// 						</div>
+	// 					</div>
+	// 				)}
+	// 			</article>
+	// 		</>
+	// 	);
+	// }
 
 	// 	// DESKTOP PAGE
 	if (isMobile === false) {
 		return (
 			<>
-				<ModalDeletePage page={page} />
 				<Resizable
 					enable={{
 						top: false,
@@ -273,7 +270,9 @@ const Page = (page) => {
 					minWidth='300px'
 					maxWidth='700px'
 					size={{ height: '100%', width: pageWidth }}
-					className='bg-base-100 h-hull p-4 flex flex-col gap-2'>
+					className={`${
+						editing ? 'bg-neutral' : 'bg-base-100'
+					} h-full p-4 flex flex-col gap-2`}>
 					{/* Title Content */}
 					<header>
 						{editing ? (
@@ -281,7 +280,7 @@ const Page = (page) => {
 								{page.locked ? (
 									<label className='font-bold pl-2'>{page.title}</label>
 								) : (
-									<label className='input input-xs flex grow items-center gap-2 mb-[2px]'>
+									<label className='input input-ghost input-xs flex grow items-center gap-2 mb-[2px]'>
 										<input
 											type='text'
 											required
@@ -290,7 +289,7 @@ const Page = (page) => {
 											maxLength={titleMaxChar}
 											onChange={handleTitleChange}
 											placeholder='Add page title'
-											className='grow font-bold text-base'
+											className='grow font-bold text-base '
 										/>
 
 										<span className='label-text-alt'>
@@ -303,30 +302,23 @@ const Page = (page) => {
 							<div className='flex justify-between'>
 								<label className='font-bold pl-[9px]'>{page.title}</label>
 								<div className='flex justify-end gap-2'>
+									<button
+										className='btn btn-xs btn-ghost'
+										onClick={handleEditClick}>
+										<Pencil1Icon />
+									</button>
 									{page.locked ? (
 										''
 									) : (
 										<div className='dropdown dropdown-end'>
-											<div
-												tabIndex={0}
-												role='button'
-												className='btn btn-xs btn-ghost '>
+											<button tabIndex={0} className='btn btn-xs btn-ghost '>
 												<DotsVerticalIcon />
-											</div>
+											</button>
 											<ul
 												tabIndex={0}
 												className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
-												{/* Delete option */}
 												<li>
-													<button
-														className='text-error'
-														onClick={() =>
-															document
-																.getElementById('delete_page_modal')
-																.showModal()
-														}>
-														Delete
-													</button>
+													<DeletePageBtn page={page} />
 												</li>
 											</ul>
 										</div>
@@ -335,7 +327,7 @@ const Page = (page) => {
 							</div>
 						)}
 					</header>
-					<hr />
+					<div className='divider m-0' />
 
 					{/* Markdown/Quill content */}
 					{editing ? (
@@ -369,14 +361,6 @@ const Page = (page) => {
 								className='page-scroll markdown-content'
 								markdown={page.content}
 							/>
-							<div className='flex justify-end'>
-								<button
-									type='button'
-									className='btn btn-sm btn-outline btn-primary w-fit'
-									onClick={handleEditClick}>
-									Edit page
-								</button>
-							</div>
 						</div>
 					)}
 				</Resizable>

@@ -1,14 +1,65 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	// mode: 'jit',
 	content: ['./src/**/*.{html,js,jsx}', './public/**/*.html'],
-	theme: {
-		extend: {},
-	},
 	plugins: [require('daisyui')],
-
+	theme: {
+		extend: {
+			animation: {
+				'fade-in': 'fadeIn 300ms ease-out forwards',
+				'scale-in': 'scaleIn 300ms ease-out forwards',
+				'fade-out': 'fadeOut 300ms ease-out forwards',
+				'scale-out': 'scaleOut 300ms ease-out forwards',
+			},
+			keyframes: {
+				fadeIn: {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' },
+				},
+				scaleIn: {
+					'0%': { transform: 'scale(0.9)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' },
+				},
+				fadeOut: {
+					'0%': { opacity: '1' },
+					'100%': { opacity: '0' },
+				},
+				scaleOut: {
+					'0%': { transform: 'scale(1)', opacity: '1' },
+					'100%': { transform: 'scale(0.9)', opacity: '0' },
+				},
+			},
+		},
+	},
 	daisyui: {
-		themes: ['light', 'dark'], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+		themes: [
+			{
+				dark: {
+					primary: '#793ef9',
+					'primary-focus': '#570df8',
+					'primary-content': '#ffffff',
+					secondary: '#f000b8',
+					'secondary-focus': '#bd0091',
+					'secondary-content': '#ffffff',
+					accent: '#37cdbe',
+					'accent-focus': '#2aa79b',
+					'accent-content': '#ffffff',
+					neutral: '#2a2e37',
+					'neutral-focus': '#16181d',
+					'neutral-content': '#ffffff',
+					'base-100': '#3d4451',
+					'base-200': '#2a2e37',
+					'base-300': '#16181d',
+					'base-content': '#ebecf0',
+					info: '#66c6ff',
+					success: '#87d039',
+					warning: '#e2d562',
+					error: '#ff6f6f',
+				},
+			},
+			'light',
+		],
+
+		// themes: ['light', 'dark'], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
 		darkTheme: 'dark', // name of one of the included themes for dark mode
 		base: true, // applies background color and foreground color for root element by default
 		styled: true, // include daisyUI colors and design decisions for all components

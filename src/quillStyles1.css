@@ -1,4 +1,4 @@
-/* quillStyles1.css */
+quillStyles1.css
 /* STYLING FOR PAGES */
 
 
@@ -27,7 +27,7 @@
   --quill-border-color: #374151; /* Tailwind's border color in dark mode */
   --quill-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Tailwind's shadow-md */
   
-  --quill-background-color: #1D232A; /* Tailwind's bg-base-200 in dark mode */
+  --quill-background-color: #2A323C; /* Tailwind's bg-neutral in dark mode */
   --quill-text-color: #e5e7eb; /* Tailwind's text-base-content in dark mode */
   --quill-link-color: #3b82f6; /* Tailwind's text-primary in dark mode */
   --quill-placeholder-color: #6b7280; /* Tailwind's text-muted in dark mode */
