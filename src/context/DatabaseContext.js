@@ -126,7 +126,6 @@ const DatabaseProvider = ({ children }) => {
 				fetchUserJobsArchived();
 				createUserResume();
 				fetchUserResume();
-				setUserTheme('light');
 			}
 		}
 	}
@@ -144,6 +143,7 @@ const DatabaseProvider = ({ children }) => {
 				console.log(error);
 			}
 			fetchUserProfile();
+			setUserTheme('light');
 		}
 	}
 

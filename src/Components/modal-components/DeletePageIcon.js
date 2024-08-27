@@ -1,10 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import useAlert from '../../Custom Hooks/useAlert';
 import Modal from './Modal';
 import { supabase } from '../../API/supabase';
+import { TrashIcon } from '@radix-ui/react-icons';
 
-const DeletePageBtn = ({ page }) => {
+const DeletePageIcon = ({ page }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const { fetchCurrentPages, currentJob } = useContext(DatabaseContext);
 	const { setAlert } = useAlert();
@@ -30,9 +31,12 @@ const DeletePageBtn = ({ page }) => {
 
 	return (
 		<>
-			<p className='text-error text-sm' onClick={handleOpenModal}>
-				Delete
-			</p>
+			<div
+				role='button'
+				className='btn btn-xs hidden group-hover:flex transition-opacity duration-200'
+				onClick={handleOpenModal}>
+				<TrashIcon />
+			</div>
 
 			<Modal
 				isOpen={isModalOpen}
@@ -61,4 +65,4 @@ const DeletePageBtn = ({ page }) => {
 	);
 };
 
-export default DeletePageBtn;
+export default DeletePageIcon;

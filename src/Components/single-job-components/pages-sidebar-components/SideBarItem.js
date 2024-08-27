@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { supabase } from '../../../API/supabase';
 import { DatabaseContext } from '../../../context/DatabaseContext';
 import { EyeOpenIcon, EyeClosedIcon, TrashIcon } from '@radix-ui/react-icons';
-// import ModalDeleteConfirmation from '../../modal-components/ModalDeleteConfirmation';
+import DeletePageIcon from '../../modal-components/DeletePageIcon';
 
 const SideBarItem = ({ page, setShowOffcanvas, showOffcanvas }) => {
 	const { fetchCurrentPages, currentJob, setSelectedPageID } =
@@ -49,15 +49,7 @@ const SideBarItem = ({ page, setShowOffcanvas, showOffcanvas }) => {
 						{page.title}
 					</p>
 					<div className='flex gap-1'>
-						{page.locked ? (
-							''
-						) : (
-							<div
-								role='button'
-								className='btn btn-xs hidden group-hover:flex transition-opacity duration-200'>
-								<TrashIcon />
-							</div>
-						)}
+						{page.locked ? '' : <DeletePageIcon page={page} />}
 						<div
 							role='button'
 							onClick={handleVisibilityClick}

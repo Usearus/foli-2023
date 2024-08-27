@@ -1,10 +1,8 @@
 import { useContext } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-
+import DropdownAddPage from '../modal-components/DropdownAddPage';
+import DropdownStageSelect from '../atom-components/DropdownStageSelect';
 // import SideBarAssistant from './SideBarAssistant';
-import DropdownAddPage from '../atom-components/DropdownAddPage';
-// import DropdownStageSelect from '../atom-components/DropdownStageSelect';
 // import SideBarSnippets from './SideBarSnippets';
 // import SideBarQuestions from '../single-job-components/SideBarQuestions';
 
@@ -31,42 +29,7 @@ const TopBarJobDesktop = () => {
 						</p>
 					)}
 				</div>
-				<div className='dropdown dropdown-end'>
-					<div
-						tabIndex={0}
-						role='button'
-						className='btn btn-xs btn-outline flex justify-between min-w-32'>
-						{currentJob.status} <ChevronDownIcon />
-					</div>
-					<ul
-						tabIndex={0}
-						className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
-						<li>
-							<button>Interested</button>
-						</li>
-						<li>
-							<button>Applied</button>
-						</li>
-						<li>
-							<button>Interviewing</button>
-						</li>
-						<li>
-							<button>Negotiating</button>
-						</li>
-						<li>
-							<button>Accepted</button>
-						</li>
-						<li>
-							<button>Declined</button>
-						</li>
-						<li>
-							<button>Rejected</button>
-						</li>
-						<li>
-							<button>Archived</button>
-						</li>
-					</ul>
-				</div>
+				<DropdownStageSelect job={currentJob} />
 			</div>
 			<div>
 				<DropdownAddPage />

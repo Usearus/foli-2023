@@ -1,3 +1,85 @@
+import { useState, useRef, useContext } from 'react';
+import { supabase } from '../../API/supabase';
+import { useAuth0 } from '@auth0/auth0-react';
+import { DatabaseContext } from '../../context/DatabaseContext';
+import useAlert from '../../Custom Hooks/useAlert';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
+
+const DropdownStageSelect = ({ job }) => {
+	const { currentJob, fetchUserJobs, fetchUserJobsArchived } =
+		useContext(DatabaseContext);
+
+	// Database handling variables
+	const { setAlert } = useAlert();
+	const [selectedStatus, setSelectedStatus] = useState(job.status);
+
+	const handleUpdateStatusClick = async (e) => {
+		setSelectedStatus(e.target.value);
+		console.log(e.target.value);
+		const { error } = await supabase
+			.from('jobs')
+			.update({
+				status: e.target.value,
+				edited: new Date().toLocaleDateString('en-US'),
+			})
+			.eq('id', job.id);
+		setAlert('Status updated', 'success');
+		fetchUserJobs();
+		fetchUserJobsArchived();
+
+		if (error) {
+			setAlert('Unable to update job.', 'danger');
+			console.log('error is', error);
+			return;
+		}
+	};
+
+	return (
+		<>
+			<div className='dropdown dropdown-end'>
+				<div
+					tabIndex={0}
+					role='button'
+					onChange={handleUpdateStatusClick}
+					value={selectedStatus}
+					className='btn btn-xs btn-outline flex justify-between min-w-32'>
+					{currentJob.status} <ChevronDownIcon />
+				</div>
+				<ul
+					tabIndex={0}
+					className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
+					<li value='Interested' onClick={handleUpdateStatusClick}>
+						<button>Interested</button>
+					</li>
+					<li value='Applied' onClick={handleUpdateStatusClick}>
+						<button>Applied</button>
+					</li>
+					<li value='Interviewing' onClick={handleUpdateStatusClick}>
+						<button>Interviewing</button>
+					</li>
+					<li value='Negotiating' onClick={handleUpdateStatusClick}>
+						<button>Negotiating</button>
+					</li>
+					<li value='Accepted' onClick={handleUpdateStatusClick}>
+						<button>Accepted</button>
+					</li>
+					<li value='Declined' onClick={handleUpdateStatusClick}>
+						<button>Declined</button>
+					</li>
+					<li value='Rejected' onClick={handleUpdateStatusClick}>
+						<button>Rejected</button>
+					</li>
+					<li value='Archived' onClick={handleUpdateStatusClick}>
+						<button>Archived</button>
+					</li>
+				</ul>
+			</div>
+		</>
+	);
+};
+
+export default DropdownStageSelect;
+
 // import { useContext, useState } from 'react';
 // import styled from 'styled-components';
 // import { DatabaseContext } from '../../context/DatabaseContext';
@@ -10,26 +92,6 @@
 
 // 	const { setAlert } = useAlert();
 // 	const [selectedStatus, setSelectedStatus] = useState(job.status);
-
-// 	const handleUpdateStatusClick = async (e) => {
-// 		setSelectedStatus(e.target.value);
-// 		const { error } = await supabase
-// 			.from('jobs')
-// 			.update({
-// 				status: e.target.value,
-// 				edited: new Date().toLocaleDateString('en-US'),
-// 			})
-// 			.eq('id', job.id);
-// 		setAlert('Status updated', 'success');
-// 		fetchUserJobs();
-// 		fetchUserJobsArchived();
-
-// 		if (error) {
-// 			setAlert('Unable to update job.', 'danger');
-// 			console.log('error is', error);
-// 			return;
-// 		}
-// 	};
 
 // 	return (
 // 		<Wrapper>
