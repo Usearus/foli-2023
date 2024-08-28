@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import DropdownAddPage from '../modal-components/DropdownAddPage';
-import DropdownStageSelect from '../atom-components/DropdownStageSelect';
+// import DropdownStageSelect from '../modal-components/DropdownStageSelect';
 // import SideBarAssistant from './SideBarAssistant';
 // import SideBarSnippets from './SideBarSnippets';
 // import SideBarQuestions from '../single-job-components/SideBarQuestions';
@@ -13,7 +13,7 @@ const TopBarJobDesktop = () => {
 		<div className='p-4 row-span-1 col-span-1 lg:col-span-2 bg-base-200 flex items-center justify-between '>
 			<div className='flex gap-6 items-center'>
 				<div className='max-w-[200px]'>
-					<p className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>
+					<p className='font-bold text-xl whitespace-nowrap overflow-hidden text-ellipsis'>
 						{currentJob.company}
 					</p>
 
@@ -29,7 +29,7 @@ const TopBarJobDesktop = () => {
 						</p>
 					)}
 				</div>
-				<DropdownStageSelect job={currentJob} />
+				{/* <DropdownStageSelect job={currentJob} /> */}
 			</div>
 			<div>
 				<DropdownAddPage />

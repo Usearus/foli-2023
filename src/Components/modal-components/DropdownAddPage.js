@@ -18,18 +18,9 @@ const DropdownAddPage = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [validated, setValidated] = useState(false);
 	const titleRef = useRef();
-	const [content, setContent] = useState('');
-	const [characterCount, setCharacterCount] = useState(0);
 	const titleMaxChar = 32;
-
-	const handleOpenModal = () => {
-		setIsModalOpen(true);
-	};
-
-	const handleCloseModal = () => {
-		setIsModalOpen(false);
-		setContent('');
-	};
+	// const [content, setContent] = useState('');
+	// const [characterCount, setCharacterCount] = useState(0);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -52,7 +43,7 @@ const DropdownAddPage = () => {
 				.insert({
 					account: user.email,
 					title: titleRef.current.value,
-					content: content,
+					// content: content,
 					jobid: currentJob.id,
 					position: currentPages.length,
 				})
@@ -71,21 +62,26 @@ const DropdownAddPage = () => {
 		}
 	};
 
-	const handleTitleChange = (event) => {
-		const newValue = event.target.value;
-		setCharacterCount(newValue.length);
-	};
+	// const handleTitleChange = (event) => {
+	// 	const newValue = event.target.value;
+	// 	setCharacterCount(newValue.length);
+	// };
 
 	const AddPageModal = () => {
 		return (
 			<>
-				<Modal isOpen={isModalOpen} onClose={handleCloseModal} title='Add page'>
+				<Modal
+					isOpen={isModalOpen}
+					onClose={() => setIsModalOpen(false)}
+					title='Add page'>
 					<div className='pb-4 flex flex-col gap-4'>
-						<form>
+						<form onSubmit={handleSubmit}>
 							{/* Title */}
 							<label className='form-control w-full'>
 								<div className='label'>
-									<span className='label-text'>Page title</span>
+									<span className='label-text'>
+										Title <span className='text-primary'>*</span>
+									</span>
 									{/* <span className='label-text-alt'>
 										{characterCount}/{titleMaxChar}
 									</span> */}
@@ -99,21 +95,12 @@ const DropdownAddPage = () => {
 									className='input input-bordered w-full'
 								/>
 							</label>
-							{/* Quill Content */}
-							{/* <label className='form-control w-full'>
-								<div className='label'>
-									<span className='label-text'>Content</span>
-								</div>
-								<div className='min-h-[300px]'>
-									<ReactQuillEditor value={content} />
-								</div>
-							</label> */}
+							<div className='flex justify-end pt-6'>
+								<button type='submit' className='btn btn-primary'>
+									Confirm
+								</button>
+							</div>
 						</form>
-					</div>
-					<div className='flex justify-end'>
-						<button className='btn btn-primary' onClick={handleSubmit}>
-							Confirm
-						</button>
 					</div>
 				</Modal>
 			</>

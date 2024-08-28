@@ -1,10 +1,9 @@
-// import ModalAddJob from '../modal-components/ModalAddJob';
+import AddJobBtn from '../modal-components/AddJobBtn';
 
 const TopBarTable = () => {
 	return (
 		<div className='flex w-full justify-end p-4'>
-			<button className='btn btn-primary btn-sm'>Add job</button>
-			{/* <ModalAddJob/> */}
+			<AddJobBtn />
 		</div>
 	);
 };

@@ -1,13 +1,12 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { supabase } from '../../../API/supabase';
 import { DatabaseContext } from '../../../context/DatabaseContext';
-import { EyeOpenIcon, EyeClosedIcon, TrashIcon } from '@radix-ui/react-icons';
+import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
 import DeletePageIcon from '../../modal-components/DeletePageIcon';
 
 const SideBarItem = ({ page, setShowOffcanvas, showOffcanvas }) => {
 	const { fetchCurrentPages, currentJob, setSelectedPageID } =
 		useContext(DatabaseContext);
-	// const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const handleVisibilityClick = async () => {
 		const visible = page.visible;
@@ -19,16 +18,6 @@ const SideBarItem = ({ page, setShowOffcanvas, showOffcanvas }) => {
 			.eq('id', page.id);
 		fetchCurrentPages(currentJob);
 	};
-
-	// 	// Will close any modal opened by the dropdown
-	// 	const handleCloseModal = () => {
-	// 		setShowDeleteModal(false);
-	// 	};
-
-	// 	// Will handle any modal option selected
-	// 	const handleDeleteModal = () => {
-	// 		setShowDeleteModal(true);
-	// 	};
 
 	// On mobile will open a modal with side bar?????????
 	const handleSideBarItemClick = () => {

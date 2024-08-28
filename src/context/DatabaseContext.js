@@ -114,7 +114,7 @@ const DatabaseProvider = ({ children }) => {
 				const theme = data.theme || 'light';
 				setUserTheme(theme);
 				document.documentElement.setAttribute('data-theme', data.theme);
-				console.log('userProfile is', data);
+				// console.log('userProfile is', data);
 				// console.log('user theme is', data.theme);
 			} else {
 				createUserProfile();
@@ -399,11 +399,11 @@ const DatabaseProvider = ({ children }) => {
 			localStorage.setItem('currentJob', JSON.stringify(data));
 
 			// Log the data to verify
-			console.log('currentJob is', data);
-			console.log(
-				'localStorage for currentJob',
-				JSON.parse(localStorage.getItem('currentJob'))
-			);
+			// console.log('currentJob is', data);
+			// console.log(
+			// 	'localStorage for currentJob',
+			// 	JSON.parse(localStorage.getItem('currentJob'))
+			// );
 		}
 	}
 
