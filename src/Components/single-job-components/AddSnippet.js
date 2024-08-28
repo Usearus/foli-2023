@@ -49,7 +49,7 @@
 // 		setediting(false);
 
 // 		if (error) {
-// 			setAlert('Unable to update snippet', 'danger');
+// 			setAlert('Unable to update snippet', 'error');
 // 			console.log('error is', error);
 // 			return;
 // 		}

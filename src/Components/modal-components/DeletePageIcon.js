@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import useAlert from '../../Custom Hooks/useAlert';
 import Modal from './Modal';
@@ -22,7 +22,7 @@ const DeletePageIcon = ({ page }) => {
 		const { error } = await supabase.from('pages').delete().eq('id', page.id);
 		if (error) {
 			console.error(error);
-			setAlert('Unable to delete page', 'danger');
+			setAlert('Unable to delete page', 'error');
 			return;
 		}
 		setAlert('Page deleted', 'success');
@@ -43,14 +43,14 @@ const DeletePageIcon = ({ page }) => {
 				onClose={handleCloseModal}
 				title='Delete page'>
 				<div className='pb-4'>
-					<p>Are you sure you want to delete this page?</p>
 					<p>
-						Page title:{` `}
+						Are you sure you want to delete {` `}
 						{page ? (
 							<span className='font-bold'>{page.title}</span>
 						) : (
-							<span>Error</span>
+							<span className='text-error'>Error</span>
 						)}
+						?
 					</p>
 				</div>
 				<div className='flex justify-end'>

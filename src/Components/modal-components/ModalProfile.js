@@ -101,7 +101,7 @@
 // 		setEditing(false);
 
 // 		if (error) {
-// 			setAlert('Unable to update preferences', 'danger');
+// 			setAlert('Unable to update preferences', 'error');
 // 			console.log('error is', error);
 // 			return;
 // 		}

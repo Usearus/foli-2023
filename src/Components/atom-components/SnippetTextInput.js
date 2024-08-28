@@ -57,7 +57,7 @@
 // 		setEditing(false);
 
 // 		if (error) {
-// 			setAlert('Unable to update', 'danger');
+// 			setAlert('Unable to update', 'error');
 // 			console.log('error is', error);
 // 			return;
 // 		}

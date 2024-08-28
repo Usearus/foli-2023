@@ -43,7 +43,7 @@
 // 		setediting(false);
 
 // 		if (error) {
-// 			setAlert('Unable to add question', 'danger');
+// 			setAlert('Unable to add question', 'error');
 // 			console.log('error is', error);
 // 			return;
 // 		}

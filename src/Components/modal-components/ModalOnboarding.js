@@ -54,7 +54,7 @@
 //         if (error) {
 //             setAlert(
 //                 'Something went wrong. Preferences not updated.',
-//                 'danger'
+//                 'error'
 //             );
 //             console.log('error is', error);
 //             return;

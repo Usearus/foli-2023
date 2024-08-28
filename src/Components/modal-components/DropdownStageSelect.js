@@ -1,12 +1,11 @@
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { supabase } from '../../API/supabase';
-import { useAuth0 } from '@auth0/auth0-react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import useAlert from '../../Custom Hooks/useAlert';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 
 const DropdownStageSelect = ({ job }) => {
-	const { fetchCurrentJob, currentJob, fetchUserJobs, fetchUserJobsArchived } =
+	const { fetchCurrentJob, fetchUserJobs, fetchUserJobsArchived } =
 		useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 
@@ -26,7 +25,7 @@ const DropdownStageSelect = ({ job }) => {
 		fetchCurrentJob(job);
 
 		if (error) {
-			setAlert('Unable to update job.', 'danger');
+			setAlert('Unable to update job.', 'error');
 			console.log('error is', error);
 			return;
 		}

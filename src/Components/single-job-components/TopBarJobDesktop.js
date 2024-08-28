@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import DropdownAddPage from '../modal-components/DropdownAddPage';
-// import DropdownStageSelect from '../modal-components/DropdownStageSelect';
+import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import EditJobBtn from '../modal-components/EditJobBtn';
+import DeleteJobBtn from '../modal-components/DeleteJobBtn';
 // import SideBarAssistant from './SideBarAssistant';
 // import SideBarSnippets from './SideBarSnippets';
 // import SideBarQuestions from '../single-job-components/SideBarQuestions';
@@ -29,10 +31,24 @@ const TopBarJobDesktop = () => {
 						</p>
 					)}
 				</div>
-				{/* <DropdownStageSelect job={currentJob} /> */}
 			</div>
-			<div>
+			<div className='flex items-center'>
 				<DropdownAddPage />
+				<div className='dropdown dropdown-end'>
+					<div tabIndex={0} role='button' className='btn btn-sm btn-ghost '>
+						<DotsVerticalIcon />
+					</div>
+					<ul
+						tabIndex={0}
+						className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
+						<li>
+							<EditJobBtn job={currentJob} />
+						</li>
+						<li>
+							<DeleteJobBtn job={currentJob} />
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	);

@@ -32,7 +32,7 @@ const Page = (page) => {
 			})
 			.eq('id', page.id);
 		if (error) {
-			setAlert('Unable to update page width.', 'danger');
+			setAlert('Unable to update page width.', 'error');
 			console.log('error is', error);
 			return;
 		}
@@ -94,7 +94,7 @@ const Page = (page) => {
 			setEditing(false);
 			// setShowEditPageModal(false);
 			if (error) {
-				setAlert('Unable to update page', 'danger');
+				setAlert('Unable to update page', 'error');
 				console.log('error is', error);
 				return;
 			}
@@ -112,7 +112,7 @@ const Page = (page) => {
 			setEditing(false);
 			// setShowEditPageModal(false);
 			if (error) {
-				setAlert('Unable to update page', 'danger');
+				setAlert('Unable to update page', 'error');
 				console.log('error is', error);
 				return;
 			}
