@@ -4,6 +4,7 @@ import { DatabaseContext } from '../context/DatabaseContext';
 import ThemeToggle from '../Components/atom-components/ThemeToggle';
 import Loader from '../Components/atom-components/Loader';
 import { useAuth0 } from '@auth0/auth0-react';
+// import ArrowTopRightIcon from '@radix-ui/react-icons';
 
 const SettingsPage = () => {
 	const { user } = useAuth0();
@@ -36,6 +37,23 @@ const SettingsPage = () => {
 			</div>
 		);
 	}
+
+	const targetSalaryIncreaseHigh = Math.round(
+		((userProfile.salary_max - userProfile.salary_current) /
+			userProfile.salary_current) *
+			100
+	);
+
+	const targetSalaryIncreaseLow = Math.round(
+		((userProfile.salary_min - userProfile.salary_current) /
+			userProfile.salary_current) *
+			100
+	);
+
+	const highClassName =
+		targetSalaryIncreaseHigh >= 0 ? 'text-success' : 'text-error';
+	const lowClassName =
+		targetSalaryIncreaseLow >= 0 ? 'text-success' : 'text-error';
 
 	return (
 		<div className='h-full text-base-content px-0 py-4 flex'>
@@ -160,6 +178,7 @@ const SettingsPage = () => {
 						</div>
 						{userProfile ? (
 							<div className='flex flex-col gap-4'>
+								{/* Target position */}
 								<label className='form-control w-full max-w-xs'>
 									<div className='label font-bold'>
 										<span className='label-text'>Target position</span>
@@ -167,13 +186,19 @@ const SettingsPage = () => {
 									<div className='px-4 py-2'>{userProfile.position}</div>
 								</label>
 								<div className='divider m-0'></div>
+								{/* Current Salary */}
 								<label className='form-control w-full max-w-xs'>
 									<div className='label font-bold'>
 										<span className='label-text'>Current salary</span>
 									</div>
-									<div className='px-4 py-2'>N/A</div>
+									<div className='px-4 py-2'>
+										{userProfile.salary_current !== undefined
+											? `$${userProfile.salary_current.toLocaleString()}`
+											: 'Current range not specified'}
+									</div>
 								</label>
 								<div className='divider m-0'></div>
+								{/*Target salary */}
 								<label className='form-control w-full max-w-xs'>
 									<div className='label font-bold'>
 										<span className='label-text'>Target salary</span>
@@ -186,11 +211,25 @@ const SettingsPage = () => {
 									</div>
 								</label>
 								<div className='divider m-0'></div>
+								{/*Target salary increase */}
 								<label className='form-control w-full max-w-xs'>
 									<div className='label font-bold'>
 										<span className='label-text'>Target salary increase</span>
 									</div>
-									<div className='px-4 py-2'>N/A</div>
+									<div className='px-4 py-2 flex gap-[2px] '>
+										<span className={lowClassName}>
+											{targetSalaryIncreaseLow !== null
+												? `${targetSalaryIncreaseLow}`
+												: '-'}
+										</span>
+										-
+										<span className={highClassName}>
+											{targetSalaryIncreaseHigh !== null
+												? `${targetSalaryIncreaseHigh}%`
+												: '-'}
+										</span>
+										{/* <ArrowTopRightIcon /> */}
+									</div>
 								</label>
 							</div>
 						) : null}
