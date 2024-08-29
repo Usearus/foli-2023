@@ -138,7 +138,7 @@ const Page = (page) => {
 	// if (isMobile === true && initialVisibleValue === true) {
 	// 	return (
 	// 		<>
-	// 			<article className='bg-base-100 w-[92vw] h-hull py-4 px-0 flex flex-col gap-2'>
+	// 			<article className='bg-base-200 w-[92vw] h-hull py-4 px-0 flex flex-col gap-2'>
 	// 				{/* Title Content */}
 	// 				<header>
 	// 					{editing ? (
@@ -179,7 +179,7 @@ const Page = (page) => {
 	// 										</div>
 	// 										<ul
 	// 											tabIndex={0}
-	// 											className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
+	// 											className='dropdown-content menu bg-base-300 rounded-box z-[1] w-52 p-2 shadow'>
 	// 											{/* Delete option */}
 	// 											<li>
 	// 												<button
@@ -271,7 +271,7 @@ const Page = (page) => {
 				maxWidth='700px'
 				size={{ height: '100%', width: pageWidth }}
 				className={`${
-					editing ? 'bg-neutral' : 'bg-base-100'
+					editing ? 'bg-base-100' : 'bg-base-200'
 				} h-full p-4 flex flex-col gap-2`}>
 				{/* Title Content */}
 				<header>

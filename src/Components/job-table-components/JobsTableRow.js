@@ -18,7 +18,7 @@ const JobsTableRow = (job) => {
 
 	return (
 		<>
-			<tr key={job.id} className='hover:bg-base-100'>
+			<tr key={job.id} className='hover:bg-base-200'>
 				{/* Job Cell */}
 				<td
 					onClick={handleTableRowClick}
@@ -68,7 +68,7 @@ const JobsTableRow = (job) => {
 						</div>
 						<ul
 							tabIndex={0}
-							className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
+							className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
 							<li>
 								<EditJobBtn job={job} />
 							</li>

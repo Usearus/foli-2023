@@ -111,11 +111,11 @@ const DatabaseProvider = ({ children }) => {
 			if (data) {
 				setUserProfile(data);
 				// THIS IS PROBABLY MAKING THE THEME REFRESH> NEED TO FIGURE OUT HOW TO DO ONLY ONCE.
-				const theme = data.theme || 'light';
+				const theme = data.theme || 'customLight';
 				setUserTheme(theme);
 				document.documentElement.setAttribute('data-theme', data.theme);
 				// console.log('userProfile is', data);
-				// console.log('user theme is', data.theme);
+				console.log('user theme is', data.theme);
 			} else {
 				createUserProfile();
 				const onboardingJob1 = await createOnboardingJob1();
@@ -143,7 +143,7 @@ const DatabaseProvider = ({ children }) => {
 				console.log(error);
 			}
 			fetchUserProfile();
-			setUserTheme('light');
+			setUserTheme('customLight');
 		}
 	}
 
@@ -282,7 +282,7 @@ const DatabaseProvider = ({ children }) => {
 				.from('jobs')
 				.select('*')
 				.filter('account', 'eq', auth0Email)
-				.not('status', 'eq', 'Archived');
+				.not('status', 'eq', 'Closed');
 			if (data) {
 				setUserJobs(data);
 				// console.log('userJobs are', data);
@@ -296,7 +296,7 @@ const DatabaseProvider = ({ children }) => {
 				.from('jobs')
 				.select('*')
 				.filter('account', 'eq', auth0Email)
-				.filter('status', 'eq', 'Archived');
+				.filter('status', 'eq', 'Closed');
 			if (data) {
 				setUserJobsArchived(data);
 				// console.log('userJobsArchived are', data);

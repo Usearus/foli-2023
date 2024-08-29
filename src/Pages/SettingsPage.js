@@ -38,7 +38,7 @@ const SettingsPage = () => {
 	}
 
 	return (
-		<div className='h-full text-base-content px-0 py-4 bg-base-200 flex'>
+		<div className='h-full text-base-content px-0 py-4 flex'>
 			{/* Sidebar */}
 			<div className='w-[350px] hidden lg:flex'>
 				<ul className='menu'>
@@ -100,7 +100,7 @@ const SettingsPage = () => {
 			<div className='flex justify-center w-full overflow-y-auto'>
 				<div className='max-w-[700px]  w-full p-4 flex flex-col gap-4 '>
 					{/* Account card */}
-					<div ref={accountRef} className='bg-base-100 p-8 flex flex-col gap-6'>
+					<div ref={accountRef} className='bg-base-200 p-8 flex flex-col gap-6'>
 						<div>
 							<h2 className='text-xl font-bold'>Account settings</h2>
 						</div>
@@ -136,7 +136,7 @@ const SettingsPage = () => {
 						) : null}
 					</div>
 					{/* Profile card */}
-					<div ref={profileRef} className='bg-base-100 p-8 flex flex-col gap-6'>
+					<div ref={profileRef} className='bg-base-200 p-8 flex flex-col gap-6'>
 						<div>
 							<h2 className='text-xl font-bold'>Profile settings</h2>
 						</div>
@@ -154,7 +154,7 @@ const SettingsPage = () => {
 					{/* Job search card */}
 					<div
 						ref={jobSearchRef}
-						className='bg-base-100 p-8 flex flex-col gap-6'>
+						className='bg-base-200 p-8 flex flex-col gap-6'>
 						<div>
 							<h2 className='text-xl font-bold'>Job search settings</h2>
 						</div>

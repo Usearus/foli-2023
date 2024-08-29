@@ -35,12 +35,12 @@ const SingleJobPage = () => {
 					<TopBarJobDesktop />
 
 					{/* Bottom left area */}
-					<div className='hidden lg:flex flex-col row-span-1 bg-base-200 pt-4'>
+					<div className='hidden lg:flex flex-col row-span-1 pt-4'>
 						<SideBar />
 					</div>
 
 					{/* Bottom right area */}
-					<div className='row-span-1 col-span-1 bg-base-200 pb-4 pt-0 px-0 overflow-hidden'>
+					<div className='row-span-1 col-span-1 pb-4 pt-0 px-0 overflow-hidden'>
 						<PageList />
 					</div>
 				</div>
@@ -56,7 +56,7 @@ const SingleJobPage = () => {
 					<TopBarJobDesktop />
 
 					{/* Bottom area */}
-					<div className='row-span-1 col-span-1 bg-base-200 p-4 flex justify-center items-center'>
+					<div className='row-span-1 col-span-1 p-4 flex justify-center items-center'>
 						<h2 className='text-lg font-bold'>
 							No pages added yet. Add your first page to get started.
 						</h2>

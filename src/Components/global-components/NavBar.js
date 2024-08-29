@@ -34,8 +34,8 @@ const NavBar = () => {
 		return (
 			<div className='text-base-content'>
 				<div
-					className='navbar bg-base-200 justify-between 
-			border-b-2 border-base-100 
+					className='navbar justify-between 
+			border-b-2 border-base-200 
 			'>
 					{/* Left content */}
 					<div>

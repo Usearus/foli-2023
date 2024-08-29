@@ -188,7 +188,7 @@ const JobsPage = () => {
 							name='my_tabs_1'
 							role='tab'
 							className='tab'
-							aria-label='Archived'
+							aria-label='Closed'
 						/>
 						<div role='tabpanel' className='tab-content pt-4'>
 							<JobsTable jobs={userJobsArchived} />

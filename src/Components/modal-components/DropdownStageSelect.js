@@ -61,7 +61,7 @@ const DropdownStageSelect = ({ job }) => {
 			</div>
 			<ul
 				tabIndex='0'
-				className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
+				className='dropdown-content menu bg-base-300 rounded-box z-[1] w-52 p-2 shadow'>
 				<li onClick={() => handleUpdateStatusClick('Interested')}>
 					<button>Interested</button>
 				</li>
@@ -83,8 +83,8 @@ const DropdownStageSelect = ({ job }) => {
 				<li onClick={() => handleUpdateStatusClick('Rejected')}>
 					<button>Rejected</button>
 				</li>
-				<li onClick={() => handleUpdateStatusClick('Archived')}>
-					<button>Archived</button>
+				<li onClick={() => handleUpdateStatusClick('Closed')}>
+					<button>Closed</button>
 				</li>
 			</ul>
 		</div>

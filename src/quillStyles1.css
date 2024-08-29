@@ -23,7 +23,7 @@ quillStyles1.css
 }
 
 /* Define CSS variables for dark theme */
-[data-theme='dark'] {
+[data-theme='customDark'] {
   --quill-border-color: #374151; /* Tailwind's border color in dark mode */
   --quill-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Tailwind's shadow-md */
   

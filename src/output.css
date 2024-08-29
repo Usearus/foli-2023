@@ -437,7 +437,7 @@ video {
   display: none;
 }
 
-:root,
+/* :root,
 [data-theme] {
   background-color: var(--fallback-b1,oklch(var(--b1)/1));
   color: var(--fallback-bc,oklch(var(--bc)/1));
@@ -493,7 +493,7 @@ video {
       --fallback-erc: #000000;
     }
   }
-}
+} */
 
 html {
   -webkit-tap-highlight-color: transparent;
@@ -507,7 +507,7 @@ html {
   scrollbar-color: color-mix(in oklch, currentColor 60%, transparent) transparent;
 }
 
-:root {
+/* :root {
   color-scheme: light;
   --in: 72.06% 0.191 231.6;
   --su: 64.8% 0.150 160;
@@ -639,7 +639,7 @@ html {
   --b2: 23.2607% 0.013807 253.100675;
   --b3: 21.1484% 0.01165 254.087939;
   --bc: 74.6477% 0.0216 264.435964;
-}
+} */
 
 *, ::before, ::after {
   --tw-border-spacing-x: 0;

@@ -31,36 +31,59 @@ module.exports = {
 		},
 	},
 	daisyui: {
+		// false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
 		themes: [
 			{
-				dark: {
-					primary: '#793ef9',
-					'primary-focus': '#570df8',
-					'primary-content': '#ffffff',
-					secondary: '#f000b8',
-					'secondary-focus': '#bd0091',
-					'secondary-content': '#ffffff',
-					accent: '#37cdbe',
-					'accent-focus': '#2aa79b',
-					'accent-content': '#ffffff',
-					neutral: '#2a2e37',
-					'neutral-focus': '#16181d',
-					'neutral-content': '#ffffff',
-					'base-100': '#3d4451',
-					'base-200': '#2a2e37',
-					'base-300': '#16181d',
-					'base-content': '#ebecf0',
-					info: '#66c6ff',
-					success: '#87d039',
-					warning: '#e2d562',
-					error: '#ff6f6f',
+				customLight: {
+					primary: '#7241C1',
+					'primary-content': '#ede9fe',
+					secondary: '#624b63',
+					'secondary-content': '#f3f4f6',
+					accent: '#10b981',
+					'accent-content': '#1f2937',
+					neutral: '#d1d1d1', //darkest
+					'neutral-content': '#414141',
+					'base-100': '#e2e2e2', //dark
+					'base-200': '#ebebeb', //light
+					'base-300': '#f5f5f5', //lightest (Background)
+					'base-content': '#242424',
+					info: '#33b2cc',
+					'info-content': '#000c11',
+					success: '#44C13C',
+					'success-content': '#050d00',
+					warning: '#FFCF0F',
+					'warning-content': '#160800',
+					error: '#FF513A',
+					'error-content': '#ffd7d3',
 				},
 			},
-			'light',
+			{
+				customDark: {
+					primary: '#7241C1',
+					'primary-content': '#ede9fe',
+					secondary: '#624b63',
+					'secondary-content': '#f3f4f6',
+					accent: '#10b981',
+					'accent-content': '#1f2937',
+					neutral: '#434b53', //lightest
+					'neutral-content': '#cdcdcd',
+					'base-100': '#2e363d', //light
+					'base-200': '#232930', //dark
+					'base-300': '#1B2127', //darkest (Background)
+					'base-content': '#d1cdd3',
+					info: '#33b2cc',
+					'info-content': '#000c11',
+					success: '#44C13C',
+					'success-content': '#050d00',
+					warning: '#FFCF0F',
+					'warning-content': '#160800',
+					error: '#FF513A',
+					'error-content': '#ffd7d3',
+				},
+			},
 		],
 
-		// themes: ['light', 'dark'], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
-		darkTheme: 'dark', // name of one of the included themes for dark mode
+		darkTheme: 'customDark', // name of one of the included themes for dark mode
 		base: true, // applies background color and foreground color for root element by default
 		styled: true, // include daisyUI colors and design decisions for all components
 		utils: true, // adds responsive and modifier utility classes

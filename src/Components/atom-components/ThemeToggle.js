@@ -9,7 +9,8 @@ const ThemeToggle = () => {
 	const { setAlert } = useAlert();
 
 	const handleThemeUpdate = async () => {
-		const oppositeTheme = userTheme === 'light' ? 'dark' : 'light';
+		const oppositeTheme =
+			userTheme === 'customLight' ? 'customDark' : 'customLight';
 
 		// Update the user's theme in Supabase
 		const { error } = await supabase
@@ -33,10 +34,10 @@ const ThemeToggle = () => {
 			<input
 				type='checkbox'
 				className='toggle'
-				checked={userTheme === 'dark'}
+				checked={userTheme === 'customDark'}
 				onChange={handleThemeUpdate}
 			/>
-			{userTheme === 'dark' ? <MoonIcon /> : <SunIcon />}
+			{userTheme === 'customDark' ? <MoonIcon /> : <SunIcon />}
 		</div>
 	);
 };
