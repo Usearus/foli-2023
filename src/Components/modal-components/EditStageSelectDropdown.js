@@ -4,7 +4,7 @@ import { DatabaseContext } from '../../context/DatabaseContext';
 import useAlert from '../../Custom Hooks/useAlert';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 
-const DropdownStageSelect = ({ job }) => {
+const EditStageSelectDropdown = ({ job }) => {
 	const { fetchCurrentJob, fetchUserJobs, fetchUserJobsArchived } =
 		useContext(DatabaseContext);
 	const { setAlert } = useAlert();
@@ -91,4 +91,4 @@ const DropdownStageSelect = ({ job }) => {
 	);
 };
 
-export default DropdownStageSelect;
+export default EditStageSelectDropdown;

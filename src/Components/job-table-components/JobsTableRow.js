@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DatabaseContext } from '../../context/DatabaseContext';
-import DropdownStageSelect from '../modal-components/DropdownStageSelect';
+import EditStageSelectDropdown from '../modal-components/EditStageSelectDropdown';
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import DeleteJobBtn from '../modal-components/DeleteJobBtn';
 import EditJobBtn from '../modal-components/EditJobBtn';
@@ -58,7 +58,7 @@ const JobsTableRow = (job) => {
 				</td>
 				{/* Status dropdown Cell */}
 				<td>
-					<DropdownStageSelect job={job} />
+					<EditStageSelectDropdown job={job} />
 				</td>
 				{/* More actions Cell */}
 				<td className='w-8'>

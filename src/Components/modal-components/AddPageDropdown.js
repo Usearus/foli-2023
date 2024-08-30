@@ -6,7 +6,7 @@ import useAlert from '../../Custom Hooks/useAlert';
 // import ReactQuillEditor from '../atom-components/ReactQuillEditor';
 import Modal from './Modal';
 
-const DropdownAddPage = () => {
+const AddPageDropdown = () => {
 	const { currentJob, currentPages, fetchCurrentPages, setSelectedPageID } =
 		useContext(DatabaseContext);
 
@@ -132,4 +132,4 @@ const DropdownAddPage = () => {
 	);
 };
 
-export default DropdownAddPage;
+export default AddPageDropdown;

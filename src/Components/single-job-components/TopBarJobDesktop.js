@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
-import DropdownAddPage from '../modal-components/DropdownAddPage';
+import AddPageDropdown from '../modal-components/AddPageDropdown';
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import EditJobBtn from '../modal-components/EditJobBtn';
 import DeleteJobBtn from '../modal-components/DeleteJobBtn';
@@ -33,7 +33,7 @@ const TopBarJobDesktop = () => {
 				</div>
 			</div>
 			<div className='flex items-center'>
-				<DropdownAddPage />
+				<AddPageDropdown />
 				<div className='dropdown dropdown-end'>
 					<div tabIndex={0} role='button' className='btn btn-sm btn-ghost '>
 						<DotsVerticalIcon />
