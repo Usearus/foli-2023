@@ -30,14 +30,15 @@ const ThemeToggle = () => {
 	};
 
 	return (
-		<div className='flex flex-row gap-2 items-center text-base-content'>
+		<div className='flex flex-row gap-2 items-center text-base-content pr-4'>
+			<SunIcon />
 			<input
 				type='checkbox'
 				className='toggle'
 				checked={userTheme === 'customDark'}
 				onChange={handleThemeUpdate}
 			/>
-			{userTheme === 'customDark' ? <MoonIcon /> : <SunIcon />}
+			<MoonIcon />
 		</div>
 	);
 };

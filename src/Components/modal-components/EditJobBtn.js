@@ -5,7 +5,7 @@ import Modal from './Modal';
 import { supabase } from '../../API/supabase';
 
 const EditJobBtn = ({ job }) => {
-	const { fetchUserJobs, fetchCurrentJob, currentJob } =
+	const { fetchUserJobs, fetchUserJobsArchived, fetchCurrentJob, currentJob } =
 		useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 
@@ -67,12 +67,13 @@ const EditJobBtn = ({ job }) => {
 				salary_min: salary_min,
 				salary_max: salary_max,
 				location: locationRef.current.value,
-				remote: remoteRef.current.checked,
+				location_remote: remoteRef.current.checked,
 				link: linkRef.current.value,
 				edited: new Date().toLocaleDateString('en-US'),
 			})
 			.eq('id', job.id);
 		fetchUserJobs();
+		fetchUserJobsArchived();
 		fetchCurrentJob(currentJob);
 		setAlert('Job updated', 'success');
 		setIsModalOpen(false);
@@ -111,7 +112,7 @@ const EditJobBtn = ({ job }) => {
 						<input
 							type='text'
 							required
-							className='input input-bordered w-full'
+							className='input input-bordered w-full bg-base-300'
 							ref={companyRef}
 							defaultValue={initialValues.company}
 						/>
@@ -126,7 +127,7 @@ const EditJobBtn = ({ job }) => {
 						<input
 							type='text'
 							required
-							className='input input-bordered w-full'
+							className='input input-bordered w-full bg-base-300'
 							ref={positionRef}
 							defaultValue={initialValues.position}
 						/>
@@ -140,7 +141,7 @@ const EditJobBtn = ({ job }) => {
 							</div>
 							<input
 								type='number'
-								className='input input-bordered w-full'
+								className='input input-bordered w-full bg-base-300'
 								placeholder='0'
 								ref={salary_minRef}
 								defaultValue={initialValues.salary_min}
@@ -153,7 +154,7 @@ const EditJobBtn = ({ job }) => {
 							</div>
 							<input
 								type='number'
-								className='input input-bordered w-full'
+								className='input input-bordered w-full bg-base-300'
 								placeholder='0'
 								ref={salary_maxRef}
 								defaultValue={initialValues.salary_max}
@@ -167,7 +168,7 @@ const EditJobBtn = ({ job }) => {
 						</div>
 						<input
 							type='text'
-							className='input input-bordered w-full'
+							className='input input-bordered w-full bg-base-300'
 							ref={locationRef}
 							defaultValue={initialValues.location}
 						/>
@@ -179,7 +180,7 @@ const EditJobBtn = ({ job }) => {
 						</div>
 						<input
 							type='checkbox'
-							className='checkbox'
+							className='checkbox bg-base-300'
 							ref={remoteRef}
 							defaultChecked={initialValues.remote}
 						/>
@@ -191,7 +192,7 @@ const EditJobBtn = ({ job }) => {
 						</div>
 						<input
 							type='text'
-							className='input input-bordered w-full'
+							className='input input-bordered w-full bg-base-300'
 							ref={linkRef}
 							defaultValue={initialValues.link}
 						/>

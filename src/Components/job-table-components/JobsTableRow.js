@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { DatabaseContext } from '../../context/DatabaseContext';
 import { useNavigate } from 'react-router-dom';
+import { DatabaseContext } from '../../context/DatabaseContext';
 import DropdownStageSelect from '../modal-components/DropdownStageSelect';
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import DeleteJobBtn from '../modal-components/DeleteJobBtn';

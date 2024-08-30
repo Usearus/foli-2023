@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Cross1Icon } from '@radix-ui/react-icons';
 import { createPortal } from 'react-dom';
 
-const Modal = ({ isOpen, onClose, children, title }) => {
+const Modal = ({ isOpen, onClose, children, title, closeButton = true }) => {
 	const [isVisible, setIsVisible] = useState(false);
 	const [animation, setAnimation] = useState('');
 
@@ -21,12 +21,16 @@ const Modal = ({ isOpen, onClose, children, title }) => {
 	const modalContent = (
 		<div className='z-50 fixed inset-0 bg-[#0f1214] bg-opacity-70 flex items-center justify-center animate-fade-in'>
 			<div
-				className={`bg-base-200 p-6 rounded-2xl shadow-sm w-full max-w-[95vw] lg:max-w-[600px] ${animation}`}>
+				className={`bg-base-300 p-6 rounded-2xl shadow-sm w-full max-w-[95vw] lg:max-w-[600px] ${animation}`}>
 				<div className='flex justify-between items-center'>
-					<h2 className='text-xl font-semibold'>{title}</h2>
-					<button className='btn btn-sm btn-ghost' onClick={onClose}>
-						<Cross1Icon />
-					</button>
+					<h2 className='text-xl font-semibold py-1'>{title}</h2>
+					{closeButton ? (
+						<button className='btn btn-sm btn-ghost' onClick={onClose}>
+							<Cross1Icon />
+						</button>
+					) : (
+						''
+					)}
 				</div>
 				<div className='mt-4'>{children}</div>
 			</div>

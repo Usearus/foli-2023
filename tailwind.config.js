@@ -43,9 +43,9 @@ module.exports = {
 					'accent-content': '#1f2937',
 					neutral: '#d1d1d1', //darkest
 					'neutral-content': '#414141',
-					'base-100': '#e2e2e2', //dark
+					'base-100': '#f3f3f3', //dark
 					'base-200': '#ebebeb', //light
-					'base-300': '#f5f5f5', //lightest (Background)
+					'base-300': '#e0e0e0', //lightest (Background)   DARKEST TEST
 					'base-content': '#242424',
 					info: '#33b2cc',
 					'info-content': '#000c11',

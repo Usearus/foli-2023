@@ -116,8 +116,8 @@
 import JobsTableRow from './JobsTableRow';
 
 const JobsTable = ({ jobs }) => {
-	return (
-		<>
+	if (jobs && jobs.length > 0) {
+		return (
 			<table className='table text-base-content'>
 				{/* Head */}
 				<thead>
@@ -137,42 +137,17 @@ const JobsTable = ({ jobs }) => {
 					))}
 				</tbody>
 			</table>
-		</>
-	);
+		);
+	}
+
+	if (jobs && jobs.length === 0) {
+		return (
+			<div className='flex justify-center items-center h-full p-6'>
+				<h5 className='text-lg'>
+					No jobs are being tracked. Add your first job to get started.
+				</h5>
+			</div>
+		);
+	}
 };
-
 export default JobsTable;
-
-// const Wrapper = styled.div`
-// 	/* padding: 2rem 2rem; */
-// 	height: 100%;
-// 	width: 100%;
-// 	max-width: 1200px;
-
-// 	/* Mobile */
-// 	@media (max-width: 576px) {
-// 		padding: 0;
-// 	}
-
-// 	.custom-width {
-// 		min-width: 120px;
-// 	}
-
-// 	th {
-// 		cursor: pointer;
-// 		font-weight: 400;
-// 		background: var(--grey-50);
-// 	}
-
-// 	tr {
-// 		font-size: small;
-// 	}
-
-// 	th.active-header {
-// 		background-color: var(--grey-100);
-// 	}
-
-// 	.table tbody:hover {
-// 		cursor: pointer;
-// 	}
-// `;

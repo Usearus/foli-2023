@@ -4,6 +4,7 @@ import { DatabaseContext } from '../context/DatabaseContext';
 import ThemeToggle from '../Components/atom-components/ThemeToggle';
 import Loader from '../Components/atom-components/Loader';
 import { useAuth0 } from '@auth0/auth0-react';
+import EditPreferencesBtn from '../Components/modal-components/EditPreferencesBtn';
 // import ArrowTopRightIcon from '@radix-ui/react-icons';
 
 const SettingsPage = () => {
@@ -11,10 +12,9 @@ const SettingsPage = () => {
 	const { userProfile } = useContext(DatabaseContext);
 	const [isLoading, setIsLoading] = useState(true);
 
-	// Refs for each section
-	const accountRef = useRef(null);
+	// Refs for each section in settings
 	const profileRef = useRef(null);
-	const jobSearchRef = useRef(null);
+	const jobPreferencesRef = useRef(null);
 
 	// Loading state
 	useEffect(() => {
@@ -38,22 +38,25 @@ const SettingsPage = () => {
 		);
 	}
 
-	const targetSalaryIncreaseHigh = Math.round(
-		((userProfile.salary_max - userProfile.salary_current) /
-			userProfile.salary_current) *
-			100
-	);
+	const targetSalaryIncrease =
+		userProfile.salary_target !== undefined &&
+		userProfile.salary_current !== undefined
+			? Math.round(
+					((userProfile.salary_target - userProfile.salary_current) /
+						userProfile.salary_current) *
+						100
+			  )
+			: undefined;
 
-	const targetSalaryIncreaseLow = Math.round(
-		((userProfile.salary_min - userProfile.salary_current) /
-			userProfile.salary_current) *
-			100
-	);
+	const salaryIncreaseClassName =
+		targetSalaryIncrease > 0 ? 'text-success' : 'text-error';
 
-	const highClassName =
-		targetSalaryIncreaseHigh >= 0 ? 'text-success' : 'text-error';
-	const lowClassName =
-		targetSalaryIncreaseLow >= 0 ? 'text-success' : 'text-error';
+	const formattedSalaryIncrease =
+		targetSalaryIncrease !== undefined
+			? targetSalaryIncrease > 0
+				? `+${targetSalaryIncrease}%`
+				: `${targetSalaryIncrease}%`
+			: '';
 
 	return (
 		<div className='h-full text-base-content px-0 py-4 flex'>
@@ -64,18 +67,13 @@ const SettingsPage = () => {
 						<span className='font-bold'>General</span>
 						<ul>
 							<li>
-								<button onClick={() => scrollToSection(accountRef)}>
-									Account
-								</button>
-							</li>
-							<li>
 								<button onClick={() => scrollToSection(profileRef)}>
 									Profile
 								</button>
 							</li>
 							<li>
-								<button onClick={() => scrollToSection(jobSearchRef)}>
-									Job search
+								<button onClick={() => scrollToSection(jobPreferencesRef)}>
+									Job preferences
 								</button>
 							</li>
 						</ul>
@@ -114,19 +112,19 @@ const SettingsPage = () => {
 					</li>
 				</ul>
 			</div>
-			{/* Content */}
+			{/* Content cards */}
 			<div className='flex justify-center w-full overflow-y-auto'>
 				<div className='max-w-[700px]  w-full p-4 flex flex-col gap-4 '>
 					{/* Account card */}
-					<div ref={accountRef} className='bg-base-200 p-8 flex flex-col gap-6'>
+					<div ref={profileRef} className='bg-base-200 p-8 flex flex-col gap-6'>
 						<div>
-							<h2 className='text-xl font-bold'>Account settings</h2>
+							<h2 className='text-xl font-bold'>Profile</h2>
 						</div>
 						{userProfile ? (
 							<div className='flex flex-col gap-4'>
-								<label className='form-control w-full max-w-xs'>
-									<div className='label font-bold'>
-										<span className='label-text'>Photo</span>
+								<label className='form-control w-full'>
+									<div className='label  font-bold'>
+										<span className='label-text'>Picture</span>
 									</div>
 									<div className='w-30'>
 										<img
@@ -137,103 +135,116 @@ const SettingsPage = () => {
 									</div>
 								</label>
 								<div className='divider m-0'></div>
-								<label className='form-control w-full max-w-xs'>
-									<div className='label font-bold'>
-										<span className='label-text'>Name</span>
-									</div>
-									<div className='px-4 py-2'>{user.name}</div>
-								</label>
+								<div className='flex gap-4'>
+									<label className='form-control w-full'>
+										<div className='label  font-bold'>
+											<span className='label-text'>Name</span>
+										</div>
+										<div className='px-1'>{user.name}</div>
+									</label>
+
+									<label className='form-control w-full'>
+										<div className='label  font-bold'>
+											<span className='label-text'>Email</span>
+										</div>
+										<div className='px-1'>{user.email}</div>
+									</label>
+								</div>
 								<div className='divider m-0'></div>
-								<label className='form-control w-full max-w-xs'>
-									<div className='label font-bold'>
-										<span className='label-text'>Email</span>
-									</div>
-									<div className='px-4 py-2'>{user.email}</div>
-								</label>
+								<div className='flex flex-col gap-4'>
+									<label className='w-full flex justify-between'>
+										<div className='label font-bold'>
+											<span className='label-text'>Interface theme</span>
+										</div>
+										<ThemeToggle />
+									</label>
+								</div>
 							</div>
 						) : null}
 					</div>
-					{/* Profile card */}
-					<div ref={profileRef} className='bg-base-200 p-8 flex flex-col gap-6'>
-						<div>
-							<h2 className='text-xl font-bold'>Profile settings</h2>
-						</div>
-						{user ? (
-							<div className='flex flex-col gap-4'>
-								<label className='w-full flex justify-between'>
-									<div className='label font-bold'>
-										<span className='label-text'>Interface theme</span>
-									</div>
-									<ThemeToggle />
-								</label>
+
+					{/* Job preferences card */}
+					{userProfile ? (
+						<div
+							ref={jobPreferencesRef}
+							className='bg-base-200 p-8 flex flex-col gap-6'>
+							<div className='flex justify-between items-center'>
+								<h2 className='text-xl font-bold'>Job preferences </h2>
+								<EditPreferencesBtn />
 							</div>
-						) : null}
-					</div>
-					{/* Job search card */}
-					<div
-						ref={jobSearchRef}
-						className='bg-base-200 p-8 flex flex-col gap-6'>
-						<div>
-							<h2 className='text-xl font-bold'>Job search settings</h2>
-						</div>
-						{userProfile ? (
 							<div className='flex flex-col gap-4'>
-								{/* Target position */}
-								<label className='form-control w-full max-w-xs'>
+								{/* Position content */}
+								<label className='form-control w-full'>
 									<div className='label font-bold'>
 										<span className='label-text'>Target position</span>
 									</div>
-									<div className='px-4 py-2'>{userProfile.position}</div>
-								</label>
-								<div className='divider m-0'></div>
-								{/* Current Salary */}
-								<label className='form-control w-full max-w-xs'>
-									<div className='label font-bold'>
-										<span className='label-text'>Current salary</span>
-									</div>
-									<div className='px-4 py-2'>
-										{userProfile.salary_current !== undefined
-											? `$${userProfile.salary_current.toLocaleString()}`
-											: 'Current range not specified'}
+									<div className='px-1'>
+										{userProfile.position ? `${userProfile.position}` : '-'}
 									</div>
 								</label>
 								<div className='divider m-0'></div>
-								{/*Target salary */}
-								<label className='form-control w-full max-w-xs'>
-									<div className='label font-bold'>
-										<span className='label-text'>Target salary</span>
-									</div>
-									<div className='px-4 py-2'>
-										{userProfile.salary_min !== undefined &&
-										userProfile.salary_max !== undefined
-											? `$${userProfile.salary_min.toLocaleString()} - $${userProfile.salary_max.toLocaleString()}`
-											: 'Salary range not specified'}
-									</div>
-								</label>
-								<div className='divider m-0'></div>
-								{/*Target salary increase */}
-								<label className='form-control w-full max-w-xs'>
-									<div className='label font-bold'>
-										<span className='label-text'>Target salary increase</span>
-									</div>
-									<div className='px-4 py-2 flex gap-[2px] '>
-										<span className={lowClassName}>
-											{targetSalaryIncreaseLow !== null
-												? `${targetSalaryIncreaseLow}`
+
+								{/* Salary content */}
+								<div className='flex gap-4'>
+									{/* Current Salary */}
+									<label className='form-control w-full'>
+										<div className='label font-bold'>
+											<span className='label-text'>Current Salary</span>
+										</div>
+										<div className='px-2'>
+											{userProfile.salary_current !== undefined
+												? `$${userProfile.salary_current.toLocaleString()}`
 												: '-'}
-										</span>
-										-
-										<span className={highClassName}>
-											{targetSalaryIncreaseHigh !== null
-												? `${targetSalaryIncreaseHigh}%`
-												: '-'}
-										</span>
-										{/* <ArrowTopRightIcon /> */}
+										</div>
+									</label>
+
+									{/* Salary target */}
+									<label className='form-control w-full'>
+										<div className='label font-bold'>
+											<span className='label-text'>Target salary</span>
+										</div>
+										<div className='px-2'>
+											{userProfile.salary_target !== undefined &&
+											userProfile.salary_max !== undefined
+												? `$${userProfile.salary_target.toLocaleString()} `
+												: 'Salary range not specified'}
+											<span className={salaryIncreaseClassName}>
+												{formattedSalaryIncrease}
+											</span>
+										</div>
+									</label>
+								</div>
+								<div className='divider m-0'></div>
+
+								{/* Location content */}
+								<label className='form-control w-full'>
+									<div className='label font-bold'>
+										<span className='label-text'>Locations</span>
+									</div>
+									<div className='flex gap-1'>
+										{/* Remote / Hybrid badge*/}
+										{userProfile.location_remote ? (
+											<div className='badge badge-primary badge-lg gap-3 mt-2 px-3 py-3'>
+												Remote / Hybrid
+											</div>
+										) : (
+											''
+										)}
+										{/* Location badge */}
+										{/* When the data comes back as an array, show the data */}
+										{Array.isArray(userProfile.location_preference) &&
+											userProfile.location_preference.map((location) => (
+												<div
+													key={location}
+													className='badge badge-primary badge-lg gap-3 mt-2 px-3 py-3'>
+													{location}
+												</div>
+											))}
 									</div>
 								</label>
 							</div>
-						) : null}
-					</div>
+						</div>
+					) : null}
 				</div>
 			</div>
 		</div>
@@ -241,3 +252,17 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
+
+// This was for doing target salary as a range...
+
+// const targetSalaryIncreaseHigh = Math.round(
+// 	((userProfile.salary_max - userProfile.salary_current) /
+// 		userProfile.salary_current) *
+// 		100
+// );
+
+// const targetSalaryIncreaseLow = Math.round(
+// 	((userProfile.salary_min - userProfile.salary_current) /
+// 		userProfile.salary_current) *
+// 		100
+// );

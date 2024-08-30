@@ -270,9 +270,7 @@ const Page = (page) => {
 				minWidth='300px'
 				maxWidth='700px'
 				size={{ height: '100%', width: pageWidth }}
-				className={`${
-					editing ? 'bg-base-100' : 'bg-base-200'
-				} h-full p-4 flex flex-col gap-2`}>
+				className='h-full p-4 flex flex-col gap-2 bg-base-100'>
 				{/* Title Content */}
 				<header>
 					{editing ? (

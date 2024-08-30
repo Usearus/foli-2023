@@ -6,7 +6,7 @@ import { supabase } from '../../API/supabase';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const DeleteJobBtn = ({ job }) => {
-	const { fetchUserJobs } = useContext(DatabaseContext);
+	const { fetchUserJobs, fetchUserJobsArchived } = useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -22,6 +22,7 @@ const DeleteJobBtn = ({ job }) => {
 		}
 		setAlert('Job deleted', 'success');
 		fetchUserJobs();
+		fetchUserJobsArchived();
 		setIsModalOpen(false);
 
 		// Only navigate to '/' if the current path is not already '/'
@@ -50,7 +51,7 @@ const DeleteJobBtn = ({ job }) => {
 						) : (
 							<span className='text-error'>Error</span>
 						)}
-						?
+						? This cannot be undone.
 					</p>
 				</div>
 				<div className='flex justify-end'>

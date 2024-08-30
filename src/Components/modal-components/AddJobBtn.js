@@ -108,7 +108,7 @@ const AddJobBtn = () => {
 						<input
 							type='text'
 							required
-							className='input input-bordered w-full'
+							className='input input-bordered w-full bg-base-300'
 							ref={companyRef}
 						/>
 					</label>
@@ -122,7 +122,7 @@ const AddJobBtn = () => {
 						<input
 							type='text'
 							required
-							className='input input-bordered w-full'
+							className='input input-bordered w-full bg-base-300'
 							ref={positionRef}
 						/>
 					</label>
@@ -135,7 +135,7 @@ const AddJobBtn = () => {
 							</div>
 							<input
 								type='number'
-								className='input input-bordered w-full'
+								className='input input-bordered w-full bg-base-300'
 								placeholder='0'
 								ref={salary_minRef}
 							/>
@@ -147,7 +147,7 @@ const AddJobBtn = () => {
 							</div>
 							<input
 								type='number'
-								className='input input-bordered w-full'
+								className='input input-bordered w-full bg-base-300'
 								placeholder='0'
 								ref={salary_maxRef}
 							/>
@@ -160,7 +160,7 @@ const AddJobBtn = () => {
 						</div>
 						<input
 							type='text'
-							className='input input-bordered w-full'
+							className='input input-bordered w-full bg-base-300'
 							ref={locationRef}
 						/>
 					</label>
@@ -169,7 +169,11 @@ const AddJobBtn = () => {
 						<div className='label'>
 							<span className='label-text'>Remote / hybrid</span>
 						</div>
-						<input type='checkbox' className='checkbox' ref={remoteRef} />
+						<input
+							type='checkbox'
+							className='checkbox bg-base-300'
+							ref={remoteRef}
+						/>
 					</label>
 					{/* Listing URL */}
 					<label className='form-control w-full'>
@@ -178,7 +182,7 @@ const AddJobBtn = () => {
 						</div>
 						<input
 							type='text'
-							className='input input-bordered w-full'
+							className='input input-bordered w-full bg-base-300'
 							ref={linkRef}
 						/>
 					</label>

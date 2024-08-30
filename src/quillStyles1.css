@@ -8,12 +8,12 @@ quillStyles1.css
   --quill-border-radius: 0.5rem; /* Tailwind's rounded-lg */
   --quill-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tailwind's shadow-sm */
   
-  --quill-background-color: #FFFFFF; /* Tailwind's bg-base-100 */
+  --quill-background-color: #FFFFFF; /* bg-base-100 */
   --quill-text-color: #1f2937; /* Tailwind's text-base-content */
   --quill-link-color: #2563eb; /* Tailwind's text-primary */
   --quill-placeholder-color: #9ca3af; /* Tailwind's text-muted */
   
-  --quill-toolbar-background: #ffffff; /* Tailwind's bg-base-100 */
+  --quill-toolbar-background: #ffffff; /* bg-base-100 */
   --quill-toolbar-border-color: #e5e7eb; /* Tailwind's border color */
   --quill-toolbar-button-color: #4b5563; /* Tailwind's text-secondary */
   --quill-toolbar-button-hover-color: #2563eb; /* Tailwind's text-primary on hover */
@@ -27,12 +27,12 @@ quillStyles1.css
   --quill-border-color: #374151; /* Tailwind's border color in dark mode */
   --quill-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Tailwind's shadow-md */
   
-  --quill-background-color: #2A323C; /* Tailwind's bg-neutral in dark mode */
+  --quill-background-color: #2e363d; /* bg-base-100 in dark mode */
   --quill-text-color: #e5e7eb; /* Tailwind's text-base-content in dark mode */
   --quill-link-color: #3b82f6; /* Tailwind's text-primary in dark mode */
   --quill-placeholder-color: #6b7280; /* Tailwind's text-muted in dark mode */
   
-  --quill-toolbar-background:#2d3748; /* Tailwind's bg-base-300 in dark mode */
+  --quill-toolbar-background:#2e363d; /* bg-base-100 in dark mode */
   --quill-toolbar-border-color: #4a5568; /* Tailwind's border color in dark mode */
   --quill-toolbar-button-color: #e5e7eb; /* Tailwind's text-base-content in dark mode */
   --quill-toolbar-button-hover-color: #60a5fa; /* Tailwind's text-primary on hover in dark mode */

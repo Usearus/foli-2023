@@ -1,20 +1,7 @@
 import { useContext, useState } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
-// import SiteIcon from '../atom-components/SiteIcon';
 import { useAuth0 } from '@auth0/auth0-react';
-// import Container from 'react-bootstrap/Container';
-// import {
-// 	Nav,
-// 	Navbar,
-// 	Button,
-// 	Offcanvas,
-// 	OffcanvasHeader,
-// 	OffcanvasTitle,
-// } from 'react-bootstrap';
-// import { LinkContainer } from 'react-router-bootstrap';
-// import ModalProfile from '../modal-components/ModalProfile';
-
-// import { FiMenu } from 'react-icons/fi';
+import ThemeToggle from '../atom-components/ThemeToggle';
 
 const NavBar = () => {
 	const { userProfile, adminProfile } = useContext(DatabaseContext);
@@ -38,28 +25,26 @@ const NavBar = () => {
 			border-b-2 border-base-200 
 			'>
 					{/* Left content */}
-					<div>
-						<a href='/' className='btn btn-ghost btn-sm text-xl'>
+					<div className='flex gap-2'>
+						{/* Logo */}
+						<a href='/' className='btn btn-ghost btn-sm text-xl '>
 							Foli
 						</a>
-
 						{/* Test page */}
 						{adminProfile ? (
-							<div className='navbar-center hidden lg:flex'>
-								<ul className='menu menu-horizontal px-1'>
-									<li>
-										<a href='/test' id='test'>
-											Test
-										</a>
-									</li>
-								</ul>
-							</div>
+							<a
+								className='btn btn-ghost btn-sm hidden lg:flex'
+								href='/test'
+								id='test'>
+								Test
+							</a>
 						) : null}
 					</div>
 
 					{/* Right content */}
-					<div className='flex-none'>
+					<div className='flex-none gap-4'>
 						{/* Profile btn */}
+						<ThemeToggle />
 						<div className='dropdown dropdown-end'>
 							<div
 								tabIndex={0}
