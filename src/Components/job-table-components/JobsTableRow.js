@@ -39,7 +39,7 @@ const JobsTableRow = (job) => {
 				{/* Location cell */}
 				<td
 					onClick={handleTableRowClick}
-					className='hidden lg:table-cell cursor-pointer'>
+					className='hidden lg:table-cell w-[300px] cursor-pointer'>
 					{job.location ? (
 						// TO DO - Fix clipping
 						<div className='badge badge-neutral overflow-hidden mr-2 my-1'>

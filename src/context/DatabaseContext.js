@@ -115,7 +115,7 @@ const DatabaseProvider = ({ children }) => {
 				setUserTheme(theme);
 				document.documentElement.setAttribute('data-theme', data.theme);
 				// console.log('userProfile is', data);
-				console.log('user theme is', data.theme);
+				// console.log('user theme is', data.theme);
 			} else {
 				createUserProfile();
 				const onboardingJob1 = await createOnboardingJob1();

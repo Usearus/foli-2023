@@ -33,34 +33,40 @@ const JobsPage = () => {
 
 	return (
 		<>
+			{/* Only shows if onboarding is false */}
 			<AddPreferencesModal
 				isModalOpen={isModalOpen}
 				setIsModalOpen={setIsModalOpen}
 			/>
-			<TopBarTable />
-			{/* Tabs component */}
-			<div className='p-0 lg:px-12'>
-				<div role='tablist' className='tabs tabs-bordered'>
-					<input
-						type='radio'
-						name='my_tabs_1'
-						role='tab'
-						className='tab'
-						aria-label='Active'
-						defaultChecked
-					/>
-					<div role='tabpanel' className='tab-content pt-4'>
-						<JobsTable jobs={userJobs} />
-					</div>
-					<input
-						type='radio'
-						name='my_tabs_1'
-						role='tab'
-						className='tab'
-						aria-label='Closed'
-					/>
-					<div role='tabpanel' className='tab-content pt-4'>
-						<JobsTable jobs={userJobsArchived} />
+			{/* Main page content */}
+			<div className='h-full overflow-hidden flex flex-col'>
+				<TopBarTable />
+				{/* Tabs component */}
+				<div className='p-0 lg:px-12 flex-grow'>
+					<div
+						role='tablist'
+						className='tabs tabs-bordered grid-rows-[1fr_auto]'>
+						<input
+							type='radio'
+							name='my_tabs_1'
+							role='tab'
+							className='tab'
+							aria-label='Active'
+							defaultChecked
+						/>
+						<div role='tabpanel' className='tab-content mt-4'>
+							<JobsTable jobs={userJobs} />
+						</div>
+						<input
+							type='radio'
+							name='my_tabs_1'
+							role='tab'
+							className='tab'
+							aria-label='Closed'
+						/>
+						<div role='tabpanel' className='tab-content mt-4 '>
+							<JobsTable jobs={userJobsArchived} />
+						</div>
 					</div>
 				</div>
 			</div>
