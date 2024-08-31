@@ -4,6 +4,9 @@ module.exports = {
 	plugins: [require('daisyui')],
 	theme: {
 		extend: {
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+			},
 			animation: {
 				'fade-in': 'fadeIn 300ms ease-out forwards',
 				'scale-in': 'scaleIn 300ms ease-out forwards',
