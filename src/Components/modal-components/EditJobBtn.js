@@ -67,7 +67,7 @@ const EditJobBtn = ({ job }) => {
 				salary_min: salary_min,
 				salary_max: salary_max,
 				location: locationRef.current.value,
-				location_remote: remoteRef.current.checked,
+				remote: remoteRef.current.checked,
 				link: linkRef.current.value,
 				edited: new Date().toLocaleDateString('en-US'),
 			})
@@ -79,7 +79,8 @@ const EditJobBtn = ({ job }) => {
 		setIsModalOpen(false);
 
 		if (error) {
-			setAlert('Unable to add job', 'error');
+			setAlert('Unable to update job', 'error');
+			console.log(error);
 			return;
 		}
 	};

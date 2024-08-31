@@ -39,7 +39,7 @@ const PageList = () => {
 
 	if (visiblePages.length > 0) {
 		return (
-			<div className='flex gap-4 h-full overflow-x-auto snap-x snap-mandatory lg:snap-none'>
+			<div className='flex gap-4 h-full overflow-x-auto snap-x snap-mandatory pl-4 lg:pl-0 lg:snap-none '>
 				{visiblePages.map((page, index) => {
 					const ref = createRef();
 					pageRef.current[index] = { id: page.id, ref };
@@ -49,7 +49,7 @@ const PageList = () => {
 					return (
 						<div
 							key={page.id}
-							className={`h-full snap-center lg:snap-align-none ${pageClassName}`}
+							className={`h-full snap-center lg:snap-align-none  ${pageClassName}`}
 							ref={ref}>
 							<Page key={page.id} id={page.id} {...page} />
 						</div>
