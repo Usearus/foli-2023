@@ -43,9 +43,7 @@ const JobsPage = () => {
 				<TopBarTable />
 				{/* Tabs component */}
 				<div className='p-0 lg:px-12 flex-grow'>
-					<div
-						role='tablist'
-						className='tabs tabs-bordered grid-rows-[1fr_auto]'>
+					<div role='tablist' className='tabs tabs-bordered'>
 						<input
 							type='radio'
 							name='my_tabs_1'
@@ -64,7 +62,7 @@ const JobsPage = () => {
 							className='tab'
 							aria-label='Closed'
 						/>
-						<div role='tabpanel' className='tab-content mt-4 '>
+						<div role='tabpanel' className='tab-content mt-4'>
 							<JobsTable jobs={userJobsArchived} />
 						</div>
 					</div>

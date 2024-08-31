@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronUpIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import JobsTableRow from './JobsTableRow';
+import Loader from '../atom-components/Loader';
 
 const JobsTable = ({ jobs }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [sortOrder, setSortOrder] = useState({
-		column: 'company',
-		direction: 'asc',
+		column: null, // No initial sorting
+		direction: null, // No sorting direction
 	});
 
 	const rowsPerPage = 10;
@@ -19,17 +20,25 @@ const JobsTable = ({ jobs }) => {
 	};
 
 	const handleHeaderClick = (column) => {
-		if (column === sortOrder.column) {
-			setSortOrder({
-				column,
-				direction: sortOrder.direction === 'asc' ? 'desc' : 'asc',
-			});
-		} else {
-			setSortOrder({ column, direction: 'asc' });
-		}
+		setSortOrder((prevState) => {
+			if (prevState.column === column) {
+				if (prevState.direction === 'asc') {
+					return { column: column, direction: 'desc' }; // Switch to descending
+				} else if (prevState.direction === 'desc') {
+					return { column: null, direction: null }; // Reset to unsorted
+				}
+			} else {
+				return { column: column, direction: 'asc' }; // Default to ascending for a new column
+			}
+			return prevState;
+		});
 	};
 
 	const sortedJobs = [...jobs].sort((a, b) => {
+		if (!sortOrder.column || !sortOrder.direction) {
+			return 0; // No sorting if unsorted
+		}
+
 		const direction = sortOrder.direction === 'asc' ? 1 : -1;
 		const columnA = a[sortOrder.column];
 		const columnB = b[sortOrder.column];
@@ -56,10 +65,30 @@ const JobsTable = ({ jobs }) => {
 		return columnName === sortOrder.column ? 'bg-base-100' : '';
 	};
 
+	// Loading state
+	const [loading, setLoading] = useState(true); // New loading state
+
+	useEffect(() => {
+		// Simulate data fetching
+		const timer = setTimeout(() => {
+			setLoading(false); // Data is ready
+		}, 1000); // Adjust the delay as needed
+
+		return () => clearTimeout(timer); // Cleanup timer on unmount
+	}, []);
+
+	if (loading) {
+		return (
+			<div className='flex justify-center items-center h-full p-6'>
+				<Loader />
+			</div>
+		);
+	}
+
 	if (jobs && jobs.length > 0) {
 		return (
 			<div className='w-full flex flex-col items-end'>
-				<table className='table  text-base-content table-pin-rows'>
+				<table className='table text-base-content table-pin-rows'>
 					<thead>
 						<tr className='bg-base-200'>
 							<th
@@ -114,7 +143,7 @@ const JobsTable = ({ jobs }) => {
 						))}
 					</tbody>
 				</table>
-
+				{/* Pagination  */}
 				<div className='mt-4 flex items-center gap-4 pr-4'>
 					<span className='text-sm'>
 						{startIndex + 1}-{endIndex} jobs of <span>{jobs.length}</span>

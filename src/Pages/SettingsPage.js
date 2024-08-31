@@ -207,7 +207,7 @@ const SettingsPage = () => {
 											{userProfile.salary_target !== undefined &&
 											userProfile.salary_max !== undefined
 												? `$${userProfile.salary_target.toLocaleString()} `
-												: 'Salary range not specified'}
+												: '-'}
 											<span className={salaryIncreaseClassName}>
 												{formattedSalaryIncrease}
 											</span>

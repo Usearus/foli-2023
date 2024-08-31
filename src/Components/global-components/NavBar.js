@@ -44,7 +44,9 @@ const NavBar = () => {
 					{/* Right content */}
 					<div className='flex-none gap-4'>
 						{/* Profile btn */}
-						<ThemeToggle />
+						<div className='hidden lg:flex'>
+							<ThemeToggle />
+						</div>
 						<div className='dropdown dropdown-end'>
 							<div
 								tabIndex={0}
@@ -62,7 +64,7 @@ const NavBar = () => {
 								) : null}
 							</div>
 
-							<ul className='menu dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow'>
+							<ul className='z-50 menu dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow'>
 								<li>
 									<a href='/settings' id='settings'>
 										Settings

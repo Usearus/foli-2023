@@ -7,7 +7,8 @@ import DeleteJobBtn from '../modal-components/DeleteJobBtn';
 import EditJobBtn from '../modal-components/EditJobBtn';
 
 const JobsTableRow = (job) => {
-	const { fetchCurrentJob, fetchCurrentPages } = useContext(DatabaseContext);
+	const { fetchCurrentJob, fetchCurrentPages, userProfile } =
+		useContext(DatabaseContext);
 	const navigate = useNavigate();
 
 	const handleTableRowClick = async () => {
@@ -15,6 +16,26 @@ const JobsTableRow = (job) => {
 		await fetchCurrentPages(job);
 		navigate(`/job/id:${job.id}`);
 	};
+
+	const targetSalaryIncrease =
+		userProfile.salary_target !== undefined &&
+		userProfile.salary_current !== undefined
+			? Math.round(
+					((job.salary_max - userProfile.salary_current) /
+						userProfile.salary_target) *
+						100
+			  )
+			: undefined;
+
+	const salaryIncreaseClassName =
+		targetSalaryIncrease > 0 ? 'text-success' : 'text-error';
+
+	const formattedSalaryIncrease =
+		targetSalaryIncrease !== undefined
+			? targetSalaryIncrease > 0
+				? `+${targetSalaryIncrease}%`
+				: `${targetSalaryIncrease}%`
+			: '';
 
 	return (
 		<>
@@ -32,9 +53,21 @@ const JobsTableRow = (job) => {
 				<td
 					onClick={handleTableRowClick}
 					className='hidden lg:table-cell font-light cursor-pointer'>
-					{job.salary_min && job.salary_max
-						? `$${job.salary_min.toLocaleString()} - ${job.salary_max.toLocaleString()}`
-						: '-'}
+					{job.salary_min && job.salary_max ? (
+						<div>
+							${job.salary_min.toLocaleString()} - $
+							{job.salary_max.toLocaleString()}{' '}
+							<div
+								className='tooltip'
+								data-tip={`${formattedSalaryIncrease} compared to current salary`}>
+								<span className={`badge ${salaryIncreaseClassName}`}>
+									{formattedSalaryIncrease}
+								</span>
+							</div>
+						</div>
+					) : (
+						'-'
+					)}{' '}
 				</td>
 				{/* Location cell */}
 				<td

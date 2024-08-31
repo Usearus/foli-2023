@@ -40,7 +40,7 @@ const TopBarJobDesktop = () => {
 					</div>
 					<ul
 						tabIndex={0}
-						className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
+						className='dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow'>
 						<li>
 							<EditJobBtn job={currentJob} />
 						</li>
