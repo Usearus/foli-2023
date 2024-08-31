@@ -101,9 +101,7 @@ const JobsTable = ({ jobs }) => {
 								</div>
 							</th>
 							<th
-								className={`hidden lg:table-cell cursor-pointer ${getHeaderClassName(
-									'salary'
-								)}`}
+								className={`cursor-pointer ${getHeaderClassName('salary')}`}
 								onClick={() => handleHeaderClick('salary')}>
 								<div className='flex items-center'>
 									Salary {renderSortIcon('salary')}
@@ -128,7 +126,9 @@ const JobsTable = ({ jobs }) => {
 								</div>
 							</th>
 							<th
-								className={`cursor-pointer ${getHeaderClassName('status')}`}
+								className={`hidden lg:table-cell cursor-pointer ${getHeaderClassName(
+									'status'
+								)}`}
 								onClick={() => handleHeaderClick('status')}>
 								<div className='flex items-center'>
 									Status {renderSortIcon('status')}

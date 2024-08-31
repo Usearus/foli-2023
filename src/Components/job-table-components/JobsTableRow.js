@@ -52,7 +52,7 @@ const JobsTableRow = (job) => {
 				{/* Salary Cell */}
 				<td
 					onClick={handleTableRowClick}
-					className='hidden lg:table-cell font-light cursor-pointer'>
+					className='table-cell font-light cursor-pointer'>
 					{job.salary_min && job.salary_max ? (
 						<div>
 							${job.salary_min.toLocaleString()} - $
@@ -90,7 +90,7 @@ const JobsTableRow = (job) => {
 					{new Date(job.edited).toLocaleDateString()}
 				</td>
 				{/* Status dropdown Cell */}
-				<td>
+				<td className='hidden lg:table-cell'>
 					<EditStageSelectDropdown job={job} />
 				</td>
 				{/* More actions Cell */}
