@@ -2,6 +2,67 @@
 ! tailwindcss v3.4.10 | MIT License | https://tailwindcss.com
 */
 
+
+/* GLOBAL STYLES FOR MY TWO THEMES AS OF 8/30/24 */
+:root {
+  /* Default theme variables */
+  --primary: #7241C1;
+  --primary-content: #ede9fe;
+  --secondary: #624b63;
+  --secondary-content: #f3f4f6;
+  --accent: #10b981;
+  --accent-content: #1f2937;
+  --neutral: #d1d1d1;
+  --neutral-content: #414141;
+  --base-100: #f3f3f3;
+  --base-200: #ebebeb;
+  --base-300: #e0e0e0;
+  --base-content: #242424;
+  --info: #33b2cc;
+  --info-content: #000c11;
+  --success: #44C13C;
+  --success-content: #050d00;
+  --warning: #FFCF0F;
+  --warning-content: #160800;
+  --error: #FF513A;
+  --error-content: #ffd7d3;
+
+  ::selection {
+    background: #B9A0E0;
+  }
+}
+
+/* Custom dark theme */
+[data-theme="customDark"] {
+  --primary: #7241C1;
+  --primary-content: #ede9fe;
+  --secondary: #624b63;
+  --secondary-content: #f3f4f6;
+  --accent: #10b981;
+  --accent-content: #1f2937;
+  --neutral: #434b53;
+  --neutral-content: #cdcdcd;
+  --base-100: #2e363d;
+  --base-200: #232930;
+  --base-300: #1B2127;
+  --base-content: #d1cdd3;
+  --info: #33b2cc;
+  --info-content: #000c11;
+  --success: #44C13C;
+  --success-content: #050d00;
+  --warning: #FFCF0F;
+  --warning-content: #160800;
+  --error: #FF513A;
+  --error-content: #ffd7d3;
+
+  ::selection {
+    background: var(--primary);
+  }
+}
+
+
+
+
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -64,6 +125,7 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
+  @apply font-sans
 }
 
 /*
@@ -4124,14 +4186,17 @@ input.tab:checked + .tab-content,
 }
 
 .markdown-content {
-  /* * {
-   color: var(--secondaryTextColor);
- }  */
-  /* 
- a {
-   color: var(--primary-400);
- } */
+a {
+  text-decoration: underline;
+  color: var(--primary) !important;
+}
+
+a:hover {
+  color: #6A3CB2 !important;
+  }
+
   padding: 1rem 1rem;
+
   h1 {
     font-size: 1.8rem;
   }
@@ -4167,6 +4232,7 @@ input.tab:checked + .tab-content,
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
+
 
 .group:hover .group-hover\:flex {
   display: flex;

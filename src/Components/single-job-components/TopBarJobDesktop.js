@@ -12,7 +12,7 @@ const TopBarJobDesktop = () => {
 	const { currentJob } = useContext(DatabaseContext);
 
 	return (
-		<div className='p-4 row-span-1 col-span-1 lg:col-span-2 flex items-center justify-between '>
+		<div className='p-4 row-span-1 col-span-1 lg:col-span-2 flex items-center justify-between z-10'>
 			<div className='flex gap-6 items-center'>
 				<div className='max-w-[200px]'>
 					<p className='font-bold text-xl whitespace-nowrap overflow-hidden text-ellipsis'>

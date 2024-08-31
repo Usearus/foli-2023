@@ -48,105 +48,35 @@ quillStyles1.css
   top: 0;
   z-index: 1;
   background: var(--quill-background-color) !important;
-  /* padding: 0 !important; */
-  /* border-radius: 8px 8px 0 0 !important; */
-  /* border-color: var(--quill-border-color) !important; */
   border: 0 !important;
 }
 
 /* Getting some of the buttons */
-.ql-formats > * {
+/* .ql-formats > * {
   color: var(--quill-toolbar-button-color) !important;
   stroke: var(--quill-toolbar-button-color) !important;
-}
+} */
 
 /* This is items in a list when clicking a dropdown button */
 .ql-picker-item::before {
   color: var(--quill-neutral-color) !important;
+  /* color: red !important;
+  stroke: red !important;
+  path: red !important; */
+  /* padding: 12px; */
 }
 
-.ql-formats > span {
-  color: var(--quill-toolbar-button-color) !important;
+.ql-picker-item::before:hover {
+  color: purple !important;
+  /* color: red !important;
+  stroke: red !important;
+  path: red !important; */
+  /* padding: 12px; */
 }
 
-.ql-formats > span.active {
-  color: var(--quill-toolbar-button-active-color) !important;
-}
-
-.ql-formats > span:hover {
-  color: var(--quill-toolbar-button-hover-color) !important;
-}
-
-
-/* Container that holds the editor */
-.ql-container {
-  border: 0 !important;
-  /* display: flex !important;
-  flex-direction: column !important;
-  flex-grow: 1 !important;
-  min-height:0 !important; */
-}
-
-/* This is the placeholder text */
-.ql-blank::before {
-  color: var(--quill-neutral-color) !important;
-  font-style: normal !important;
-}
-
-/* Container that sets the content */
-.ql-editor ul > li::before {
-  content: '';
-}
 
 /* This is the editor */
 .ql-editor {
   font-size: 16px !important;
-  /* flex-grow: 1 !important;
-  min-height:0 !important;
-  overflow-y: auto !important; */
 
-  /* Set all color to secondary by default to be different than the standard colors in the app */
-  * {
-      color: var(--quill-text-color) !important;
-  }
-
-  a {
-      color: var(--quill-link-color) !important;
-  }
-
-  h1 {
-      font-size: 1.8rem !important;
-  }
-
-  h2 {
-      font-size: 1.25rem !important;
-  }
-
-  h3 {
-      font-size: 1rem !important;
-  }
-
-  h4 {
-      font-size: 1rem !important;
-  }
-
-  h5 {
-      font-size: 1rem !important;
-  }
-
-}
-
-
-/* This enforces showing the px selector items somehow */
-.ql-snow {
-  .ql-picker {
-      &.ql-size {
-          .ql-picker-label,
-          .ql-picker-item {
-              &::before {
-                  content: attr(data-value) !important;
-              }
-          }
-      }
-  }
 }

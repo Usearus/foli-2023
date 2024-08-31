@@ -6,7 +6,7 @@ import ReactQuillEditor from '../atom-components/ReactQuillEditor';
 import { supabase } from '../../API/supabase';
 import { Resizable } from 're-resizable';
 import { DotsVerticalIcon, Pencil1Icon } from '@radix-ui/react-icons';
-import '../../quillStyles1.css';
+import '../../quillStyles.css';
 import DeletePageBtn from '../modal-components/DeletePageBtn';
 
 const Page = (page) => {
