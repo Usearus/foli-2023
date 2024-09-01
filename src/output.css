@@ -4226,13 +4226,13 @@ a:hover {
 
 /* We want the page-scroll to be change based on the content showing / not showing on mobile. */
   .page-scroll {
-  height: calc(100vh - 240px);
+  height: calc(100vh - 250px);
   /* 100vh minus the height of the navbar */
     overflow-y: auto; }
     
   @media (min-width: 700px) {
     .page-scroll {
-    height: calc(100vh - 320px);
+    height: calc(100vh - 330px);
     /* 100vh minus the height of the navbar */
     overflow-y: auto;
 } }

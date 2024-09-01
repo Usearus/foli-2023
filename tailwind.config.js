@@ -39,7 +39,7 @@ module.exports = {
 			{
 				customLight: {
 					primary: '#7241C1',
-					'primary-content': '#100424',
+					'primary-content': '#ede9fe',
 					secondary: '#DCD0F0',
 					'secondary-content': '#100424',
 					accent: '#10b981',
