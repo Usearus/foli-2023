@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef, useContext } from 'react';
-import { LockClosedIcon } from '@radix-ui/react-icons';
+import {
+	LockClosedIcon,
+	ArrowUpIcon,
+	ArrowDownIcon,
+} from '@radix-ui/react-icons';
 import { DatabaseContext } from '../context/DatabaseContext';
 import ThemeToggle from '../Components/atom-components/ThemeToggle';
 import Loader from '../Components/atom-components/Loader';
 import { useAuth0 } from '@auth0/auth0-react';
 import EditPreferencesBtn from '../Components/modal-components/EditPreferencesBtn';
-// import ArrowTopRightIcon from '@radix-ui/react-icons';
 
 const SettingsPage = () => {
 	const { user } = useAuth0();
@@ -23,7 +26,7 @@ const SettingsPage = () => {
 		}
 	}, [user, userProfile]);
 
-	// // Function to scroll to a specific section
+	// Function to scroll to a specific section
 	const scrollToSection = (ref) => {
 		if (ref && ref.current) {
 			ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -51,11 +54,32 @@ const SettingsPage = () => {
 	const salaryIncreaseClassName =
 		targetSalaryIncrease > 0 ? 'text-success' : 'text-error';
 
+	// Conditionally render the icon with the formatted salary increase
 	const formattedSalaryIncrease =
+		targetSalaryIncrease !== undefined ? (
+			<span>
+				{targetSalaryIncrease > 0 ? (
+					<div className='flex items-center'>
+						<ArrowUpIcon className='inline-block mr-1' />
+						{targetSalaryIncrease}%
+					</div>
+				) : (
+					<div className='flex items-center'>
+						<ArrowDownIcon className='inline-block mr-1' />
+						{Math.abs(targetSalaryIncrease)}%
+					</div>
+				)}
+			</span>
+		) : (
+			''
+		);
+
+	// Set tooltip text based on the salary increase direction
+	const tooltipText =
 		targetSalaryIncrease !== undefined
 			? targetSalaryIncrease > 0
-				? `+${targetSalaryIncrease}%`
-				: `${targetSalaryIncrease}%`
+				? `${targetSalaryIncrease}% higher than current salary`
+				: `${Math.abs(targetSalaryIncrease)}% lower than current salary`
 			: '';
 
 	return (
@@ -191,55 +215,60 @@ const SettingsPage = () => {
 										<div className='label font-bold'>
 											<span className='label-text'>Current Salary</span>
 										</div>
-										<div className='px-2'>
+										<div className='px-1'>
 											{userProfile.salary_current !== undefined
 												? `$${userProfile.salary_current.toLocaleString()}`
 												: '-'}
 										</div>
 									</label>
-
-									{/* Salary target */}
+									{/* Target salary */}
 									<label className='form-control w-full'>
 										<div className='label font-bold'>
 											<span className='label-text'>Target salary</span>
 										</div>
-										<div className='px-2'>
-											{userProfile.salary_target !== undefined &&
-											userProfile.salary_max !== undefined
-												? `$${userProfile.salary_target.toLocaleString()} `
-												: '-'}
-											<span className={salaryIncreaseClassName}>
-												{formattedSalaryIncrease}
-											</span>
+										<div className='px-1'>
+											{userProfile.salary_target &&
+											userProfile.salary_current ? (
+												<>
+													${userProfile.salary_target.toLocaleString()}{' '}
+													<div className='tooltip' data-tip={tooltipText}>
+														<span
+															className={`badge badge-outline ${salaryIncreaseClassName}`}>
+															{formattedSalaryIncrease}
+														</span>
+													</div>
+												</>
+											) : (
+												'-'
+											)}
 										</div>
 									</label>
 								</div>
 								<div className='divider m-0'></div>
-
 								{/* Location content */}
 								<label className='form-control w-full'>
 									<div className='label font-bold'>
 										<span className='label-text'>Locations</span>
 									</div>
-									<div className='flex gap-1'>
-										{/* Remote / Hybrid badge*/}
-										{userProfile.location_remote ? (
-											<div className='badge badge-primary badge-lg gap-3 mt-2 px-3 py-3'>
-												Remote / Hybrid
-											</div>
-										) : (
-											''
-										)}
+									<div className='flex gap-2 flex-wrap'>
 										{/* Location badge */}
 										{/* When the data comes back as an array, show the data */}
 										{Array.isArray(userProfile.location_preference) &&
 											userProfile.location_preference.map((location) => (
 												<div
 													key={location}
-													className='badge badge-primary badge-lg gap-3 mt-2 px-3 py-3'>
+													className='badge badge-neutral mt-2'>
 													{location}
 												</div>
 											))}
+										{/* Remote / Hybrid badge*/}
+										{userProfile.location_remote ? (
+											<div className='badge badge-neutral mt-2'>
+												Remote / Hybrid
+											</div>
+										) : (
+											''
+										)}
 									</div>
 								</label>
 							</div>
@@ -252,17 +281,3 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
-
-// This was for doing target salary as a range...
-
-// const targetSalaryIncreaseHigh = Math.round(
-// 	((userProfile.salary_max - userProfile.salary_current) /
-// 		userProfile.salary_current) *
-// 		100
-// );
-
-// const targetSalaryIncreaseLow = Math.round(
-// 	((userProfile.salary_min - userProfile.salary_current) /
-// 		userProfile.salary_current) *
-// 		100
-// );

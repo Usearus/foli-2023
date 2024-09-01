@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
-import { ChevronUpIcon, ChevronDownIcon } from '@radix-ui/react-icons';
+import {
+	ChevronUpIcon,
+	ChevronDownIcon,
+	InfoCircledIcon,
+} from '@radix-ui/react-icons';
 import JobsTableRow from './JobsTableRow';
 import Loader from '../atom-components/Loader';
 
@@ -40,12 +44,14 @@ const JobsTable = ({ jobs }) => {
 		}
 
 		const direction = sortOrder.direction === 'asc' ? 1 : -1;
-		const columnA = a[sortOrder.column];
-		const columnB = b[sortOrder.column];
 
 		if (sortOrder.column === 'salary') {
-			return (columnA - columnB) * direction;
+			const salaryA = a.salary_max;
+			const salaryB = b.salary_max;
+			return (salaryA - salaryB) * direction;
 		} else {
+			const columnA = a[sortOrder.column];
+			const columnB = b[sortOrder.column];
 			return columnA.localeCompare(columnB) * direction;
 		}
 	});
@@ -90,9 +96,9 @@ const JobsTable = ({ jobs }) => {
 			<div className='w-full flex flex-col items-end'>
 				<table className='table text-base-content table-pin-rows'>
 					<thead>
-						<tr className='bg-base-200'>
+						<tr className='bg-base-300'>
 							<th
-								className={`min-w-[100px] max-w-[200px] cursor-pointer ${getHeaderClassName(
+								className={`hover:bg-base-200 min-w-[100px] max-w-[200px] cursor-pointer ${getHeaderClassName(
 									'company'
 								)}`}
 								onClick={() => handleHeaderClick('company')}>
@@ -103,8 +109,14 @@ const JobsTable = ({ jobs }) => {
 							<th
 								className={`cursor-pointer ${getHeaderClassName('salary')}`}
 								onClick={() => handleHeaderClick('salary')}>
-								<div className='flex items-center'>
-									Salary {renderSortIcon('salary')}
+								<div className='flex items-center gap-1'>
+									Salary
+									<div
+										className='tooltip font-normal'
+										data-tip='Sorts by max salary'>
+										<InfoCircledIcon />
+									</div>
+									{renderSortIcon('salary')}
 								</div>
 							</th>
 							<th

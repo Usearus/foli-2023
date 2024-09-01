@@ -39,15 +39,15 @@ const JobsTableRow = (job) => {
 		targetSalaryIncrease !== undefined ? (
 			<span>
 				{targetSalaryIncrease > 0 ? (
-					<>
+					<div className='flex items-center'>
 						<ArrowUpIcon className='inline-block mr-1' />
 						{targetSalaryIncrease}%
-					</>
+					</div>
 				) : (
-					<>
+					<div className='flex items-center'>
 						<ArrowDownIcon className='inline-block mr-1' />
 						{Math.abs(targetSalaryIncrease)}%
-					</>
+					</div>
 				)}
 			</span>
 		) : (
@@ -79,7 +79,7 @@ const JobsTableRow = (job) => {
 					onClick={handleTableRowClick}
 					className='table-cell font-light cursor-pointer'>
 					{job.salary_min && job.salary_max ? (
-						<div>
+						<div className='flex flex-wrap items-center gap-2'>
 							${job.salary_min.toLocaleString()} - $
 							{job.salary_max.toLocaleString()}{' '}
 							<div className='tooltip' data-tip={tooltipText}>

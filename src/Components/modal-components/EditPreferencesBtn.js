@@ -3,7 +3,7 @@ import { DatabaseContext } from '../../context/DatabaseContext';
 import useAlert from '../../Custom Hooks/useAlert';
 import Modal from './Modal';
 import { supabase } from '../../API/supabase';
-import { Cross1Icon, Pencil1Icon } from '@radix-ui/react-icons';
+import { Cross2Icon, Pencil1Icon } from '@radix-ui/react-icons';
 
 const EditPreferencesBtn = () => {
 	const { userProfile, fetchUserProfile } = useContext(DatabaseContext);
@@ -181,9 +181,9 @@ const EditPreferencesBtn = () => {
 									tempLocations.map((location) => (
 										<div
 											key={location}
-											className='badge badge-primary badge-lg gap-3 mt-2 px-3 py-3'>
+											className='badge badge-neutral gap-2 mt-2'>
 											{location}
-											<Cross1Icon
+											<Cross2Icon
 												onClick={() => handleRemoveLocation(location)}
 												className='cursor-pointer'
 											/>

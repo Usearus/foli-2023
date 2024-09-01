@@ -39,24 +39,24 @@ module.exports = {
 			{
 				customLight: {
 					primary: '#7241C1',
-					'primary-content': '#ede9fe',
-					secondary: '#624b63',
-					'secondary-content': '#f3f4f6',
+					'primary-content': '#100424',
+					secondary: '#DCD0F0',
+					'secondary-content': '#100424',
 					accent: '#10b981',
 					'accent-content': '#1f2937',
-					neutral: '#d1d1d1', //darkest
+					neutral: '#c9c9c9', //Darkest (Borders)
 					'neutral-content': '#414141',
-					'base-100': '#f3f3f3', //dark
-					'base-200': '#ebebeb', //light
-					'base-300': '#e0e0e0', //lightest (Background)   DARKEST TEST
+					'base-100': '#f3f3f3', //Dark (Dropdowns)
+					'base-200': '#ebebeb', //Darker (Content, Pages, Modals, Background hover,)
+					'base-300': '#e0e0e0', //Darkest (Background)   DARKEST TEST
 					'base-content': '#242424',
 					info: '#33b2cc',
 					'info-content': '#000c11',
-					success: '#44C13C',
+					success: '#35912e',
 					'success-content': '#050d00',
 					warning: '#FFCF0F',
 					'warning-content': '#160800',
-					error: '#FF513A',
+					error: '#c23f2e',
 					'error-content': '#ffd7d3',
 				},
 			},
@@ -64,11 +64,11 @@ module.exports = {
 				customDark: {
 					primary: '#7241C1',
 					'primary-content': '#ede9fe',
-					secondary: '#624b63',
-					'secondary-content': '#f3f4f6',
+					secondary: '#2F0B6B',
+					'secondary-content': '#EDE7F7',
 					accent: '#10b981',
 					'accent-content': '#1f2937',
-					neutral: '#434b53', //lightest
+					neutral: '#33393f', //lightest
 					'neutral-content': '#cdcdcd',
 					'base-100': '#2e363d', //light
 					'base-200': '#232930', //dark
