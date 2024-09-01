@@ -156,13 +156,13 @@ const Page = (page) => {
 					minWidth='300px'
 					maxWidth='700px'
 					size={{ height: '100%', width: pageWidth }}
-					className='h-full p-4 flex flex-col gap-2 bg-base-100'>
+					className='h-full p-4 flex flex-col gap-2 bg-base-200'>
 					{/* Title Content */}
 					<header>
 						{editing ? (
 							<div className='flex justify-between'>
 								{page.locked ? (
-									<label className='font-bold pl-2'>{page.title}</label>
+									<label className='font-bold pl-[9px]'>{page.title}</label>
 								) : (
 									<label className='input input-ghost input-xs flex grow items-center gap-2 mb-[2px]'>
 										<input
@@ -198,7 +198,7 @@ const Page = (page) => {
 											</button>
 											<ul
 												tabIndex={0}
-												className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
+												className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
 												<li>
 													<DeletePageBtn page={page} />
 												</li>
@@ -246,7 +246,7 @@ const Page = (page) => {
 				</Resizable>
 			) : (
 				// Mobile Version
-				<div className='h-full w-[90vw] p-4 flex flex-col gap-2 bg-base-100'>
+				<div className='h-full w-[90vw] p-4 flex flex-col gap-2 bg-base-200'>
 					{/* Title Content */}
 					<header>
 						{editing ? (
@@ -281,13 +281,13 @@ const Page = (page) => {
 										<Pencil1Icon />
 									</button>
 									{!page.locked && (
-										<div className='dropdown dropdown-end'>
+										<div className='dropdown dropdown-end '>
 											<button tabIndex={0} className='btn btn-xs btn-ghost'>
 												<DotsVerticalIcon />
 											</button>
 											<ul
 												tabIndex={0}
-												className='dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow'>
+												className='dropdown-content menu  rounded-box z-[1] w-52 p-2 shadow'>
 												<li>
 													<DeletePageBtn page={page} />
 												</li>

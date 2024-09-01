@@ -39,7 +39,7 @@ const DeletePageBtn = ({ page }) => {
 						) : (
 							<span className='text-error'>Error</span>
 						)}
-						? This cannot be undone.
+						? <br /> This cannot be undone.
 					</p>
 				</div>
 				<div className='flex justify-end'>

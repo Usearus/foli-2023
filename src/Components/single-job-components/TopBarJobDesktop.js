@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import AddPageDropdown from '../modal-components/AddPageDropdown';
-import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { DotsVerticalIcon, ArrowLeftIcon } from '@radix-ui/react-icons';
 import EditJobBtn from '../modal-components/EditJobBtn';
 import DeleteJobBtn from '../modal-components/DeleteJobBtn';
 // import SideBarAssistant from './SideBarAssistant';
@@ -13,9 +13,12 @@ const TopBarJobDesktop = () => {
 
 	return (
 		<div className='p-4 row-span-1 col-span-1 lg:col-span-2 flex items-center justify-between z-10'>
-			<div className='flex gap-6 items-center'>
+			<div className='flex gap-2 items-center'>
+				<a href='/' className='btn btn-ghost btn-sm md:hidden '>
+					<ArrowLeftIcon />
+				</a>
 				<div className='max-w-[200px]'>
-					<p className='font-bold text-xl whitespace-nowrap overflow-hidden text-ellipsis'>
+					<p className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>
 						{currentJob.company}
 					</p>
 

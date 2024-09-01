@@ -1,7 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import './app.css';
-import './input.css';
+// Order of output.css and input.css needs to stay in this order
 import './output.css';
+import './input.css';
 
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';

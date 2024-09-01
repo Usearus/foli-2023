@@ -21,7 +21,7 @@ const Modal = ({ isOpen, onClose, children, title, closeButton = true }) => {
 	const modalContent = (
 		<div className='z-50 fixed inset-0 bg-[#0f1214] bg-opacity-70 flex items-center justify-center animate-fade-in'>
 			<div
-				className={`bg-base-300 p-6 rounded-2xl shadow-sm w-full max-w-[95vw] lg:max-w-[600px] ${animation}`}>
+				className={`bg-base-300 p-6 rounded-2xl shadow-sm w-full max-w-[95vw] md:max-w-[600px] ${animation}`}>
 				<div className='flex justify-between items-center'>
 					<h2 className='text-xl font-semibold py-1'>{title}</h2>
 					{closeButton ? (

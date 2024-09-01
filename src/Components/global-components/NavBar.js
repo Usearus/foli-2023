@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import ThemeToggle from '../atom-components/ThemeToggle';
@@ -6,16 +6,6 @@ import ThemeToggle from '../atom-components/ThemeToggle';
 const NavBar = () => {
 	const { userProfile, adminProfile } = useContext(DatabaseContext);
 	const { user } = useAuth0();
-
-	// const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-	// const toggleDropdown = () => {
-	// 	setIsDropdownOpen((prev) => !prev);
-	// };
-
-	// const closeDropdown = () => {
-	// 	setIsDropdownOpen(false);
-	// };
 
 	if (userProfile) {
 		return (

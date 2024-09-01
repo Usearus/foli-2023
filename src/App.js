@@ -8,6 +8,8 @@ import SingleJobPage from './Pages/SingleJobPage';
 import TestingPage from './Pages/TestingPage';
 import SettingsPage from './Pages/SettingsPage';
 import Layout from './layout';
+import NavBar from './Components/global-components/NavBar';
+import AlertPopup from './Components/global-components/AlertPopup';
 
 const App = () => {
 	return (
@@ -28,9 +30,15 @@ const App = () => {
 					path='/job/:id'
 					element={
 						<PrivateRoute>
-							<Layout>
-								<SingleJobPage />
-							</Layout>
+							<div className='flex flex-col h-screen bg-base-300 relative'>
+								<AlertPopup />
+								<div className='hidden md:block'>
+									<NavBar />
+								</div>
+								<div className='flex-grow overflow-y-auto'>
+									<SingleJobPage />
+								</div>
+							</div>
 						</PrivateRoute>
 					}
 				/>

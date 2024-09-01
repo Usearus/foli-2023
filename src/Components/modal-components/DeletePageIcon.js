@@ -50,7 +50,7 @@ const DeletePageIcon = ({ page }) => {
 						) : (
 							<span className='text-error'>Error</span>
 						)}
-						?
+						? <br /> This cannot be undone.
 					</p>
 				</div>
 				<div className='flex justify-end'>

@@ -2,7 +2,11 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import EditStageSelectDropdown from '../modal-components/EditStageSelectDropdown';
-import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import {
+	DotsVerticalIcon,
+	ArrowUpIcon,
+	ArrowDownIcon,
+} from '@radix-ui/react-icons';
 import DeleteJobBtn from '../modal-components/DeleteJobBtn';
 import EditJobBtn from '../modal-components/EditJobBtn';
 
@@ -28,13 +32,34 @@ const JobsTableRow = (job) => {
 			: undefined;
 
 	const salaryIncreaseClassName =
-		targetSalaryIncrease > 0 ? 'text-success' : 'text-error';
+		targetSalaryIncrease > 0 ? 'badge-success' : 'badge-error';
 
+	// Conditionally render the icon with the formatted salary increase
 	const formattedSalaryIncrease =
+		targetSalaryIncrease !== undefined ? (
+			<span>
+				{targetSalaryIncrease > 0 ? (
+					<>
+						<ArrowUpIcon className='inline-block mr-1' />
+						{targetSalaryIncrease}%
+					</>
+				) : (
+					<>
+						<ArrowDownIcon className='inline-block mr-1' />
+						{Math.abs(targetSalaryIncrease)}%
+					</>
+				)}
+			</span>
+		) : (
+			''
+		);
+
+	// Set tooltip text based on the salary increase direction
+	const tooltipText =
 		targetSalaryIncrease !== undefined
 			? targetSalaryIncrease > 0
-				? `+${targetSalaryIncrease}%`
-				: `${targetSalaryIncrease}%`
+				? `${targetSalaryIncrease}% higher than current salary`
+				: `${Math.abs(targetSalaryIncrease)}% lower than current salary`
 			: '';
 
 	return (
@@ -44,7 +69,7 @@ const JobsTableRow = (job) => {
 				<td
 					onClick={handleTableRowClick}
 					className='min-w-[100px] max-w-[200px] cursor-pointer'>
-					<div className='font-bold '>{job.company}</div>
+					<div className='font-bold'>{job.company}</div>
 					<div className='font-light whitespace-nowrap overflow-hidden text-ellipsis'>
 						{job.position}
 					</div>
@@ -57,10 +82,9 @@ const JobsTableRow = (job) => {
 						<div>
 							${job.salary_min.toLocaleString()} - $
 							{job.salary_max.toLocaleString()}{' '}
-							<div
-								className='tooltip'
-								data-tip={`${formattedSalaryIncrease} compared to current salary`}>
-								<span className={`badge ${salaryIncreaseClassName}`}>
+							<div className='tooltip' data-tip={tooltipText}>
+								<span
+									className={`badge badge-outline ${salaryIncreaseClassName}`}>
 									{formattedSalaryIncrease}
 								</span>
 							</div>
@@ -74,7 +98,6 @@ const JobsTableRow = (job) => {
 					onClick={handleTableRowClick}
 					className='hidden lg:table-cell w-[300px] cursor-pointer'>
 					{job.location ? (
-						// TO DO - Fix clipping
 						<div className='badge badge-neutral overflow-hidden mr-2 my-1'>
 							{job.location}
 						</div>
