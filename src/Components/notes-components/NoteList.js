@@ -1,15 +1,15 @@
 import { useContext, useEffect, useRef, createRef } from 'react';
 import { DatabaseContext } from '../../context/DatabaseContext';
-import Page from './Page';
+import Note from './Note';
 
-const PageList = () => {
-	const { currentJobPages, selectedPageID } = useContext(DatabaseContext);
-	const visiblePages = currentJobPages.filter((page) => page.visible);
+const NoteList = () => {
+	const { userNotePages, selectedPageID } = useContext(DatabaseContext);
+	const visiblePages = userNotePages.filter((page) => page.visible);
 
 	// create a ref to the Pages
 	const pageRef = useRef([]);
 	const lastPageRef = useRef(null);
-	const prevLengthRef = useRef(currentJobPages.length);
+	const prevLengthRef = useRef(userNotePages.length);
 
 	useEffect(() => {
 		const pageToScrollTo = pageRef.current.find(
@@ -27,19 +27,19 @@ const PageList = () => {
 		}
 
 		// Scroll to the last page when currentJobPages increases
-		if (currentJobPages.length > prevLengthRef.current) {
+		if (userNotePages.length > prevLengthRef.current) {
 			if (lastPageRef.current && lastPageRef.current.scrollIntoView) {
 				lastPageRef.current.scrollIntoView({ behavior: 'smooth' });
 			}
 		}
 
 		// Update prevLengthRef.current
-		prevLengthRef.current = currentJobPages.length;
-	}, [selectedPageID, currentJobPages.length]);
+		prevLengthRef.current = userNotePages.length;
+	}, [selectedPageID, userNotePages.length]);
 
 	if (visiblePages.length > 0) {
 		return (
-			<div className='flex gap-4 h-full overflow-x-auto snap-x snap-mandatory pl-4 pt-4 lg:snap-none '>
+			<div className='flex gap-4 h-full overflow-x-auto snap-x snap-mandatory pl-4 pt-4  lg:snap-none '>
 				{visiblePages.map((page, index) => {
 					const ref = createRef();
 					pageRef.current[index] = { id: page.id, ref };
@@ -51,7 +51,7 @@ const PageList = () => {
 							key={page.id}
 							className={`h-full snap-center lg:snap-align-none  ${pageClassName}`}
 							ref={ref}>
-							<Page key={page.id} id={page.id} {...page} />
+							<Note key={page.id} id={page.id} {...page} />
 						</div>
 					);
 				})}
@@ -63,10 +63,10 @@ const PageList = () => {
 	if (visiblePages.length === 0) {
 		return (
 			<div className='text-lg font-bold flex justify-center items-center w-full h-full'>
-				<h5>No pages are visible. Toggle visibility in Pages list.</h5>
+				<h5>No notes are visible. Toggle visibility in Notes list.</h5>
 			</div>
 		);
 	}
 };
 
-export default PageList;
+export default NoteList;

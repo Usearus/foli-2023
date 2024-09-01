@@ -9,8 +9,8 @@ import { DotsVerticalIcon, Pencil1Icon } from '@radix-ui/react-icons';
 import '../../quillStyles.css';
 import DeletePageBtn from '../modal-components/DeletePageBtn';
 
-const Page = (page) => {
-	const { fetchCurrentJobPages, currentJob } = useContext(DatabaseContext);
+const PageNote = (page) => {
+	const { fetchUserNotePages, userNotePages } = useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 
 	// 	React Quill Editor Variables & Functions
@@ -82,38 +82,20 @@ const Page = (page) => {
 	};
 
 	const handleUpdateContentClick = async () => {
-		if (page.locked) {
-			const { error } = await supabase
-				.from('pages')
-				.update({
-					content: content,
-				})
-				.eq('id', page.id);
-			setAlert('Page updated', 'success');
-			fetchCurrentJobPages(currentJob);
-			setEditing(false);
-			if (error) {
-				setAlert('Unable to update page', 'error');
-				console.log('error is', error);
-				return;
-			}
-		}
-		if (!page.locked) {
-			const { error } = await supabase
-				.from('pages')
-				.update({
-					content: content,
-					title: titleRef.current.value,
-				})
-				.eq('id', page.id);
-			setAlert('Page updated', 'success');
-			fetchCurrentJobPages(currentJob);
-			setEditing(false);
-			if (error) {
-				setAlert('Unable to update page', 'error');
-				console.log('error is', error);
-				return;
-			}
+		const { error } = await supabase
+			.from('pages')
+			.update({
+				content: content,
+				title: titleRef.current.value,
+			})
+			.eq('id', page.id);
+		setAlert('Note updated', 'success');
+		fetchUserNotePages();
+		setEditing(false);
+		if (error) {
+			setAlert('Unable to update note', 'error');
+			console.log('error is', error);
+			return;
 		}
 	};
 
@@ -159,26 +141,21 @@ const Page = (page) => {
 					<header>
 						{editing ? (
 							<div className='flex justify-between'>
-								{page.locked ? (
-									<label className='font-bold pl-[9px]'>{page.title}</label>
-								) : (
-									<label className='input input-ghost input-xs flex grow items-center gap-2 mb-[2px]'>
-										<input
-											type='text'
-											required
-											ref={titleRef}
-											defaultValue={initialTitleValue}
-											maxLength={titleMaxChar}
-											onChange={handleTitleChange}
-											placeholder='Add page title'
-											className='grow font-bold text-base'
-										/>
-
-										<span className='label-text-alt'>
-											{characterCount}/{titleMaxChar}
-										</span>
-									</label>
-								)}
+								<label className='input input-ghost input-xs flex grow items-center gap-2 mb-[2px]'>
+									<input
+										type='text'
+										required
+										ref={titleRef}
+										defaultValue={initialTitleValue}
+										maxLength={titleMaxChar}
+										onChange={handleTitleChange}
+										placeholder='Add page title'
+										className='grow font-bold text-base'
+									/>
+									<span className='label-text-alt'>
+										{characterCount}/{titleMaxChar}
+									</span>
+								</label>
 							</div>
 						) : (
 							<div className='flex justify-between'>
@@ -189,25 +166,23 @@ const Page = (page) => {
 										onClick={handleEditClick}>
 										<Pencil1Icon />
 									</button>
-									{!page.locked && (
-										<div className='dropdown dropdown-end'>
-											<button tabIndex={0} className='btn btn-xs btn-ghost'>
-												<DotsVerticalIcon />
-											</button>
-											<ul
-												tabIndex={0}
-												className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
-												<li>
-													<DeletePageBtn page={page} />
-												</li>
-											</ul>
-										</div>
-									)}
+									<div className='dropdown dropdown-end'>
+										<button tabIndex={0} className='btn btn-xs btn-ghost'>
+											<DotsVerticalIcon />
+										</button>
+										<ul
+											tabIndex={0}
+											className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
+											<li>
+												<DeletePageBtn page={page} />
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 						)}
 					</header>
-					<div className='divider m-0  pb-[1px]' />
+					<div className='divider m-0 pb-[1px]' />
 
 					{/* Markdown/Quill content */}
 					{editing ? (
@@ -229,7 +204,7 @@ const Page = (page) => {
 									type='button'
 									className='btn btn-sm btn-primary w-fit'
 									onClick={handleUpdateContentClick}>
-									Save page
+									Save note
 								</button>
 							</div>
 						</div>
@@ -296,7 +271,7 @@ const Page = (page) => {
 							</div>
 						)}
 					</header>
-					<div className='divider m-0 pb-[1px]' />
+					<div className='divider m-0' />
 
 					{/* Markdown/Quill content */}
 					{editing ? (
@@ -336,4 +311,4 @@ const Page = (page) => {
 	);
 };
 
-export default Page;
+export default PageNote;

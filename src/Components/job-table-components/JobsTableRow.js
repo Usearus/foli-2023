@@ -11,13 +11,13 @@ import DeleteJobBtn from '../modal-components/DeleteJobBtn';
 import EditJobBtn from '../modal-components/EditJobBtn';
 
 const JobsTableRow = (job) => {
-	const { fetchCurrentJob, fetchCurrentPages, userProfile } =
+	const { fetchCurrentJob, fetchCurrentJobPages, userProfile } =
 		useContext(DatabaseContext);
 	const navigate = useNavigate();
 
 	const handleTableRowClick = async () => {
 		await fetchCurrentJob(job);
-		await fetchCurrentPages(job);
+		await fetchCurrentJobPages(job);
 		navigate(`/job/id:${job.id}`);
 	};
 

@@ -88,7 +88,8 @@ const DatabaseProvider = ({ children }) => {
 	const [userProfile, setUserProfile] = useState([]);
 	const [userJobs, setUserJobs] = useState([]);
 	const [userJobsArchived, setUserJobsArchived] = useState([]);
-	const [userPages, setUserPages] = useState([]);
+	const [userJobPages, setUserJobPages] = useState([]);
+	const [userNotePages, setUserNotePages] = useState([]);
 	const [userResume, setUserResume] = useState([]);
 	const [userSnippets, setUserSnippets] = useState([]);
 	const [userTheme, setUserTheme] = useState([]);
@@ -304,15 +305,30 @@ const DatabaseProvider = ({ children }) => {
 		}
 	}
 
-	async function fetchUserPages() {
+	async function fetchUserJobPages() {
 		if (auth0Email) {
 			const { data } = await supabase
 				.from('pages')
 				.select('*')
-				.filter('account', 'eq', auth0Email);
+				.filter('account', 'eq', auth0Email)
+				.filter('isNote', 'eq', false);
 			if (data) {
-				setUserPages(data);
-				// console.log('userPages are', data);
+				setUserJobPages(data);
+				// console.log('userJobPages are', data);
+			}
+		}
+	}
+
+	async function fetchUserNotePages() {
+		if (auth0Email) {
+			const { data } = await supabase
+				.from('pages')
+				.select('*')
+				.filter('account', 'eq', auth0Email)
+				.filter('isNote', 'eq', true);
+			if (data) {
+				setUserNotePages(data);
+				// console.log('userNotePages are', data);
 			}
 		}
 	}
@@ -348,7 +364,8 @@ const DatabaseProvider = ({ children }) => {
 		fetchUserProfile();
 		fetchUserJobs();
 		fetchUserJobsArchived();
-		fetchUserPages();
+		fetchUserNotePages();
+		fetchUserJobPages();
 		fetchUserResume();
 		fetchUserSnippets();
 		// console.log(localStorage);
@@ -361,7 +378,7 @@ const DatabaseProvider = ({ children }) => {
 	// *
 	// *
 	// SET CURRENTLY VIEWED JOB DATA
-	const [currentPages, setCurrentPages] = useState([]);
+	const [currentJobPages, setCurrentJobPages] = useState([]);
 	const [currentJob, setCurrentJob] = useState([]);
 	const [selectedPageID, setSelectedPageID] = useState(null); // used to select a page to scroll to on page list
 
@@ -372,9 +389,9 @@ const DatabaseProvider = ({ children }) => {
 			setCurrentJob(JSON.parse(savedJob));
 		}
 
-		const savedPages = localStorage.getItem('currentPages');
+		const savedPages = localStorage.getItem('currentJobPages');
 		if (savedPages) {
-			setCurrentPages(JSON.parse(savedPages));
+			setCurrentJobPages(JSON.parse(savedPages));
 		}
 	}, []);
 
@@ -407,17 +424,17 @@ const DatabaseProvider = ({ children }) => {
 		}
 	}
 
-	async function fetchCurrentPages(job) {
+	async function fetchCurrentJobPages(job) {
 		// console.log('job received for fetch:', job);
 		const { data } = await supabase
 			.from('pages')
 			.select('*')
 			.filter('jobid', 'eq', job.id);
 		if (data) {
-			// console.log('currentPages are', data);
-			localStorage.setItem('currentPages', JSON.stringify(data));
-			const sortedPages = [...data].sort((a, b) => a.position - b.position);
-			setCurrentPages(sortedPages);
+			// console.log('currentJobPages are', data);
+			localStorage.setItem('currentJobPages', JSON.stringify(data));
+			const sortedJobPages = [...data].sort((a, b) => a.position - b.position);
+			setCurrentJobPages(sortedJobPages);
 		}
 	}
 
@@ -437,11 +454,14 @@ const DatabaseProvider = ({ children }) => {
 				adminProfile,
 				//Pages
 				allPages,
-				userPages,
-				currentPages,
 				fetchAllPages,
-				setCurrentPages,
-				fetchCurrentPages,
+				userJobPages,
+				userNotePages,
+				setUserNotePages,
+				fetchUserNotePages,
+				currentJobPages,
+				setCurrentJobPages,
+				fetchCurrentJobPages,
 				selectedPageID,
 				setSelectedPageID,
 				//Jobs

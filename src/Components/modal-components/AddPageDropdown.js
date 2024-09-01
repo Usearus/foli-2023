@@ -7,8 +7,12 @@ import useAlert from '../../Custom Hooks/useAlert';
 import Modal from './Modal';
 
 const AddPageDropdown = () => {
-	const { currentJob, currentPages, fetchCurrentPages, setSelectedPageID } =
-		useContext(DatabaseContext);
+	const {
+		currentJob,
+		currentJobPages,
+		fetchCurrentJobPages,
+		setSelectedPageID,
+	} = useContext(DatabaseContext);
 
 	// Database handling variables
 	const { setAlert } = useAlert();
@@ -45,7 +49,8 @@ const AddPageDropdown = () => {
 					title: titleRef.current.value,
 					// content: content,
 					jobid: currentJob.id,
-					position: currentPages.length,
+					position: currentJobPages.length,
+					isNote: false,
 				})
 				.select();
 			setAlert('Page added', 'success');
@@ -55,7 +60,7 @@ const AddPageDropdown = () => {
 				return;
 			}
 
-			fetchCurrentPages(currentJob);
+			fetchCurrentJobPages(currentJob);
 			const newPageId = data[0].id;
 			setSelectedPageID(newPageId);
 			setIsModalOpen(false);
@@ -92,7 +97,7 @@ const AddPageDropdown = () => {
 									ref={titleRef}
 									maxLength={titleMaxChar}
 									// onChange={handleTitleChange}
-									className='input input-bordered w-full'
+									className='input input-bordered w-full bg-base-300'
 								/>
 							</label>
 							<div className='flex justify-end pt-6'>

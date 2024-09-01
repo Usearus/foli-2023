@@ -1,12 +1,11 @@
 import { useContext } from 'react';
-import { supabase } from '../../../API/supabase';
-import { DatabaseContext } from '../../../context/DatabaseContext';
+import { supabase } from '../../API/supabase';
+import { DatabaseContext } from '../../context/DatabaseContext';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
-import DeletePageIcon from '../../modal-components/DeletePageIcon';
+import DeletePageIcon from '../modal-components/DeletePageIcon';
 
-const SideBarItem = ({ page }) => {
-	const { fetchCurrentJobPages, currentJob, setSelectedPageID } =
-		useContext(DatabaseContext);
+const SideBarItemNotes = ({ page }) => {
+	const { fetchUserNotePages, setSelectedPageID } = useContext(DatabaseContext);
 
 	const handleVisibilityClick = async () => {
 		const visible = page.visible;
@@ -16,7 +15,7 @@ const SideBarItem = ({ page }) => {
 				visible: !visible,
 			})
 			.eq('id', page.id);
-		fetchCurrentJobPages(currentJob);
+		fetchUserNotePages();
 	};
 
 	const handleSideBarItemClick = () => {
@@ -48,4 +47,4 @@ const SideBarItem = ({ page }) => {
 	);
 };
 
-export default SideBarItem;
+export default SideBarItemNotes;

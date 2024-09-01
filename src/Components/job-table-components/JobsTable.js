@@ -8,7 +8,7 @@ import JobsTableRow from './JobsTableRow';
 import Loader from '../atom-components/Loader';
 
 const JobsTable = ({ jobs }) => {
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentTablePage, setCurrentTablePage] = useState(1);
 	const [sortOrder, setSortOrder] = useState({
 		column: null, // No initial sorting
 		direction: null, // No sorting direction
@@ -16,11 +16,11 @@ const JobsTable = ({ jobs }) => {
 
 	const rowsPerPage = 10;
 	const totalPages = Math.ceil(jobs.length / rowsPerPage);
-	const startIndex = (currentPage - 1) * rowsPerPage;
+	const startIndex = (currentTablePage - 1) * rowsPerPage;
 	const endIndex = Math.min(startIndex + rowsPerPage, jobs.length);
 
 	const handlePageChange = (pageNumber) => {
-		setCurrentPage(pageNumber);
+		setCurrentTablePage(pageNumber);
 	};
 
 	const handleHeaderClick = (column) => {
@@ -166,7 +166,7 @@ const JobsTable = ({ jobs }) => {
 								<button
 									key={index + 1}
 									className={`join-item btn btn-sm ${
-										currentPage === index + 1 ? 'btn-primary' : ''
+										currentTablePage === index + 1 ? 'btn-primary' : ''
 									}`}
 									onClick={() => handlePageChange(index + 1)}>
 									{index + 1}

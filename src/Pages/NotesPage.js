@@ -1,23 +1,22 @@
 import { useContext, useState, useEffect } from 'react';
-import SideBar from '../Components/single-job-components/pages-sidebar-components/SideBar';
-import PageList from '../Components/single-job-components/PageList';
-import TopBarJobDesktop from '../Components/single-job-components/TopBarJobDesktop';
-// import TopBarJobMobile from '../Components/single-job-components/TopBarJobMobile';
+import SideBarNotes from '../Components/notes-components/SideBarNotes';
+import NoteList from '../Components/notes-components/NoteList';
+import TopBarNotes from '../Components/notes-components/TopBarNotes';
 import { DatabaseContext } from '../context/DatabaseContext';
 import Loader from '../Components/atom-components/Loader';
 
-const SingleJobPage = () => {
-	const { currentJobPages } = useContext(DatabaseContext);
+const NotesPage = () => {
+	const { userNotePages } = useContext(DatabaseContext);
 	const [isLoading, setIsLoading] = useState(true);
 
 	// Simulate loading
 	useEffect(() => {
 		// Assuming you have data loading or API calls here
 		// Set the loading state to false once everything is loaded
-		if (currentJobPages) {
+		if (userNotePages) {
 			setIsLoading(false);
 		}
-	}, [currentJobPages]);
+	}, [userNotePages]);
 
 	if (isLoading) {
 		return (
@@ -27,38 +26,38 @@ const SingleJobPage = () => {
 		);
 	}
 
-	if (currentJobPages.length > 0) {
+	if (userNotePages.length > 0) {
 		return (
 			<div className='flex flex-col h-full text-base-content'>
 				<div className='flex-grow grid grid-rows-[70px_auto] grid-cols-1 lg:grid-cols-[250px_auto]'>
 					{/* Top area */}
-					<TopBarJobDesktop />
+					<TopBarNotes />
 
 					{/* Bottom left area */}
 					<div className='hidden lg:flex flex-col row-span-1 pt-4'>
-						<SideBar />
+						<SideBarNotes />
 					</div>
 
 					{/* Bottom right area */}
 					<div className='row-span-1 col-span-1 pb-4 pt-0 px-0 overflow-hidden'>
-						<PageList />
+						<NoteList />
 					</div>
 				</div>
 			</div>
 		);
 	}
 
-	if (currentJobPages.length === 0) {
+	if (userNotePages.length === 0) {
 		return (
 			<div className='flex flex-col h-full text-base-content'>
 				<div className='flex-grow grid grid-rows-[70px_auto] grid-cols-1'>
 					{/* Top area */}
-					<TopBarJobDesktop />
+					<TopBarNotes />
 
 					{/* Bottom area */}
 					<div className='row-span-1 col-span-1 p-4 flex justify-center items-center'>
 						<h2 className='text-lg font-bold'>
-							No pages added yet. Add your first page to get started.
+							No notes added yet. Add your first note to get started.
 						</h2>
 					</div>
 				</div>
@@ -67,4 +66,4 @@ const SingleJobPage = () => {
 	}
 };
 
-export default SingleJobPage;
+export default NotesPage;

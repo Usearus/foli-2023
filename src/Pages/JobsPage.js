@@ -42,7 +42,7 @@ const JobsPage = () => {
 			<div className='h-full overflow-hidden flex flex-col'>
 				<TopBarTable />
 				{/* Tabs component */}
-				<div className='p-0 lg:px-12 flex-grow'>
+				<div className='p-0 lg:px-4 pt-2 lg:pt-4 flex-grow'>
 					<div role='tablist' className='tabs tabs-bordered'>
 						<input
 							type='radio'

@@ -7,6 +7,7 @@ import PrivateRoute from './Pages/PrivateRoute';
 import SingleJobPage from './Pages/SingleJobPage';
 import TestingPage from './Pages/TestingPage';
 import SettingsPage from './Pages/SettingsPage';
+import NotesPage from './Pages/NotesPage';
 import Layout from './layout';
 import NavBar from './Components/global-components/NavBar';
 import AlertPopup from './Components/global-components/AlertPopup';
@@ -49,6 +50,22 @@ const App = () => {
 							<Layout>
 								<TestingPage />
 							</Layout>
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='/notes'
+					element={
+						<PrivateRoute>
+							<div className='flex flex-col h-screen bg-base-300 relative'>
+								<AlertPopup />
+								<div className='hidden md:block'>
+									<NavBar />
+								</div>
+								<div className='flex-grow overflow-y-auto'>
+									<NotesPage />
+								</div>
+							</div>
 						</PrivateRoute>
 					}
 				/>

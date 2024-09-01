@@ -7,7 +7,8 @@ import { TrashIcon } from '@radix-ui/react-icons';
 
 const DeletePageIcon = ({ page }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const { fetchCurrentPages, currentJob } = useContext(DatabaseContext);
+	const { fetchCurrentJobPages, currentJob, fetchUserNotePages } =
+		useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 
 	const handleOpenModal = () => {
@@ -26,7 +27,8 @@ const DeletePageIcon = ({ page }) => {
 			return;
 		}
 		setAlert('Page deleted', 'success');
-		fetchCurrentPages(currentJob);
+		fetchCurrentJobPages(currentJob);
+		fetchUserNotePages();
 	};
 
 	return (

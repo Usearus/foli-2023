@@ -6,7 +6,8 @@ import { supabase } from '../../API/supabase';
 
 const DeletePageBtn = ({ page }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const { fetchCurrentPages, currentJob } = useContext(DatabaseContext);
+	const { fetchCurrentJobPages, currentJob, fetchUserNotePages } =
+		useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 
 	const handleDeletePage = async () => {
@@ -17,7 +18,8 @@ const DeletePageBtn = ({ page }) => {
 			return;
 		}
 		setAlert('Page deleted', 'success');
-		fetchCurrentPages(currentJob);
+		fetchCurrentJobPages(currentJob);
+		fetchUserNotePages();
 		setIsModalOpen(false);
 	};
 

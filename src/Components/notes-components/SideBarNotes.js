@@ -1,51 +1,46 @@
 import { useState, useContext, useEffect } from 'react';
-import { DatabaseContext } from '../../../context/DatabaseContext';
+import { DatabaseContext } from '../../context/DatabaseContext';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import SideBarItem from './SideBarItem';
-import { supabase } from '../../../API/supabase';
+import SideBarItemNotes from './SideBarItemNotes';
+import { supabase } from '../../API/supabase';
 
-const SideBar = () => {
-	const { currentJobPages, setCurrentJobPages } = useContext(DatabaseContext);
+const SideBarNotes = () => {
+	const { userNotePages, setUserNotePages } = useContext(DatabaseContext);
 	const [isDragging, setIsDragging] = useState(false);
 
 	useEffect(() => {
-		const pagesFromStorage = localStorage.getItem('currentJobPages');
-		const sortedPages = JSON.parse(pagesFromStorage).sort(
-			(a, b) => a.position - b.position
-		);
-		setCurrentJobPages(sortedPages);
-	}, [setCurrentJobPages]);
+		const sortedPages = userNotePages.sort((a, b) => a.position - b.position);
+		setUserNotePages(sortedPages);
+	}, [setUserNotePages, userNotePages]);
 
 	const updatePositionsOnDragEnd = async (result) => {
-		// console.log(result);
 		if (!result.destination) {
 			return;
 		}
 
-		const newCurrentJobPages = Array.from(currentJobPages);
-		const [reorderedItem] = newCurrentJobPages.splice(result.source.index, 1);
-		newCurrentJobPages.splice(result.destination.index, 0, reorderedItem);
+		const newCurrentNotePages = Array.from(userNotePages);
+		const [reorderedItem] = newCurrentNotePages.splice(result.source.index, 1);
+		newCurrentNotePages.splice(result.destination.index, 0, reorderedItem);
 
-		newCurrentJobPages.forEach((page, index) => {
+		newCurrentNotePages.forEach((page, index) => {
 			page.position = index;
 		});
 
 		await Promise.all(
-			newCurrentJobPages.map(async (page, index) => {
+			newCurrentNotePages.map(async (page, index) => {
 				await supabase
 					.from('pages')
 					.update({ position: index })
 					.eq('id', page.id);
-				// console.log('currentJobPages update', currentJobPages);
+				console.log('userNotePages updated to', userNotePages);
 			})
 		);
-		setCurrentJobPages(newCurrentJobPages);
-		localStorage.setItem('currentJobPages', JSON.stringify(newCurrentJobPages));
+		setUserNotePages(newCurrentNotePages);
 	};
 
 	return (
 		<>
-			<label className='pl-4 pb-2 font-bold'>Pages</label>
+			<label className='pl-4 pb-2 font-bold'>Notes</label>
 
 			<div className='scroll-container'>
 				<DragDropContext
@@ -62,14 +57,14 @@ const SideBar = () => {
 								{...provided.droppableProps}
 								ref={provided.innerRef}
 								className={`draggable-area ${isDragging ? 'dragging' : ''}`}>
-								{currentJobPages.map((page, index) => (
+								{userNotePages.map((page, index) => (
 									<Draggable key={page.id} draggableId={page.id} index={index}>
 										{(provided) => (
 											<div
 												ref={provided.innerRef}
 												{...provided.draggableProps}
 												{...provided.dragHandleProps}>
-												<SideBarItem page={page} />
+												<SideBarItemNotes page={page} />
 											</div>
 										)}
 									</Draggable>
@@ -84,4 +79,4 @@ const SideBar = () => {
 	);
 };
 
-export default SideBar;
+export default SideBarNotes;
