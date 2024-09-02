@@ -4,6 +4,8 @@ https://foli2023.netlify.app
 
 ## Things to add
 
+try fade animations from portfolio. Cascade pages
+
 --TAILWIND FIXES---
 -   userTheme, setUserTheme THIS IS PROBABLY MAKING THE THEME REFRESH> NEED TO FIGURE OUT HOW TO DO ONLY ONCE.
 
