@@ -82,6 +82,35 @@ const SettingsPage = () => {
 				: `${Math.abs(targetSalaryIncrease)}% lower than current salary`
 			: '';
 
+	const targetSalaryDisplay = (() => {
+		// Current & Target filled
+		if (userProfile.salary_target && userProfile.salary_current) {
+			return (
+				<>
+					${userProfile.salary_target.toLocaleString()}{' '}
+					<div className='tooltip' data-tip={tooltipText}>
+						<span className={`badge badge-outline ${salaryIncreaseClassName}`}>
+							{formattedSalaryIncrease}
+						</span>
+					</div>
+				</>
+			);
+		} else if (
+			// Target only
+			userProfile.salary_target &&
+			!userProfile.salary_current
+		) {
+			return (
+				<div className='flex flex-wrap items-center gap-2'>
+					${userProfile.salary_target.toLocaleString()}
+				</div>
+			);
+		} else {
+			// Current only
+			return '$0';
+		}
+	})();
+
 	return (
 		<div className='h-full text-base-content px-0 py-4 flex'>
 			{/* Sidebar */}
@@ -193,7 +222,7 @@ const SettingsPage = () => {
 							ref={jobPreferencesRef}
 							className='bg-base-200 p-8 flex flex-col gap-6'>
 							<div className='flex justify-between items-center'>
-								<h2 className='text-xl font-bold'>Job preferences </h2>
+								<h2 className='text-xl font-bold'>Job preferences</h2>
 								<EditPreferencesBtn />
 							</div>
 							<div className='flex flex-col gap-4'>
@@ -226,22 +255,7 @@ const SettingsPage = () => {
 										<div className='label font-bold'>
 											<span className='label-text'>Target salary</span>
 										</div>
-										<div className='px-1'>
-											{userProfile.salary_target &&
-											userProfile.salary_current ? (
-												<>
-													${userProfile.salary_target.toLocaleString()}{' '}
-													<div className='tooltip' data-tip={tooltipText}>
-														<span
-															className={`badge badge-outline ${salaryIncreaseClassName}`}>
-															{formattedSalaryIncrease}
-														</span>
-													</div>
-												</>
-											) : (
-												'-'
-											)}
-										</div>
+										<div className='px-1'>{targetSalaryDisplay}</div>
 									</label>
 								</div>
 								<div className='divider m-0'></div>
