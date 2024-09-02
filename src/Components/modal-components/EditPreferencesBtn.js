@@ -57,11 +57,8 @@ const EditPreferencesBtn = () => {
 	const handleRemoveLocation = (location) => {
 		const updatedLocations = tempLocations.filter((loc) => loc !== location);
 		setTempLocations(updatedLocations);
-		console.log('tempLocations removed & updated to', tempLocations);
+		// console.log('tempLocations removed & updated to', tempLocations);
 	};
-
-	console.log('temp locations are', tempLocations);
-	console.log('initial locations are', userProfile.location_preference);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
