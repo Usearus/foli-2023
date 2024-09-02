@@ -4,9 +4,16 @@ https://foli2023.netlify.app
 
 ## Things to add
 
+<<<<<<< HEAD
 
 --BUGS--
 -  Flashing empty state on JobsPage.js. Somehow got JobsTable.js to work...
+=======
+look up user generated content again
+try fade animations from portfolio. Cascade pages
+
+--TAILWIND FIXES---
+>>>>>>> 1fd6c1e994a2197726e862103260c8c46040428b
 -   userTheme, setUserTheme THIS IS PROBABLY MAKING THE THEME REFRESH> NEED TO FIGURE OUT HOW TO DO ONLY ONCE.
 
 ---LOW PRIORITY---
