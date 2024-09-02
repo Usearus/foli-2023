@@ -138,6 +138,7 @@ const AddJobBtn = () => {
 								className='input input-bordered w-full bg-base-300'
 								placeholder='0'
 								ref={salary_minRef}
+								max='9999999'
 							/>
 						</label>
 						{/* Salary max */}
@@ -150,6 +151,7 @@ const AddJobBtn = () => {
 								className='input input-bordered w-full bg-base-300'
 								placeholder='0'
 								ref={salary_maxRef}
+								max='9999999'
 							/>
 						</label>
 					</div>

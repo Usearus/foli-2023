@@ -62,7 +62,7 @@ module.exports = {
 			},
 			{
 				customDark: {
-					primary: '#7241C1',
+					primary: '#8d51ee',
 					'primary-content': '#ede9fe',
 					secondary: '#2F0B6B',
 					'secondary-content': '#EDE7F7',

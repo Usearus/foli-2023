@@ -146,6 +146,7 @@ const EditJobBtn = ({ job }) => {
 								placeholder='0'
 								ref={salary_minRef}
 								defaultValue={initialValues.salary_min}
+								max='9999999'
 							/>
 						</label>
 						{/* Salary max */}
@@ -159,6 +160,7 @@ const EditJobBtn = ({ job }) => {
 								placeholder='0'
 								ref={salary_maxRef}
 								defaultValue={initialValues.salary_max}
+								max='9999999'
 							/>
 						</label>
 					</div>

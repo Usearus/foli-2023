@@ -9,7 +9,7 @@ const TopBarNotes = () => {
 					<ArrowLeftIcon />
 				</a>
 				<div>
-					<p className='text-base md:text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis'>
+					<p className='text-base md:text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis pt-1'>
 						Notebook
 					</p>
 					<p className='text-sm hidden md:block'>View job search notes.</p>

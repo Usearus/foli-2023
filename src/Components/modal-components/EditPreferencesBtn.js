@@ -135,6 +135,7 @@ const EditPreferencesBtn = () => {
 								placeholder='0'
 								ref={salary_currentRef}
 								defaultValue={initialValues.salary_current}
+								max='9999999'
 							/>
 						</label>
 						{/* Target salary */}
@@ -148,6 +149,7 @@ const EditPreferencesBtn = () => {
 								placeholder='0'
 								ref={salary_targetRef}
 								defaultValue={initialValues.salary_target}
+								max='9999999'
 							/>
 						</label>
 					</div>
