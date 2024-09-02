@@ -18,7 +18,6 @@ const JobsPage = () => {
 		<>
 			{userJobs.length === 0 && userJobsArchived.length === 0 ? (
 				<>
-					{/* New account or 0 jobs */}
 					<AddPreferencesModal
 						isModalOpen={isModalOpen}
 						setIsModalOpen={setIsModalOpen}
@@ -36,6 +35,10 @@ const JobsPage = () => {
 			) : (
 				<>
 					{/* Main page content */}
+					<AddPreferencesModal
+						isModalOpen={isModalOpen}
+						setIsModalOpen={setIsModalOpen}
+					/>
 					<div className='h-full overflow-hidden flex flex-col'>
 						<TopBarTable />
 						{/* Tabs component */}
