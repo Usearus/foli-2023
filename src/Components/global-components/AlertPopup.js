@@ -1,16 +1,31 @@
-'use client';
 import useAlert from '../../Custom Hooks/useAlert';
+import { useState, useEffect } from 'react';
 
 const AlertPopup = () => {
 	const { text, type } = useAlert();
+	const [isVisible, setIsVisible] = useState(false);
+	const [animation, setAnimation] = useState('');
 
-	if (!text || !type) return null;
+	useEffect(() => {
+		if (text) {
+			setIsVisible(true);
+			setAnimation('animate-slide-down animate-fade-in');
+		} else {
+			const timer = setTimeout(() => setIsVisible(false), 200);
+			setAnimation('animate-slide-up animate-fade-out');
+			return () => clearTimeout(timer);
+		}
+	}, [text]);
+
+	if (!text || !type || !isVisible) return null;
 
 	const renderAlert = () => {
 		switch (type) {
 			case 'info':
 				return (
-					<div role='alert' className='alert border border-info bg-base-300'>
+					<div
+						role='alert'
+						className={`${animation} alert border border-info bg-base-300`}>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							fill='none'
@@ -29,7 +44,9 @@ const AlertPopup = () => {
 				);
 			case 'success':
 				return (
-					<div role='alert' className='alert border border-success bg-base-300'>
+					<div
+						role='alert'
+						className={`${animation} alert border border-success bg-base-300`}>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							className='h-6 w-6 shrink-0 stroke-current'
@@ -48,7 +65,9 @@ const AlertPopup = () => {
 				);
 			case 'warning':
 				return (
-					<div role='alert' className='alert border border-warning bg-base-300'>
+					<div
+						role='alert'
+						className={`${animation} alert border border-warning bg-base-300`}>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							className='h-6 w-6 shrink-0 stroke-current'
@@ -67,7 +86,9 @@ const AlertPopup = () => {
 				);
 			case 'error':
 				return (
-					<div role='alert' className='alert border border-error bg-base-300'>
+					<div
+						role='alert'
+						className={`${animation} alert border border-error bg-base-300`}>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							className='h-6 w-6 shrink-0 stroke-current'

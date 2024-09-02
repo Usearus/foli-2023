@@ -12,7 +12,7 @@ const Modal = ({ isOpen, onClose, children, title, closeButton = true }) => {
 			setAnimation('animate-fade-in animate-scale-in');
 		} else {
 			setAnimation('animate-fade-out animate-scale-out');
-			setTimeout(() => setIsVisible(false), 200); // Wait for the animation to complete
+			setTimeout(() => setIsVisible(false), 200);
 		}
 	}, [isOpen]);
 
