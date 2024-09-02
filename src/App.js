@@ -16,7 +16,14 @@ const App = () => {
 	return (
 		<AuthWrapper>
 			<Routes>
-				<Route path='/login' element={<LoginPage />} />
+				<Route
+					path='/login'
+					element={
+						<Layout>
+							<LoginPage />
+						</Layout>
+					}
+				/>
 				<Route
 					path='/'
 					element={
