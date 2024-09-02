@@ -4,6 +4,7 @@ https://foli2023.netlify.app
 
 ## Things to add
 
+look up user generated content again
 try fade animations from portfolio. Cascade pages
 
 --TAILWIND FIXES---
