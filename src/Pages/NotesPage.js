@@ -57,7 +57,7 @@ const NotesPage = () => {
 					{/* Bottom area */}
 					<div className='row-span-1 col-span-1 p-4 flex justify-center items-center'>
 						<h2 className='text-lg'>
-							No notes added yet. Add your first note to get started.
+							No notes added. Add your first note to get started.
 						</h2>
 					</div>
 				</div>
