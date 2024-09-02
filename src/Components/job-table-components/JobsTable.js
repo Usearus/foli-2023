@@ -91,103 +91,102 @@ const JobsTable = ({ jobs }) => {
 		);
 	}
 
-	if (jobs && jobs.length > 0) {
-		return (
-			<div className='w-full flex flex-col items-end'>
-				<table className='table text-base-content table-pin-rows'>
-					<thead>
-						<tr className='bg-base-300'>
-							<th
-								className={`hover:bg-base-200 min-w-[100px] max-w-[200px] cursor-pointer ${getHeaderClassName(
-									'company'
-								)}`}
-								onClick={() => handleHeaderClick('company')}>
-								<div className='flex items-center'>
-									Job {renderSortIcon('company')}
-								</div>
-							</th>
-							<th
-								className={`cursor-pointer ${getHeaderClassName('salary')}`}
-								onClick={() => handleHeaderClick('salary')}>
-								<div className='flex items-center gap-1'>
-									Salary
-									<div
-										className='tooltip font-normal'
-										data-tip='Sorts by max salary'>
-										<InfoCircledIcon />
+	return (
+		<>
+			{jobs && jobs.length > 0 ? (
+				<div className='w-full flex flex-col items-end'>
+					<table className='table text-base-content table-pin-rows'>
+						<thead>
+							<tr className='bg-base-300'>
+								<th
+									className={`hover:bg-base-200 min-w-[100px] max-w-[200px] cursor-pointer ${getHeaderClassName(
+										'company'
+									)}`}
+									onClick={() => handleHeaderClick('company')}>
+									<div className='flex items-center'>
+										Job {renderSortIcon('company')}
 									</div>
-									{renderSortIcon('salary')}
-								</div>
-							</th>
-							<th
-								className={`hidden lg:table-cell cursor-pointer ${getHeaderClassName(
-									'location'
-								)}`}
-								onClick={() => handleHeaderClick('location')}>
-								<div className='flex items-center'>
-									Location {renderSortIcon('location')}
-								</div>
-							</th>
-							<th
-								className={`hidden lg:table-cell cursor-pointer ${getHeaderClassName(
-									'edited'
-								)}`}
-								onClick={() => handleHeaderClick('edited')}>
-								<div className='flex items-center'>
-									Edited {renderSortIcon('edited')}
-								</div>
-							</th>
-							<th
-								className={`hidden lg:table-cell cursor-pointer ${getHeaderClassName(
-									'status'
-								)}`}
-								onClick={() => handleHeaderClick('status')}>
-								<div className='flex items-center'>
-									Status {renderSortIcon('status')}
-								</div>
-							</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{sortedJobs.slice(startIndex, endIndex).map((job) => (
-							<JobsTableRow key={job.id} {...job} id={job.id} />
-						))}
-					</tbody>
-				</table>
-				{/* Pagination  */}
-				<div className='mt-4 flex items-center gap-4 pr-4'>
-					<span className='text-sm'>
-						{startIndex + 1}-{endIndex} jobs of <span>{jobs.length}</span>
-					</span>
-					{totalPages > 1 && (
-						<div className='join flex'>
-							{Array.from({ length: totalPages }, (_, index) => (
-								<button
-									key={index + 1}
-									className={`join-item btn btn-sm ${
-										currentTablePage === index + 1 ? 'btn-primary' : ''
-									}`}
-									onClick={() => handlePageChange(index + 1)}>
-									{index + 1}
-								</button>
+								</th>
+								<th
+									className={`cursor-pointer ${getHeaderClassName('salary')}`}
+									onClick={() => handleHeaderClick('salary')}>
+									<div className='flex items-center gap-1'>
+										Salary
+										<div
+											className='tooltip font-normal'
+											data-tip='Sorts by max salary'>
+											<InfoCircledIcon />
+										</div>
+										{renderSortIcon('salary')}
+									</div>
+								</th>
+								<th
+									className={`hidden lg:table-cell cursor-pointer ${getHeaderClassName(
+										'location'
+									)}`}
+									onClick={() => handleHeaderClick('location')}>
+									<div className='flex items-center'>
+										Location {renderSortIcon('location')}
+									</div>
+								</th>
+								<th
+									className={`hidden lg:table-cell cursor-pointer ${getHeaderClassName(
+										'edited'
+									)}`}
+									onClick={() => handleHeaderClick('edited')}>
+									<div className='flex items-center'>
+										Edited {renderSortIcon('edited')}
+									</div>
+								</th>
+								<th
+									className={`hidden lg:table-cell cursor-pointer ${getHeaderClassName(
+										'status'
+									)}`}
+									onClick={() => handleHeaderClick('status')}>
+									<div className='flex items-center'>
+										Status {renderSortIcon('status')}
+									</div>
+								</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{sortedJobs.slice(startIndex, endIndex).map((job) => (
+								<JobsTableRow key={job.id} {...job} id={job.id} />
 							))}
-						</div>
-					)}
+						</tbody>
+					</table>
+					{/* Pagination  */}
+					<div className='mt-4 flex items-center gap-4 pr-4'>
+						<span className='text-sm'>
+							{startIndex + 1}-{endIndex} jobs of <span>{jobs.length}</span>
+						</span>
+						{totalPages > 1 && (
+							<div className='join flex'>
+								{Array.from({ length: totalPages }, (_, index) => (
+									<button
+										key={index + 1}
+										className={`join-item btn btn-sm ${
+											currentTablePage === index + 1 ? 'btn-primary' : ''
+										}`}
+										onClick={() => handlePageChange(index + 1)}>
+										{index + 1}
+									</button>
+								))}
+							</div>
+						)}
+					</div>
 				</div>
-			</div>
-		);
-	}
-
-	if (jobs && jobs.length === 0) {
-		return (
-			<div className='flex justify-center items-center h-full p-6'>
-				<h5 className='text-lg'>
-					No jobs are being tracked. Add your first job to get started.
-				</h5>
-			</div>
-		);
-	}
+			) : (
+				// Empty state
+				<div className='flex justify-center items-center h-full p-6'>
+					<h5 className='text-lg'>
+						No jobs are being tracked. Add a job to get started.
+					</h5>
+				</div>
+			)}
+		</>
+	);
 };
 
 export default JobsTable;

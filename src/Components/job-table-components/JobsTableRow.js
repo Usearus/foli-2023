@@ -62,6 +62,60 @@ const JobsTableRow = (job) => {
 				: `${Math.abs(targetSalaryIncrease)}% lower than current salary`
 			: '';
 
+	const salaryDisplay = (() => {
+		// Min & Max filled
+		if (job.salary_min && job.salary_max) {
+			return (
+				<div className='flex flex-wrap items-center gap-2'>
+					${job.salary_min.toLocaleString()} - $
+					{job.salary_max.toLocaleString()}{' '}
+					{/* Only show badge if Target Salary is filled */}
+					{userProfile.salary_target ? (
+						<div className='tooltip' data-tip={tooltipText}>
+							<span
+								className={`badge badge-outline ${salaryIncreaseClassName}`}>
+								{formattedSalaryIncrease}
+							</span>
+						</div>
+					) : null}
+				</div>
+			);
+		} else if (
+			// Min only
+			job.salary_min &&
+			(job.salary_max === 0 || job.salary_max === null)
+		) {
+			return (
+				<div className='flex flex-wrap items-center gap-2'>
+					${job.salary_min.toLocaleString()}
+				</div>
+			);
+		} else if (
+			// Max only
+			(job.salary_min === 0 || job.salary_min === null) &&
+			job.salary_max
+		) {
+			return (
+				<div className='flex flex-wrap items-center gap-2'>
+					${job.salary_max.toLocaleString()}{' '}
+					{/* Only show badge if Target Salary is filled */}
+					{userProfile.salary_target ? (
+						<div className='tooltip' data-tip={tooltipText}>
+							<span
+								className={`badge badge-outline ${salaryIncreaseClassName}`}>
+								{formattedSalaryIncrease}
+							</span>
+						</div>
+					) : null}
+				</div>
+			);
+		} else {
+			return '-';
+		}
+	})();
+
+	console.log(job.salary_min, job.salary_max);
+
 	return (
 		<>
 			<tr key={job.id} className='hover:bg-base-200'>
@@ -78,20 +132,7 @@ const JobsTableRow = (job) => {
 				<td
 					onClick={handleTableRowClick}
 					className='table-cell font-light cursor-pointer'>
-					{job.salary_min && job.salary_max ? (
-						<div className='flex flex-wrap items-center gap-2'>
-							${job.salary_min.toLocaleString()} - $
-							{job.salary_max.toLocaleString()}{' '}
-							<div className='tooltip' data-tip={tooltipText}>
-								<span
-									className={`badge badge-outline ${salaryIncreaseClassName}`}>
-									{formattedSalaryIncrease}
-								</span>
-							</div>
-						</div>
-					) : (
-						'-'
-					)}{' '}
+					{salaryDisplay}
 				</td>
 				{/* Location cell */}
 				<td

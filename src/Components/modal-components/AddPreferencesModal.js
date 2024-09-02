@@ -9,19 +9,21 @@ const AddPreferencesModal = ({ isModalOpen, setIsModalOpen }) => {
 	const { userProfile, fetchUserProfile } = useContext(DatabaseContext);
 	const { setAlert } = useAlert();
 
-	const [isOnboarded, setIsOnboarded] = useState(undefined);
+	const [isOnboarded, setIsOnboarded] = useState();
 
 	// RUNS INITIAL ONBOARDING FOR USERS
 	useEffect(() => {
-		if (userProfile && userProfile.onboarded === false) {
-			setIsModalOpen(true);
-			setIsOnboarded(false);
-		}
-		if (userProfile && userProfile.onboarded === true) {
-			setIsModalOpen(false);
-			setIsOnboarded(true);
+		if (userProfile !== undefined) {
+			if (userProfile.onboarded === false) {
+				setIsModalOpen(true);
+				setIsOnboarded(false);
+			} else if (userProfile.onboarded === true) {
+				setIsModalOpen(false);
+				setIsOnboarded(true);
+			}
 		}
 	}, [userProfile, setIsModalOpen]);
+	// console.log(userProfile.onboarded);
 
 	// Form Variables
 	const [validated, setValidated] = useState(false);
@@ -123,6 +125,7 @@ const AddPreferencesModal = ({ isModalOpen, setIsModalOpen }) => {
 								className='input input-bordered w-full bg-base-300'
 								placeholder='0'
 								ref={salary_currentRef}
+								max='9999999'
 							/>
 						</label>
 						{/* Target salary */}
@@ -135,6 +138,7 @@ const AddPreferencesModal = ({ isModalOpen, setIsModalOpen }) => {
 								className='input input-bordered w-full bg-base-300'
 								placeholder='0'
 								ref={salary_targetRef}
+								max='9999999'
 							/>
 						</label>
 					</div>
