@@ -3,8 +3,8 @@ import { supabase } from '../../API/supabase';
 import { useAuth0 } from '@auth0/auth0-react';
 import { DatabaseContext } from '../../context/DatabaseContext';
 import useAlert from '../../Custom Hooks/useAlert';
-// import ReactQuillEditor from '../atom-components/ReactQuillEditor';
 import Modal from './Modal';
+import TemplateSidePanel from './TemplateSidePanel';
 
 const AddPageDropdown = () => {
 	const {
@@ -20,10 +20,10 @@ const AddPageDropdown = () => {
 
 	// Form Variables
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isTemplatePanelOpen, setIsTemplatePanelOpen] = useState(false);
 	const [validated, setValidated] = useState(false);
 	const titleRef = useRef();
 	const titleMaxChar = 32;
-	// const [content, setContent] = useState('');
 	// const [characterCount, setCharacterCount] = useState(0);
 
 	const handleSubmit = (event) => {
@@ -74,47 +74,49 @@ const AddPageDropdown = () => {
 
 	const AddPageModal = () => {
 		return (
-			<>
-				<Modal
-					isOpen={isModalOpen}
-					onClose={() => setIsModalOpen(false)}
-					title='Add page'>
-					<div className='pb-4 flex flex-col gap-4'>
-						<form onSubmit={handleSubmit}>
-							{/* Title */}
-							<label className='form-control w-full'>
-								<div className='label'>
-									<span className='label-text'>
-										Title <span className='text-primary'>*</span>
-									</span>
-									{/* <span className='label-text-alt'>
+			<Modal
+				isOpen={isModalOpen}
+				onClose={() => setIsModalOpen(false)}
+				title='Add page'>
+				<div className='pb-4 flex flex-col gap-4'>
+					<form onSubmit={handleSubmit}>
+						{/* Title */}
+						<label className='form-control w-full'>
+							<div className='label'>
+								<span className='label-text'>
+									Title <span className='text-primary'>*</span>
+								</span>
+								{/* <span className='label-text-alt'>
 										{characterCount}/{titleMaxChar}
 									</span> */}
-								</div>
-								<input
-									type='text'
-									required
-									ref={titleRef}
-									maxLength={titleMaxChar}
-									// onChange={handleTitleChange}
-									className='input input-bordered w-full bg-base-300'
-								/>
-							</label>
-							<div className='flex justify-end pt-6'>
-								<button type='submit' className='btn btn-primary'>
-									Confirm
-								</button>
 							</div>
-						</form>
-					</div>
-				</Modal>
-			</>
+							<input
+								type='text'
+								required
+								ref={titleRef}
+								maxLength={titleMaxChar}
+								// onChange={handleTitleChange}
+								className='input input-bordered w-full bg-base-300'
+							/>
+						</label>
+						<div className='flex justify-end pt-6'>
+							<button type='submit' className='btn btn-primary'>
+								Confirm
+							</button>
+						</div>
+					</form>
+				</div>
+			</Modal>
 		);
 	};
 
 	return (
 		<>
 			<AddPageModal />
+			<TemplateSidePanel
+				isOpen={isTemplatePanelOpen}
+				onClose={() => setIsTemplatePanelOpen(false)}
+			/>
 			<div className='dropdown dropdown-bottom dropdown-end'>
 				<div tabIndex={0} role='button' className='btn btn-sm btn-primary m-1'>
 					Add page
@@ -125,8 +127,10 @@ const AddPageDropdown = () => {
 					<li>
 						<button onClick={() => setIsModalOpen(true)}>Blank page</button>
 					</li>
-					<li className='disabled'>
-						<button>Use template</button>
+					<li>
+						<button onClick={() => setIsTemplatePanelOpen(true)}>
+							Use template
+						</button>
 					</li>
 					<li className='disabled'>
 						<button>Use AI assistant</button>

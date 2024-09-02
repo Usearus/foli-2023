@@ -3,12 +3,14 @@
 https://foli2023.netlify.app
 
 ## Priority
--  
+-  Add animation library from portfolio project
+-  Finish Templates
 
 ## Bugs
 -   Numbered list is messed up in Quill component
 -   Color of toolbar is messed up in Quill component
 -   Flashing empty state on JobsPage.js. Somehow got JobsTable.js to work...
+-   Cannot get jobsTable to overflow-y-auto correctly
 
 ## Post-MVP Features
 -   Add contacts (May go over pages sidebar)
