@@ -114,8 +114,6 @@ const JobsTableRow = (job) => {
 		}
 	})();
 
-	console.log(job.salary_min, job.salary_max);
-
 	return (
 		<>
 			<tr key={job.id} className='hover:bg-base-200'>
@@ -145,7 +143,11 @@ const JobsTableRow = (job) => {
 					) : (
 						''
 					)}
-					{job.remote ? <div className='badge badge-neutral'>Remote</div> : ''}
+					{job.remote ? (
+						<div className='badge badge-neutral'>Remote / Hybrid</div>
+					) : (
+						''
+					)}
 				</td>
 				{/* Edited cell */}
 				<td
