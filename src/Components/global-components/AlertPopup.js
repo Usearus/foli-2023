@@ -9,11 +9,10 @@ const AlertPopup = () => {
 	useEffect(() => {
 		if (text) {
 			setIsVisible(true);
-			setAnimation('animate-slide-down animate-fade-in');
+			setAnimation('animate-slide-down');
 		} else {
-			const timer = setTimeout(() => setIsVisible(false), 200);
-			setAnimation('animate-slide-up animate-fade-out');
-			return () => clearTimeout(timer);
+			setAnimation('animate-slide-up');
+			setTimeout(() => setIsVisible(false), 300);
 		}
 	}, [text]);
 

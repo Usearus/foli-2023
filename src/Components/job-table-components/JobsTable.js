@@ -97,7 +97,7 @@ const JobsTable = ({ jobs }) => {
 				<div className='w-full flex flex-col items-end'>
 					<table className='table text-base-content table-pin-rows'>
 						<thead>
-							<tr className='bg-base-300'>
+							<tr className='bg-base-300 border-b-neutral'>
 								<th
 									className={`hover:bg-base-200 min-w-[100px] max-w-[200px] cursor-pointer ${getHeaderClassName(
 										'company'
