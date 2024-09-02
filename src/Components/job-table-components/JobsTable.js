@@ -14,7 +14,7 @@ const JobsTable = ({ jobs }) => {
 		direction: null, // No sorting direction
 	});
 
-	const rowsPerPage = 10;
+	const rowsPerPage = 8;
 	const totalPages = Math.ceil(jobs.length / rowsPerPage);
 	const startIndex = (currentTablePage - 1) * rowsPerPage;
 	const endIndex = Math.min(startIndex + rowsPerPage, jobs.length);
