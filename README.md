@@ -2,28 +2,28 @@
 
 https://foli2023.netlify.app
 
-## Things to add
+## Priority
+-  
 
-<<<<<<< HEAD
+## Bugs
+-   Numbered list is messed up in Quill component
+-   Color of toolbar is messed up in Quill component
+-   Flashing empty state on JobsPage.js. Somehow got JobsTable.js to work...
 
---BUGS--
--  Flashing empty state on JobsPage.js. Somehow got JobsTable.js to work...
-=======
-look up user generated content again
-try fade animations from portfolio. Cascade pages
+## Post-MVP Features
+-   Add contacts (May go over pages sidebar)
+    -   Name, Role, Notes
+-   Export Page to PDF
 
---TAILWIND FIXES---
->>>>>>> 1fd6c1e994a2197726e862103260c8c46040428b
--   userTheme, setUserTheme THIS IS PROBABLY MAKING THE THEME REFRESH> NEED TO FIGURE OUT HOW TO DO ONLY ONCE.
+## UX Issues
 
----LOW PRIORITY---
+
+## Future 2025
+-   ADHD Tools
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
 -   instead of snippets we should open a master resume that individual things can be copied.
--   Fix ability to count char in title while in modal.
-
-
-## Post-MVP Features
+-   Fix ability to count char in title while in modal
 -   Import LinkedIn or PDF
 -   Import LinkedIn profile
 -   Import existing Resume
@@ -40,15 +40,3 @@ try fade animations from portfolio. Cascade pages
 -   Bugdgeting Tool
     -   Set all budgeting info for account
     -   Simple vs advanced. What is minimal and what can be added?
-
-
-## Non-priority
--   Export Page to PDF
--   Add location info
--   Add contacts (May go over pages sidebar)
-    -   Name, Role, Notes
--   ADHD Tools
-
-## UX Issues
-
-## Bugs

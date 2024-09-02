@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { DatabaseContext } from './../../context/DatabaseContext';
 import { supabase } from '../../API/supabase';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import useAlert from '../../Custom Hooks/useAlert';
-import Loader from './Loader';
+// import Loader from './Loader';
 
 const ThemeToggle = () => {
 	const { userTheme, userProfile, setUserTheme } = useContext(DatabaseContext);
@@ -39,24 +39,15 @@ const ThemeToggle = () => {
 	}, [setUserTheme]);
 
 	// Loading state
-	const [loading, setLoading] = useState(true); // New loading state
+	// const [loading, setLoading] = useState(true); // New loading state
 
-	useEffect(() => {
-		// Simulate data fetching
-		const timer = setTimeout(() => {
-			setLoading(false); // Data is ready
-		}, 1000); // Adjust the delay as needed
-
-		return () => clearTimeout(timer); // Cleanup timer on unmount
-	}, []);
-
-	if (loading) {
-		return (
-			<div className='pr-2 h-[36px] flex items-center'>
-				<Loader />
-			</div>
-		);
-	}
+	// if (loading) {
+	// 	return (
+	// 		<div className='pr-2 h-[36px] flex items-center'>
+	// 			<Loader />
+	// 		</div>
+	// 	);
+	// }
 
 	return (
 		<div className='flex flex-row gap-2 items-center text-base-content pr-4'>
