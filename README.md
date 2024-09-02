@@ -7,6 +7,9 @@ https://foli2023.netlify.app
 --TAILWIND FIXES---
 -   userTheme, setUserTheme THIS IS PROBABLY MAKING THE THEME REFRESH> NEED TO FIGURE OUT HOW TO DO ONLY ONCE.
 
+--BUGS--
+-  Flashing empty state on JobsPage.js. Somehow got JobsTable.js to work...
+
 ---LOW PRIORITY---
 -   Sticky survey at bottom
     What do you like, what's missing, what to chat about it?
