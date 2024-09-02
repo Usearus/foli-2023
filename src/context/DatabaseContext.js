@@ -114,12 +114,21 @@ const DatabaseProvider = ({ children }) => {
 				.single();
 			if (data) {
 				setUserProfile(data);
-				// THIS IS PROBABLY MAKING THE THEME REFRESH> NEED TO FIGURE OUT HOW TO DO ONLY ONCE.
-				const theme = data.theme || 'customLight';
-				setUserTheme(theme);
-				document.documentElement.setAttribute('data-theme', data.theme);
-				// console.log('userProfile is', data);
-				// console.log('user theme is', data.theme);
+				// Retrieve theme from localStorage
+				const storedTheme = JSON.parse(localStorage.getItem('currentTheme'));
+				const themeToSet = data.theme || storedTheme || 'customLight';
+
+				// Update localStorage and document if necessary
+				if (!storedTheme || storedTheme !== themeToSet) {
+					localStorage.setItem('currentTheme', JSON.stringify(themeToSet));
+					document.documentElement.setAttribute('data-theme', themeToSet);
+				}
+
+				// Optionally update userTheme state if necessary
+				setUserTheme(themeToSet);
+
+				// console.log('User profile is', data);
+				// console.log('User theme is', themeToSet);
 			} else {
 				createUserProfile();
 				const onboardingJob1 = await createOnboardingJob1();
@@ -148,7 +157,8 @@ const DatabaseProvider = ({ children }) => {
 			}
 			fetchUserProfile();
 			setUserTheme('customLight');
-			// document.documentElement.setAttribute('data-theme', data.theme);
+			localStorage.setItem('currentTheme', JSON.stringify('customLight'));
+			document.documentElement.setAttribute('data-theme', 'customLight');
 		}
 	}
 

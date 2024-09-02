@@ -26,9 +26,17 @@ const ThemeToggle = () => {
 		}
 		setAlert('Theme updated', 'success');
 		setUserTheme(oppositeTheme);
+		localStorage.setItem('currentTheme', JSON.stringify(oppositeTheme));
 		document.documentElement.setAttribute('data-theme', oppositeTheme);
 		console.log('Theme successfully updated to:', oppositeTheme);
 	};
+
+	useEffect(() => {
+		const storedTheme =
+			JSON.parse(localStorage.getItem('currentTheme')) || 'customLight';
+		setUserTheme(storedTheme);
+		document.documentElement.setAttribute('data-theme', storedTheme);
+	}, [setUserTheme]);
 
 	// Loading state
 	const [loading, setLoading] = useState(true); // New loading state
@@ -43,7 +51,11 @@ const ThemeToggle = () => {
 	}, []);
 
 	if (loading) {
-		return null;
+		return (
+			<div className='pr-2 h-[36px] flex items-center'>
+				<Loader />
+			</div>
+		);
 	}
 
 	return (
