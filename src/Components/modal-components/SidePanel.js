@@ -28,7 +28,7 @@ const SidePanel = ({
 		<div className='z-50 fixed inset-0 bg-[#0f1214] bg-opacity-70 flex justify-end animate-fade-in'>
 			{/* Side Panel container */}
 			<div
-				className={`w-full bg-base-300 p-6 shadow-sm max-w-[700px] ${animation}`}>
+				className={`w-full bg-base-300 p-4 lg:p-6 shadow-sm max-w-[700px] ${animation}`}>
 				{/* Title & close btn */}
 				<div className='flex justify-between items-center pb-4'>
 					<h2 className='text-xl font-semibold py-1'>{title}</h2>
