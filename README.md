@@ -2,6 +2,17 @@
 
 https://foli2023.netlify.app
 
+
+## ARYAN TEST
+Safari, mobile, system default theme = dark
+-  Onboarding jobs not created. 
+-  Job Pref Modal worked.
+-  Settings page didn't work.
+-  Add page - wanted to add content at the same time.
+-  Job table padded to the right. Not responsive correctly.
+-  Notebook - add note Quill Toolbar was white on dark mode. 
+
+
 ## Priority
 -  Add animation library from portfolio project
 -  Finish Templates
