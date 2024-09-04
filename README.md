@@ -5,6 +5,9 @@ https://foli2023.netlify.app
 idea
 on a page/note a feature to save as a template. then, when in templates there is a custom tab. users can edit custom templates 
 
+see if it's worth removing extra text on templates. wouldn't need it on custom
+
+
 ## ARYAN TEST
 Safari, mobile, system default theme = dark
 -  Onboarding jobs not created. 
