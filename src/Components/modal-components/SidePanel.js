@@ -40,7 +40,8 @@ const SidePanel = ({
 						''
 					)}
 				</div>
-				<div>{children}</div>
+				{/* H-full required to get overflow-y to scroll pb-52px makes up for the title somehow...*/}
+				<div className='h-full pb-[52px]'>{children}</div>
 			</div>
 		</div>
 	);

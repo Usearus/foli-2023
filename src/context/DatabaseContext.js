@@ -327,7 +327,6 @@ const DatabaseProvider = ({ children }) => {
 		if (savedJob) {
 			setCurrentJob(JSON.parse(savedJob));
 		}
-
 		const savedPages = localStorage.getItem('currentJobPages');
 		if (savedPages) {
 			setCurrentJobPages(JSON.parse(savedPages));
@@ -341,25 +340,14 @@ const DatabaseProvider = ({ children }) => {
 			.select('*')
 			.filter('id', 'eq', job.id)
 			.single();
-
 		if (error) {
 			console.error('Error fetching current job:', error);
 			return;
 		}
-
 		if (data) {
-			// Set the current job data to the state
 			setCurrentJob(data);
-
 			// Store the current job data in localStorage
 			localStorage.setItem('currentJob', JSON.stringify(data));
-
-			// Log the data to verify
-			// console.log('currentJob is', data);
-			// console.log(
-			// 	'localStorage for currentJob',
-			// 	JSON.parse(localStorage.getItem('currentJob'))
-			// );
 		}
 	}
 
