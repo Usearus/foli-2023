@@ -2,11 +2,17 @@
 
 https://foli2023.netlify.app
 
-idea
-on a page/note a feature to save as a template. then, when in templates there is a custom tab. users can edit custom templates 
 
-see if it's worth removing extra text on templates. wouldn't need it on custom
+Save as template - 
+    - Three dots, "Save as template"
+    - Modal, with title and content.
+    - Confirm
+    - Open templates, auto to custom
+        - (Empty state is a statement on how to add a custom template)
+    - Edit template btn
+    - Modal, with title and content
 
+    (See if it's worth removing extra text on templates). wouldn't need it on custom
 
 ## ARYAN TEST
 Safari, mobile, system default theme = dark

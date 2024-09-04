@@ -6,6 +6,7 @@ import { DatabaseContext } from '../../context/DatabaseContext';
 import SidePanel from './SidePanel';
 import MarkdownView from 'react-showdown';
 // import { EnvelopeClosedIcon, FileTextIcon } from '@radix-ui/react-icons';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
 
 const TemplateSidePanel = ({ isOpen, onClose }) => {
 	const { user } = useAuth0();
@@ -101,7 +102,9 @@ const TemplateSidePanel = ({ isOpen, onClose }) => {
 											{template.title}
 											{/* <div className='badge badge-primary'>NEW</div> */}
 										</h2>
-										<p className='text-sm'>{template.description}</p>
+										<p className='text-sm text-secondary-content'>
+											{template.description}
+										</p>
 									</div>
 								</div>
 							))}
@@ -155,7 +158,9 @@ const TemplateSidePanel = ({ isOpen, onClose }) => {
 											{template.title}
 											{/* <div className='badge badge-primary'>NEW</div> */}
 										</h2>
-										<p className='text-sm'>{template.description}</p>
+										<p className='text-sm text-secondary-content'>
+											{template.description}
+										</p>
 									</div>
 								</div>
 							))}
@@ -209,7 +214,9 @@ const TemplateSidePanel = ({ isOpen, onClose }) => {
 											{template.title}
 											{/* <div className='badge badge-primary'>NEW</div> */}
 										</h2>
-										<p className='text-sm'>{template.description}</p>
+										<p className='text-sm text-secondary-content'>
+											{template.description}
+										</p>
 									</div>
 								</div>
 							))}
@@ -274,29 +281,47 @@ const TemplateSidePanel = ({ isOpen, onClose }) => {
 							{documentTemplateCategoryList}
 						</div>
 					</div>
+					{/* Custom Tab */}
+					<input
+						type='radio'
+						name='templates'
+						role='tab'
+						className='tab'
+						aria-label='Custom'
+						disabled
+					/>
 				</div>
 			) : (
-				<div className='p-4 bg-base-200 w-full shadow-md h-full flex flex-col'>
-					<header className='page-title'>
-						<h6 className='text-base font-bold mb-2'>{activeTemplate.title}</h6>
-						<div className='divider m-0 pb-[1px]' />
-					</header>
-					<MarkdownView
-						className='flex-grow overflow-y-auto markdown-content'
-						markdown={activeTemplate.content}
-					/>
-					{/* Actions */}
-					<div className='flex gap-2 justify-end mt-4'>
-						<button
-							className='btn btn-sm btn-primary btn-outline'
-							onClick={handleCloseActive}>
-							Back to templates
-						</button>
-						<button
-							className='btn btn-sm btn-primary'
-							onClick={handleAddPageClick}>
-							Add page
-						</button>
+				<div className='h-full flex flex-col gap-4 items-start'>
+					<button
+						className='btn btn-sm btn-ghost text-primary hover:bg-base-200'
+						onClick={handleCloseActive}>
+						<ArrowLeftIcon /> Back to templates
+					</button>
+					<div className='p-4 bg-base-200 w-full shadow-md h-full flex flex-col'>
+						<header className='page-title'>
+							<h6 className='text-base font-bold mb-2'>
+								{activeTemplate.title}
+							</h6>
+							<div className='divider m-0 pb-[1px]' />
+						</header>
+						<MarkdownView
+							className='flex-grow overflow-y-auto markdown-content'
+							markdown={activeTemplate.content}
+						/>
+						{/* Actions */}
+						<div className='flex gap-2 justify-end mt-4'>
+							{/* <button
+								className='btn btn-sm btn-primary btn-outline'
+								onClick={handleCloseActive}>
+								Back to templates
+							</button> */}
+							<button
+								className='btn btn-sm btn-primary'
+								onClick={handleAddPageClick}>
+								Add page
+							</button>
+						</div>
 					</div>
 				</div>
 			)}
