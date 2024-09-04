@@ -2,6 +2,8 @@
 
 https://foli2023.netlify.app
 
+idea
+on a page/note a feature to save as a template. then, when in templates there is a custom tab. users can edit custom templates 
 
 ## ARYAN TEST
 Safari, mobile, system default theme = dark
