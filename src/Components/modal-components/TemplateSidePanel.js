@@ -229,7 +229,7 @@ const TemplateSidePanel = ({ isOpen, onClose }) => {
 						name='templates'
 						role='tab'
 						className='tab'
-						aria-label='Email'
+						aria-label='Emails'
 						defaultChecked
 					/>
 					{/* Email Tab content*/}
@@ -247,8 +247,7 @@ const TemplateSidePanel = ({ isOpen, onClose }) => {
 						name='templates'
 						role='tab'
 						className='tab'
-						aria-label='Resources'
-						defaultChecked
+						aria-label='Strategies'
 					/>
 					{/* Resources Tab content*/}
 					<div role='tabpanel' className='tab-content pt-6'>
@@ -265,8 +264,7 @@ const TemplateSidePanel = ({ isOpen, onClose }) => {
 						name='templates'
 						role='tab'
 						className='tab'
-						aria-label='Resources'
-						defaultChecked
+						aria-label='Documents'
 					/>
 					{/* Documents Tab content*/}
 					<div role='tabpanel' className='tab-content pt-6'>
