@@ -61,7 +61,7 @@ module.exports = {
 					primary: '#7241C1',
 					'primary-content': '#ede9fe',
 					secondary: '#DCD0F0',
-					'secondary-content': '#100424',
+					'secondary-content': '#6c6874', //Secondary text
 					accent: '#10b981',
 					'accent-content': '#1f2937',
 					neutral: '#c9c9c9', //Darkest (Borders)
@@ -70,6 +70,7 @@ module.exports = {
 					'base-200': '#ebebeb', //Darker (Content, Pages, Modals, Background hover,)
 					'base-300': '#e0e0e0', //Darkest (Background)   DARKEST TEST
 					'base-content': '#242424',
+					'base-content-secondary': '#303030',
 					info: '#33b2cc',
 					'info-content': '#000c11',
 					success: '#35912e',
@@ -85,7 +86,7 @@ module.exports = {
 					primary: '#8d51ee',
 					'primary-content': '#ede9fe',
 					secondary: '#2F0B6B',
-					'secondary-content': '#EDE7F7',
+					'secondary-content': '#9e9aac', //Secondary text
 					accent: '#10b981',
 					'accent-content': '#1f2937',
 					neutral: '#33393f', //lightest
