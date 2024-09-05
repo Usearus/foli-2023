@@ -198,6 +198,9 @@ const Page = (page) => {
 												tabIndex={0}
 												className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
 												<li>
+													<p className='text-sm'>Save as template</p>
+												</li>
+												<li>
 													<DeletePageBtn page={page} />
 												</li>
 											</ul>
