@@ -2,6 +2,7 @@
 
 https://foli2023.netlify.app
 
+Change empty state of notes page to have examples of what you can add. maybe buttons that open a predetermined template? like salary research?
 
 Save as template - 
     - Three dots, "Save as template"
